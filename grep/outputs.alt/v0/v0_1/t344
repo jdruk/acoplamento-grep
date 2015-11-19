@@ -1,0 +1,8 @@
+../inputs/grep1.dat:   ? 0									\
+../inputs/grep1.dat:      ? 0								\
+../inputs/grep1.dat:    ? 0									\
+../inputs/grep1.dat:  newsize = (new == NULL) ? 0 : strlen(new);
+../inputs/grep1.dat:		      l->balance = t->balance != 1 ? 0 : -1;
+../inputs/grep1.dat:		      r->balance = t->balance != (char) -1 ? 0 : 1;
+../inputs/grep1.dat:		      l->balance = t->balance != 1 ? 0 : -1;
+../inputs/grep1.dat:		      r->balance = t->balance != (char) -1 ? 0 : 1;

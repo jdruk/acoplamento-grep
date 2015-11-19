@@ -1,0 +1,616 @@
+{
+{
+{
+{
+{
+{
+    {
+    {
+{
+    {
+    {
+	{
+    {
+	{
+{
+{
+    {
+{
+    {
+{
+    {
+	{
+    {
+	{
+{
+    {
+	{
+	{
+    {
+{
+    {
+	{
+	{
+	{
+    {
+{
+{
+      {
+{
+      {
+	  {
+      {
+      {
+	  {
+	  {
+	      {
+	      {
+    {
+	{
+{
+{
+    {
+{
+{
+{
+    {
+	{
+	{
+    {
+	{
+	{
+	{
+	{
+    {
+	  {
+	      {
+	      {
+	{
+	{
+	    {
+		{
+		    {
+	    {
+		{
+	    {
+	{
+	    {
+  {
+      {
+	  {
+      {
+	  {
+	      {
+	  {
+	      {
+	      {
+		  {
+{
+{
+    {
+	{
+    {
+{
+{
+  do {									\
+  do {									\
+  do {									\
+{
+  do {									\
+{ 
+{
+    {
+	{
+            {
+            {
+{
+    {
+    {
+	{
+	    {
+          {
+		{
+		    {
+              {
+{
+    {
+{
+    {
+        {
+{
+  { NULL,					/* REG_NOERROR */
+    "Unmatched \\{",				/* REG_EBRACE */
+    "Invalid content of \\{\\}",		/* REG_BADBR */
+  do {if (p == pend) return REG_EEND;					\
+  do {if (p == pend) return REG_EEND;					\
+  do {									\
+  do {									\
+  do {									\
+  do { 									\
+      {									\
+   {start,stop}_memory, the maximum number of groups we can report
+{
+{
+  { if (p != pend)							\
+     {									\
+         { 								\
+{
+  /* Place in the uncompiled pattern (i.e., the {) to
+    {
+    {
+	{ /* If zero allocated, but buffer is non-null, try to realloc
+        { /* Caller did not allocate a buffer.  Do it for them.  */
+    {
+        {
+          {
+          {
+            {
+          {
+               interval operators with these because of, e.g., `a{2}*',
+              {
+                  {
+                      {
+                  {
+              { /* More than one repetition is allowed, so put in at the
+                  { /* We have .*\n.  */
+              {
+          {
+              {
+                  {
+                  {
+                  { /* This handles ranges made up of characters only.  */
+                  { /* Leave room for the null.  */
+                      {
+                      {
+                          {
+                      {
+                  {
+        case '{':
+            {
+                { 
+                {
+                { /* Push a dummy failure point at the end of the
+              {
+                  {
+            case '{': 
+              /* If \{ is a literal.  */
+                     /* If we're at `\{' and it's not the open-interval 
+              {
+                  {
+                  {
+                  /* Interval such as `{1}' => match exactly once. */
+                  {
+                  {
+                  {
+                  {
+                   {
+                   { /* If the upper bound is > 1, we need to insert
+                       { /* More than one repetition is allowed, so
+                 {
+		      ? *p == '{'
+                      : (p[0] == '\\' && p[1] == '{'))))
+	    {
+    {
+{
+{
+{
+{
+{
+{
+{
+{
+    {
+{
+  do {									\
+  do {									\
+      {									\
+      {									\
+{									\
+    {									\
+{
+    {
+        {
+	{
+            {
+            {
+	    {
+{
+    {
+    {
+{
+{
+    {
+    { 
+	{
+	    {
+	    {
+        {
+        {
+{
+  {
+    {									\
+        {								\
+    {									\
+  do {									\
+ {
+{
+    {
+        {
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+	{ /* End of pattern means we might have succeeded.  */
+	    {
+                { /* More failure points to try.  */
+                    {
+                        {
+                {
+		    {
+	    {
+                { /* No.  So allocate them with malloc.  We need one
+                { /* Yes.  If we need more elements than were already
+                    {
+		{
+                {
+		{
+                    {
+	{
+	    {
+		{
+	    {
+		{
+	  {
+            {
+            { /* We must scan for the new highest active register, since
+                {
+            {
+                {
+		{
+		    {
+                        {
+	  {
+	      {
+		  {
+            {
+            {
+            {
+            {
+             the result of a completed succeed_n, as in \(a\)\{1,3\}b\1
+            {
+          {
+	      {
+	      {
+                  {
+		  {
+                      {
+	    {
+          {
+            {
+            {
+            {
+	  {
+	{ /* A restart point is known.  Restore to that state.  */
+            {
+                {
+{
+    {
+        {
+	    {
+                {
+                    {
+{
+    {
+        {
+{
+    {
+        {
+{
+    {
+{
+{
+    {
+    {
+{
+{
+    {
+    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+{
+    {
+    {
+        {
+            {
+{
+    {
+        {
+{
+{
+{
+{
+    {						  \
+{
+    {
+	{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+static int minrep, maxrep;	/* Repeat counts for {m,n}. */
+  {			   	      \
+#define FUNC(F, P) static int F(c) int c; { return P(c); }
+static struct {
+} prednames[] = {
+{
+{
+    {
+	{
+	    {
+	case '{':
+	     {M} - exact count
+	     {M,} - minimum count, maximum is infinity
+	     {,M} - 0 through M
+	     {M,N} - M through N */
+	    {
+		{
+	      {
+	    {
+	    {
+	    {
+		    {
+		{
+		    {
+		    {
+		{
+	    {
+	    {
+{
+    {
+{
+    {
+    {
+{
+    {
+{
+{
+      {
+	  {
+	  {
+      {
+{
+    {
+{
+    {
+{
+{
+{
+    {
+	{
+{
+      {
+{
+{
+    {
+      {
+      {
+{
+      {
+	  {
+	  {
+	  {
+{
+    {
+    {				/* Nonsyntactic #ifdef goo... */
+      {
+	  {
+	  {
+	  {
+	{
+	{
+      {
+	  {
+{
+    {
+    {
+	{
+	{
+	    {
+	    {
+	{
+    {
+	{
+    {
+	    {
+{
+    {
+	  {
+	  {
+      {
+	  {
+{
+{
+    {
+    {
+	  {
+	{
+	    {
+	{
+	{
+{
+{
+    {
+    {
+{
+    {
+{
+{
+{
+{
+{
+    {
+{
+    {
+      {
+      {
+{
+    {
+	{
+{
+    {
+{
+    {
+	{
+	    {
+{
+{
+{
+    {
+    {
+    {
+	{
+	  {
+	  {
+	      {
+	      {
+	      {
+	    {
+	    {
+	    {
+	    {
+    {
+    {
+{
+{
+{
+{
+    {
+{
+  enum { L, R } dirs[12];
+    {
+	{
+	{
+	    {
+	    {
+		{
+		    {
+		    {
+{
+{
+    {
+	{
+{
+{
+{
+{
+    {
+	{
+    {
+	{
+	    {
+	{
+{
+      {
+	  {
+	  {
+    {
+	{
+{
+    {
+    {
+	{
+	    {
+	{
+	{
+	    {
+		{
+    {
+	{
+	{
+	{
+	    {
+		{
+	{
+    {
+{
+    {
+	{
+{
+struct fooalign {char x; double d;};
+union fooround {long x; double d;};
+  do { \
+{
+    {
+{
+    {
+{
+    {
+    {
+{
+    {
+{
+    {
+    {
+{
+    {
+    {
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+struct matcher matchers[] = {
+  { "default", Gcompile, EGexecute },
+  { "grep", Gcompile, EGexecute },
+  { "ggrep", Gcompile, EGexecute },
+  { "egrep", Ecompile, EGexecute },
+  { "posix-egrep", Ecompile, EGexecute },
+  { "gegrep", Ecompile, EGexecute },
+  { "fgrep", Fcompile, Fexecute },
+  { "gfgrep", Fcompile, Fexecute },
+  { 0, 0, 0 },
+{
+{
+{
+    {
+	{
+	{
+{
+    {
+{
+    {
+    {
+    {
+{
+    {
+	{
+	    {
+	{
+	{
+	      {
+		  {
+		  {
+{
+    {
+{
+    {
+	{
+	  {
+	      {

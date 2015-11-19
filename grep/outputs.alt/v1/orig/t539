@@ -1,0 +1,75 @@
+35:1174:#include <errno.h>
+36:1193:#include <stdio.h>
+43:1273:#include <stdlib.h>
+46:1321:#include <sys/types.h>
+53:1483:#include <string.h>
+56:1546:#include <memory.h>
+60:1601:#include <strings.h>
+72:1793:#include <sys/types.h>
+75:1847:#include <fcntl.h>
+76:1866:#include <unistd.h>
+82:1955:#include "getpagesize.h"
+83:1980:#include "grep.h"
+215:4544:#include <sys/types.h>
+218:4598:#include <sys/stat.h>
+219:4620:#include <sys/mman.h>
+882:19186:#include "config.h"
+890:19434:#include <alloca.h>
+908:19754:/*#include <stdio.h> */
+912:19929:   Library, but also included in many other GNU distributions.  Compiling
+921:20345:/* This needs to come after some library #include
+925:20471:/* Don't include stdlib.h for non-GNU C libraries because some of them
+928:20614:#include <stdlib.h>
+954:21621:#include "getopt.h"
+1039:24773:#include <string.h>
+1620:40127:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+1622:40224:#include <sys/types.h>
+1628:40319:#include "config.h"
+1637:40484:#include "lisp.h"
+1638:40502:#include "buffer.h"
+1639:40522:#include "syntax.h"
+1650:40814:#include <string.h>
+1664:41087:#include <strings.h>
+1671:41186:#include <stdlib.h>
+1731:42225:#include "regex.h"
+1734:42301:#include <ctype.h>
+1815:45108:#include <alloca.h>
+1974:50944:           subsequent two-byte number.  The address *includes* the two
+2084:54142:/*#include <stdio.h>*/
+2087:54239:#include <assert.h>
+4076:118979:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+4850:143613:     return, for use in backreferences.  The number here includes
+4914:146588:     there are groups, we include space for register 0 (the whole
+6549:201516:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+6618:203269:/*#include <assert.h> */
+6619:203294:/*#include <ctype.h> */
+6620:203318:/*#include <stdio.h> */
+6624:203382:#include <stdlib.h>
+6629:203459:#include <sys/types.h>
+6638:203658:#include <string.h>
+6645:203767:#include <strings.h>
+6693:204934:#include "dfa.h"
+6694:204951:/*#include "regex.h"*/
+7485:221399:   length of the string, so s can include NUL characters.  D is a pointer to
+8041:238203:   If we are building a searching matcher, we include the positions of state
+9180:268050:#include <limits.h>
+9183:268112:#include <stdlib.h>
+9190:268232:#include <stddef.h>
+9193:268279:#include <sys/types.h>
+9203:268429:#include <string.h>
+9208:268518:#include <memory.h>
+9225:268730:#include "kwset.h"
+9226:268749:#include "obstack.h"
+9984:288506:/*#include "obstack.h"*/
+9987:288584:/*#include <stdio.h>*/
+9991:288758:   Library, but also included in many other GNU distributions.  Compiling
+10440:302541:/*#include <ctype.h>*/
+10445:302622:#include <limits.h>
+10449:302690:#include <stdlib.h>
+10455:302788:#include <sys/types.h>
+10463:302911:#include <string.h>
+10468:303000:#include <memory.h>
+10495:303496:/*#include "grep.h"*/
+10496:303518:/*#include "dfa.h"*/
+10497:303539:/*#include "kwset.h"*/
+10498:303562:/*#include "regex.h"*/

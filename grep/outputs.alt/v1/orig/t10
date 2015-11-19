@@ -1,0 +1,403 @@
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   You should have received a copy of the GNU General Public License
+#define HAVE_SYS_PARAM_H 1
+#define HAVE_GETPAGESIZE 1
+#ifdef NEED_MEMORY_H
+#define O_RDONLY 0
+#undef MAX
+#define MAX(A,B) ((A) > (B) ? (A) : (B))
+      bufsalloc = MAX(8192, getpagesize());
+		   MAP_PRIVATE | MAP_FIXED, bufdesc, bufoffset);
+      /* You might thing this (or MADV_WILLNEED) would help,
+  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+      case 'X':
+	desc = strcmp(argv[optind], "-") ? open(argv[optind], O_RDONLY) : 0;
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   You should have received a copy of the GNU General Public License
+/* NOTE!!!  AIX requires this to be the first thing in the file.
+   Do not put ANYTHING before it!  */
+#if !defined (__GNUC__) && defined (_AIX)
+#ifndef _AIX
+#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
+   to get __GNU_LIBRARY__ defined.  */
+#ifdef	__GNU_LIBRARY__
+   long-named option.  Because this is not POSIX.2 compliant, it is
+   Setting the environment variable POSIXLY_CORRECT disables permutation.
+/* XXX 1003.2 says this must be 1 before any call.  */
+   POSIXLY_CORRECT is defined, PERMUTE otherwise.
+   variable POSIXLY_CORRECT, or using `+' as the first character
+#ifdef	__GNU_LIBRARY__
+   If LONG_ONLY is nonzero, '-' as well as '--' can introduce
+      else if (getenv ("POSIXLY_CORRECT") != NULL)
+#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+   (Implements POSIX draft P10003.2/D11.2, except for
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   You should have received a copy of the GNU General Public License
+/* AIX requires this to be the first thing in the file. */
+#if defined (_AIX) && !defined (REGEX_MALLOC)
+#ifdef SYNTAX_TABLE
+#else /* not SYNTAX_TABLE */
+#define CHAR_SET_SIZE 256
+static char re_syntax_table[CHAR_SET_SIZE];
+   for (c = 'A'; c <= 'Z'; c++)
+#endif /* not SYNTAX_TABLE */
+#define SYNTAX(c) re_syntax_table[c]
+   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
+#define ISXDIGIT(c) (isascii (c) && isxdigit (c))
+/* We remove any previous definition of `SIGN_EXTEND_CHAR',
+#undef SIGN_EXTEND_CHAR
+#define SIGN_EXTEND_CHAR(c) ((signed char) (c))
+#define SIGN_EXTEND_CHAR(c) ((((unsigned char) (c)) ^ 128) - 128)
+/* Should we use malloc or alloca?  If REGEX_MALLOC is not defined, we
+#ifdef REGEX_MALLOC
+#define REGEX_ALLOCATE malloc
+#define REGEX_REALLOCATE(source, osize, nsize) realloc (source, nsize)
+#else /* not REGEX_MALLOC  */
+#ifndef _AIX /* Already did AIX, up at the top.  */
+#endif /* not _AIX */
+#define REGEX_ALLOCATE alloca
+#define REGEX_REALLOCATE(source, osize, nsize)				\
+#endif /* not REGEX_MALLOC */
+#define REGEX_TALLOC(n, t) ((t *) REGEX_ALLOCATE ((n) * sizeof (t)))
+#define BYTEWIDTH 8 /* In bits.  */
+#undef MAX               /****** added later *******/
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+   arguments.  Zero bytes may appear in the compiled regular expression.
+   So regex.h defines a symbol `RE_EXACTN_VALUE' to be 1; the value of
+#define EXTRACT_NUMBER(destination, source)				\
+    (destination) += SIGN_EXTEND_CHAR (*((source) + 1)) << 8;		\
+  int temp = SIGN_EXTEND_CHAR (*(source + 1)); 
+#ifndef EXTRACT_MACROS /* To debug the macros.  */
+#undef EXTRACT_NUMBER
+#define EXTRACT_NUMBER(dest, src) extract_number (&dest, src)
+#endif /* not EXTRACT_MACROS */
+/* Same as EXTRACT_NUMBER, except increment SOURCE to after the number.
+#define EXTRACT_NUMBER_AND_INCR(destination, source)			\
+    EXTRACT_NUMBER (destination, source);				\
+#ifndef EXTRACT_MACROS
+#undef EXTRACT_NUMBER_AND_INCR
+#define EXTRACT_NUMBER_AND_INCR(dest, src) \
+#endif /* not EXTRACT_MACROS */
+  while (i < (1 << BYTEWIDTH))
+          while (i < (1 << BYTEWIDTH)  &&  fastmap[i])
+	            (re_opcode_t) *(p - 1) == charset_not ? "^" : "");
+reg_syntax_t re_syntax_options = RE_SYNTAX_EMACS;
+   The argument SYNTAX is a bit mask comprised of the various bits
+    "Invalid character class name",		/* REG_ECTYPE */
+    "Unmatched [ or [^",			/* REG_EBRACK */
+    "Regular expression too big",		/* REG_ESIZE */
+#define INIT_BUF_SIZE  32
+      EXTEND_BUFFER ()
+   into the pattern are two bytes long.  So if 2^16 bytes turns out to
+#define MAX_BUF_SIZE (1L << 16)
+   being larger than MAX_BUF_SIZE, then flag memory exhausted.  */
+#define EXTEND_BUFFER()							\
+    if (bufp->allocated == MAX_BUF_SIZE) 				\
+      return REG_ESIZE;							\
+    if (bufp->allocated > MAX_BUF_SIZE)					\
+      bufp->allocated = MAX_BUF_SIZE; 					\
+#define MAX_REGNUM 255
+/* But patterns can have more than `MAX_REGNUM' registers.  We just
+   be able to hold values from -(MAX_BUF_SIZE - 1) to MAX_BUF_SIZE - 1.  */
+#define INIT_COMPILE_STACK_SIZE 32
+#define COMPILE_STACK_EMPTY  (compile_stack.avail == 0)
+  (b[((unsigned char) (c)) / BYTEWIDTH]               \
+   |= 1 << (((unsigned char) c) % BYTEWIDTH))
+#define CHAR_CLASS_MAX_LENGTH  6 /* Namely, `xdigit'.  */
+/* `regex_compile' compiles PATTERN (of length SIZE) according to SYNTAX.
+     `syntax' is set to SYNTAX;
+  compile_stack.stack = TALLOC (INIT_COMPILE_STACK_SIZE, compile_stack_elt_t);
+  compile_stack.size = INIT_COMPILE_STACK_SIZE;
+#if !defined (emacs) && !defined (SYNTAX_TABLE)
+          RETALLOC (bufp->buffer, INIT_BUF_SIZE, unsigned char);
+          bufp->buffer = TALLOC (INIT_BUF_SIZE, unsigned char);
+      bufp->allocated = INIT_BUF_SIZE;
+        case '^':
+                || syntax & RE_CONTEXT_INDEP_ANCHORS
+                || syntax & RE_CONTEXT_INDEP_ANCHORS
+              if (syntax & RE_CONTEXT_INVALID_OPS)
+              else if (!(syntax & RE_CONTEXT_INDEP_OPS))
+            /* We test `*p == '^' twice, instead of using an if
+            BUF_PUSH (*p == '^' ? charset_not : charset); 
+            if (*p == '^')
+            BUF_PUSH ((1 << BYTEWIDTH) / BYTEWIDTH);
+            bzero (b, (1 << BYTEWIDTH) / BYTEWIDTH);
+                /* \ might escape characters inside [...] and [^...].  */
+                    && !(p - 3 >= pattern && p[-3] == '[' && p[-2] == '^')
+                    char str[CHAR_CLASS_MAX_LENGTH + 1];
+                            || c1 == CHAR_CLASS_MAX_LENGTH)
+                        if (!IS_CHAR_CLASS (str)) return REG_ECTYPE;
+                        for (ch = 0; ch < 1 << BYTEWIDTH; ch++)
+                                || (is_xdigit && ISXDIGIT (ch)))
+              if (regnum <= MAX_REGNUM)
+	      /* If we've reached MAX_REGNUM groups, then this open
+              if (COMPILE_STACK_EMPTY)
+              if (COMPILE_STACK_EMPTY)
+		/* If we've reached MAX_REGNUM groups, then this open
+                if (this_group_regnum <= MAX_REGNUM)
+                    if (upper_bound < 0) upper_bound = RE_DUP_MAX;
+                if (lower_bound < 0 || upper_bound > RE_DUP_MAX
+                    if (syntax & RE_CONTEXT_INVALID_OPS)
+                    else if (syntax & RE_CONTEXT_INDEP_OPS)
+              /* You might think it would be useful for \ to mean
+	      || *pending_exact == (1 << BYTEWIDTH) - 1
+              || *p == '*' || *p == '^'
+  if (!COMPILE_STACK_EMPTY) 
+/* P points to just after a ^ in PATTERN.  Return true if that ^ comes
+   least one character before the ^.  */
+    return syntax & RE_NO_EMPTY_RANGES ? REG_ERANGE : REG_NOERROR;
+   REGEX_ALLOCATE.  */
+   exactly that if always used MAX_FAILURE_SPACE each time we failed.
+#define FAIL_STACK_EMPTY()     (fail_stack.avail == 0)
+#define FAIL_STACK_PTR_EMPTY() (fail_stack_ptr->avail == 0)
+      REGEX_ALLOCATE (INIT_FAILURE_ALLOC * sizeof (fail_stack_elt_t));	\
+   REGEX_REALLOCATE requires `destination' be declared.   */
+  ((fail_stack).size > re_max_failures * MAX_FAILURE_ITEMS		\
+        REGEX_REALLOCATE ((fail_stack).stack, 				\
+#define MAX_FAILURE_ITEMS ((num_regs - 1) * NUM_REG_ITEMS + NUM_NONREG_ITEMS)
+  assert (!FAIL_STACK_EMPTY ());					\
+   BUFP.  A fastmap records which of the (1 << BYTEWIDTH) possible
+   The caller must supply the address of a (1 << BYTEWIDTH)-byte data
+#ifndef REGEX_MALLOC
+  bzero (fastmap, 1 << BYTEWIDTH);  /* Assume nothing's valid.  */
+  while (p != pend || !FAIL_STACK_EMPTY ())
+          for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+	    if (p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH)))
+	  for (j = *p * BYTEWIDTH; j < (1 << BYTEWIDTH); j++)
+	  for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+	    if (!(p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH))))
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) == Sword)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) != Sword)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) == (enum syntaxcode) k)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) != (enum syntaxcode) k)
+          EXTRACT_NUMBER_AND_INCR (j, p);
+          EXTRACT_NUMBER_AND_INCR (j, p);
+          if (!FAIL_STACK_EMPTY () 
+          EXTRACT_NUMBER_AND_INCR (j, p);
+              EXTRACT_NUMBER_AND_INCR (k, p);	/* Skip the n.  */
+          EXTRACT_NUMBER_AND_INCR (k, p);
+   STRING1 and STRING2 have length SIZE1 and SIZE2, respectively.
+  (SYNTAX ((d) == end1 ? *string2					\
+#define AT_WORD_BOUNDARY(d)						\
+#ifdef REGEX_MALLOC
+#else /* not REGEX_MALLOC */
+#endif /* not REGEX_MALLOC */
+#define NO_HIGHEST_ACTIVE_REG (1 << BYTEWIDTH)
+   the (virtual) concatenation of STRING1 and STRING2 (of length SIZE1
+   and SIZE2, respectively).  We start matching at POS, and stop
+      regstart = REGEX_TALLOC (num_regs, const char *);
+      regend = REGEX_TALLOC (num_regs, const char *);
+      old_regstart = REGEX_TALLOC (num_regs, const char *);
+      old_regend = REGEX_TALLOC (num_regs, const char *);
+      best_regstart = REGEX_TALLOC (num_regs, const char *);
+      best_regend = REGEX_TALLOC (num_regs, const char *);
+      reg_info = REGEX_TALLOC (num_regs, register_info_type);
+      reg_dummy = REGEX_TALLOC (num_regs, const char *);
+      reg_info_dummy = REGEX_TALLOC (num_regs, register_info_type);
+#ifdef REGEX_MALLOC
+#endif /* REGEX_MALLOC */
+              if (!FAIL_STACK_EMPTY ())
+                  regs->num_regs = MAX (RE_NREGS, num_regs + 1);
+                { /* Yes.  If we need more elements than were already
+		  assert (bufp->regs_allocated == REGS_FIXED);
+          DEBUG_PRINT1 ("EXECUTING no_op.\n");
+          DEBUG_PRINT2 ("EXECUTING exactn %d.\n", mcnt);
+          DEBUG_PRINT1 ("EXECUTING anychar.\n");
+            DEBUG_PRINT2 ("EXECUTING charset%s.\n", not ? "_not" : "");
+	    if (c < (unsigned) (*p * BYTEWIDTH)
+		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+                    EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
+          DEBUG_PRINT1 ("EXECUTING begline.\n");
+          DEBUG_PRINT1 ("EXECUTING endline.\n");
+          DEBUG_PRINT1 ("EXECUTING begbuf.\n");
+          DEBUG_PRINT1 ("EXECUTING endbuf.\n");
+          DEBUG_PRINT1 ("EXECUTING on_failure_keep_string_jump");
+          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          DEBUG_PRINT1 ("EXECUTING on_failure_jump");
+          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          DEBUG_PRINT2 ("EXECUTING maybe_pop_jump %d.\n", mcnt);
+		    if (c < (unsigned char) (p1[4] * BYTEWIDTH)
+			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+            DEBUG_PRINT1 ("EXECUTING pop_failure_jump.\n");
+	  EXTRACT_NUMBER_AND_INCR (mcnt, p);	/* Get the amount to jump.  */
+          DEBUG_PRINT2 ("EXECUTING jump %d ", mcnt);
+          DEBUG_PRINT1 ("EXECUTING jump_past_alt.\n");
+          DEBUG_PRINT1 ("EXECUTING dummy_failure_jump.\n");
+          DEBUG_PRINT1 ("EXECUTING push_dummy_failure.\n");
+          EXTRACT_NUMBER (mcnt, p + 2);
+          DEBUG_PRINT2 ("EXECUTING succeed_n %d.\n", mcnt);
+          EXTRACT_NUMBER (mcnt, p + 2);
+          DEBUG_PRINT2 ("EXECUTING jump_n %d.\n", mcnt);
+            DEBUG_PRINT1 ("EXECUTING set_number_at.\n");
+            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          DEBUG_PRINT1 ("EXECUTING wordbound.\n");
+          if (AT_WORD_BOUNDARY (d))
+          DEBUG_PRINT1 ("EXECUTING notwordbound.\n");
+	  if (AT_WORD_BOUNDARY (d))
+          DEBUG_PRINT1 ("EXECUTING wordbeg.\n");
+          DEBUG_PRINT1 ("EXECUTING wordend.\n");
+          DEBUG_PRINT1 ("EXECUTING before_dot.\n");
+          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+          DEBUG_PRINT1 ("EXECUTING after_dot.\n");
+          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+          DEBUG_PRINT2 ("EXECUTING syntaxspec %d.\n", mcnt);
+          DEBUG_PRINT1 ("EXECUTING Emacs wordchar.\n");
+	  if (SYNTAX (*d++) != (enum syntaxcode) mcnt)
+          DEBUG_PRINT2 ("EXECUTING notsyntaxspec %d.\n", mcnt);
+          DEBUG_PRINT1 ("EXECUTING Emacs notwordchar.\n");
+	  if (SYNTAX (*d++) == (enum syntaxcode) mcnt)
+          DEBUG_PRINT1 ("EXECUTING non-Emacs wordchar.\n");
+          DEBUG_PRINT1 ("EXECUTING non-Emacs notwordchar.\n");
+      if (!FAIL_STACK_EMPTY ())
+                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+              EXTRACT_NUMBER (mcnt, p1 - 2);
+          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+      assert (reg_no > 0 && reg_no <= MAX_REGNUM);
+      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+   compiles PATTERN (of length SIZE) and puts the result in BUFP.
+   them if this is an Emacs or POSIX compilation.  */
+#if !defined (emacs) && !defined (_POSIX_SOURCE)
+      re_comp_buf.fastmap = (char *) malloc (1 << BYTEWIDTH);
+  /* Yes, we're discarding `const' here.  */
+#endif /* not emacs and not _POSIX_SOURCE */
+/* POSIX.2 functions.  Don't define these for Emacs.  */
+   since POSIX says we shouldn't.  Thus, we set
+     `syntax' to RE_SYNTAX_POSIX_EXTENDED if the
+       REG_EXTENDED bit in CFLAGS is set; otherwise, to
+       RE_SYNTAX_POSIX_BASIC;
+     If REG_EXTENDED is set, we use POSIX extended syntax; otherwise, we
+     use POSIX basic syntax.
+     If REG_NEWLINE is set, then . and [^...] don't match newline.
+    = (cflags & REG_EXTENDED) ?
+      RE_SYNTAX_POSIX_EXTENDED : RE_SYNTAX_POSIX_BASIC;
+      preg->translate = (char *) malloc (CHAR_SET_SIZE);
+      for (i = 0; i < CHAR_SET_SIZE; i++)
+    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+  /* POSIX says a null character in the pattern terminates it, so we 
+  /* POSIX doesn't distinguish between an unmatched open-group and an
+   REG_NOTBOL is set, then ^ does not match at the beginning of the
+  private_preg.regs_allocated = REGS_FIXED;
+  /* Copy the register information to the POSIX structure.  */
+  /* POSIX doesn't require that we do anything in this case, but why
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   You should have received a copy of the GNU General Public License
+#undef ISXDIGIT
+#define ISXDIGIT(C) (isascii(C) && isxdigit(C))
+#define ISXDIGIT(C) isxdigit(C)
+#define REALLOC_IF_NECESSARY(p, t, nalloc, index) \
+	case EMPTY: s = "EMPTY"; break;
+  REALLOC_IF_NECESSARY(dfa->charclasses, charclass, dfa->calloc, dfa->cindex);
+   meaning of the @#%!@#%^!@ syntax bits. */
+FUNC(is_xdigit, ISXDIGIT)
+	case '^':
+	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	  if (c == '^')
+  REALLOC_IF_NECESSARY(dfa->tokens, token, dfa->talloc, dfa->tindex);
+    case EMPTY:
+    addtok(EMPTY);
+    hash ^= s->elems[i].index + s->elems[i].constraint;
+  REALLOC_IF_NECESSARY(d->states, dfa_state, d->salloc, d->sindex);
+	if (SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 0)
+	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 1)
+	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 0)
+	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 1))
+   *  EMPTY leaves are nullable.
+   * EMPTY leaves have empty firstpos.
+   * EMPTY leaves have empty lastpos.
+      case EMPTY:
+	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+	  if (! MATCHES_LETTER_CONTEXT(pos.constraint,
+	  if (! MATCHES_LETTER_CONTEXT(pos.constraint,
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 1, d->states[s].letter, 0,
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 1,
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 0,
+   "ZERO" means "a zero-length sequence" below.
+	CSET	ZERO		ZERO		ZERO		ZERO
+	STAR	ZERO		ZERO		ZERO		ZERO
+	QMARK	ZERO		ZERO		ZERO		ZERO
+	PLUS	p->left		p->right	ZERO		p->in
+	CAT	(p->is==ZERO)?	(q->is==ZERO)?	(p->is!=ZERO &&	p->in plus
+		p->left :	q->right :	q->is!=ZERO) ?	q->in plus
+						ZERO
+					(Yes, we now find "epsi" as a "string
+	case EMPTY:
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   You should have received a copy of the GNU General Public License
+#undef RE_DUP_MAX
+#define INT_MAX 2147483647
+#define UCHAR_MAX 255
+#ifdef NEED_MEMORY_H
+#define NCHAR (UCHAR_MAX + 1)
+  kwset->mind = INT_MAX;
+   matching substring.  Similarly, if FOUNDIDX is non-NULL, store
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+You should have received a copy of the GNU General Public License
+/* This is just to get __GNU_LIBRARY__ defined.  */
+#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
+  ((PTR_INT_TYPE) ((char *)&((struct fooalign *) 0)->d - (char *)0))
+   in such a case, redefine COPYING_UNIT to `long' (if that works)
+#ifndef COPYING_UNIT
+#define COPYING_UNIT int
+/* Initialize an obstack H for use.  Specify chunk size SIZE (0 means default).
+      /* 12 is sizeof (mhead) and 4 is EXTRA from GNU malloc.
+      /* 12 is sizeof (mhead) and 4 is EXTRA from GNU malloc.
+      for (i = obj_size / sizeof (COPYING_UNIT) - 1;
+	((COPYING_UNIT *)new_chunk->contents)[i]
+	  = ((COPYING_UNIT *)h->object_base)[i];
+      /* We used to copy the odd few remaining bytes as one extra COPYING_UNIT,
+	 which does not do strict alignment for COPYING_UNITS.  */
+      already = obj_size / sizeof (COPYING_UNIT) * sizeof (COPYING_UNIT);
+#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   You should have received a copy of the GNU General Public License
+#undef RE_DUP_MAX
+#define UCHAR_MAX 255
+#ifdef NEED_MEMORY_H
+#define NCHAR (UCHAR_MAX + 1)
+  re_set_syntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE);
+  dfasyntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE, match_icase);
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 ^(userpattern)$.
+	 BUG: Using [A-Za-z_] is locale-dependent!  */
+	strcpy(n, "^\\(");
+	strcpy(n, "\\(^\\|[^0-9A-Za-z_]\\)\\(");
+	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+      re_set_syntax(RE_SYNTAX_POSIX_EGREP);
+      dfasyntax(RE_SYNTAX_POSIX_EGREP, match_icase);
+      re_set_syntax(RE_SYNTAX_EGREP);
+      dfasyntax(RE_SYNTAX_EGREP, match_icase);
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 ^(userpattern)$.
+	 BUG: Using [A-Za-z_] is locale-dependent!  */
+	strcpy(n, "^(");
+	strcpy(n, "(^|[^0-9A-Za-z_])(");
+	strcpy(n + i, ")([^0-9A-Za-z_]|$)");

@@ -1,0 +1,2 @@
+  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+      c = getopt (argc, argv, "abc:d:0123456789");

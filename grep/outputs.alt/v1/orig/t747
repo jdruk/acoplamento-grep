@@ -1,0 +1,30 @@
+#define SIGN_EXTEND_CHAR(c) ((((unsigned char) (c)) ^ 128) - 128)
+	            (re_opcode_t) *(p - 1) == charset_not ? "^" : "");
+    "Unmatched [ or [^",			/* REG_EBRACK */
+   into the pattern are two bytes long.  So if 2^16 bytes turns out to
+        case '^':
+            /* We test `*p == '^' twice, instead of using an if
+            BUF_PUSH (*p == '^' ? charset_not : charset); 
+            if (*p == '^')
+                /* \ might escape characters inside [...] and [^...].  */
+                    && !(p - 3 >= pattern && p[-3] == '[' && p[-2] == '^')
+              || *p == '*' || *p == '^'
+/* P points to just after a ^ in PATTERN.  Return true if that ^ comes
+   least one character before the ^.  */
+     If REG_NEWLINE is set, then . and [^...] don't match newline.
+    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+   REG_NOTBOL is set, then ^ does not match at the beginning of the
+   meaning of the @#%!@#%^!@ syntax bits. */
+	case '^':
+	  if (c == '^')
+    hash ^= s->elems[i].index + s->elems[i].constraint;
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 ^(userpattern)$.
+	strcpy(n, "^\\(");
+	strcpy(n, "\\(^\\|[^0-9A-Za-z_]\\)\\(");
+	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 ^(userpattern)$.
+	strcpy(n, "^(");
+	strcpy(n, "(^|[^0-9A-Za-z_])(");
+	strcpy(n + i, ")([^0-9A-Za-z_]|$)");

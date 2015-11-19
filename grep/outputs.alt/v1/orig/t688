@@ -1,0 +1,70 @@
+      else if (p < b)
+	    else if (list_files == -1)
+      else if (list_files == -1)
+#else /* not __GNUC__ */
+   from the option name by a `=', or else the in next ARGV-element.
+      else if (optstring[0] == '+')
+      else if (getenv ("POSIXLY_CORRECT") != NULL)
+	  else if (last_nonopt != optind)
+	 then skip everything else like a non-option.  */
+	  else if (first_nonopt == last_nonopt)
+	    else if (pfound == NULL)
+	  else if (pfound->has_arg == 1)
+	    else if (optind == argc)
+#else  /* not emacs */
+#else /* not SYNTAX_TABLE */
+#else  /* not __STDC__ */
+#else /* not REGEX_MALLOC  */
+#else /* not __GNUC__ */
+#else /* not __GNUC__ or HAVE_ALLOCA_H */
+		  else if (last + 1 != c && in_range)
+#else /* not DEBUG */
+/* If `translate' is non-null, return translate[D], else just D.  We
+              else if (!(syntax & RE_CONTEXT_INDEP_OPS))
+                else if (syntax & RE_BK_PLUS_QM  &&  c == '\\')
+                else if (p[0] == '-' && p[1] != ']')
+                else if (syntax & RE_CHAR_CLASSES && c == '[' && *p == ':')
+                    else 
+                    else 
+                    else if (syntax & RE_CONTEXT_INDEP_OPS)
+                 else 
+	  else if (bufp->can_be_null)
+  else if (endpos > total_size)
+              /* Written out as an if-else to avoid testing `translate'
+      else if (range > 0) 
+#else /* not REGEX_MALLOC */
+     else (see below).  Also, we never need info about register 0 for
+              else if (best_regs_set)   
+              else if (bufp->regs_allocated == REGS_REALLOCATE)
+          /* This is written out as an if-else so we don't waste time
+		/* Compare that many; failure if mismatch, else move
+          else if (d[-1] == '\n' && bufp->newline_anchor)
+          else if ((d == end1 ? *string2 : *d) == '\n'
+            else if ((re_opcode_t) *p2 == exactn
+		else if ((re_opcode_t) p1[3] == charset
+	  else if (mcnt == 0)
+	  else      
+#else /* not emacs19 */
+#else /* not emacs */
+  else if (t < NOTCHAR)
+	  else if (c != ',')
+		    else if (ISLOWER(c))
+  else if (tok == LPAREN)
+    else if (s1->elems[i].index < s2->elems[j].index)
+    else if (d->tokens[s->elems[j].index] == BACKREF)
+	/* Anything else is a nonempty position.  (Note that special
+      else if (d->tokens[pos.index] >= CSET)
+	else if (ISALNUM(i))
+	      else if (ISALNUM(c))
+	      else if (c < NOTCHAR)
+	else if (d->fails[i])
+	else if (ISALNUM(i))
+    else if (d->fails[i])
+   If there's anything else we recognize in the tree, all four sequences get set
+  else if (newsize == 0)
+	  else if (t == '\0')
+	  else if (t >= CSET)
+    else \
+  else if (obj != 0)
+  else if (obj != 0)
+      else if (match_words)

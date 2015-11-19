@@ -1,0 +1,37 @@
+2811:static int errseen;
+4329:static int bufdesc;		/* File descriptor. */
+4643:static int bufmapped;		/* True for ordinary files. */
+4927:  static int initialized;
+5895:static int
+6032:  static int pagesize;
+7929:static int out_quiet;		/* Suppress all normal output. */
+7986:static int out_invert;		/* Print nonmatching stuff. */
+8041:static int out_file;		/* Print filenames. */
+8086:static int out_line;		/* Print line numbers. */
+8134:static int out_byte;		/* Print byte offsets. */
+8182:static int out_before;		/* Lines of leading context. */
+8238:static int out_after;		/* Lines of trailing context. */
+8715:static int pending;		/* Pending lines of output. */
+9921:  static int used;		/* avoid printing "--" before any output */
+11103:static int
+11774:static int
+25616:static int first_nonopt;
+25641:static int last_nonopt;
+41725:   static int done = 0;
+54260:static int debug = 0;
+135831:static int bcmp_translate ();
+192435:static int
+206880:static int
+207548:static int
+207892:static int
+208257:static int syntax_bits, syntax_bits_set;
+208346:static int case_fold;
+209027:static int laststart;		/* True if we're separated from beginning or (, |
+209141:static int parens;		/* Count of outstanding left parens. */
+209201:static int minrep, maxrep;	/* Repeat counts for {m,n}. */
+209580:#define FUNC(F, P) static int F(c) int c; { return P(c); }
+210473:static int
+219871:static int
+224298:static int
+277160:static int
+304957:static int lastexact;

@@ -1,0 +1,10 @@
+     char *argv[];
+char *alloca ();
+     char **argv;
+     char *const *argv;
+     char *const *argv;
+     char **argv;
+char *alloca ();
+               would have to backtrack because of (as in, e.g., `a*a')
+     register struct tree *a;
+  struct trie **next, *trie, *accept;

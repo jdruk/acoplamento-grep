@@ -1,0 +1,216 @@
+../inputs/grep0.dat:include
+../inputs/grep1.dat:#include <errno.h>
+../inputs/grep1.dat:#include <stdio.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <memory.h>
+../inputs/grep1.dat:#include <strings.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <fcntl.h>
+../inputs/grep1.dat:#include <unistd.h>
+../inputs/grep1.dat:#include "getpagesize.h"
+../inputs/grep1.dat:#include "grep.h"
+../inputs/grep1.dat:    fprintf(stderr, "%s: %s: %s\n", prog, mesg, strerror(errnum));
+../inputs/grep1.dat:    fprintf(stderr, "%s: %s\n", prog, mesg);
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <sys/stat.h>
+../inputs/grep1.dat:#include <sys/mman.h>
+../inputs/grep1.dat:  if (bufmapped && bufoffset % pagesize == 0
+../inputs/grep1.dat:	  fprintf(stderr, "%s: warning: %s: %s\n", filename,
+../inputs/grep1.dat:	 In fact, it actually slows us down about 30%! */
+../inputs/grep1.dat:    printf("%s%c", filename, sep);
+../inputs/grep1.dat:      printf("%d%c", ++totalnl, sep);
+../inputs/grep1.dat:    printf("%lu%c", totalcc + (beg - bufbeg), sep);
+../inputs/grep1.dat:  "usage: %s [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]\n"
+../inputs/grep1.dat:	fprintf(stderr, "%s\n", version);
+../inputs/grep1.dat:		  printf("%s:", filename);
+../inputs/grep1.dat:		printf("%d\n", count);
+../inputs/grep1.dat:		  printf("%s\n", filename);
+../inputs/grep1.dat:	      printf("%s\n", filename);
+../inputs/grep1.dat:	printf("%d\n", count);
+../inputs/grep1.dat:#include "config.h"
+../inputs/grep1.dat:#include <alloca.h>
+../inputs/grep1.dat:/*#include <stdio.h> */
+../inputs/grep1.dat:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:/* This needs to come after some library #include
+../inputs/grep1.dat:/* Don't include stdlib.h for non-GNU C libraries because some of them
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include "getopt.h"
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:	    fprintf (stderr, "%s: option `%s' is ambiguous\n",
+../inputs/grep1.dat:				 "%s: option `--%s' doesn't allow an argument\n",
+../inputs/grep1.dat:			     "%s: option `%c%s' doesn't allow an argument\n",
+../inputs/grep1.dat:		    fprintf (stderr, "%s: option `%s' requires an argument\n",
+../inputs/grep1.dat:		fprintf (stderr, "%s: unrecognized option `--%s'\n",
+../inputs/grep1.dat:		fprintf (stderr, "%s: unrecognized option `%c%s'\n",
+../inputs/grep1.dat:	      fprintf (stderr, "%s: unrecognized option, character code 0%o\n",
+../inputs/grep1.dat:	      fprintf (stderr, "%s: unrecognized option `-%c'\n", argv[0], c);
+../inputs/grep1.dat:	    fprintf (stderr, "%s: illegal option -- %c\n", argv[0], c);
+../inputs/grep1.dat:		    fprintf (stderr, "%s: option `-%c' requires an argument\n",
+../inputs/grep1.dat:		    fprintf (stderr, "%s: option requires an argument -- %c\n",
+../inputs/grep1.dat:	  printf ("option %c\n", c);
+../inputs/grep1.dat:	  printf ("option c with value `%s'\n", optarg);
+../inputs/grep1.dat:	  printf ("?? getopt returned character code 0%o ??\n", c);
+../inputs/grep1.dat:	printf ("%s ", argv[optind++]);
+../inputs/grep1.dat:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include "config.h"
+../inputs/grep1.dat:#include "lisp.h"
+../inputs/grep1.dat:#include "buffer.h"
+../inputs/grep1.dat:#include "syntax.h"
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <strings.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include "regex.h"
+../inputs/grep1.dat:#include <ctype.h>
+../inputs/grep1.dat:#include <alloca.h>
+../inputs/grep1.dat:           subsequent two-byte number.  The address *includes* the two
+../inputs/grep1.dat:/*#include <stdio.h>*/
+../inputs/grep1.dat:#include <assert.h>
+../inputs/grep1.dat:      printf ("%d:\t", p - start);
+../inputs/grep1.dat:          printf ("/exactn/%d", mcnt);
+../inputs/grep1.dat:          printf ("/start_memory/%d/%d", mcnt, *p++);
+../inputs/grep1.dat:	  printf ("/stop_memory/%d/%d", mcnt, *p++);
+../inputs/grep1.dat:	  printf ("/duplicate/%d", *p++);
+../inputs/grep1.dat:	    printf ("/charset [%s",
+../inputs/grep1.dat:		  && (p[1 + (c/8)] & (1 << (c % 8))))
+../inputs/grep1.dat:  	  printf ("/on_failure_jump to %d", p + mcnt - start);
+../inputs/grep1.dat:  	  printf ("/on_failure_keep_string_jump to %d", p + mcnt - start);
+../inputs/grep1.dat:  	  printf ("/dummy_failure_jump to %d", p + mcnt - start);
+../inputs/grep1.dat:  	  printf ("/maybe_pop_jump to %d", p + mcnt - start);
+../inputs/grep1.dat:  	  printf ("/pop_failure_jump to %d", p + mcnt - start);
+../inputs/grep1.dat:  	  printf ("/jump_past_alt to %d", p + mcnt - start);
+../inputs/grep1.dat:  	  printf ("/jump to %d", p + mcnt - start);
+../inputs/grep1.dat:	  printf ("/succeed_n to %d, %d times", p + mcnt - start, mcnt2);
+../inputs/grep1.dat:	  printf ("/jump_n to %d, %d times", p + mcnt - start, mcnt2);
+../inputs/grep1.dat:	  printf ("/set_number_at location %d to %d", p + mcnt - start, mcnt2);
+../inputs/grep1.dat:	  printf ("/%d", mcnt);
+../inputs/grep1.dat:	  printf ("/%d", mcnt);
+../inputs/grep1.dat:          printf ("?%d", *(p-1));
+../inputs/grep1.dat:  printf ("%d:\tend of pattern.\n", p - start);
+../inputs/grep1.dat:  printf ("%d bytes used/%d bytes allocated.\n", bufp->used, bufp->allocated);
+../inputs/grep1.dat:  printf ("re_nsub: %d\t", bufp->re_nsub);
+../inputs/grep1.dat:  printf ("regs_alloc: %d\t", bufp->regs_allocated);
+../inputs/grep1.dat:  printf ("can_be_null: %d\t", bufp->can_be_null);
+../inputs/grep1.dat:  printf ("newline_anchor: %d\n", bufp->newline_anchor);
+../inputs/grep1.dat:  printf ("no_sub: %d\t", bufp->no_sub);
+../inputs/grep1.dat:  printf ("not_bol: %d\t", bufp->not_bol);
+../inputs/grep1.dat:  printf ("not_eol: %d\t", bufp->not_eol);
+../inputs/grep1.dat:  printf ("syntax: %d\n", bufp->syntax);
+../inputs/grep1.dat:   |= 1 << (((unsigned char) c) % BYTEWIDTH))
+../inputs/grep1.dat:    DEBUG_PRINT2 ("\nPUSH_FAILURE_POINT #%u:\n", failure_id);		\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Before push, next avail: %d\n", (fail_stack).avail);\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("                     size: %d\n", (fail_stack).size);\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  slots needed: %d\n", NUM_FAILURE_ITEMS);		\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("     available: %d\n", REMAINING_AVAIL_SLOTS);	\
+../inputs/grep1.dat:        DEBUG_PRINT2 ("\n  Doubled stack; size now: %d\n",		\
+../inputs/grep1.dat:        DEBUG_PRINT2 ("  slots available: %d\n", REMAINING_AVAIL_SLOTS);\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("  Pushing reg: %d\n", this_reg);			\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+../inputs/grep1.dat:        DEBUG_PRINT2 (" match_null=%d",					\
+../inputs/grep1.dat:        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+../inputs/grep1.dat:        DEBUG_PRINT2 (" matched_something=%d",				\
+../inputs/grep1.dat:        DEBUG_PRINT2 (" ever_matched=%d",				\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing  low active reg: %d\n", lowest_active_reg);\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing high active reg: %d\n", highest_active_reg);\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing pattern 0x%x: ", pattern_place);		\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing string 0x%x: `", string_place);		\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing failure id: %u\n", failure_id);		\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Before pop, next avail: %d\n", fail_stack.avail);	\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("                    size: %d\n", fail_stack.size);	\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping failure id: %u\n", failure_id);		\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping string 0x%x: `", str);			\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping pattern 0x%x: ", pat);			\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping high active reg: %d\n", high_reg);		\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping  low active reg: %d\n", low_reg);		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("    Popping reg: %d\n", this_reg);			\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+../inputs/grep1.dat:	    if (p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH)))
+../inputs/grep1.dat:	    if (!(p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH))))
+../inputs/grep1.dat:     return, for use in backreferences.  The number here includes
+../inputs/grep1.dat:     there are groups, we include space for register 0 (the whole
+../inputs/grep1.dat:      DEBUG_PRINT2 ("\n0x%x: ", p);
+../inputs/grep1.dat:          DEBUG_PRINT4 ("%u failure points pushed, %u popped (%u remain).\n",
+../inputs/grep1.dat:          DEBUG_PRINT2 ("%u registers pushed.\n", num_regs_pushed);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("Returning %d from re_match_2.\n", mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING exactn %d.\n", mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("  Matched `%d'.\n", *d);
+../inputs/grep1.dat:            DEBUG_PRINT2 ("EXECUTING charset%s.\n", not ? "_not" : "");
+../inputs/grep1.dat:		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+../inputs/grep1.dat:	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("  old_regstart: %d\n", 
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+../inputs/grep1.dat:	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      old_regend: %d\n", 
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+../inputs/grep1.dat:	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
+../inputs/grep1.dat:          DEBUG_PRINT3 (" %d (to 0x%x):\n", mcnt, p + mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT3 (" %d (to 0x%x)", mcnt, p + mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING maybe_pop_jump %d.\n", mcnt);
+../inputs/grep1.dat:                    DEBUG_PRINT3 ("  %c != %c => pop_failure_jump.\n",
+../inputs/grep1.dat:			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING jump %d ", mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("(to 0x%x).\n", p);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING succeed_n %d.\n", mcnt);
+../inputs/grep1.dat:               DEBUG_PRINT3 ("  Setting 0x%x to %d.\n", p, mcnt);
+../inputs/grep1.dat:              DEBUG_PRINT2 ("  Setting two bytes from 0x%x to no_op.\n", p+2);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING jump_n %d.\n", mcnt);
+../inputs/grep1.dat:            DEBUG_PRINT3 ("  Setting 0x%x to %d.\n", p1, mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING syntaxspec %d.\n", mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING notsyntaxspec %d.\n", mcnt);
+../inputs/grep1.dat:/*#include <assert.h> */
+../inputs/grep1.dat:/*#include <ctype.h> */
+../inputs/grep1.dat:/*#include <stdio.h> */
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <strings.h>
+../inputs/grep1.dat:#include "dfa.h"
+../inputs/grep1.dat:/*#include "regex.h"*/
+../inputs/grep1.dat:    fprintf(stderr, "%c", t);
+../inputs/grep1.dat:      fprintf(stderr, "%s", s);
+../inputs/grep1.dat:  return c[b / INTBITS] & 1 << b % INTBITS;
+../inputs/grep1.dat:  c[b / INTBITS] |= 1 << b % INTBITS;
+../inputs/grep1.dat:  c[b / INTBITS] &= ~(1 << b % INTBITS);
+../inputs/grep1.dat:   meaning of the @#%!@#%^!@ syntax bits. */
+../inputs/grep1.dat:   length of the string, so s can include NUL characters.  D is a pointer to
+../inputs/grep1.dat:      fprintf(stderr, " %d:", i);
+../inputs/grep1.dat:      fprintf(stderr, "node %d:", i);
+../inputs/grep1.dat:	  fprintf(stderr, " %d:", firstpos[j].index);
+../inputs/grep1.dat:	  fprintf(stderr, " %d:", lastpos[j].index);
+../inputs/grep1.dat:	fprintf(stderr, "follows(%d:", i);
+../inputs/grep1.dat:	    fprintf(stderr, " %d:", d->follows[i].elems[j].index);
+../inputs/grep1.dat:   If we are building a searching matcher, we include the positions of state
+../inputs/grep1.dat:      fprintf(stderr, " %d:", i);
+../inputs/grep1.dat:      fprintf(stderr, " node: %d:", ri);
+../inputs/grep1.dat:	fprintf(stderr, " \"%s\"", mp->in[i]);
+../inputs/grep1.dat:      fprintf(stderr, "\n  is: \"%s\"\n", mp->is);
+../inputs/grep1.dat:      fprintf(stderr, "  left: \"%s\"\n", mp->left);
+../inputs/grep1.dat:      fprintf(stderr, "  right: \"%s\"\n", mp->right);
+../inputs/grep1.dat:#include <limits.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <stddef.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <memory.h>
+../inputs/grep1.dat:#include "kwset.h"
+../inputs/grep1.dat:#include "obstack.h"
+../inputs/grep1.dat:/*#include "obstack.h"*/
+../inputs/grep1.dat:/*#include <stdio.h>*/
+../inputs/grep1.dat:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:/*#include <ctype.h>*/
+../inputs/grep1.dat:#include <limits.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <memory.h>
+../inputs/grep1.dat:/*#include "grep.h"*/
+../inputs/grep1.dat:/*#include "dfa.h"*/
+../inputs/grep1.dat:/*#include "kwset.h"*/
+../inputs/grep1.dat:/*#include "regex.h"*/
+../inputs/grep1.dat:				    Q@#%!# library interface in regex.c.  */

@@ -1,0 +1,977 @@
+  for (p = (unsigned char *) vp; n--; ++p)
+    if (*p == c)
+      return (VOID *) p;
+  return 0;
+--
+  if (size && !result)
+    fatal("memory exhausted", 0);
+  return result;
+--
+  if (size && !result)
+    fatal("memory exhausted", 0);
+  return result;
+--
+  else
+    buflim = buffer + bufsalloc;
+  return cc;
+--
+      nlines += n;
+    }
+  return nlines;
+--
+	{
+	  error(filename, errno);
+	  return nlines;
+--
+	prpending(buflim);
+    }
+  return nlines;
+--
+
+/* Go through the matchers vector and look for the specified matcher.
+   If we find it, install it in compile and execute, and return 1.  */
+--
+	compile = matchers[i].compile;
+	execute = matchers[i].execute;
+	return 1;
+      }
+  return 0;
+--
+/* For communication from `getopt' to the caller.
+   When `getopt' finds an option that takes an argument,
+   the argument value is returned here.
+   Also, when `ordering' is RETURN_IN_ORDER,
+   each non-option ARGV-element is returned here.  */
+--
+   On entry to `getopt', zero means this is the first call; initialize.
+
+   When `getopt' returns EOF, this is the index of the first of the
+--
+
+/* The next char to be scanned in the option-element
+   in which the last option character we returned was found.
+--
+   The special argument `--' forces an end of option-scanning regardless
+   of the value of `ordering'.  In the case of RETURN_IN_ORDER, only
+   `--' can cause `getopt' to return EOF with `optind' != ARGC.  */
+--
+    {
+      if (*str == chr)
+	return (char *) str;
+      str++;
+    }
+  return 0;
+--
+   then it is an option element.  The characters of this element
+   (aside from the initial '-') are option characters.  If `getopt'
+   is called repeatedly, it returns successively each of the option characters
+   from each of the option elements.
+
+   If `getopt' finds another option character, it returns that character,
+--
+   resume the scan with the following option character or ARGV-element.
+
+   If there are no more option characters, `getopt' returns `EOF'.
+--
+   OPTSTRING is a string containing the legitimate option characters.
+   If an option character is seen that is not listed in OPTSTRING,
+   return '?' after printing an error message.  If you set `opterr' to
+   zero, the error message is suppressed but we still return '?'.
+--
+   If a char in OPTSTRING is followed by a colon, that means it wants an arg,
+   so the following text in the same ARGV-element, or the text of the following
+   ARGV-element, is returned in `optarg'.  Two colons mean an option that
+   wants an optional arg; if there is text in the current ARGV-element,
+   it is returned in `optarg', otherwise `optarg' is set to zero.
+--
+   argument, it follows the option name in the same ARGV-element, separated
+   from the option name by a `=', or else the in next ARGV-element.
+   When `getopt' finds a long-named option, it returns 0 if that option's
+--
+   element containing a name which is zero.
+
+   LONGIND returns the index in LONGOPT of the long-named option found.
+--
+	  if (first_nonopt != last_nonopt)
+	    optind = first_nonopt;
+	  return EOF;
+--
+	{
+	  if (ordering == REQUIRE_ORDER)
+	    return EOF;
+	  optarg = argv[optind++];
+	  return 1;
+--
+	  nextchar += strlen (nextchar);
+	  optind++;
+	  return '?';
+--
+		    }
+		  nextchar += strlen (nextchar);
+		  return '?';
+--
+			     argv[0], argv[optind - 1]);
+		  nextchar += strlen (nextchar);
+		  return optstring[0] == ':' ? ':' : '?';
+--
+	    {
+	      *(pfound->flag) = pfound->val;
+	      return 0;
+	    }
+	  return pfound->val;
+--
+	  nextchar = (char *) "";
+	  optind++;
+	  return '?';
+--
+	  }
+	optopt = c;
+	return '?';
+--
+	  }
+      }
+    return c;
+--
+     const char *optstring;
+{
+  return _getopt_internal (argc, argv, optstring,
+--
+
+	default:
+	  printf ("?? getopt returned character code 0%o ??\n", c);
+--
+
+   if (done)
+     return;
+--
+    {
+      printf ("(null)\n");
+      return;
+--
+
+   The argument SYNTAX is a bit mask comprised of the various bits
+   defined in regex.h.  We return the old syntax.  */
+--
+  
+  re_syntax_options = syntax;
+  return ret;
+--
+   as an array index (in, e.g., `translate').  */
+#define PATFETCH(c)							\
+  do {if (p == pend) return REG_EEND;					\
+--
+   translation.  */
+#define PATFETCH_RAW(c)							\
+  do {if (p == pend) return REG_EEND;					\
+--
+
+
+/* If `translate' is non-null, return translate[D], else just D.  We
+--
+    unsigned char *old_buffer = bufp->buffer;				\
+    if (bufp->allocated == MAX_BUF_SIZE) 				\
+      return REG_ESIZE;							\
+--
+    bufp->buffer = (unsigned char *) realloc (bufp->buffer, bufp->allocated);\
+    if (bufp->buffer == NULL)						\
+      return REG_ESPACE;						\
+--
+   fields are set in BUFP on entry.
+
+   If it succeeds, results are put in BUFP (if it returns an error, the
+--
+  compile_stack.stack = TALLOC (INIT_COMPILE_STACK_SIZE, compile_stack_elt_t);
+  if (compile_stack.stack == NULL)
+    return REG_ESPACE;
+--
+  bufp->not_bol = bufp->not_eol = 0;
+
+  /* Set `used' to zero, so that if we return an error, the pattern
+--
+          bufp->buffer = TALLOC (INIT_BUF_SIZE, unsigned char);
+        }
+      if (!bufp->buffer) return REG_ESPACE;
+--
+            {
+              if (syntax & RE_CONTEXT_INVALID_OPS)
+                return REG_BADRPT;
+--
+                else if (syntax & RE_BK_PLUS_QM  &&  c == '\\')
+                  {
+                    if (p == pend) return REG_EESCAPE;
+--
+            boolean had_char_class = false;
+
+            if (p == pend) return REG_EBRACK;
+--
+            for (;;)
+              {
+                if (p == pend) return REG_EBRACK;
+--
+                if ((syntax & RE_BACKSLASH_ESCAPE_IN_LISTS) && c == '\\')
+                  {
+                    if (p == pend) return REG_EESCAPE;
+--
+                   was a character class.  */
+                if (had_char_class && c == '-' && *p != ']')
+                  return REG_ERANGE;
+--
+                    reg_errcode_t ret
+                      = compile_range (&p, pend, translate, syntax, b);
+                    if (ret != REG_NOERROR) return ret;
+--
+                    
+                    ret = compile_range (&p, pend, translate, syntax, b);
+                    if (ret != REG_NOERROR) return ret;
+--
+
+                    /* If pattern is `[[:'.  */
+                    if (p == pend) return REG_EBRACK;
+--
+                        boolean is_xdigit = STREQ (str, "xdigit");
+                        
+                        if (!IS_CHAR_CLASS (str)) return REG_ECTYPE;
+--
+                        PATFETCH (c);					
+
+                        if (p == pend) return REG_EBRACK;
+--
+
+        case '\\':
+          if (p == pend) return REG_EESCAPE;
+--
+                  RETALLOC (compile_stack.stack, compile_stack.size << 1,
+                            compile_stack_elt_t);
+                  if (compile_stack.stack == NULL) return REG_ESPACE;
+--
+                  goto normal_backslash;
+                else
+                  return REG_ERPAREN;
+--
+                  goto normal_char;
+                else
+                  return REG_ERPAREN;
+--
+                      goto unfetch_interval;
+                    else
+                      return REG_EBRACE;
+--
+                      goto unfetch_interval;
+                    else 
+                      return REG_BADBR;
+--
+                if (!(syntax & RE_NO_BK_BRACES)) 
+                  {
+                    if (c != '\\') return REG_EBRACE;
+--
+                      goto unfetch_interval;
+                    else 
+                      return REG_BADBR;
+--
+                  {
+                    if (syntax & RE_CONTEXT_INVALID_OPS)
+                      return REG_BADRPT;
+--
+
+              if (c1 > regnum)
+                return REG_ESUBREG;
+--
+
+  if (!COMPILE_STACK_EMPTY) 
+    return REG_EPAREN;
+--
+#endif /* DEBUG */
+
+  return REG_NOERROR;
+--
+  boolean prev_prev_backslash = prev > pattern && prev[-1] == '\\';
+  
+  return
+--
+  const char *next_next = p + 1 < pend ? p + 1 : NULL;
+  
+  return
+--
+       this_element--)
+    if (compile_stack.stack[this_element].regnum == regnum)
+      return true;
+
+  return false;
+--
+  
+  if (p == pend)
+    return REG_ERANGE;
+--
+  /* If the start is after the end, the range is empty.  */
+  if (range_start > range_end)
+    return syntax & RE_NO_EMPTY_RANGES ? REG_ERANGE : REG_NOERROR;
+--
+    }
+  
+  return REG_NOERROR;
+--
+
+
+/* Initialize `fail_stack'.  Do `return -2' if the alloc fails.  */
+--
+									\
+    if (fail_stack.stack == NULL)					\
+      return -2;							\
+--
+   declared.
+   
+   Does `return FAILURE_CODE' if runs out of memory.  */
+--
+      {									\
+        if (!DOUBLE_FAIL_STACK (fail_stack))			\
+          return failure_code;						\
+--
+	case duplicate:
+	  bufp->can_be_null = 1;
+          return 0;
+--
+             then the fastmap is irrelevant.  Something's wrong here.  */
+	  else if (bufp->can_be_null)
+	    return 0;
+--
+            {
+              if (!PUSH_PATTERN_OP (p + j, fail_stack))
+                return -2;
+--
+     pattern is empty).  */
+  bufp->can_be_null |= path_can_be_null;
+  return 0;
+--
+     struct re_registers *regs;
+{
+  return re_search_2 (bufp, NULL, 0, string, size, startpos, range, 
+--
+   RANGE.
+   
+   In REGS, return the indices of the virtual concatenation of STRING1
+--
+   concatenation of STRING1 and STRING2.
+
+   We return either the position in the strings at which the match was
+--
+  /* Check for out-of-range STARTPOS.  */
+  if (startpos < 0 || startpos > total_size)
+    return -1;
+--
+    {
+      if (startpos > 0)
+	return -1;
+--
+  if (fastmap && !bufp->fastmap_accurate)
+    if (re_compile_fastmap (bufp) == -2)
+      return -2;
+--
+      if (range >= 0 && startpos == total_size && fastmap
+          && !bufp->can_be_null)
+	return -1;
+--
+	                startpos, regs, stop);
+      if (val >= 0)
+	return startpos;
+        
+      if (val == -2)
+	return -2;
+--
+        }
+    }
+  return -1;
+--
+     struct re_registers *regs;
+ {
+  return re_match_2 (bufp, NULL, 0, string, size, pos, regs, size); 
+--
+   documentation for exactly how many groups we fill.
+
+   We return -1 if no match, -2 if an internal error (such as the
+   failure stack overflowing).  Otherwise, we return the length of the
+--
+
+  /* We fill all the registers internally, independent of what we
+     return, for use in backreferences.  The number here includes
+--
+        {
+          FREE_VARIABLES ();
+          return -2;
+--
+    {
+      FREE_VARIABLES ();
+      return -1;
+--
+  DEBUG_PRINT1 ("'\n");
+  
+  /* This loops over pattern commands.  It exits by returning from the
+--
+                  regs->end = TALLOC (regs->num_regs, regoff_t);
+                  if (regs->start == NULL || regs->end == NULL)
+                    return -2;
+--
+                      RETALLOC (regs->end, regs->num_regs, regoff_t);
+                      if (regs->start == NULL || regs->end == NULL)
+                        return -2;
+--
+		}
+              
+              /* If the regs structure we return has more elements than
+--
+          DEBUG_PRINT2 ("Returning %d from re_match_2.\n", mcnt);
+
+          return mcnt;
+--
+  FREE_VARIABLES ();
+
+  return -1;         			/* Failure to match.  */
+--
+  while (p1 < end)
+    {
+      /* Skip over opcodes that can match nothing, and return true or
+--
+                  if (!alt_match_null_string_p (p1, p1 + mcnt - 3, 
+				                      reg_info))
+                    return false;
+--
+
+              if (!alt_match_null_string_p (p1, p1 + mcnt, reg_info))
+                return false;
+--
+	  assert (p1[1] == **p);
+          *p = p1 + 2;
+          return true;
+--
+        default: 
+          if (!common_op_match_null_string_p (&p1, end, reg_info))
+            return false;
+--
+    } /* while p1 < end */
+
+  return false;
+--
+	default: 
+          if (!common_op_match_null_string_p (&p1, end, reg_info))
+            return false;
+--
+    }  /* while p1 < end */
+
+  return true;
+--
+
+      if (!ret)
+        return false;
+--
+        p1 += mcnt;
+      else
+        return false;
+--
+        }
+      else
+        return false;
+--
+    case duplicate: 
+      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+        return false;
+--
+    default:
+      /* All other opcodes mean we cannot match the empty string.  */
+      return false;
+--
+
+  *p = p1;
+  return true;
+--
+  while (len)
+    {
+      if (translate[*p1++] != translate[*p2++]) return 1;
+      len--;
+    }
+  return 0;
+--
+  ret = regex_compile (pattern, length, re_syntax_options, bufp);
+
+  return re_error_msg[(int) ret];
+--
+    {
+      if (!re_comp_buf.buffer)
+	return "No previous regular expression";
+      return 0;
+--
+      re_comp_buf.buffer = (unsigned char *) malloc (200);
+      if (re_comp_buf.buffer == NULL)
+        return "Memory exhausted";
+--
+      re_comp_buf.fastmap = (char *) malloc (1 << BYTEWIDTH);
+      if (re_comp_buf.fastmap == NULL)
+	return "Memory exhausted";
+--
+  
+  /* Yes, we're discarding `const' here.  */
+  return (char *) re_error_msg[(int) ret];
+--
+{
+  const int len = strlen (s);
+  return
+--
+     registers.
+
+   It returns 0 if it succeeds, nonzero if it doesn't.  (See regex.h for
+   the return codes and their meanings.)  */
+--
+      preg->translate = (char *) malloc (CHAR_SET_SIZE);
+      if (preg->translate == NULL)
+        return (int) REG_ESPACE;
+--
+  if (ret == REG_ERPAREN) ret = REG_EPAREN;
+  
+  return (int) ret;
+--
+   string; if REG_NOTEOL is set, then $ does not match at the end.
+   
+   We return 0 if we find a match and REG_NOMATCH if not.  */
+--
+  private_preg.not_eol = !!(eflags & REG_NOTEOL);
+  
+  /* The user has told us exactly how many registers to return
+--
+      regs.end = TALLOC (nmatch, regoff_t);
+      if (regs.start == NULL || regs.end == NULL)
+        return (int) REG_NOMATCH;
+--
+    }
+
+  /* We want zero return to mean success, unlike `re_search'.  */
+  return ret >= 0 ? (int) REG_NOERROR : (int) REG_NOMATCH;
+--
+
+
+/* Returns a message corresponding to an error code, ERRCODE, returned
+--
+  if (errcode < 0
+      || errcode >= (sizeof (re_error_msg) / sizeof (re_error_msg[0])))
+    /* Only error codes returned by the rest of the code should be passed 
+--
+    }
+
+  return msg_size;
+--
+  if (!r)
+    dfaerror("Memory exhausted");
+  return r;
+--
+  if (!r)
+    dfaerror("Memory exhausted");
+  return r;
+--
+  if (!r)
+    dfaerror("Memory exhausted");
+  return r;
+--
+     charclass c;
+{
+  return c[b / INTBITS] & 1 << b % INTBITS;
+--
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+    if (s1[i] != s2[i])
+      return 0;
+  return 1;
+--
+  for (i = 0; i < dfa->cindex; ++i)
+    if (equal(s, dfa->charclasses[i]))
+      return i;
+--
+  ++dfa->cindex;
+  copyset(s, dfa->charclasses[i]);
+  return i;
+--
+static char *lexptr;		/* Pointer to next input character. */
+static lexleft;			/* Number of characters remaining. */
+static token lasttok;		/* Previous token returned; initially END. */
+--
+	dfaerror(eoferr);  	      \
+      else		   	      \
+	return END;	   	      \
+--
+  }
+
+#define FUNC(F, P) static int F(c) int c; { return P(c); }
+--
+  len = strlen(s);
+  if (lexleft < len)
+    return 0;
+  return strncmp(s, lexptr, len) == 0;
+--
+	      || lasttok == LPAREN
+	      || lasttok == OR)
+	    return lasttok = BEGLINE;
+--
+	      || ((syntax_bits & RE_NEWLINE_ALT)
+	          && lexleft > 0 && *lexptr == '\n'))
+	    return lasttok = ENDLINE;
+--
+	    {
+	      laststart = 0;
+	      return lasttok = BACKREF;
+--
+	case '<':
+	  if (backslash)
+	    return lasttok = BEGWORD;
+--
+	case '>':
+	  if (backslash)
+	    return lasttok = ENDWORD;
+--
+	case 'b':
+	  if (backslash)
+	    return lasttok = LIMWORD;
+--
+	case 'B':
+	  if (backslash)
+	    return lasttok = NOTLIMWORD;
+--
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	    goto normal_char;
+	  return lasttok = QMARK;
+--
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	    goto normal_char;
+	  return lasttok = STAR;
+--
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	    goto normal_char;
+	  return lasttok = PLUS;
+--
+	    dfaerror("malformed repeat count");
+	  laststart = 0;
+	  return lasttok = REPMN;
+--
+	    goto normal_char;
+	  laststart = 1;
+	  return lasttok = OR;
+--
+	    goto normal_char;
+	  laststart = 1;
+	  return lasttok = OR;
+--
+	  ++parens;
+	  laststart = 1;
+	  return lasttok = LPAREN;
+--
+	  --parens;
+	  laststart = 0;
+	  return lasttok = RPAREN;
+--
+	    clrbit('\0', ccl);
+	  laststart = 0;
+	  return lasttok = CSET + charclass_index(ccl);
+--
+	    notset(ccl);
+	  laststart = 0;
+	  return lasttok = CSET + charclass_index(ccl);
+--
+	    }
+	  laststart = 0;
+	  return lasttok = CSET + charclass_index(ccl);
+--
+	      else
+		setbit(toupper(c), ccl);
+	      return lasttok = CSET + charclass_index(ccl);
+	    }
+	  return c;
+--
+    {
+    default:
+      return 1;
+--
+    case STAR:
+    case PLUS:
+      return 1 + nsubtoks(tindex - 1);
+--
+    case ORTOP:
+      ntoks1 = nsubtoks(tindex - 1);
+      return 1 + ntoks1 + nsubtoks(tindex - 1 - ntoks1);
+--
+	  break;
+      if (j == s->nelem)
+	return i;
+--
+  ++d->sindex;
+
+  return i;
+--
+		else
+		  *backref = 0;
+	      return (char *) p;
+--
+      /* Check if we've run off the end of the buffer. */
+      if ((char *) p > end)
+	return NULL;
+--
+
+   When we get to the root of the tree, we use one of the longest of its
+   calculated "in" sequences as our answer.  The sequence we find is returned in
+   d->must (where "d" is the single argument passed to "dfamust");
+   the length of the sequence is returned in d->mustn.
+--
+   If there's anything else we recognize in the tree, all four sequences get set
+   to zero-length sequences.  If there's something we don't recognize in the tree,
+   we just return a zero-length sequence.
+--
+    oldsize = 0;
+  else if (newsize == 0)
+    return old;
+--
+  if (result != NULL && new != NULL)
+    (void) strcpy(result + oldsize, new);
+  return result;
+--
+     char *string;
+{
+  return icatalloc((char *) NULL, string);
+--
+  for (cp = lookin; *cp != '\0'; ++cp)
+    if (strncmp(cp, lookfor, len) == 0)
+      return cp;
+  return NULL;
+--
+
+  if (cpp == NULL)
+    return;
+--
+
+  if (cpp == NULL)
+    return NULL;
+--
+    {
+      freelist(cpp);
+      return NULL;
+--
+      {
+	free(new);
+	return cpp;
+--
+  cpp = (char **) realloc((char *) cpp, (i + 2) * sizeof *cpp);
+  if (cpp == NULL)
+    return NULL;
+  cpp[i] = new;
+  cpp[i + 1] = NULL;
+  return cpp;
+}
+
+/* Given pointers to two strings, return a pointer to an allocated
+--
+
+  if (left == NULL || right == NULL)
+    return NULL;
+  cpp = (char **) malloc(sizeof *cpp);
+  if (cpp == NULL)
+    return NULL;
+--
+	break;
+    }
+  return cpp;
+--
+
+  if (old == NULL || new == NULL)
+    return NULL;
+--
+	break;
+    }
+  return old;
+}
+
+/* Given two lists of substrings, return a new list giving substrings
+--
+
+  if (left == NULL || right == NULL)
+    return NULL;
+  both = (char **) malloc(sizeof *both);
+  if (both == NULL)
+    return NULL;
+--
+	    {
+	      freelist(both);
+	      return NULL;
+--
+	  freelist(temp);
+	  if (both == NULL)
+	    return NULL;
+	}
+    }
+  return both;
+--
+  musts = (must *) malloc((dfa->tindex + 1) * sizeof *musts);
+  if (musts == NULL)
+    return;
+--
+};
+
+/* Structure returned opaquely to the caller, containing everything. */
+--
+};
+
+/* Allocate and initialize a keyword set object, returning an opaque
+--
+  kwset = (struct kwset *) malloc(sizeof (struct kwset));
+  if (!kwset)
+    return 0;
+--
+    {
+      kwsfree((kwset_t) kwset);
+      return 0;
+--
+  kwset->trans = trans;
+
+  return (kwset_t) kwset;
+--
+					       sizeof (struct tree));
+	  if (!link)
+	    return "memory exhausted";
+--
+						     sizeof (struct trie));
+	  if (!link->trie)
+	    return "memory exhausted";
+--
+    kwset->maxd = trie->depth;
+
+  return 0;
+--
+{
+  if (!tree)
+    return;
+--
+
+  if (!tree)
+    return;
+--
+	{
+	  tree->trie->fail = link->trie;
+	  return;
+--
+{
+  if (!tree)
+    return;
+--
+{
+  if (!b)
+    return 1;
+  if (!hasevery(a, b->llink))
+    return 0;
+  if (!hasevery(a, b->rlink))
+    return 0;
+--
+    else
+      a = a->rlink;
+  return !!a;
+--
+{
+  if (!tree)
+    return;
+--
+      kwset->delta[i] = delta[i];
+
+  return 0;
+--
+
+  if (len == 0)
+    return text;
+  if (len > size)
+    return 0;
+  if (len == 1)
+    return memchr(text, kwset->target[0], size);
+--
+	      ;
+	    if (i > len)
+	      return tp - len;
+--
+	    ;
+	  if (i > len)
+	    return tp - len;
+--
+    }
+
+  return 0;
+--
+  kwset = (struct kwset *) kws;
+  if (len < kwset->mind)
+    return 0;
+--
+	goto match;
+    }
+  return 0;
+--
+      kwsmatch->size[0] = accept->depth;
+    }
+  return mch;
+--
+	  kwsmatch->size[0] = kwset->mind;
+	}
+      return ret;
+    }
+  else
+    return cwexec(kws, text, size, kwsmatch);
+--
+      lp = plp;
+    }
+  return lp != 0;
+--
+     struct obstack *obstack;
+{
+  return obstack_base (obstack);
+--
+     struct obstack *obstack;
+{
+  return obstack_next_free (obstack);
+--
+     struct obstack *obstack;
+{
+  return obstack_object_size (obstack);
+--
+     struct obstack *obstack;
+{
+  return obstack_room (obstack);
+--
+     struct obstack *obstack;
+{
+  return obstack_finish (obstack);
+--
+     int length;
+{
+  return obstack_alloc (obstack, length);
+--
+     int length;
+{
+  return obstack_copy (obstack, pointer, length);
+--
+     int length;
+{
+  return obstack_copy0 (obstack, pointer, length);
+--
+
+/* Last compiled fixed string known to exactly match the regexp.
+   If kwsexec() returns < lastexact, then we don't need to
+--
+      kwsinit();
+      /* First, we compile in the substrings known to be exact
+	 matches.  The kwset matcher will return the index
+--
+
+ failure:
+  return 0;
+--
+ success:
+  *endp = end < buflim ? end + 1 : end;
+  return beg;
+--
+    {
+      if (!(beg = kwsexec(kwset, beg, buf + size - beg, &kwsmatch)))
+	return 0;
+--
+    }
+
+  return 0;
+--
+  while (beg > buf && beg[-1] != '\n')
+    --beg;
+  return beg;

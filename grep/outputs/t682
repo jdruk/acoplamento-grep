@@ -1,0 +1,82 @@
+extern char *sys_errlist[];
+static char version[] = "GNU grep version 2.0";
+  "usage: %s [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]\n"
+     char *argv[];
+	strcpy(&keys[keycc], optarg);
+	desc = strcmp(argv[optind], "-") ? open(argv[optind], O_RDONLY) : 0;
+	      error(argv[optind], errno);
+	    filename = desc == 0 ? "(standard input)" : argv[optind];
+		 && (argv[optind][0] != '-' || argv[optind][1] == '\0')
+		     || argv[optind][0] != '+' || argv[optind][1] == '\0')
+      if (optind != argc && !strcmp (argv[optind], "--"))
+      if ((argv[optind][0] != '-' || argv[optind][1] == '\0')
+	      || argv[optind][0] != '+' || argv[optind][1] == '\0')
+      nextchar = (argv[optind] + 1
+		  + (longopts != NULL && argv[optind][1] == '-'));
+      && ((argv[optind][0] == '-'
+	   && (argv[optind][1] == '-' || long_only))
+	  || argv[optind][0] == '+'
+		     argv[0], argv[optind]);
+      if (!long_only || argv[optind][1] == '-'
+	  || argv[optind][0] == '+'
+	      if (argv[optind][1] == '-')
+			 argv[0], argv[optind][0], nextchar);
+     re_syntax_table[c] = Sword;
+     re_syntax_table[c] = Sword;
+     re_syntax_table[c] = Sword;
+#define SYNTAX(c) re_syntax_table[c]
+static const char *re_error_msg[] =
+    if (translate) c = translate[c]; 					\
+                   not (i.e., when the bracket expression is `[]' so
+              BUF_PUSH_2 (syntaxspec, syntax_spec_code[c]);
+              BUF_PUSH_2 (notsyntaxspec, syntax_spec_code[c]);
+	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+        PUSH_FAILURE_ITEM (regstart[this_reg]);				\
+	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+        PUSH_FAILURE_ITEM (regend[this_reg]);				\
+	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+                      REG_MATCH_NULL_STRING_P (reg_info[this_reg]));	\
+        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+                      MATCHED_SOMETHING (reg_info[this_reg]));		\
+                      EVER_MATCHED_SOMETHING (reg_info[this_reg]));	\
+        PUSH_FAILURE_ITEM (reg_info[this_reg].word);			\
+      reg_info[this_reg].word = POP_FAILURE_ITEM ();			\
+      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+      regend[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+      regstart[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+    regmatch_t pmatch[]; 
+  msg = re_error_msg[errcode];
+} prednames[] = {
+  ":alpha:]", is_alpha,
+  ":upper:]", is_upper,
+  ":lower:]", is_lower,
+  ":digit:]", is_digit,
+  ":xdigit:]", is_xdigit,
+  ":space:]", is_space,
+  ":punct:]", is_punct,
+  ":alnum:]", is_alnum,
+  ":print:]", is_print,
+  ":graph:]", is_graph,
+  ":cntrl:]", is_cntrl,
+		 Note that if we're looking at some other [:...:]
+     int trans[];
+		trans[c] = state_newline;
+		trans[c] = state_letter;
+		trans[c] = state;
+   is a non-accepting state, then d->trans[state] points to its table.
+   If it is an accepting state then d->fails[state] points to its table.
+   If it has no table at all, then d->trans[state] is NULL.
+	    d->trans[oldalloc] = NULL;
+	grep '[c]'		->	grep 'c'
+     unsigned char delta[];
+     struct trie *next[];
+	  while ((d = delta[c = *end]) && end < qlim)
+	      end += delta[(unsigned char) *end];
+	      end += delta[(unsigned char) *end];
+      trie = next[c];
+	  c = trans ? trans[(unsigned char) *--beg] : *--beg;
+      if (!(trie = next[c]))
+	  c = trans ? trans[(unsigned char) *--beg] : *--beg;
+struct matcher matchers[] = {

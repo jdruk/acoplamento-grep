@@ -1,0 +1,13 @@
+        case '$':
+/* The dual of at_begline_loc_p.  This one is for $.  We assume there is
+   at least one character after the $, i.e., `P < PEND'.  */
+   string; if REG_NOTEOL is set, then $ does not match at the end.
+	case '$':
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 ^(userpattern)$.
+	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+	strcpy(n + i, "\\)$");
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 ^(userpattern)$.
+	strcpy(n + i, ")([^0-9A-Za-z_]|$)");
+	strcpy(n + i, ")$");

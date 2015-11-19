@@ -1,0 +1,2 @@
+../inputs/grep1.dat:if agout
+../inputs/grep1.dat:if agout end = buf + size;

@@ -1,0 +1,3 @@
+               `(a|ab)*' we do need to backtrack to the `ab' alternative
+           popped.  For example, matching `(a|ab)*' against `aab'
+                 with a jump, e.g., here is the pattern for `a|b|c':

@@ -1,0 +1,977 @@
+      return (VOID *) p;
+  return 0;
+}
+#endif
+--
+  return result;
+}
+
+--
+  return result;
+}
+
+--
+  return cc;
+}
+
+--
+  return nlines;
+}
+
+--
+	  return nlines;
+	}
+      lastnl = bufbeg;
+--
+  return nlines;
+}
+
+--
+   If we find it, install it in compile and execute, and return 1.  */
+int
+setmatcher(name)
+--
+	return 1;
+      }
+  return 0;
+}  
+
+--
+   the argument value is returned here.
+   Also, when `ordering' is RETURN_IN_ORDER,
+   each non-option ARGV-element is returned here.  */
+
+char *optarg = 0;
+--
+   When `getopt' returns EOF, this is the index of the first of the
+   non-option elements that the caller should itself scan.
+
+--
+   in which the last option character we returned was found.
+   This allows us to pick up the scan where we left off.
+
+--
+   `--' can cause `getopt' to return EOF with `optind' != ARGC.  */
+
+static enum
+--
+	return (char *) str;
+      str++;
+    }
+  return 0;
+}
+
+--
+   is called repeatedly, it returns successively each of the option characters
+   from each of the option elements.
+
+   If `getopt' finds another option character, it returns that character,
+   updating `optind' and `nextchar' so that the next call to `getopt' can
+   resume the scan with the following option character or ARGV-element.
+--
+   If there are no more option characters, `getopt' returns `EOF'.
+   Then `optind' is the index in ARGV of the first ARGV-element
+   that is not an option.  (The ARGV-elements have been permuted
+--
+   return '?' after printing an error message.  If you set `opterr' to
+   zero, the error message is suppressed but we still return '?'.
+
+   If a char in OPTSTRING is followed by a colon, that means it wants an arg,
+--
+   ARGV-element, is returned in `optarg'.  Two colons mean an option that
+   wants an optional arg; if there is text in the current ARGV-element,
+   it is returned in `optarg', otherwise `optarg' is set to zero.
+
+   If OPTSTRING starts with `-' or `+', it requests different methods of
+--
+   When `getopt' finds a long-named option, it returns 0 if that option's
+   `flag' field is nonzero, the value of the option's `val' field
+   if the `flag' field is zero.
+--
+   LONGIND returns the index in LONGOPT of the long-named option found.
+   It is only valid when a long-named option has been found by the most
+   recent call.
+--
+	  return EOF;
+	}
+
+--
+	    return EOF;
+	  optarg = argv[optind++];
+	  return 1;
+	}
+
+--
+	  return '?';
+	}
+
+--
+		  return '?';
+		}
+	    }
+--
+		  return optstring[0] == ':' ? ':' : '?';
+		}
+	    }
+--
+	      return 0;
+	    }
+	  return pfound->val;
+	}
+      /* Can't find it as a long option.  If this is not getopt_long_only,
+--
+	  return '?';
+	}
+    }
+--
+	return '?';
+      }
+    if (temp[1] == ':')
+--
+    return c;
+  }
+}
+--
+  return _getopt_internal (argc, argv, optstring,
+			   (const struct option *) 0,
+			   (int *) 0,
+--
+	  printf ("?? getopt returned character code 0%o ??\n", c);
+	}
+    }
+--
+     return;
+
+   bzero (re_syntax_table, sizeof re_syntax_table);
+--
+      return;
+    }
+    
+--
+   defined in regex.h.  We return the old syntax.  */
+
+reg_syntax_t
+--
+  return ret;
+}
+
+--
+  do {if (p == pend) return REG_EEND;					\
+    c = (unsigned char) *p++;						\
+    if (translate) c = translate[c]; 					\
+--
+  do {if (p == pend) return REG_EEND;					\
+    c = (unsigned char) *p++; 						\
+  } while (0)
+--
+/* If `translate' is non-null, return translate[D], else just D.  We
+   cast the subscript to translate because some data is declared as
+   `char *', to avoid warnings when a string constant is passed.  But
+--
+      return REG_ESIZE;							\
+    bufp->allocated <<= 1;						\
+    if (bufp->allocated > MAX_BUF_SIZE)					\
+--
+      return REG_ESPACE;						\
+    /* If the buffer moved, move all the pointers into it.  */		\
+    if (old_buffer != bufp->buffer)					\
+--
+   If it succeeds, results are put in BUFP (if it returns an error, the
+   contents of BUFP are undefined):
+     `buffer' is the compiled pattern;
+--
+    return REG_ESPACE;
+
+  compile_stack.size = INIT_COMPILE_STACK_SIZE;
+--
+  /* Set `used' to zero, so that if we return an error, the pattern
+     printer (for debugging) will think there's no pattern.  We reset it
+     at the end.  */
+--
+      if (!bufp->buffer) return REG_ESPACE;
+
+      bufp->allocated = INIT_BUF_SIZE;
+--
+                return REG_BADRPT;
+              else if (!(syntax & RE_CONTEXT_INDEP_OPS))
+                goto normal_char;
+--
+                    if (p == pend) return REG_EESCAPE;
+
+                    PATFETCH (c1);
+--
+            if (p == pend) return REG_EBRACK;
+
+            /* Ensure that we have enough space to push a charset: the
+--
+                if (p == pend) return REG_EBRACK;
+
+                PATFETCH (c);
+--
+                    if (p == pend) return REG_EESCAPE;
+
+                    PATFETCH (c1);
+--
+                  return REG_ERANGE;
+
+                /* Look ahead to see if it's a range when the last thing
+--
+                    if (ret != REG_NOERROR) return ret;
+                  }
+
+--
+                    if (ret != REG_NOERROR) return ret;
+                  }
+
+--
+                    if (p == pend) return REG_EBRACK;
+
+                    for (;;)
+--
+                        if (!IS_CHAR_CLASS (str)) return REG_ECTYPE;
+
+                        /* Throw away the ] at the end of the character
+--
+                        if (p == pend) return REG_EBRACK;
+
+                        for (ch = 0; ch < 1 << BYTEWIDTH; ch++)
+--
+          if (p == pend) return REG_EESCAPE;
+
+          /* Do not translate the character after the \, so that we can
+--
+                  if (compile_stack.stack == NULL) return REG_ESPACE;
+
+                  compile_stack.size <<= 1;
+--
+                  return REG_ERPAREN;
+
+            handle_close:
+--
+                  return REG_ERPAREN;
+
+              /* Since we just checked for an empty stack above, this
+--
+                      return REG_EBRACE;
+                  }
+
+--
+                      return REG_BADBR;
+                  }
+
+--
+                    if (c != '\\') return REG_EBRACE;
+
+                    PATFETCH (c);
+--
+                      return REG_BADBR;
+                  }
+
+--
+                      return REG_BADRPT;
+                    else if (syntax & RE_CONTEXT_INDEP_OPS)
+                      laststart = b;
+--
+                return REG_ESUBREG;
+
+              /* Can't back reference to a subexpression if inside of it.  */
+--
+    return REG_EPAREN;
+
+  free (compile_stack.stack);
+--
+  return REG_NOERROR;
+} /* regex_compile */
+
+--
+  return
+       /* After a subexpression?  */
+       (*prev == '(' && (syntax & RE_NO_BK_PARENS || prev_prev_backslash))
+--
+  return
+       /* Before a subexpression?  */
+       (syntax & RE_NO_BK_PARENS ? *next == ')'
+--
+      return true;
+
+  return false;
+}
+
+--
+    return REG_ERANGE;
+
+  /* Even though the pattern is a signed `char *', we need to fetch
+--
+    return syntax & RE_NO_EMPTY_RANGES ? REG_ERANGE : REG_NOERROR;
+
+  /* Here we see why `this_char' has to be larger than an `unsigned
+--
+  return REG_NOERROR;
+}
+
+--
+/* Initialize `fail_stack'.  Do `return -2' if the alloc fails.  */
+
+#define INIT_FAIL_STACK()						\
+--
+      return -2;							\
+									\
+    fail_stack.size = INIT_FAILURE_ALLOC;				\
+--
+   Does `return FAILURE_CODE' if runs out of memory.  */
+
+#define PUSH_FAILURE_POINT(pattern_place, string_place, failure_code)	\
+--
+          return failure_code;						\
+									\
+        DEBUG_PRINT2 ("\n  Doubled stack; size now: %d\n",		\
+--
+          return 0;
+
+
+--
+	    return 0;
+
+          /* Otherwise, have to check alternative paths.  */
+--
+                return -2;
+            }
+          else
+--
+  return 0;
+} /* re_compile_fastmap */
+
+--
+  return re_search_2 (bufp, NULL, 0, string, size, startpos, range, 
+		      regs, size);
+}
+--
+   In REGS, return the indices of the virtual concatenation of STRING1
+   and STRING2 that matched the entire BUFP->buffer and its contained
+   subexpressions.
+--
+   We return either the position in the strings at which the match was
+   found, -1 if no match, or -2 if error (such as failure
+   stack overflow).  */
+--
+    return -1;
+    
+  /* Fix up RANGE if it might eventually take us outside
+--
+	return -1;
+      else
+	range = 1;
+--
+      return -2;
+  
+  /* Loop through the string, looking for a place to start matching.  */
+--
+	return -1;
+
+      val = re_match_2 (bufp, string1, size1, string2, size2,
+--
+	return startpos;
+        
+      if (val == -2)
+	return -2;
+
+    advance:
+--
+  return -1;
+} /* re_search_2 */
+
+--
+  return re_match_2 (bufp, NULL, 0, string, size, pos, regs, size); 
+}
+#endif /* not emacs */
+--
+   We return -1 if no match, -2 if an internal error (such as the
+   failure stack overflowing).  Otherwise, we return the length of the
+   matched substring.  */
+
+--
+     return, for use in backreferences.  The number here includes
+     an element for register zero.  */
+  unsigned num_regs = bufp->re_nsub + 1;
+--
+          return -2;
+        }
+    }
+--
+      return -1;
+    }
+    
+--
+  /* This loops over pattern commands.  It exits by returning from the
+     function if the match is complete, or it drops through if the match
+     fails at this starting point in the input data.  */
+--
+                    return -2;
+                  bufp->regs_allocated = REGS_REALLOCATE;
+                }
+--
+                        return -2;
+                    }
+                }
+--
+              /* If the regs structure we return has more elements than
+                 were in the pattern, set the extra elements to -1.  If
+                 we (re)allocated the registers, this is the case,
+--
+          return mcnt;
+        }
+
+--
+  return -1;         			/* Failure to match.  */
+} /* re_match_2 */
+
+--
+      /* Skip over opcodes that can match nothing, and return true or
+	 false, as appropriate, when we get to one that can't, or to the
+         matching stop_memory.  */
+--
+                    return false;
+
+                  /* Move to right after this alternative, including the
+--
+                return false;
+
+              p1 += mcnt;	/* Get past the n-th alternative.  */
+--
+          return true;
+
+        
+--
+            return false;
+        }
+    } /* while p1 < end */
+--
+  return false;
+} /* group_match_null_string_p */
+
+--
+            return false;
+        }
+    }  /* while p1 < end */
+--
+  return true;
+} /* alt_match_null_string_p */
+
+--
+        return false;
+      break;
+          
+--
+        return false;
+      break;
+
+--
+        return false;
+      break;
+
+--
+        return false;
+      break;
+
+--
+      return false;
+  }
+
+--
+  return true;
+} /* common_op_match_null_string_p */
+
+--
+      if (translate[*p1++] != translate[*p2++]) return 1;
+      len--;
+    }
+  return 0;
+}
+
+--
+  return re_error_msg[(int) ret];
+}     
+
+--
+	return "No previous regular expression";
+      return 0;
+    }
+
+--
+        return "Memory exhausted";
+      re_comp_buf.allocated = 200;
+
+--
+	return "Memory exhausted";
+    }
+
+--
+  return (char *) re_error_msg[(int) ret];
+}
+
+--
+  return
+    0 <= re_search (&re_comp_buf, s, len, 0, len, (struct re_registers *) 0);
+}
+--
+   It returns 0 if it succeeds, nonzero if it doesn't.  (See regex.h for
+   the return codes and their meanings.)  */
+
+int
+--
+        return (int) REG_ESPACE;
+
+      /* Map uppercase characters to corresponding lowercase ones.  */
+--
+  return (int) ret;
+}
+
+--
+   We return 0 if we find a match and REG_NOMATCH if not.  */
+
+int
+--
+  /* The user has told us exactly how many registers to return
+     information about, via `nmatch'.  We have to pass that on to the
+     matching routines.  */
+--
+        return (int) REG_NOMATCH;
+    }
+
+--
+  /* We want zero return to mean success, unlike `re_search'.  */
+  return ret >= 0 ? (int) REG_NOERROR : (int) REG_NOMATCH;
+}
+
+--
+/* Returns a message corresponding to an error code, ERRCODE, returned
+   from either regcomp or regexec.   We don't use PREG here.  */
+
+--
+    /* Only error codes returned by the rest of the code should be passed 
+       to this routine.  If we are given anything else, or if other regex
+       code generates an invalid error code, then the program has a bug.
+--
+  return msg_size;
+}
+
+--
+  return r;
+}
+
+--
+  return r;
+}
+
+--
+  return r;
+}
+
+--
+  return c[b / INTBITS] & 1 << b % INTBITS;
+}
+
+--
+      return 0;
+  return 1;
+}
+
+--
+      return i;
+  REALLOC_IF_NECESSARY(dfa->charclasses, charclass, dfa->calloc, dfa->cindex);
+  ++dfa->cindex;
+--
+  return i;
+}
+
+--
+static token lasttok;		/* Previous token returned; initially END. */
+static int laststart;		/* True if we're separated from beginning or (, |
+				   only by zero-width characters. */
+--
+	return END;	   	      \
+    (c) = (unsigned char) *lexptr++;  \
+    --lexleft;		   	      \
+--
+#define FUNC(F, P) static int F(c) int c; { return P(c); }
+
+FUNC(is_alpha, ISALPHA)
+--
+    return 0;
+  return strncmp(s, lexptr, len) == 0;
+}
+
+--
+	    return lasttok = BEGLINE;
+	  goto normal_char;
+
+--
+	    return lasttok = ENDLINE;
+	  goto normal_char;
+
+--
+	      return lasttok = BACKREF;
+	    }
+	  goto normal_char;
+--
+	    return lasttok = BEGWORD;
+	  goto normal_char;
+
+--
+	    return lasttok = ENDWORD;
+	  goto normal_char;
+
+--
+	    return lasttok = LIMWORD;
+	  goto normal_char;
+
+--
+	    return lasttok = NOTLIMWORD;
+	  goto normal_char;
+
+--
+	  return lasttok = QMARK;
+
+	case '*':
+--
+	  return lasttok = STAR;
+
+	case '+':
+--
+	  return lasttok = PLUS;
+
+	case '{':
+--
+	  return lasttok = REPMN;
+
+	case '|':
+--
+	  return lasttok = OR;
+
+	case '\n':
+--
+	  return lasttok = OR;
+
+	case '(':
+--
+	  return lasttok = LPAREN;
+
+	case ')':
+--
+	  return lasttok = RPAREN;
+
+	case '.':
+--
+	  return lasttok = CSET + charclass_index(ccl);
+
+	case 'w':
+--
+	  return lasttok = CSET + charclass_index(ccl);
+	
+	case '[':
+--
+	  return lasttok = CSET + charclass_index(ccl);
+
+	default:
+--
+	      return lasttok = CSET + charclass_index(ccl);
+	    }
+	  return c;
+	}
+    }
+--
+      return 1;
+    case QMARK:
+    case STAR:
+--
+      return 1 + nsubtoks(tindex - 1);
+    case CAT:
+    case OR:
+--
+      return 1 + ntoks1 + nsubtoks(tindex - 1 - ntoks1);
+    }
+}
+--
+	return i;
+    }
+
+--
+  return i;
+}
+
+--
+	      return (char *) p;
+	    }
+
+--
+	return NULL;
+
+      if (s >= 0)
+--
+   calculated "in" sequences as our answer.  The sequence we find is returned in
+   d->must (where "d" is the single argument passed to "dfamust");
+   the length of the sequence is returned in d->mustn.
+
+   The sequences calculated for the various types of node (in pseudo ANSI c)
+--
+   we just return a zero-length sequence.
+
+   Break ties in favor of infrequent letters (choosing 'zzz' in preference to
+--
+    return old;
+  else	oldsize = strlen(old);
+  if (old == NULL)
+--
+  return result;
+}
+
+--
+  return icatalloc((char *) NULL, string);
+}
+
+--
+      return cp;
+  return NULL;
+}
+
+--
+    return;
+  for (i = 0; cpp[i] != NULL; ++i)
+    {
+--
+    return NULL;
+  if ((new = icpyalloc(new)) == NULL)
+    {
+--
+      return NULL;
+    }
+  new[len] = '\0';
+--
+	return cpp;
+      }
+  /* Eliminate any obsoleted strings. */
+--
+    return NULL;
+  cpp[i] = new;
+  cpp[i + 1] = NULL;
+  return cpp;
+}
+
+/* Given pointers to two strings, return a pointer to an allocated
+   list of their distinct common substrings. Return NULL if something
+   seems wild. */
+--
+    return NULL;
+  cpp = (char **) malloc(sizeof *cpp);
+  if (cpp == NULL)
+    return NULL;
+  cpp[0] = NULL;
+  for (lcp = left; *lcp != '\0'; ++lcp)
+--
+  return cpp;
+}
+
+--
+    return NULL;
+  for (i = 0; new[i] != NULL; ++i)
+    {
+--
+  return old;
+}
+
+/* Given two lists of substrings, return a new list giving substrings
+   common to both. */
+static char **
+--
+    return NULL;
+  both = (char **) malloc(sizeof *both);
+  if (both == NULL)
+    return NULL;
+  both[0] = NULL;
+  for (lnum = 0; left[lnum] != NULL; ++lnum)
+--
+	      return NULL;
+	    }
+	  both = addlists(both, temp);
+--
+	    return NULL;
+	}
+    }
+  return both;
+}
+
+--
+    return;
+  mp = musts;
+  for (i = 0; i <= dfa->tindex; ++i)
+--
+/* Structure returned opaquely to the caller, containing everything. */
+struct kwset
+{
+--
+/* Allocate and initialize a keyword set object, returning an opaque
+   pointer to it.  Return NULL if memory is not available. */
+kwset_t
+--
+    return 0;
+
+  obstack_init(&kwset->obstack);
+--
+      return 0;
+    }
+  kwset->trie->accepting = 0;
+--
+  return (kwset_t) kwset;
+}
+
+--
+	    return "memory exhausted";
+	  link->llink = 0;
+	  link->rlink = 0;
+--
+	    return "memory exhausted";
+	  link->trie->accepting = 0;
+	  link->trie->links = 0;
+--
+  return 0;
+}
+
+--
+    return;
+  enqueue(tree->llink, last);
+  enqueue(tree->rlink, last);
+--
+    return;
+
+  treefails(tree->llink, fail, recourse);
+--
+	  return;
+	}
+      fail = fail->fail;
+--
+    return;
+  treedelta(tree->llink, depth, delta);
+  treedelta(tree->rlink, depth, delta);
+--
+    return 1;
+  if (!hasevery(a, b->llink))
+    return 0;
+  if (!hasevery(a, b->rlink))
+    return 0;
+  while (a && b->label != a->label)
+    if (b->label < a->label)
+--
+  return !!a;
+}
+
+--
+    return;
+  treenext(tree->llink, next);
+  treenext(tree->rlink, next);
+--
+  return 0;
+}
+
+--
+    return text;
+  if (len > size)
+    return 0;
+  if (len == 1)
+    return memchr(text, kwset->target[0], size);
+
+  d1 = kwset->delta;
+--
+	      return tp - len;
+	  }
+	tp += md2;
+--
+	    return tp - len;
+	}
+      d = md2;
+--
+  return 0;
+}
+
+--
+    return 0;
+  next = kwset->next;
+  delta = kwset->delta;
+--
+  return 0;
+
+ match:
+--
+  return mch;
+}
+  
+--
+      return ret;
+    }
+  else
+    return cwexec(kws, text, size, kwsmatch);
+}
+
+--
+  return lp != 0;
+}
+
+--
+  return obstack_base (obstack);
+}
+
+--
+  return obstack_next_free (obstack);
+}
+
+--
+  return obstack_object_size (obstack);
+}
+
+--
+  return obstack_room (obstack);
+}
+
+--
+  return obstack_finish (obstack);
+}
+
+--
+  return obstack_alloc (obstack, length);
+}
+
+--
+  return obstack_copy (obstack, pointer, length);
+}
+
+--
+  return obstack_copy0 (obstack, pointer, length);
+}
+
+--
+   If kwsexec() returns < lastexact, then we don't need to
+   call the regexp matcher at all. */
+static int lastexact;
+--
+	 matches.  The kwset matcher will return the index
+	 of the matching string that it chooses. */
+      for (dm = dfa_1.musts; dm; dm = dm->next)
+--
+  return 0;
+
+ success:
+--
+  return beg;
+}
+
+--
+	return 0;
+      len = kwsmatch.size[0];
+      if (match_lines)
+--
+  return 0;
+
+ success:
+--
+  return beg;
+}
+

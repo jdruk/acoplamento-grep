@@ -1,0 +1,23 @@
+extern char *sys_errlist[];
+static char version[] = "GNU grep version 2.0";
+     char *argv[];
+static const char *re_error_msg[] =
+                   not (i.e., when the bracket expression is `[]' so
+    regmatch_t pmatch[]; 
+} prednames[] = {
+  ":alpha:]", is_alpha,
+  ":upper:]", is_upper,
+  ":lower:]", is_lower,
+  ":digit:]", is_digit,
+  ":xdigit:]", is_xdigit,
+  ":space:]", is_space,
+  ":punct:]", is_punct,
+  ":alnum:]", is_alnum,
+  ":print:]", is_print,
+  ":graph:]", is_graph,
+  ":cntrl:]", is_cntrl,
+		 Note that if we're looking at some other [:...:]
+     int trans[];
+     unsigned char delta[];
+     struct trie *next[];
+struct matcher matchers[] = {

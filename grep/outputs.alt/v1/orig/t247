@@ -1,0 +1,10 @@
+../inputs/grep1.dat:      else if (getenv ("POSIXLY_CORRECT") != NULL)
+../inputs/grep1.dat:              if (group_in_compile_stack (compile_stack, c1))
+../inputs/grep1.dat:if (out)
+../inputs/grep1.dat:if (gout)
+../inputs/grep1.dat:if (gsth)
+../inputs/grep1.dat:swswsif (out)
+../inputs/grep1.dat:swswsif (out)fvvfvf
+../inputs/grep1.dat:s  if (out)
+../inputs/grep1.dat:    if (gout)
+../inputs/grep1.dat: sds if (gsth)

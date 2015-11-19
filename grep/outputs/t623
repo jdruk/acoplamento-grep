@@ -1,0 +1,3 @@
+target1: invalid option -- 'Y'
+Usage: target1 [OPTION]... PATTERN [FILE]...
+Try `target1 --help' for more information.

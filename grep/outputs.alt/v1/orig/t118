@@ -1,0 +1,11 @@
+../inputs/grep1.dat:static char *prog;
+../inputs/grep1.dat:  const char *prev = p - 2;
+../inputs/grep1.dat:       (*prev == '(' && (syntax & RE_NO_BK_PARENS || prev_prev_backslash))
+../inputs/grep1.dat:    || (*prev == '|' && (syntax & RE_NO_BK_VBAR || prev_prev_backslash));
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:  private_preg = *preg;
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:  int (*pred)();
+../inputs/grep1.dat:			if ((*prednames[c1].pred)(c2))

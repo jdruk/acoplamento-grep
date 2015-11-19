@@ -1,0 +1,4 @@
+../inputs/grep1.dat:    const char **p_ptr, *pend;
+../inputs/grep1.dat:    unsigned char **p, *end;
+../inputs/grep1.dat:	  assert (p1[1] == **p);
+../inputs/grep1.dat:    unsigned char **p, *end;

@@ -1,0 +1,76 @@
+276:include
+1174:#include <errno.h>
+1193:#include <stdio.h>
+1273:#include <stdlib.h>
+1321:#include <sys/types.h>
+1483:#include <string.h>
+1546:#include <memory.h>
+1601:#include <strings.h>
+1793:#include <sys/types.h>
+1847:#include <fcntl.h>
+1866:#include <unistd.h>
+1955:#include "getpagesize.h"
+1980:#include "grep.h"
+4544:#include <sys/types.h>
+4598:#include <sys/stat.h>
+4620:#include <sys/mman.h>
+19186:#include "config.h"
+19434:#include <alloca.h>
+19754:/*#include <stdio.h> */
+19929:   Library, but also included in many other GNU distributions.  Compiling
+20345:/* This needs to come after some library #include
+20471:/* Don't include stdlib.h for non-GNU C libraries because some of them
+20614:#include <stdlib.h>
+21621:#include "getopt.h"
+24773:#include <string.h>
+40127:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+40224:#include <sys/types.h>
+40319:#include "config.h"
+40484:#include "lisp.h"
+40502:#include "buffer.h"
+40522:#include "syntax.h"
+40814:#include <string.h>
+41087:#include <strings.h>
+41186:#include <stdlib.h>
+42225:#include "regex.h"
+42301:#include <ctype.h>
+45108:#include <alloca.h>
+50944:           subsequent two-byte number.  The address *includes* the two
+54142:/*#include <stdio.h>*/
+54239:#include <assert.h>
+118979:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+143613:     return, for use in backreferences.  The number here includes
+146588:     there are groups, we include space for register 0 (the whole
+201516:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+203269:/*#include <assert.h> */
+203294:/*#include <ctype.h> */
+203318:/*#include <stdio.h> */
+203382:#include <stdlib.h>
+203459:#include <sys/types.h>
+203658:#include <string.h>
+203767:#include <strings.h>
+204934:#include "dfa.h"
+204951:/*#include "regex.h"*/
+221399:   length of the string, so s can include NUL characters.  D is a pointer to
+238203:   If we are building a searching matcher, we include the positions of state
+268050:#include <limits.h>
+268112:#include <stdlib.h>
+268232:#include <stddef.h>
+268279:#include <sys/types.h>
+268429:#include <string.h>
+268518:#include <memory.h>
+268730:#include "kwset.h"
+268749:#include "obstack.h"
+288506:/*#include "obstack.h"*/
+288584:/*#include <stdio.h>*/
+288758:   Library, but also included in many other GNU distributions.  Compiling
+302541:/*#include <ctype.h>*/
+302622:#include <limits.h>
+302690:#include <stdlib.h>
+302788:#include <sys/types.h>
+302911:#include <string.h>
+303000:#include <memory.h>
+303496:/*#include "grep.h"*/
+303518:/*#include "dfa.h"*/
+303539:/*#include "kwset.h"*/
+303562:/*#include "regex.h"*/

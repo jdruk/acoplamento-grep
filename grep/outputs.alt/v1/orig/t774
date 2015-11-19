@@ -1,0 +1,575 @@
+  for (p = (unsigned char *) vp; n--; ++p)
+      buffer = valloc(bufalloc + 1);
+      nbuffer = valloc(bufalloc + 1);
+  dp = nbuffer + bufsalloc - save;
+    *dp++ = *sp++;
+      maddr = buffer + bufsalloc;
+      bufoffset += cc;
+      cc = read(bufdesc, buffer + bufsalloc, bufalloc - bufsalloc);
+  cc = read(bufdesc, buffer + bufsalloc, bufalloc - bufsalloc);
+    buflim = buffer + bufsalloc + cc;
+    buflim = buffer + bufsalloc;
+  for (beg = lastnl; beg < lim; ++beg)
+      ++totalnl;
+      printf("%d%c", ++totalnl, sep);
+    printf("%lu%c", totalcc + (beg - bufbeg), sep);
+	++nl;
+      for (i = 0; i < out_before; ++i)
+	  prline(p, nl + 1, '-');
+	  p = nl + 1;
+      for (n = 0; p < lim; ++n)
+	    ++nl;
+	  nlines += 1;
+	  nlines += n;
+      nlines += n;
+      beg = bufbeg + save - residue;
+	  nlines += grepbuf(beg, lim);
+	  ++i;
+      save = residue + lim - beg;
+      totalcc += buflim - bufbeg - save;
+      nlines += grepbuf(bufbeg + save - residue, buflim);
+  for (i = 0; matchers[i].name; ++i)
+    prog = strrchr(prog, '/') + 1;
+	out_before = 10 * out_before + opt - '0';
+	out_after = 10 * out_after + opt - '0';
+	keys = xrealloc(keys, keycc + cc + 1);
+	  keys[keycc++] = '\n';
+	keycc += cc;
+	  keys[keycc++] = '\n';
+	       && (cc = fread(keys + keycc, 1, keyalloc - keycc, fp)) > 0)
+	    keycc += cc;
+	keys = argv[optind++];
+	++optind;
+/* If GETOPT_COMPAT is defined, `+' as well as `--' can introduce a
+   variable POSIXLY_CORRECT, or using `+' as the first character
+      str++;
+  for (i = 0; i < size; i++)
+	    (char *) &argv[first_nonopt + optind - last_nonopt],
+  first_nonopt += (optind - last_nonopt);
+   If OPTSTRING starts with `-' or `+', it requests different methods of
+	  ++optstring;
+      else if (optstring[0] == '+')
+	  ++optstring;
+		     || argv[optind][0] != '+' || argv[optind][1] == '\0')
+	    optind++;
+	  optind++;
+	      || argv[optind][0] != '+' || argv[optind][1] == '\0')
+	  optarg = argv[optind++];
+      nextchar = (argv[optind] + 1
+		  + (longopts != NULL && argv[optind][1] == '-'));
+	  || argv[optind][0] == '+'
+	s++;
+	   p++, option_index++)
+	  nextchar += strlen (nextchar);
+	  optind++;
+	  optind++;
+		optarg = s + 1;
+			/* +option or -option */
+		  nextchar += strlen (nextchar);
+		optarg = argv[optind++];
+		  nextchar += strlen (nextchar);
+	  nextchar += strlen (nextchar);
+	  || argv[optind][0] == '+'
+		/* +option or -option */
+	  optind++;
+    char c = *nextchar++;
+      ++optind;
+		optind++;
+		optind++;
+	      optarg = argv[optind++];
+	printf ("%s ", argv[optind++]);
+   for (c = 'a'; c <= 'z'; c++)
+   for (c = 'A'; c <= 'Z'; c++)
+   for (c = '0'; c <= '9'; c++)
+  (size1 && string1 <= (ptr) && (ptr) <= string1 + size1)
+           is made to use it for a failure.  A `+' construct makes this
+    (destination) += 2;							\
+    (destination) += SIGN_EXTEND_CHAR (*((source) + 1)) << 8;		\
+  int temp = SIGN_EXTEND_CHAR (*(source + 1)); 
+  *dest += temp << 8;
+    (source) += 2; 							\
+  *source += 2;
+      if (fastmap[i++])
+              i++;
+      switch ((re_opcode_t) *p++)
+	  mcnt = *p++;
+	      printchar (*p++);
+          mcnt = *p++;
+          printf ("/start_memory/%d/%d", mcnt, *p++);
+          mcnt = *p++;
+	  printf ("/stop_memory/%d/%d", mcnt, *p++);
+	  printf ("/duplicate/%d", *p++);
+            assert (p + *p < pend);
+            for (c = 0; c < 256; c++)
+		  && (p[1 + (c/8)] & (1 << (c % 8))))
+		  if (last + 1 == c && ! in_range)
+		  else if (last + 1 != c && in_range)
+	    p += 1 + *p;
+  	  printf ("/on_failure_jump to %d", p + mcnt - start);
+  	  printf ("/on_failure_keep_string_jump to %d", p + mcnt - start);
+  	  printf ("/dummy_failure_jump to %d", p + mcnt - start);
+  	  printf ("/maybe_pop_jump to %d", p + mcnt - start);
+  	  printf ("/pop_failure_jump to %d", p + mcnt - start);
+  	  printf ("/jump_past_alt to %d", p + mcnt - start);
+  	  printf ("/jump to %d", p + mcnt - start);
+	  printf ("/succeed_n to %d, %d times", p + mcnt - start, mcnt2);
+	  printf ("/jump_n to %d, %d times", p + mcnt - start, mcnt2);
+	  printf ("/set_number_at location %d to %d", p + mcnt - start, mcnt2);
+	  mcnt = *p++;
+	  mcnt = *p++;
+  print_partial_compiled_pattern (buffer, buffer + bufp->used);
+          for (this_char = where - string1; this_char < size1; this_char++)
+      for (this_char = where - string2; this_char < size2; this_char++)
+    c = (unsigned char) *p++;						\
+    c = (unsigned char) *p++; 						\
+    while (b - bufp->buffer + (n) > bufp->allocated)			\
+    *b++ = (unsigned char) (c);						\
+    *b++ = (unsigned char) (c1);					\
+    *b++ = (unsigned char) (c2);					\
+    *b++ = (unsigned char) (c1);					\
+    *b++ = (unsigned char) (c2);					\
+    *b++ = (unsigned char) (c3);					\
+        b = (b - old_buffer) + bufp->buffer;				\
+        begalt = (begalt - old_buffer) + bufp->buffer;			\
+          fixup_alt_jump = (fixup_alt_jump - old_buffer) + bufp->buffer;\
+          laststart = (laststart - old_buffer) + bufp->buffer;		\
+          pending_exact = (pending_exact - old_buffer) + bufp->buffer;	\
+           num = num * 10 + c - '0'; 					\
+  const char *pend = pattern + size;
+      for (debug_count = 0; debug_count < size; debug_count++)
+                   p == pattern + 1
+	case '+':
+                zero_times_ok |= c != '+';
+                    || (!(syntax & RE_BK_PLUS_QM) && (c == '+' || c == '?')))
+                    if (!(c1 == '+' || c1 == '?'))
+                b += 3;
+            /* On failure, jump from laststart to b + 3, which will be the
+                         laststart, b + 3);
+            b += 3;
+                INSERT_JUMP (dummy_failure_jump, laststart, laststart + 6);
+                b += 3;
+              p++;
+                if (c == ']' && p != p1 + 1)
+                    char str[CHAR_CLASS_MAX_LENGTH + 1];
+                        str[c1++] = c;
+                        for (ch = 0; ch < 1 << BYTEWIDTH; ch++)
+                        c1++;
+            b += b[-1];
+              bufp->re_nsub++;
+              regnum++;
+                = fixup_alt_jump ? fixup_alt_jump - bufp->buffer + 1 : 0;
+                  COMPILE_STACK_TOP.inner_group_offset = b - bufp->buffer + 2;
+              compile_stack.avail++;
+                begalt = bufp->buffer + COMPILE_STACK_TOP.begalt_offset;
+                    ? bufp->buffer + COMPILE_STACK_TOP.fixup_alt_jump - 1 
+                laststart = bufp->buffer + COMPILE_STACK_TOP.laststart_offset;
+                      = bufp->buffer + COMPILE_STACK_TOP.inner_group_offset;
+              INSERT_JUMP (on_failure_jump, begalt, b + 6);
+              b += 3;
+              b += 3;
+                   all; jump from `laststart' to `b + 3', which will be
+                     INSERT_JUMP (jump, laststart, b + 3);
+                     b += 3;
+                     unsigned nbytes = 10 + (upper_bound > 1) * 10;
+                                   b + 5 + (upper_bound > 1) * 5,
+                     b += 5;
+                     b += 5;
+                         STORE_JUMP2 (jump_n, b, laststart + 5,
+                         b += 5;
+                            `laststart+3' the number to set, the source
+                            Conclusion: (b - 2) - (laststart + 3) + 5,
+                         b += 5;
+            case '+':
+              || pending_exact + *pending_exact + 1 != b
+		  ? *p == '\\' && (p[1] == '+' || p[1] == '?')
+		  : (*p == '+' || *p == '?'))
+          (*pending_exact)++;
+  STORE_NUMBER (loc + 1, arg);
+  STORE_NUMBER (loc + 1, arg1);
+  STORE_NUMBER (loc + 3, arg2);
+  register unsigned char *pto = end + 3;
+  register unsigned char *pto = end + 5;
+  const char *next_next = p + 1 < pend ? p + 1 : NULL;
+  (*p_ptr)++;
+  for (this_char = range_start; this_char <= range_end; this_char++)
+    : ((fail_stack).stack[(fail_stack).avail++] = pattern_op,		\
+  fail_stack.stack[fail_stack.avail++] = (fail_stack_elt_t) item
+       of 0 + -1 isn't done as unsigned.  */				\
+    DEBUG_STATEMENT (failure_id++);					\
+    DEBUG_STATEMENT (nfailure_points_pushed++);				\
+         this_reg++)							\
+        DEBUG_STATEMENT (num_regs_pushed++);				\
+#define MAX_FAILURE_ITEMS ((num_regs - 1) * NUM_REG_ITEMS + NUM_NONREG_ITEMS)
+  ((highest_active_reg - lowest_active_reg + 1) * NUM_REG_ITEMS 	\
+    + NUM_NONREG_ITEMS)
+  DEBUG_STATEMENT (nfailure_points_popped++);				\
+  register unsigned char *pend = pattern + size;
+      switch ((int) ((re_opcode_t) *p++))
+      switch ((re_opcode_t) *p++)
+          for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+	  for (j = *p * BYTEWIDTH; j < (1 << BYTEWIDTH); j++)
+	  for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	  k = *p++;
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	  k = *p++;
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	  p += j;	
+          p++;
+          p += j;		
+          /* For some patterns, e.g., `(a?)?', `p+j' here points to the
+          if (p + j < pend)
+              if (!PUSH_PATTERN_OP (p + j, fail_stack))
+          p += 2;		
+          p += 4;
+	  p += 2;
+        } /* switch *p++ */
+   STARTPOS, then at STARTPOS + 1, and so on.
+   only at STARTPOS; in general, the last start tried is STARTPOS +
+  int total_size = size1 + size2;
+  int endpos = startpos + range;
+              if (startpos < size1 && startpos + range >= size1)
+	      d = (startpos >= size1 ? string2 - size1 : string1) + startpos;
+				   translate[(unsigned char) *d++]])
+                while (range > lim && !fastmap[(unsigned char) *d++])
+	      startpos += irange - range;
+          startpos++;
+          range++; 
+      for (r = lowest_active_reg; r <= highest_active_reg; r++)		\
+  (FIRST_STRING_P (ptr) ? (ptr) - string1 : (ptr) - string2 + size1)
+#define NO_LOWEST_ACTIVE_REG (NO_HIGHEST_ACTIVE_REG + 1)
+  register unsigned char *pend = p + bufp->used;
+  unsigned num_regs = bufp->re_nsub + 1;
+  if (pos < 0 || pos > size1 + size2)
+  for (mcnt = 1; mcnt < num_regs; mcnt++)
+  end1 = string1 + size1;
+  end2 = string2 + size2;
+      end_match_1 = string1 + stop;
+      end_match_2 = string2 + stop - size1;
+      d = string1 + pos;
+      d = string2 + pos - size1;
+                      for (mcnt = 1; mcnt < num_regs; mcnt++)
+		  for (mcnt = 1; mcnt < num_regs; mcnt++)
+                  regs->num_regs = MAX (RE_NREGS, num_regs + 1);
+                  if (regs->num_regs < num_regs + 1)
+                      regs->num_regs = num_regs + 1;
+			          : d - string2 + size1);
+	      for (mcnt = 1; mcnt < MIN (num_regs, regs->num_regs); mcnt++)
+              for (mcnt = num_regs; mcnt < regs->num_regs; mcnt++)
+      switch ((int) ((re_opcode_t) *p++))
+      switch ((re_opcode_t) *p++)
+	  mcnt = *p++;
+		  if (translate[(unsigned char) *d++] != (char) *p++)
+		  if (*d++ != (char) *p++) goto fail;
+          d++;
+		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+	    p += 1 + *p;
+            d++;
+          p += 2;
+	      && (p + 2) < pend)              
+              p1 = p + 2;
+              switch ((re_opcode_t) *p1++)
+		      p1 += 2;
+	      p1 += mcnt;
+                      for (r = *p; r < *p + *(p + 1); r++)
+		  p1++;
+                  PUSH_FAILURE_POINT (p1 + mcnt, d, -2);
+          p += 2;
+	    int regno = *p++;   /* Get which register to match against.  */
+		d += mcnt, d2 += mcnt;
+          DEBUG_PRINT3 (" %d (to 0x%x):\n", mcnt, p + mcnt);
+          PUSH_FAILURE_POINT (p + mcnt, NULL, -2);
+          DEBUG_PRINT3 (" %d (to 0x%x)", mcnt, p + mcnt);
+             a failure point to `p + mcnt' after we do this.  */
+            p1++;
+              highest_active_reg = *(p1 + 1) + *(p1 + 2);
+                lowest_active_reg = *(p1 + 1);
+          PUSH_FAILURE_POINT (p + mcnt, d, -2);
+	    while (p2 + 2 < pend
+	      p2 += 3;			/* Skip over args, too.  */
+		p1 = p + mcnt;
+			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+	  p += mcnt;				/* Do the jump.  */
+           pop_failure_jump, also, and with a pattern of, say, `a+', we
+          EXTRACT_NUMBER (mcnt, p + 2);
+	       p += 2;
+              DEBUG_PRINT2 ("  Setting two bytes from 0x%x to no_op.\n", p+2);
+          EXTRACT_NUMBER (mcnt, p + 2);
+               STORE_NUMBER (p + 2, mcnt);
+	    p += 4;		     
+            p1 = p + mcnt;
+	  if (PTR_CHAR_POS ((unsigned char *) d) + 1 != point)
+	  mcnt = *p++;
+	  if (SYNTAX (*d++) != (enum syntaxcode) mcnt)
+	  mcnt = *p++;
+	  if (SYNTAX (*d++) == (enum syntaxcode) mcnt)
+          d++;
+          d++;
+                  p1 = p + 1;
+                  p1 += mcnt;	
+  unsigned char *p1 = *p + 2;
+          p1++;
+                  if (!alt_match_null_string_p (p1, p1 + mcnt - 3, 
+                  p1 += mcnt;	
+		  p1++;
+              if (!alt_match_null_string_p (p1, p1 + mcnt, reg_info))
+              p1 += mcnt;	/* Get past the n-th alternative.  */
+          *p = p1 + 2;
+          p1++;
+          p1 += mcnt;
+  switch ((re_opcode_t) *p1++)
+        p1 += mcnt;
+      p1 += 2;		
+          p1 += mcnt;
+      p1 += 4;
+      if (translate[*p1++] != translate[*p2++]) return 1;
+      for (i = 0; i < CHAR_SET_SIZE; i++)
+          for (r = 0; r < nmatch; r++)
+  msg_size = strlen (msg) + 1; /* Includes the null.  */
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < dfa->cindex; ++i)
+  ++dfa->cindex;
+    (c) = (unsigned char) *lexptr++;  \
+  for (i = 0; i < 2; ++i)
+	case '+':
+		  minrep = 10 * minrep + c - '0';
+		maxrep = 10 * maxrep + c - '0';
+	  ++parens;
+	  return lasttok = CSET + charclass_index(ccl);
+	  for (c2 = 0; c2 < NOTCHAR; ++c2)
+	  return lasttok = CSET + charclass_index(ccl);
+		for (c1 = 0; prednames[c1].name; ++c1)
+		      for (c2 = 0; c2 < NOTCHAR; ++c2)
+		      lexptr += strlen(prednames[c1].name);
+		      ++lexleft;
+		  ++c;
+	  return lasttok = CSET + charclass_index(ccl);
+	      return lasttok = CSET + charclass_index(ccl);
+  dfa->tokens[dfa->tindex++] = t;
+      ++dfa->nleaves;
+      ++depth;
+      return 1 + nsubtoks(tindex - 1);
+      return 1 + ntoks1 + nsubtoks(tindex - 1 - ntoks1);
+  for (i = 0; i < ntokens; ++i)
+    addtok(dfa->tokens[tindex + i]);
+	for (i = 1; i < minrep; ++i)
+	for (; i < maxrep; ++i)
+  ++d->nregexps;
+  for (i = 0; i < src->nelem; ++i)
+  for (i = 0; i < s->nelem && p.index < s->elems[i].index; ++i)
+      ++s->nelem;
+	  s->elems[i++] = t1;
+      m->elems[m->nelem++] = s1->elems[i++];
+      m->elems[m->nelem++] = s2->elems[j++];
+	m->elems[m->nelem] = s1->elems[i++];
+	m->elems[m->nelem++].constraint |= s2->elems[j++].constraint;
+    m->elems[m->nelem++] = s1->elems[i++];
+    m->elems[m->nelem++] = s2->elems[j++];
+  for (i = 0; i < s->nelem; ++i)
+    for (--s->nelem; i < s->nelem; ++i)
+      s->elems[i] = s->elems[i + 1];
+  for (i = 0; i < s->nelem; ++i)
+    hash ^= s->elems[i].index + s->elems[i].constraint;
+  for (i = 0; i < d->sindex; ++i)
+      for (j = 0; j < s->nelem; ++j)
+  for (j = 0; j < s->nelem; ++j)
+  ++d->sindex;
+  for (i = 0; i < d->tindex; ++i)
+  for (i = 0; i < s->nelem; ++i)
+	for (j = 0; j < d->follows[old.index].nelem; ++j)
+  for (i = 0; i < d->tindex; ++i)
+  o_firstpos = firstpos, firstpos += d->nleaves;
+  o_lastpos = lastpos, lastpos += d->nleaves;
+  for (i = 0; i < d->tindex; ++i)
+  for (i = 0; i < d->tindex; ++i)
+	*nullable++ = 1;
+	*nfirstpos++ = *nlastpos++ = 0;
+	for (j = 0; j < nlastpos[-1]; ++j)
+	pos = lastpos + nlastpos[-1];
+	for (j = 0; j < nlastpos[-2]; ++j)
+	  nfirstpos[-2] += nfirstpos[-1];
+	  firstpos += nfirstpos[-1];
+	  nlastpos[-2] += nlastpos[-1];
+	    pos = lastpos + nlastpos[-2];
+	    lastpos += nlastpos[-2];
+	nfirstpos[-2] += nfirstpos[-1];
+	nlastpos[-2] += nlastpos[-1];
+	*nullable++ = d->tokens[i] == BACKREF;
+	*nfirstpos++ = *nlastpos++ = 1;
+  for (i = 0; i < d->tindex; ++i)
+  for (i = 0; i < nfirstpos[-1]; ++i)
+  for (i = 0; i < merged.nelem; ++i)
+      for (i = 0; i < NOTCHAR; ++i)
+  for (i = 0; i < d->states[s].elems.nelem; ++i)
+	    for (j = 0; j < CHARCLASS_INTS; ++j)
+	    for (j = 0; j < CHARCLASS_INTS; ++j)
+	    for (j = 0; j < CHARCLASS_INTS; ++j)
+	  for (j = 0; j < CHARCLASS_INTS && !matches[j]; ++j)
+      for (j = 0; j < ngrps; ++j)
+	  for (k = 0; k < CHARCLASS_INTS; ++k)
+	  for (k = 0; k < CHARCLASS_INTS; ++k)
+	      ++ngrps;
+	  grps[j].elems[grps[j].nelem++] = pos;
+	  ++ngrps;
+      for (i = 0; i < d->states[0].elems.nelem; ++i)
+      for (i = 0; i < NOTCHAR; ++i)
+    for (i = 0; i < NOTCHAR; ++i)
+  for (i = 0; i < ngrps; ++i)
+      for (j = 0; j < grps[i].nelem; ++j)
+	for (k = 0; k < d->follows[grps[i].elems[j].index].nelem; ++k)
+	for (j = 0; j < d->states[0].elems.nelem; ++j)
+	for (j = 0; j < follows.nelem; ++j)
+      for (j = 0; j < CHARCLASS_INTS; ++j)
+	for (j = 0; j < follows.nelem; ++j)
+      for (j = 0; j < CHARCLASS_INTS; ++j)
+	for (k = 0; k < INTBITS; ++k)
+	      int c = j * INTBITS + k;
+  for (i = 0; i < ngrps; ++i)
+      for (i = 0; i < d->tralloc; ++i)
+  ++d->trcount;
+  for (i = 0; i < NOTCHAR; ++i)
+	REALLOC(d->realtrans, int *, d->tralloc + 1);
+	d->trans = d->realtrans + 1;
+	    d->fails[oldalloc++] = NULL;
+  CALLOC(d->realtrans, int *, d->tralloc + 1);
+  d->trans = d->realtrans + 1;
+      for (i = 0; i < NOTCHAR; ++i)
+	    s1 = t[*p++];
+	    s = t[*p++];
+	  s = d->fails[s][*p++];
+	++*count;
+      for (i = 0; i < len; ++i)
+  for (i = 0; i < d->sindex; ++i)
+  for (i = 0; i < d->tindex; ++i)
+  for (i = 0; i < d->tralloc; ++i)
+    result = (char *) malloc(newsize + 1);
+    result = (char *) realloc((void *) old, oldsize + newsize + 1);
+    (void) strcpy(result + oldsize, new);
+  for (cp = lookin; *cp != '\0'; ++cp)
+  for (i = 0; cpp[i] != NULL; ++i)
+  for (i = 0; cpp[i] != NULL; ++i)
+      ++j;
+  cpp = (char **) realloc((char *) cpp, (i + 2) * sizeof *cpp);
+  cpp[i + 1] = NULL;
+  for (lcp = left; *lcp != '\0'; ++lcp)
+	  for (i = 1; lcp[i] != '\0' && lcp[i] == rcp[i]; ++i)
+	  rcp = index(rcp + 1, *lcp);
+  for (i = 0; new[i] != NULL; ++i)
+  for (lnum = 0; left[lnum] != NULL; ++lnum)
+      for (rnum = 0; right[rnum] != NULL; ++rnum)
+  musts = (must *) malloc((dfa->tindex + 1) * sizeof *musts);
+  for (i = 0; i <= dfa->tindex; ++i)
+  for (i = 0; i <= dfa->tindex; ++i)
+  for (i = 0; i < dfa->tindex; ++i)
+  for (ri = 0; ri < dfa->tindex; ++ri)
+	      ++i;
+	    for (i = 0; i < n; ++i)
+	    for (j = 0; j < i; ++j)
+	      lmp->right[j] = lmp->right[(ln - i) + j];
+	  for (i = 0; musts[0].in[i] != NULL; ++i)
+      for (i = 0; mp->in[i]; ++i)
+      ++mp;
+      dm->must = malloc(strlen(result) + 1);
+  for (i = 0; i <= dfa->tindex; ++i)
+#define NCHAR (UCHAR_MAX + 1)
+  text += len;
+	    dirs[depth++] = L, link = link->llink;
+	    dirs[depth++] = R, link = link->rlink;
+	  link->trie->depth = trie->depth + 1;
+		++links[depth]->balance;
+			|| (dirs[depth] == R && ++links[depth]->balance)))
+		  switch (dirs[depth + 1])
+		  switch (dirs[depth + 1])
+    trie->accepting = 1 + 2 * kwset->words;
+  ++kwset->words;
+    for (i = 0; i < NCHAR; ++i)
+    for (i = 0; i < NCHAR; ++i)
+      for (i = 0; i < kwset->mind; ++i)
+	delta[(unsigned char) kwset->target[i]] = kwset->mind - (i + 1);
+      for (i = 0; i < kwset->mind - 1; ++i)
+	  kwset->mind2 = kwset->mind - (i + 1);
+      for (i = 0; i < NCHAR; ++i)
+	for (i = 0; i < NCHAR; ++i)
+	for (i = 0; i < NCHAR; ++i)
+    for (i = 0; i < NCHAR; ++i)
+    for (i = 0; i < NCHAR; ++i)
+  sp = kwset->target + len;
+  tp = text + len;
+  /* Significance of 12: 1 (initial offset) + 10 (skip loop) + 1 (md2). */
+    for (ep = text + size - 11 * len;;)
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+	tp += md2;
+  ep = text + size;
+      d = d1[U((tp += d)[-1])];
+	  for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+  lim = text + len;
+	  end += d - 1;
+	      end += d;
+	      end += delta[(unsigned char) *end];
+	      end += delta[(unsigned char) *end];
+	  ++end;
+	d = delta[c = (end += d)[-1]];
+    lim = mch + kwset->maxd;
+      if ((d = delta[c = (end += d)[-1]]) != 0)
+      int extra = ((((12 + DEFAULT_ROUNDING - 1) & ~(DEFAULT_ROUNDING - 1))
+		    + 4 + DEFAULT_ROUNDING - 1)
+    = (char *) chunk + h->chunk_size;
+      int extra = ((((12 + DEFAULT_ROUNDING - 1) & ~(DEFAULT_ROUNDING - 1))
+		    + 4 + DEFAULT_ROUNDING - 1)
+    = (char *) chunk + h->chunk_size;
+  new_size = (obj_size + length) + (obj_size >> 3) + 100;
+  new_chunk->limit = h->chunk_limit = (char *) new_chunk + new_size;
+  if (h->alignment_mask + 1 >= DEFAULT_ALIGNMENT)
+  for (i = already; i < obj_size; i++)
+  h->next_free = h->object_base + obj_size;
+#define NCHAR (UCHAR_MAX + 1)
+    for (i = 0; i < NCHAR; ++i)
+	  ++lastexact;
+      char *n = malloc(size + 50);
+      bcopy(pattern, n + i, size);
+      i += size;
+	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+	strcpy(n + i, "\\)$");
+      i += strlen(n + i);
+      char *n = malloc(size + 50);
+      bcopy(pattern, n + i, size);
+      i += size;
+	strcpy(n + i, ")([^0-9A-Za-z_]|$)");
+	strcpy(n + i, ")$");
+      i += strlen(n + i);
+  buflim = buf + size;
+  for (beg = end = buf; end < buflim; beg = end + 1)
+		    && (len == end - beg || !WCHAR(beg[start + len])))
+		    len = re_match(&regex, beg, start + len, start, &regs);
+		    ++start;
+  *endp = end < buflim ? end + 1 : end;
+      for (lim = beg; lim < pattern + size && *lim != '\n'; ++lim)
+      if (lim < pattern + size)
+	++lim;
+  while (beg < pattern + size);
+  for (beg = buf; beg <= buf + size; ++beg)
+      if (!(beg = kwsexec(kwset, beg, buf + size - beg, &kwsmatch)))
+	  if (beg + len < buf + size && beg[len] != '\n')
+	    if (try + len < buf + size && WCHAR((unsigned char) try[len]))
+  if ((end = memchr(beg + len, '\n', (buf + size) - (beg + len))) != 0)
+    ++end;
+    end = buf + size;
+if agout end = buf + size;
+3eif agout end = buf + size;
+3eif agoutvf end = buf + size;
+argue if agout end = buf + size;

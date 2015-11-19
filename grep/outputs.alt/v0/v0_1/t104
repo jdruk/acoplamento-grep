@@ -1,0 +1,8 @@
+../inputs/grep1.dat:     const char *pattern;
+../inputs/grep1.dat:    const char *pattern, *p;
+../inputs/grep1.dat:  unsigned char *pattern = bufp->buffer;
+../inputs/grep1.dat:     const char *pattern;
+../inputs/grep1.dat:    const char *pattern; 
+../inputs/grep1.dat:     char *pattern;
+../inputs/grep1.dat:     char *pattern;
+../inputs/grep1.dat:     char *pattern;

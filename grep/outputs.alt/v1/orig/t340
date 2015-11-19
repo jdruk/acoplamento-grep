@@ -1,0 +1,3 @@
+../inputs/grep1.dat:          printf ("?%d", *(p-1));
+../inputs/grep1.dat:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+../inputs/grep1.dat:  msg_size = strlen (msg) + 1; /* Includes the null.  */

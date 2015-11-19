@@ -1,0 +1,96 @@
+../inputs/grep0.dat:include
+../inputs/grep1.dat:/* grep.c - main driver file for grep.
+../inputs/grep1.dat:#include <errno.h>
+../inputs/grep1.dat:#include <stdio.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <memory.h>
+../inputs/grep1.dat:#include <strings.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <fcntl.h>
+../inputs/grep1.dat:#include <unistd.h>
+../inputs/grep1.dat:#include "getpagesize.h"
+../inputs/grep1.dat:#include "grep.h"
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <sys/stat.h>
+../inputs/grep1.dat:#include <sys/mman.h>
+../inputs/grep1.dat:main(argc, argv)
+../inputs/grep1.dat:#include "config.h"
+../inputs/grep1.dat:#include <alloca.h>
+../inputs/grep1.dat:/*#include <stdio.h> */
+../inputs/grep1.dat:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:/* This needs to come after some library #include
+../inputs/grep1.dat:/* Don't include stdlib.h for non-GNU C libraries because some of them
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include "getopt.h"
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:main (argc, argv)
+../inputs/grep1.dat:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include "config.h"
+../inputs/grep1.dat:#include "lisp.h"
+../inputs/grep1.dat:#include "buffer.h"
+../inputs/grep1.dat:#include "syntax.h"
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <strings.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:/* Get the interface, including the syntax bits.  */
+../inputs/grep1.dat:#include "regex.h"
+../inputs/grep1.dat:#include <ctype.h>
+../inputs/grep1.dat:#include <alloca.h>
+../inputs/grep1.dat:           subsequent two-byte number.  The address *includes* the two
+../inputs/grep1.dat:   main program in `iregex.c', you can enter patterns and strings
+../inputs/grep1.dat:   interactively.  And if linked with the main program in `main.c' and
+../inputs/grep1.dat:/*#include <stdio.h>*/
+../inputs/grep1.dat:#include <assert.h>
+../inputs/grep1.dat:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+../inputs/grep1.dat:   inner groups (which is a bits list) are maintained in separate
+../inputs/grep1.dat:     return, for use in backreferences.  The number here includes
+../inputs/grep1.dat:     there are groups, we include space for register 0 (the whole
+../inputs/grep1.dat:          DEBUG_PRINT4 ("%u failure points pushed, %u popped (%u remain).\n",
+../inputs/grep1.dat:                     is, including the ending `jump_past_alt' and
+../inputs/grep1.dat:                  /* Move to right after this alternative, including the
+../inputs/grep1.dat:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+../inputs/grep1.dat:/*#include <assert.h> */
+../inputs/grep1.dat:/*#include <ctype.h> */
+../inputs/grep1.dat:/*#include <stdio.h> */
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <strings.h>
+../inputs/grep1.dat:#include "dfa.h"
+../inputs/grep1.dat:/*#include "regex.h"*/
+../inputs/grep1.dat:static lexleft;			/* Number of characters remaining. */
+../inputs/grep1.dat:     main switch inside the backslash case.  On the minus side,
+../inputs/grep1.dat:/* Add the given token to the parse tree, maintaining the depth count and
+../inputs/grep1.dat:   length of the string, so s can include NUL characters.  D is a pointer to
+../inputs/grep1.dat:/* Insert a position in a set.  Position sets are maintained in sorted
+../inputs/grep1.dat:   If we are building a searching matcher, we include the positions of state
+../inputs/grep1.dat:   If after comparing with every group there are characters remaining in C,
+../inputs/grep1.dat:#include <limits.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <stddef.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <memory.h>
+../inputs/grep1.dat:#include "kwset.h"
+../inputs/grep1.dat:#include "obstack.h"
+../inputs/grep1.dat:     copy of the preceding main search loops. */
+../inputs/grep1.dat:/*#include "obstack.h"*/
+../inputs/grep1.dat:/*#include <stdio.h>*/
+../inputs/grep1.dat:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:      /* We used to copy the odd few remaining bytes as one extra COPYING_UNIT,
+../inputs/grep1.dat:  /* Copy remaining bytes one by one.  */
+../inputs/grep1.dat:/* Free objects in obstack H, including OBJ and everything allocate
+../inputs/grep1.dat:/*#include <ctype.h>*/
+../inputs/grep1.dat:#include <limits.h>
+../inputs/grep1.dat:#include <stdlib.h>
+../inputs/grep1.dat:#include <sys/types.h>
+../inputs/grep1.dat:#include <string.h>
+../inputs/grep1.dat:#include <memory.h>
+../inputs/grep1.dat:/*#include "grep.h"*/
+../inputs/grep1.dat:/*#include "dfa.h"*/
+../inputs/grep1.dat:/*#include "kwset.h"*/
+../inputs/grep1.dat:/*#include "regex.h"*/
+../inputs/grep1.dat:/* Here is the matchers vector for the main program. */

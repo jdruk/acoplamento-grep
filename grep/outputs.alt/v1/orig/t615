@@ -1,0 +1,19 @@
+  list_files = 0;
+  suppress_errors = 0;
+  matcher = NULL;
+
+  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+	 != EOF)
+    switch (opt)
+      {
+      case '0':
+--
+  while (1)
+    {
+      int this_option_optind = optind ? optind : 1;
+
+      c = getopt (argc, argv, "abc:d:0123456789");
+      if (c == EOF)
+	break;
+
+      switch (c)

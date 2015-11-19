@@ -1,0 +1,76 @@
+10:include
+35:#include <errno.h>
+36:#include <stdio.h>
+43:#include <stdlib.h>
+46:#include <sys/types.h>
+53:#include <string.h>
+56:#include <memory.h>
+60:#include <strings.h>
+72:#include <sys/types.h>
+75:#include <fcntl.h>
+76:#include <unistd.h>
+82:#include "getpagesize.h"
+83:#include "grep.h"
+215:#include <sys/types.h>
+218:#include <sys/stat.h>
+219:#include <sys/mman.h>
+882:#include "config.h"
+890:#include <alloca.h>
+908:/*#include <stdio.h> */
+912:   Library, but also included in many other GNU distributions.  Compiling
+921:/* This needs to come after some library #include
+925:/* Don't include stdlib.h for non-GNU C libraries because some of them
+928:#include <stdlib.h>
+954:#include "getopt.h"
+1039:#include <string.h>
+1620:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+1622:#include <sys/types.h>
+1628:#include "config.h"
+1637:#include "lisp.h"
+1638:#include "buffer.h"
+1639:#include "syntax.h"
+1650:#include <string.h>
+1664:#include <strings.h>
+1671:#include <stdlib.h>
+1731:#include "regex.h"
+1734:#include <ctype.h>
+1815:#include <alloca.h>
+1974:           subsequent two-byte number.  The address *includes* the two
+2084:/*#include <stdio.h>*/
+2087:#include <assert.h>
+4076:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+4850:     return, for use in backreferences.  The number here includes
+4914:     there are groups, we include space for register 0 (the whole
+6549:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+6618:/*#include <assert.h> */
+6619:/*#include <ctype.h> */
+6620:/*#include <stdio.h> */
+6624:#include <stdlib.h>
+6629:#include <sys/types.h>
+6638:#include <string.h>
+6645:#include <strings.h>
+6693:#include "dfa.h"
+6694:/*#include "regex.h"*/
+7485:   length of the string, so s can include NUL characters.  D is a pointer to
+8041:   If we are building a searching matcher, we include the positions of state
+9180:#include <limits.h>
+9183:#include <stdlib.h>
+9190:#include <stddef.h>
+9193:#include <sys/types.h>
+9203:#include <string.h>
+9208:#include <memory.h>
+9225:#include "kwset.h"
+9226:#include "obstack.h"
+9984:/*#include "obstack.h"*/
+9987:/*#include <stdio.h>*/
+9991:   Library, but also included in many other GNU distributions.  Compiling
+10440:/*#include <ctype.h>*/
+10445:#include <limits.h>
+10449:#include <stdlib.h>
+10455:#include <sys/types.h>
+10463:#include <string.h>
+10468:#include <memory.h>
+10495:/*#include "grep.h"*/
+10496:/*#include "dfa.h"*/
+10497:/*#include "kwset.h"*/
+10498:/*#include "regex.h"*/

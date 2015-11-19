@@ -1,0 +1,1 @@
+../inputs/grep1.dat:          printf ("?%d", *(p-1));

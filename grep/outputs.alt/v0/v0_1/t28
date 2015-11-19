@@ -1,0 +1,7 @@
+           popped.  For example, matching `(a|ab)*' against `aab'
+				   dfaanalyze(). */
+dfaanalyze(d, searchflag)
+  fprintf(stderr, "dfaanalyze:\n");
+      dfaanalyze(d, searchflag);
+        dfaanalyze(d, searchflag);
+   'aaa')?

@@ -1,0 +1,164 @@
+#include <stdlib.h>
+#define flag_stdlib 1
+  register char *p, *b;
+  while ((b = (*execute)(p, lim - p, &endp)) != 0)
+      if (b == lim && ((b > beg && b[-1] == '\n') || b == beg))
+	  prtext(b, endp, (int *) 0);
+      else if (p < b)
+	  prtext(p, b, &n);
+      case 'b':
+/* Don't include stdlib.h for non-GNU C libraries because some of them
+#if flag_stdlib==0   
+#include <stdlib.h>
+#define flag_stdlib 1
+	case 'b':
+	  printf ("option b\n");
+#if flag_stdlib==0 
+#include <stdlib.h>
+#define flag_stdlib 1
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+           the range 0 to one less than the pattern buffer's re_nsub
+           number, in the range 0 to one less than `re_nsub' in the
+  printf ("re_nsub: %d\t", bufp->re_nsub);
+  printf ("no_sub: %d\t", bufp->no_sub);
+    while (b - bufp->buffer + (n) > bufp->allocated)			\
+    *b++ = (unsigned char) (c);						\
+    *b++ = (unsigned char) (c1);					\
+    *b++ = (unsigned char) (c2);					\
+    *b++ = (unsigned char) (c1);					\
+    *b++ = (unsigned char) (c2);					\
+    *b++ = (unsigned char) (c3);					\
+/* Like `STORE_JUMP', but for inserting.  Assume `b' is the buffer end.  */
+  insert_op1 (op, loc, (to) - (loc) - 3, b)
+/* Like `STORE_JUMP2', but for inserting.  Assume `b' is the buffer end.  */
+  insert_op2 (op, loc, (to) - (loc) - 3, arg, b)
+        b = (b - old_buffer) + bufp->buffer;				\
+  (b[((unsigned char) (c)) / BYTEWIDTH]               \
+     `re_nsub' is the number of subexpressions in PATTERN;
+  register unsigned char *b;
+  /* Always count groups, whether or not bufp->no_sub is set.  */
+  bufp->re_nsub = 0;				
+  begalt = b = bufp->buffer;
+                   end a backward relative jump from `b' to before the next
+                    STORE_JUMP (jump, b, laststart);
+                  STORE_JUMP (maybe_pop_jump, b, laststart - 3);
+                b += 3;
+            /* On failure, jump from laststart to b + 3, which will be the
+                         laststart, b + 3);
+            b += 3;
+                b += 3;
+          laststart = b;
+            laststart = b;
+            bzero (b, (1 << BYTEWIDTH) / BYTEWIDTH);
+            if ((re_opcode_t) b[-2] == charset_not
+                      = compile_range (&p, pend, translate, syntax, b);
+                    ret = compile_range (&p, pend, translate, syntax, b);
+            while ((int) b[-1] > 0 && b[b[-1] - 1] == 0) 
+              b[-1]--; 
+            b += b[-1];
+             distinguish, e.g., \B from \b, even if we normally would
+             translate, e.g., B to b.  */
+              bufp->re_nsub++;
+              COMPILE_STACK_TOP.laststart_offset = b - bufp->buffer;
+                  COMPILE_STACK_TOP.inner_group_offset = b - bufp->buffer + 2;
+              begalt = b;
+                  STORE_JUMP (jump_past_alt, fixup_alt_jump, b - 1);
+                   as in `(ab)c(de)' -- the second group is #2.  */
+              INSERT_JUMP (on_failure_jump, begalt, b + 6);
+              b += 3;
+                         a | b   | c   
+                 If we are at `b', then fixup_alt_jump right now points to a
+                 fixup_alt_jump to right after `b', and leave behind three
+                STORE_JUMP (jump_past_alt, fixup_alt_jump, b);
+              fixup_alt_jump = b;
+              b += 3;
+              begalt = b;
+                      laststart = b;
+                   all; jump from `laststart' to `b + 3', which will be
+                     INSERT_JUMP (jump, laststart, b + 3);
+                     b += 3;
+                                   b + 5 + (upper_bound > 1) * 5,
+                     b += 5;
+                     insert_op2 (set_number_at, laststart, 5, lower_bound, b);
+                     b += 5;
+                         STORE_JUMP2 (jump_n, b, laststart + 5,
+                         b += 5;
+                            parameter of the `jump_n'; that is `b-2' as
+                            Conclusion: (b - 2) - (laststart + 3) + 5,
+                            i.e., b - laststart.
+                         insert_op2 (set_number_at, laststart, b - laststart,
+                                     upper_bound - 1, b);
+                         b += 5;
+              laststart = b;
+              laststart = b;
+              laststart = b;
+              laststart = b;
+            case 'b':
+              laststart = b;
+              || pending_exact + *pending_exact + 1 != b
+              laststart = b;
+	      pending_exact = b - 1;
+    STORE_JUMP (jump_past_alt, fixup_alt_jump, b);
+  bufp->used = b - bufp->buffer;
+compile_range (p_ptr, pend, translate, syntax, b)
+    unsigned char *b;
+   If REGS is non-null and the `no_sub' field of BUFP is nonzero, we
+  unsigned num_regs = bufp->re_nsub + 1;
+  if (bufp->re_nsub)
+          if (regs && !bufp->no_sub)
+	    } /* regs && !bufp->no_sub */
+             operated upon by a repetition operator, e.g., with `(a*)*b'
+             against `ab'; then we want to ignore where we are now in
+             upon by a repetition operator, e.g., with `((a*)*(b*)*)*'
+                 (a(b)c(d(e)f)g).  When group 3 ends, after the f), the
+                     failed match, e.g., with `(a*)*b' against `ab' for
+                     regstart[1], and, e.g., with `((a*)*(b*)*)*'
+                     e.g., `((a*)(b*))*' against `aba' (register 3 would
+             and in \(\(a*\)b*\)\2, we need the inner group.  */
+             the result of a completed succeed_n, as in \(a\)\{1,3\}b\1
+               `(a|ab)*' we do need to backtrack to the `ab' alternative
+               (e.g., if the string was `ab').  But instead of trying to
+           popped.  For example, matching `(a|ab)*' against `aab'
+           requires that we match the `ab' alternative.  */
+                 with a jump, e.g., here is the pattern for `a|b|c':
+                 /on_failure_jump/0/6/exactn/1/b/jump_past_alt/0/3
+     setting no_sub.  */
+  bufp->no_sub = 0;
+     `re_nsub' to the number of subexpressions in PATTERN.
+  preg->no_sub = !!(cflags & REG_NOSUB);
+  boolean want_reg_info = !preg->no_sub && nmatch > 0;
+#if flag_stdlib==0
+#include <stdlib.h>
+#define flag_stdlib 1
+tstbit(b, c)
+     int b;
+  return c[b / INTBITS] & 1 << b % INTBITS;
+setbit(b, c)
+     int b;
+  c[b / INTBITS] |= 1 << b % INTBITS;
+clrbit(b, c)
+     int b;
+  c[b / INTBITS] &= ~(1 << b % INTBITS);
+	case 'b':
+   (Take "(ab|a)b"--please.)
+		(sub)sequence	(sub)sequence	length and	
+	grep '(ab|a)b'		->	grep 'ab'
+	grep 'ab*'		->	grep 'a'
+	grep 'a*b'		->	grep 'b'
+   (something like 'ab*' is probably unlikely; something like is
+#if flag_stdlib==0 
+#include <stdlib.h>
+#define flag_stdlib 1
+hasevery(a, b)
+     register struct tree *b;
+  if (!b)
+  if (!hasevery(a, b->llink))
+  if (!hasevery(a, b->rlink))
+  while (a && b->label != a->label)
+    if (b->label < a->label)
+   Define them to simply use the corresponding macros to do the job.  */
+#if flag_stdlib==0
+#include <stdlib.h>
+#define flag_stdlib 1
+	     (b) Several alternatives in the pattern might be valid at a given

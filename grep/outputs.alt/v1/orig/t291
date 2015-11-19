@@ -1,0 +1,4 @@
+../inputs/grep1.dat:	case '?':
+../inputs/grep1.dat:        case '?':
+../inputs/grep1.dat:            case '?':
+../inputs/grep1.dat:	case '?':

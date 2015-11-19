@@ -1,0 +1,6 @@
+../inputs/grep1.dat:if (out)
+../inputs/grep1.dat:if (gout)
+../inputs/grep1.dat:if (gsth)
+../inputs/grep1.dat:if out
+../inputs/grep1.dat:if gout
+../inputs/grep1.dat:if g

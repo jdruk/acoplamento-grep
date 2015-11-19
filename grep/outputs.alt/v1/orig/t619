@@ -1,0 +1,35 @@
+  keycc = 0;
+  keyfound = 0;
+  count_matches = 0;
+  no_filenames = 0;
+  list_files = 0;
+  suppress_errors = 0;
+  matcher = NULL;
+
+  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+	 != EOF)
+    switch (opt)
+      {
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+--
+{
+  int c;
+  int digit_optind = 0;
+
+  while (1)
+    {
+      int this_option_optind = optind ? optind : 1;
+
+      c = getopt (argc, argv, "abc:d:0123456789");
+      if (c == EOF)
+	break;
+
+      switch (c)
+	{
+	case '0':
+	case '1':
+	case '2':

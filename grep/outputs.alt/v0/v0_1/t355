@@ -1,0 +1,37 @@
+../inputs/grep1.dat:static int errseen;
+../inputs/grep1.dat:static int bufdesc;		/* File descriptor. */
+../inputs/grep1.dat:static int bufmapped;		/* True for ordinary files. */
+../inputs/grep1.dat:  static int initialized;
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:  static int pagesize;
+../inputs/grep1.dat:static int out_quiet;		/* Suppress all normal output. */
+../inputs/grep1.dat:static int out_invert;		/* Print nonmatching stuff. */
+../inputs/grep1.dat:static int out_file;		/* Print filenames. */
+../inputs/grep1.dat:static int out_line;		/* Print line numbers. */
+../inputs/grep1.dat:static int out_byte;		/* Print byte offsets. */
+../inputs/grep1.dat:static int out_before;		/* Lines of leading context. */
+../inputs/grep1.dat:static int out_after;		/* Lines of trailing context. */
+../inputs/grep1.dat:static int pending;		/* Pending lines of output. */
+../inputs/grep1.dat:  static int used;		/* avoid printing "--" before any output */
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int first_nonopt;
+../inputs/grep1.dat:static int last_nonopt;
+../inputs/grep1.dat:   static int done = 0;
+../inputs/grep1.dat:static int debug = 0;
+../inputs/grep1.dat:static int bcmp_translate ();
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int syntax_bits, syntax_bits_set;
+../inputs/grep1.dat:static int case_fold;
+../inputs/grep1.dat:static int laststart;		/* True if we're separated from beginning or (, |
+../inputs/grep1.dat:static int parens;		/* Count of outstanding left parens. */
+../inputs/grep1.dat:static int minrep, maxrep;	/* Repeat counts for {m,n}. */
+../inputs/grep1.dat:#define FUNC(F, P) static int F(c) int c; { return P(c); }
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int
+../inputs/grep1.dat:static int lastexact;

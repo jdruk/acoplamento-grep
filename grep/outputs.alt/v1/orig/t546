@@ -1,0 +1,76 @@
+../inputs/grep0.dat:10:include
+../inputs/grep1.dat:35:#include <errno.h>
+../inputs/grep1.dat:36:#include <stdio.h>
+../inputs/grep1.dat:43:#include <stdlib.h>
+../inputs/grep1.dat:46:#include <sys/types.h>
+../inputs/grep1.dat:53:#include <string.h>
+../inputs/grep1.dat:56:#include <memory.h>
+../inputs/grep1.dat:60:#include <strings.h>
+../inputs/grep1.dat:72:#include <sys/types.h>
+../inputs/grep1.dat:75:#include <fcntl.h>
+../inputs/grep1.dat:76:#include <unistd.h>
+../inputs/grep1.dat:82:#include "getpagesize.h"
+../inputs/grep1.dat:83:#include "grep.h"
+../inputs/grep1.dat:215:#include <sys/types.h>
+../inputs/grep1.dat:218:#include <sys/stat.h>
+../inputs/grep1.dat:219:#include <sys/mman.h>
+../inputs/grep1.dat:882:#include "config.h"
+../inputs/grep1.dat:890:#include <alloca.h>
+../inputs/grep1.dat:908:/*#include <stdio.h> */
+../inputs/grep1.dat:912:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:921:/* This needs to come after some library #include
+../inputs/grep1.dat:925:/* Don't include stdlib.h for non-GNU C libraries because some of them
+../inputs/grep1.dat:928:#include <stdlib.h>
+../inputs/grep1.dat:954:#include "getopt.h"
+../inputs/grep1.dat:1039:#include <string.h>
+../inputs/grep1.dat:1620:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+../inputs/grep1.dat:1622:#include <sys/types.h>
+../inputs/grep1.dat:1628:#include "config.h"
+../inputs/grep1.dat:1637:#include "lisp.h"
+../inputs/grep1.dat:1638:#include "buffer.h"
+../inputs/grep1.dat:1639:#include "syntax.h"
+../inputs/grep1.dat:1650:#include <string.h>
+../inputs/grep1.dat:1664:#include <strings.h>
+../inputs/grep1.dat:1671:#include <stdlib.h>
+../inputs/grep1.dat:1731:#include "regex.h"
+../inputs/grep1.dat:1734:#include <ctype.h>
+../inputs/grep1.dat:1815:#include <alloca.h>
+../inputs/grep1.dat:1974:           subsequent two-byte number.  The address *includes* the two
+../inputs/grep1.dat:2084:/*#include <stdio.h>*/
+../inputs/grep1.dat:2087:#include <assert.h>
+../inputs/grep1.dat:4076:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+../inputs/grep1.dat:4850:     return, for use in backreferences.  The number here includes
+../inputs/grep1.dat:4914:     there are groups, we include space for register 0 (the whole
+../inputs/grep1.dat:6549:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+../inputs/grep1.dat:6618:/*#include <assert.h> */
+../inputs/grep1.dat:6619:/*#include <ctype.h> */
+../inputs/grep1.dat:6620:/*#include <stdio.h> */
+../inputs/grep1.dat:6624:#include <stdlib.h>
+../inputs/grep1.dat:6629:#include <sys/types.h>
+../inputs/grep1.dat:6638:#include <string.h>
+../inputs/grep1.dat:6645:#include <strings.h>
+../inputs/grep1.dat:6693:#include "dfa.h"
+../inputs/grep1.dat:6694:/*#include "regex.h"*/
+../inputs/grep1.dat:7485:   length of the string, so s can include NUL characters.  D is a pointer to
+../inputs/grep1.dat:8041:   If we are building a searching matcher, we include the positions of state
+../inputs/grep1.dat:9180:#include <limits.h>
+../inputs/grep1.dat:9183:#include <stdlib.h>
+../inputs/grep1.dat:9190:#include <stddef.h>
+../inputs/grep1.dat:9193:#include <sys/types.h>
+../inputs/grep1.dat:9203:#include <string.h>
+../inputs/grep1.dat:9208:#include <memory.h>
+../inputs/grep1.dat:9225:#include "kwset.h"
+../inputs/grep1.dat:9226:#include "obstack.h"
+../inputs/grep1.dat:9984:/*#include "obstack.h"*/
+../inputs/grep1.dat:9987:/*#include <stdio.h>*/
+../inputs/grep1.dat:9991:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:10440:/*#include <ctype.h>*/
+../inputs/grep1.dat:10445:#include <limits.h>
+../inputs/grep1.dat:10449:#include <stdlib.h>
+../inputs/grep1.dat:10455:#include <sys/types.h>
+../inputs/grep1.dat:10463:#include <string.h>
+../inputs/grep1.dat:10468:#include <memory.h>
+../inputs/grep1.dat:10495:/*#include "grep.h"*/
+../inputs/grep1.dat:10496:/*#include "dfa.h"*/
+../inputs/grep1.dat:10497:/*#include "kwset.h"*/
+../inputs/grep1.dat:10498:/*#include "regex.h"*/

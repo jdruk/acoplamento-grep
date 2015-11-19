@@ -1,0 +1,39 @@
+../inputs/grep1.dat:regcomp (preg, pattern, cflags)
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:  preg->buffer = 0;
+../inputs/grep1.dat:  preg->allocated = 0;
+../inputs/grep1.dat:  preg->used = 0;
+../inputs/grep1.dat:  preg->fastmap = 0;
+../inputs/grep1.dat:      preg->translate = (char *) malloc (CHAR_SET_SIZE);
+../inputs/grep1.dat:      if (preg->translate == NULL)
+../inputs/grep1.dat:        preg->translate[i] = ISUPPER (i) ? tolower (i) : i;
+../inputs/grep1.dat:    preg->translate = NULL;
+../inputs/grep1.dat:      preg->newline_anchor = 1;
+../inputs/grep1.dat:    preg->newline_anchor = 0;
+../inputs/grep1.dat:  preg->no_sub = !!(cflags & REG_NOSUB);
+../inputs/grep1.dat:  ret = regex_compile (pattern, strlen (pattern), syntax, preg);
+../inputs/grep1.dat:regexec (preg, string, nmatch, pmatch, eflags)
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:  regex_t private_preg;
+../inputs/grep1.dat:  boolean want_reg_info = !preg->no_sub && nmatch > 0;
+../inputs/grep1.dat:  private_preg = *preg;
+../inputs/grep1.dat:  private_preg.not_bol = !!(eflags & REG_NOTBOL);
+../inputs/grep1.dat:  private_preg.not_eol = !!(eflags & REG_NOTEOL);
+../inputs/grep1.dat:  private_preg.regs_allocated = REGS_FIXED;
+../inputs/grep1.dat:  ret = re_search (&private_preg, string, len,
+../inputs/grep1.dat:regerror (errcode, preg, errbuf, errbuf_size)
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:regfree (preg)
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:  if (preg->buffer != NULL)
+../inputs/grep1.dat:    free (preg->buffer);
+../inputs/grep1.dat:  preg->buffer = NULL;
+../inputs/grep1.dat:  preg->allocated = 0;
+../inputs/grep1.dat:  preg->used = 0;
+../inputs/grep1.dat:  if (preg->fastmap != NULL)
+../inputs/grep1.dat:    free (preg->fastmap);
+../inputs/grep1.dat:  preg->fastmap = NULL;
+../inputs/grep1.dat:  preg->fastmap_accurate = 0;
+../inputs/grep1.dat:  if (preg->translate != NULL)
+../inputs/grep1.dat:    free (preg->translate);
+../inputs/grep1.dat:  preg->translate = NULL;

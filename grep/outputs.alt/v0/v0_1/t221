@@ -1,0 +1,12 @@
+../inputs/grep1.dat:  if (out_file)
+../inputs/grep1.dat:  if (out_line)
+../inputs/grep1.dat:  if (out_byte)
+../inputs/grep1.dat:  if (out_invert && p < lim)
+../inputs/grep1.dat:      if (out_line)
+../inputs/grep1.dat:	if (out_after < 0)
+../inputs/grep1.dat:	if (out_before < 0)
+../inputs/grep1.dat:		if (out_file)
+../inputs/grep1.dat:if (out)
+../inputs/grep1.dat:if g
+../inputs/grep1.dat:s  if (out)
+../inputs/grep1.dat:  argue if g

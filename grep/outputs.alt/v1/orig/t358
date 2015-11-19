@@ -1,0 +1,16 @@
+../inputs/grep1.dat:            while ((int) b[-1] > 0 && b[b[-1] - 1] == 0) 
+../inputs/grep1.dat:		mcnt = dend - d;
+../inputs/grep1.dat:	    for (j = nlastpos[-1] - 1; j >= 0; --j)
+../inputs/grep1.dat:      for (j = nfirstpos[-1] - 1; j >= 0; --j)
+../inputs/grep1.dat:      for (j = nlastpos[-1] - 1; j >= 0; --j)
+../inputs/grep1.dat:	copyset(d->charclasses[d->tokens[pos.index] - CSET], matches);
+../inputs/grep1.dat:      beg = end - 1;
+../inputs/grep1.dat:      beg = end - 1;
+../inputs/grep1.dat:      if ((start = re_search(&regex, beg, end - beg, 0, end - beg, &regs)) >= 0)
+../inputs/grep1.dat:	  len = regs.end[0] - start;
+../inputs/grep1.dat:	  if (!match_lines && !match_words || match_lines && len == end - beg)
+../inputs/grep1.dat:		    && (len == end - beg || !WCHAR(beg[start + len])))
+../inputs/grep1.dat:		    if (start == end - beg)
+../inputs/grep1.dat:		    start = re_search(&regex, beg, end - beg,
+../inputs/grep1.dat:				      start, end - beg - start, &regs);
+../inputs/grep1.dat:		    len = regs.end[0] - start;

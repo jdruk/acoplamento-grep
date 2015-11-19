@@ -1,0 +1,76 @@
+../inputs/grep0.dat:276:include
+../inputs/grep1.dat:1174:#include <errno.h>
+../inputs/grep1.dat:1193:#include <stdio.h>
+../inputs/grep1.dat:1273:#include <stdlib.h>
+../inputs/grep1.dat:1321:#include <sys/types.h>
+../inputs/grep1.dat:1483:#include <string.h>
+../inputs/grep1.dat:1546:#include <memory.h>
+../inputs/grep1.dat:1601:#include <strings.h>
+../inputs/grep1.dat:1793:#include <sys/types.h>
+../inputs/grep1.dat:1847:#include <fcntl.h>
+../inputs/grep1.dat:1866:#include <unistd.h>
+../inputs/grep1.dat:1955:#include "getpagesize.h"
+../inputs/grep1.dat:1980:#include "grep.h"
+../inputs/grep1.dat:4544:#include <sys/types.h>
+../inputs/grep1.dat:4598:#include <sys/stat.h>
+../inputs/grep1.dat:4620:#include <sys/mman.h>
+../inputs/grep1.dat:19186:#include "config.h"
+../inputs/grep1.dat:19434:#include <alloca.h>
+../inputs/grep1.dat:19754:/*#include <stdio.h> */
+../inputs/grep1.dat:19929:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:20345:/* This needs to come after some library #include
+../inputs/grep1.dat:20471:/* Don't include stdlib.h for non-GNU C libraries because some of them
+../inputs/grep1.dat:20614:#include <stdlib.h>
+../inputs/grep1.dat:21621:#include "getopt.h"
+../inputs/grep1.dat:24773:#include <string.h>
+../inputs/grep1.dat:40127:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+../inputs/grep1.dat:40224:#include <sys/types.h>
+../inputs/grep1.dat:40319:#include "config.h"
+../inputs/grep1.dat:40484:#include "lisp.h"
+../inputs/grep1.dat:40502:#include "buffer.h"
+../inputs/grep1.dat:40522:#include "syntax.h"
+../inputs/grep1.dat:40814:#include <string.h>
+../inputs/grep1.dat:41087:#include <strings.h>
+../inputs/grep1.dat:41186:#include <stdlib.h>
+../inputs/grep1.dat:42225:#include "regex.h"
+../inputs/grep1.dat:42301:#include <ctype.h>
+../inputs/grep1.dat:45108:#include <alloca.h>
+../inputs/grep1.dat:50944:           subsequent two-byte number.  The address *includes* the two
+../inputs/grep1.dat:54142:/*#include <stdio.h>*/
+../inputs/grep1.dat:54239:#include <assert.h>
+../inputs/grep1.dat:118979:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+../inputs/grep1.dat:143613:     return, for use in backreferences.  The number here includes
+../inputs/grep1.dat:146588:     there are groups, we include space for register 0 (the whole
+../inputs/grep1.dat:201516:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+../inputs/grep1.dat:203269:/*#include <assert.h> */
+../inputs/grep1.dat:203294:/*#include <ctype.h> */
+../inputs/grep1.dat:203318:/*#include <stdio.h> */
+../inputs/grep1.dat:203382:#include <stdlib.h>
+../inputs/grep1.dat:203459:#include <sys/types.h>
+../inputs/grep1.dat:203658:#include <string.h>
+../inputs/grep1.dat:203767:#include <strings.h>
+../inputs/grep1.dat:204934:#include "dfa.h"
+../inputs/grep1.dat:204951:/*#include "regex.h"*/
+../inputs/grep1.dat:221399:   length of the string, so s can include NUL characters.  D is a pointer to
+../inputs/grep1.dat:238203:   If we are building a searching matcher, we include the positions of state
+../inputs/grep1.dat:268050:#include <limits.h>
+../inputs/grep1.dat:268112:#include <stdlib.h>
+../inputs/grep1.dat:268232:#include <stddef.h>
+../inputs/grep1.dat:268279:#include <sys/types.h>
+../inputs/grep1.dat:268429:#include <string.h>
+../inputs/grep1.dat:268518:#include <memory.h>
+../inputs/grep1.dat:268730:#include "kwset.h"
+../inputs/grep1.dat:268749:#include "obstack.h"
+../inputs/grep1.dat:288506:/*#include "obstack.h"*/
+../inputs/grep1.dat:288584:/*#include <stdio.h>*/
+../inputs/grep1.dat:288758:   Library, but also included in many other GNU distributions.  Compiling
+../inputs/grep1.dat:302541:/*#include <ctype.h>*/
+../inputs/grep1.dat:302622:#include <limits.h>
+../inputs/grep1.dat:302690:#include <stdlib.h>
+../inputs/grep1.dat:302788:#include <sys/types.h>
+../inputs/grep1.dat:302911:#include <string.h>
+../inputs/grep1.dat:303000:#include <memory.h>
+../inputs/grep1.dat:303496:/*#include "grep.h"*/
+../inputs/grep1.dat:303518:/*#include "dfa.h"*/
+../inputs/grep1.dat:303539:/*#include "kwset.h"*/
+../inputs/grep1.dat:303562:/*#include "regex.h"*/

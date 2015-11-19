@@ -1,0 +1,4 @@
+../inputs/grep1.dat:if out
+../inputs/grep1.dat:if g
+../inputs/grep1.dat:  if out
+../inputs/grep1.dat:  argue if g

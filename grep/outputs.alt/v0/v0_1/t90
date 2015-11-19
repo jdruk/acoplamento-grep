@@ -1,0 +1,163 @@
+../inputs/grep1.dat:  unsigned char *p;
+../inputs/grep1.dat:    if (*p == c)
+../inputs/grep1.dat:static char *prog;
+../inputs/grep1.dat:     char *ptr;
+../inputs/grep1.dat:  char *bp, *p, *nl;
+../inputs/grep1.dat:  register char *p, *b;
+../inputs/grep1.dat:      const struct option *p;
+../inputs/grep1.dat:      const struct option *pfound = NULL;
+../inputs/grep1.dat:  unsigned char *p = start;
+../inputs/grep1.dat:  unsigned char *pend = end;
+../inputs/grep1.dat:      switch ((re_opcode_t) *p++)
+../inputs/grep1.dat:	  mcnt = *p++;
+../inputs/grep1.dat:	      printchar (*p++);
+../inputs/grep1.dat:          mcnt = *p++;
+../inputs/grep1.dat:          printf ("/start_memory/%d/%d", mcnt, *p++);
+../inputs/grep1.dat:          mcnt = *p++;
+../inputs/grep1.dat:	  printf ("/stop_memory/%d/%d", mcnt, *p++);
+../inputs/grep1.dat:	  printf ("/duplicate/%d", *p++);
+../inputs/grep1.dat:            assert (p + *p < pend);
+../inputs/grep1.dat:	      if (c / 8 < *p
+../inputs/grep1.dat:	    p += 1 + *p;
+../inputs/grep1.dat:	  mcnt = *p++;
+../inputs/grep1.dat:	  mcnt = *p++;
+../inputs/grep1.dat:    c = (unsigned char) *p++;						\
+../inputs/grep1.dat:    c = (unsigned char) *p++; 						\
+../inputs/grep1.dat:     const char *pattern;
+../inputs/grep1.dat:  const char *p1;
+../inputs/grep1.dat:  const char *p = pattern;
+../inputs/grep1.dat:  const char *pend = pattern + size;
+../inputs/grep1.dat:  unsigned char *pending_exact = 0;
+../inputs/grep1.dat:                    && p < pend && TRANSLATE (*p) == TRANSLATE ('\n')
+../inputs/grep1.dat:            /* We test `*p == '^' twice, instead of using an if
+../inputs/grep1.dat:            BUF_PUSH (*p == '^' ? charset_not : charset); 
+../inputs/grep1.dat:            if (*p == '^')
+../inputs/grep1.dat:                if (had_char_class && c == '-' && *p != ']')
+../inputs/grep1.dat:                    && *p != ']')
+../inputs/grep1.dat:                else if (syntax & RE_CHAR_CLASSES && c == '[' && *p == ':')
+../inputs/grep1.dat:                    if (c == ':' && *p == ']')
+../inputs/grep1.dat:              || pending_exact + *pending_exact + 1 != b
+../inputs/grep1.dat:	      || *pending_exact == (1 << BYTEWIDTH) - 1
+../inputs/grep1.dat:              || *p == '*' || *p == '^'
+../inputs/grep1.dat:		  ? *p == '\\' && (p[1] == '+' || p[1] == '?')
+../inputs/grep1.dat:		  : (*p == '+' || *p == '?'))
+../inputs/grep1.dat:		      ? *p == '{'
+../inputs/grep1.dat:          (*pending_exact)++;
+../inputs/grep1.dat:  register unsigned char *pfrom = end;
+../inputs/grep1.dat:  register unsigned char *pto = end + 3;
+../inputs/grep1.dat:  register unsigned char *pfrom = end;
+../inputs/grep1.dat:  register unsigned char *pto = end + 5;
+../inputs/grep1.dat:    const char *pattern, *p;
+../inputs/grep1.dat:  const char *prev = p - 2;
+../inputs/grep1.dat:       (*prev == '(' && (syntax & RE_NO_BK_PARENS || prev_prev_backslash))
+../inputs/grep1.dat:    || (*prev == '|' && (syntax & RE_NO_BK_VBAR || prev_prev_backslash));
+../inputs/grep1.dat:    const char *p, *pend;
+../inputs/grep1.dat:    const char **p_ptr, *pend;
+../inputs/grep1.dat:  const char *p = *p_ptr;
+../inputs/grep1.dat:  (*p_ptr)++;
+../inputs/grep1.dat:  unsigned char *pattern = bufp->buffer;
+../inputs/grep1.dat:  const unsigned char *p = pattern;
+../inputs/grep1.dat:  register unsigned char *pend = pattern + size;
+../inputs/grep1.dat:      switch ((int) ((re_opcode_t) *p++))
+../inputs/grep1.dat:      switch ((re_opcode_t) *p++)
+../inputs/grep1.dat:          for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+../inputs/grep1.dat:	  for (j = *p * BYTEWIDTH; j < (1 << BYTEWIDTH); j++)
+../inputs/grep1.dat:	  for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+../inputs/grep1.dat:	  k = *p++;
+../inputs/grep1.dat:	  k = *p++;
+../inputs/grep1.dat:          if ((re_opcode_t) *p != on_failure_jump
+../inputs/grep1.dat:	      && (re_opcode_t) *p != succeed_n)
+../inputs/grep1.dat:        } /* switch *p++ */
+../inputs/grep1.dat:  unsigned char *p1;
+../inputs/grep1.dat:  unsigned char *p = bufp->buffer;
+../inputs/grep1.dat:  register unsigned char *pend = p + bufp->used;
+../inputs/grep1.dat:      switch ((int) ((re_opcode_t) *p++))
+../inputs/grep1.dat:      switch ((re_opcode_t) *p++)
+../inputs/grep1.dat:	  mcnt = *p++;
+../inputs/grep1.dat:		  if (translate[(unsigned char) *d++] != (char) *p++)
+../inputs/grep1.dat:		  if (*d++ != (char) *p++) goto fail;
+../inputs/grep1.dat:	    if (c < (unsigned) (*p * BYTEWIDTH)
+../inputs/grep1.dat:	    p += 1 + *p;
+../inputs/grep1.dat:	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+../inputs/grep1.dat:          if (REG_MATCH_NULL_STRING_P (reg_info[*p]) == MATCH_NULL_UNSET_VALUE)
+../inputs/grep1.dat:            REG_MATCH_NULL_STRING_P (reg_info[*p]) 
+../inputs/grep1.dat:          old_regstart[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+../inputs/grep1.dat:                             ? REG_UNSET (regstart[*p]) ? d : regstart[*p]
+../inputs/grep1.dat:                             : regstart[*p];
+../inputs/grep1.dat:			 POINTER_TO_OFFSET (old_regstart[*p]));
+../inputs/grep1.dat:          regstart[*p] = d;
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+../inputs/grep1.dat:          IS_ACTIVE (reg_info[*p]) = 1;
+../inputs/grep1.dat:          MATCHED_SOMETHING (reg_info[*p]) = 0;
+../inputs/grep1.dat:          highest_active_reg = *p;
+../inputs/grep1.dat:            lowest_active_reg = *p;
+../inputs/grep1.dat:	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+../inputs/grep1.dat:          old_regend[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+../inputs/grep1.dat:                           ? REG_UNSET (regend[*p]) ? d : regend[*p]
+../inputs/grep1.dat:			   : regend[*p];
+../inputs/grep1.dat:			 POINTER_TO_OFFSET (old_regend[*p]));
+../inputs/grep1.dat:          regend[*p] = d;
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+../inputs/grep1.dat:          IS_ACTIVE (reg_info[*p]) = 0;
+../inputs/grep1.dat:              unsigned char r = *p - 1;
+../inputs/grep1.dat:          if ((!MATCHED_SOMETHING (reg_info[*p])
+../inputs/grep1.dat:              switch ((re_opcode_t) *p1++)
+../inputs/grep1.dat:              if (mcnt < 0 && (re_opcode_t) *p1 == on_failure_jump
+../inputs/grep1.dat:                  && (re_opcode_t) p1[3] == start_memory && p1[4] == *p)
+../inputs/grep1.dat:                  if (EVER_MATCHED_SOMETHING (reg_info[*p]))
+../inputs/grep1.dat:                      EVER_MATCHED_SOMETHING (reg_info[*p]) = 0;
+../inputs/grep1.dat:                      for (r = *p; r < *p + *(p + 1); r++)
+../inputs/grep1.dat:	    int regno = *p++;   /* Get which register to match against.  */
+../inputs/grep1.dat:          while (p1 < pend && (re_opcode_t) *p1 == no_op)
+../inputs/grep1.dat:          if (p1 < pend && (re_opcode_t) *p1 == start_memory)
+../inputs/grep1.dat:	    register unsigned char *p2 = p;
+../inputs/grep1.dat:		   && ((re_opcode_t) *p2 == stop_memory
+../inputs/grep1.dat:		       || (re_opcode_t) *p2 == start_memory))
+../inputs/grep1.dat:            else if ((re_opcode_t) *p2 == exactn
+../inputs/grep1.dat:		     || (bufp->newline_anchor && (re_opcode_t) *p2 == endline))
+../inputs/grep1.dat:                  = *p2 == (unsigned char) endline ? '\n' : p2[2];
+../inputs/grep1.dat:            unsigned char *pdummy;
+../inputs/grep1.dat:	  mcnt = *p++;
+../inputs/grep1.dat:	  mcnt = *p++;
+../inputs/grep1.dat:          /* If we failed to the end of the pattern, don't examine *p.  */
+../inputs/grep1.dat:              switch ((re_opcode_t) *p)
+../inputs/grep1.dat:                  if ((is_a_jump_n && (re_opcode_t) *p1 == succeed_n)
+../inputs/grep1.dat:                          && (re_opcode_t) *p1 == on_failure_jump))
+../inputs/grep1.dat:    unsigned char **p, *end;
+../inputs/grep1.dat:  unsigned char *p1 = *p + 2;
+../inputs/grep1.dat:      switch ((re_opcode_t) *p1)
+../inputs/grep1.dat:                  if ((re_opcode_t) *p1 != on_failure_jump)
+../inputs/grep1.dat:	  assert (p1[1] == **p);
+../inputs/grep1.dat:          *p = p1 + 2;
+../inputs/grep1.dat:    unsigned char *p, *end;
+../inputs/grep1.dat:  unsigned char *p1 = p;
+../inputs/grep1.dat:      switch ((re_opcode_t) *p1)
+../inputs/grep1.dat:    unsigned char **p, *end;
+../inputs/grep1.dat:  unsigned char *p1 = *p;
+../inputs/grep1.dat:  switch ((re_opcode_t) *p1++)
+../inputs/grep1.dat:      reg_no = *p1;
+../inputs/grep1.dat:      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+../inputs/grep1.dat:  *p = p1;
+../inputs/grep1.dat:  register unsigned char *p1 = s1, *p2 = s2;
+../inputs/grep1.dat:      if (translate[*p1++] != translate[*p2++]) return 1;
+../inputs/grep1.dat:     const char *pattern;
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:    const char *pattern; 
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:  private_preg = *preg;
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:typedef void *ptr_t;
+../inputs/grep1.dat:typedef char *ptr_t;
+../inputs/grep1.dat:  int (*pred)();
+../inputs/grep1.dat:			if ((*prednames[c1].pred)(c2))
+../inputs/grep1.dat:  position *pos;
+../inputs/grep1.dat:  register unsigned char *p;	/* Current input character. */
+../inputs/grep1.dat:	    s1 = t[*p++];
+../inputs/grep1.dat:	    s = t[*p++];
+../inputs/grep1.dat:	  if (d->success[s] & sbit[*p])
+../inputs/grep1.dat:	  s = d->fails[s][*p++];
+../inputs/grep1.dat:  struct trie *parent;		/* Parent of this node. */
+../inputs/grep1.dat:     char *pattern;
+../inputs/grep1.dat:     char *pattern;
+../inputs/grep1.dat:     char *pattern;

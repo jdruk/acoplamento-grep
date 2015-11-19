@@ -1,0 +1,317 @@
+   This program is distributed in the hope that it will be useful,
+/* I added a series define from makefile here in order to run cfe */
+/* Define flags declared in grep.h. */
+	 discontiguous from the last output in the file. */
+   If we find it, install it in compile and execute, and return 1.  */
+	   Inspired by the same option in Hume's gre. */
+   This program is distributed in the hope that it will be useful,
+/* NOTE!!!  AIX requires this to be the first thing in the file.
+/* This tells Alpha OSF/1 not to define a getopt prototype in <stdio.h>.  */
+   Library, but also included in many other GNU distributions.  Compiling
+   and linking in this code is a waste when using the GNU C library
+   it is simpler to just do this in the source for each such file.  */
+   GNU application programs can use a third alternative mode in which
+/* Index in ARGV of the next element to be scanned.
+/* The next char to be scanned in the option-element
+   in which the last option character we returned was found.
+   This must be initialized on some systems to avoid linking in the
+   to be given in any order, even with programs that were not written to
+   to expect options and other ARGV-elements in any order and that care about
+   in GCC.  */
+   been skipped.  `first_nonopt' is the index in ARGV of the first of them;
+   the new indices of the non-options in ARGV after they are moved.  */
+  /* Interchange the two blocks of data in ARGV.  */
+   given in OPTSTRING.
+   Then `optind' is the index in ARGV of the first ARGV-element
+   If an option character is seen that is not listed in OPTSTRING,
+   If a char in OPTSTRING is followed by a colon, that means it wants an arg,
+   so the following text in the same ARGV-element, or the text of the following
+   ARGV-element, is returned in `optarg'.  Two colons mean an option that
+   wants an optional arg; if there is text in the current ARGV-element,
+   it is returned in `optarg', otherwise `optarg' is set to zero.
+   argument, it follows the option name in the same ARGV-element, separated
+   from the option name by a `=', or else the in next ARGV-element.
+   But we pretend they're const in the prototype to be compatible
+   LONGIND returns the index in LONGOPT of the long-named option found.
+/* Compile with -DTEST to make an executable for use in testing
+	    printf ("digits occur in two different argv-elements.\n");
+   This program is distributed in the hope that it will be useful,
+/* AIX requires this to be the first thing in the file. */
+   that make sense only in Emacs. */
+   commands in re_match_2.  */
+/* How many characters in the character set.  */
+/* As in Harbison and Steele.  */
+   use `alloca' instead of `malloc'.  This is because using malloc in
+   re_search* or re_match* could cause memory leaks when C-g is used in
+   function it is called in.  */
+/* These are the command codes that appear in compiled regular
+   arguments.  Zero bytes may appear in the compiled regular expression.
+   The value of `exactn' is needed in search.c (search_buffer) in Emacs.
+           for a bitmap saying which chars are in.  Bits in each byte
+           are ordered low-bit-first.  A character is in the set if its
+           bit is 1.  A character too large to have a bit in the map is
+           automatically not in the set.  */
+        /* Start remembering the text that is matched, for storing in a
+           register.  Followed by one byte with the register number, in
+           start_memory only because we need it in the on_failure_jump
+        /* Stop remembering the text that is matched and store it in a
+           number, in the range 0 to one less than `re_nsub' in the
+           in case of failure.  */
+/* Store NUMBER in two contiguous bytes starting at DESTINATION.  */
+/* Put into DESTINATION a number stored in two contiguous bytes starting
+   main program in `iregex.c', you can enter patterns and strings
+   interactively.  And if linked with the main program in `main.c' and
+/* Print the fastmap in human-readable form.  */
+/* Print a compiled pattern string in human-readable form, starting at
+   defined in regex.h.  We return the old syntax.  */
+   in regex.h.  Obviously the order here has to be same as there.  */
+/* Fetch the next character in the uncompiled pattern---translating it 
+   if necessary.  Also cast from a signed character in the constant
+   as an array index (in, e.g., `translate').  */
+/* Fetch the next character in the uncompiled pattern, with no
+/* Go backwards one character in the pattern.  */
+/* If the buffer isn't allocated when it comes in, use this.  */
+/* Make sure we have at least N more bytes of space in buffer.  */
+   correct places in the new one.  If extending the buffer results in it
+   things about is what fits in that byte.  */
+/* Set the bit for character C in a list.  */
+/* Get the next unsigned number in the uncompiled pattern.  */
+   Returns one of error codes defined in `regex.h', or zero for success.
+   fields are set in BUFP on entry.
+   If it succeeds, results are put in BUFP (if it returns an error, the
+     `re_nsub' is the number of subexpressions in PATTERN;
+  /* A random tempory spot in PATTERN.  */
+  /* Points to the current (ending) position in the pattern.  */
+  /* How to translate the characters in the pattern.  */
+  /* Place in the uncompiled pattern (i.e., the {) to
+     number is put in the stop_memory as the start_memory.  */
+              { /* More than one repetition is allowed, so put in at the
+                   jump we're going to put in below (which jumps from
+                   But if we are at the `*' in the exact sequence `.*\n',
+               opcode, the length count, and the bitset; 34 bytes in all.  */
+            /* Remember the first position in the bracket expression.  */
+            /* Push the number of bytes in the bitmap.  */
+            /* Read in characters and ranges, setting map bits.  */
+                 represent in the compiled pattern.  */
+                     `push_dummy_failure' in `re_match_2'.  */
+                     to `fixup_alt_jump', in the `handle_alt' case below.  */
+                   as in `(ab)c(de)' -- the second group is #2.  */
+                 jump (put in below, which in turn will jump to the next
+                 three-byte space after `a'.  We'll put in the jump, set
+                 bytes which we'll fill in when we get to after `c'.  */
+                 to be filled in later either by next alternative or
+        /* Expects the character in `c'.  */
+/* P points to just after a ^ in PATTERN.  Return true if that ^ comes
+/* Returns true if REGNUM is in one of COMPILE_STACK's elements and 
+/* Read the ending character of a range (in a bracket expression) from the
+   starting character is in `P[-2]'.  (`P[-1]' is the character `-'.)
+   ending characters (inclusive) in the compiled pattern B.
+     appropriate translation is done in the bit-setting loop below.  */
+     saved NULL, thus retaining our current position in the string.  */	\
+/* re_compile_fastmap computes a ``fastmap'' for the compiled pattern in
+   We set the `fastmap', `fastmap_accurate', and `can_be_null' fields in
+/* Set REGS to hold NUM_REGS registers, storing them in STARTS and
+/* Using the compiled pattern in BUFP->buffer, first tries to match the
+   only at STARTPOS; in general, the last start tried is STARTPOS +
+   Do not consider matching one past the index STOP in the virtual
+   We return either the position in the strings at which the match was
+  /* If the search isn't to be a backwards one, don't waste time in a
+   inner groups (which is a bits list) are maintained in separate
+/* Macros for dealing with the split strings in re_match_2.  */
+   the first character in string2; and if before the beginning of
+   string2, look at the last character in string1.  */
+   we use only one byte in the pattern for the register number), we can
+/* re_match_2 matches the compiled pattern in BUFP against the
+   store offsets for the substring each group matched in REGS.  See the
+  /* Pointers into string1 and string2, just past the last characters in
+  /* Where we are in the data, and the end of the current string.  */
+  /* Where we are in the pattern, and the end of the pattern.  */
+  /* We use this to map every character in the string.  */
+     return, for use in backreferences.  The number here includes
+     regnum-th regstart pointer points to where in the pattern we began
+     restored because it will have been set to wherever in the string we
+     nested) subexpressions we are currently in. The matched_something
+     loop their register is in.  */
+  /* The following record the register info as found in the above
+     This happens as we backtrack through the failure points, which in
+     the end of the best match so far in a separate variable.  We
+     no groups in the pattern, as it takes a fair amount of time.  If
+     fails at this starting point in the input data.  */
+                     end_match_1' while the restored d is in string2.
+                     not consecutive in memory.  */
+		  /* These braces fend off a "empty body in an else-statement"
+              /* Convert the pointer data in `regstart' and `regend' to
+                 were in the pattern, set the extra elements to -1.  If
+           byte in the pattern defines n, and the n bytes after that
+            /* Cast to `unsigned' instead of `unsigned char' in case the
+           The arguments are the register number in the next byte, and the
+           number of groups inner to this one in the next.  The text
+           matched within the group is recorded (in the internal
+          /* Save the position in the string where we were the last time
+             we were at this open-group operator in case the group is
+             against `ab'; then we want to ignore where we are now in
+             the string in case this attempt to match fails.  */
+             this close-group operator in case the group is operated
+             against `aba'; then we want to ignore where we are now in
+             the string in case this attempt to match fails.  */
+                 `stop_memory'.  For example, in ((.)*) we save
+              /* If the next operation is a jump backwards in the pattern
+                 on_failure_jump's jump in the pattern, and d.  */
+            /* Where in input to try to start matching.  */
+               the place to stop matching are in the same string, then
+		/* If necessary, advance to next segment in register
+		/* If necessary, advance to next segment in data.  */
+		/* How many characters left in this segment to match.  */
+		/* Want how many consecutive characters we can match in
+           (unless `not_bol' is set in `bufp'), and, if
+           Because this is used only in specific cases, we don't need to
+           `anychar's code to do something besides goto fail in this
+           except the last ends with a jump that in effect jumps past
+             For example, in \(a*\)*\1, we need the preceding group,
+             and in \(\(a*\)b*\)\2, we need the inner group.  */
+             start_memory in case this on_failure_jump is happening as
+             the result of a completed succeed_n, as in \(a\)\{1,3\}b\1
+            /* Compare the beginning of the repeat with what in the
+               would have to backtrack because of (as in, e.g., `a*a')
+               This is not true in the case of alternatives: in
+               register from the stack, since lowest will == highest in
+           in `group_match_null_string_p' et al.  */
+           point in case we are followed by a `pop_failure_jump', because
+          /* If the next operation is not a jump backwards in the
+      /* Have to set this here in case we're checking a group which
+   compiles PATTERN (of length SIZE) and puts the result in BUFP.
+   are set in BUFP on entry.
+       REG_EXTENDED bit in CFLAGS is set; otherwise, to
+     `newline_anchor' to REG_NEWLINE being set in CFLAGS;
+     `re_nsub' to the number of subexpressions in PATTERN.
+  /* POSIX says a null character in the pattern terminates it, so we 
+     can use strlen here in compiling the pattern.  */
+/* regexec searches for a given pattern, specified by PREG, in the
+   If NMATCH is zero or REG_NOSUB was set in the cflags argument to
+  /* POSIX doesn't require that we do anything in this case, but why
+   This program is distributed in the hope that it will be useful,
+/* Find the index of charclass s in dfa->charclasses, or allocate a new charclass. */
+   to predicate functions that determine whether a given character is in
+			 which is left in c1, the lookahead character. */
+				   required of the real stack later on in
+   The parser builds a parse tree in postfix form in an array of tokens. */
+/* Return the number of tokens in the given subexpression. */
+/* Insert a position in a set.  Position sets are maintained in sorted
+   order according to index.  If position already exists in the set with
+   contains a symbol that matches the empty string in some context, replace
+   correspond to the character following a character matching the node in
+   that match the empty string in some context to be just normal characters.
+   Later, if we find that a special symbol is in a follow set, we will
+   * Every node in the firstpos of the argument of a STAR or PLUS node is in
+     the follow of every node in the lastpos.
+   * Every node in the firstpos of the second argument of a CAT node is in
+     the follow of every node in the lastpos of the first argument.
+   scheme; the number of elements in each set deeper in the stack can be
+	/* Every element in the firstpos of the argument is in the follow
+	   of every element in the lastpos. */
+	/* Every element in the firstpos of the second argument is in the
+	   follow of every element in the lastpos of the first argument. */
+	/* This position is in its own firstpos and lastpos. */
+   it in the appropriate slot of trans.
+   We divide the positions of s into groups (positions can appear in more
+   every position in the group matches (taking into account, if necessary,
+   new state.  For each character in the group's label, set the transition
+   0 in every state.
+   the intersection of L and C.  Insert the position in this group, set
+   If after comparing with every group there are characters remaining in C,
+   position in that group. */
+  charclass leftovers;		/* Stuff in the label that didn't match. */
+	 they fail in the current context. */
+	  /* If there are no characters left, there's no point in going on. */
+	  /* Put the position in the current group.  Note that there is no
+      /* If we are building a searching matcher, throw in the positions
+      /* Set the transitions for each character in the current label. */
+     largest state mentioned in the table. */
+  /* Keep the newline transition in a special place so we can use it as
+   Find the first occurrence of a string matching the regexp in the buffer,
+   its end.  We store a newline in *end to act as a sentinel, so end had
+   allow newlines to be in the matching string.  If count is non-
+   we store a 0 in *backref. */
+  if (case_fold)	/* dummy folding in service of dfamust() */
+   try to find a long sequence of characters that must appear in any line
+   in matches of r.e.'s represented by trees rooted at the nodes of the postfix
+	lists of sequences that must appear somewhere in the match ("in")
+   calculated "in" sequences as our answer.  The sequence we find is returned in
+   the length of the sequence is returned in d->mustn.
+   The sequences calculated for the various types of node (in pseudo ANSI c)
+	Type	left		right		is		in
+	PLUS	p->left		p->right	ZERO		p->in
+	CAT	(p->is==ZERO)?	(q->is==ZERO)?	(p->is!=ZERO &&	p->in plus
+		p->left :	q->right :	q->is!=ZERO) ?	q->in plus
+		leading		trailing	q->is have same	p->in and q->in
+   If there's anything else we recognize in the tree, all four sequences get set
+   to zero-length sequences.  If there's something we don't recognize in the tree,
+   Break ties in favor of infrequent letters (choosing 'zzz' in preference to
+   Are optimizable r.e.'s likely to be used in real-life situations
+  /* Is there already something in the list that's new (or longer)? */
+  char **in;
+  freelist(mp->in);
+      mp[i].in = (char **) malloc(sizeof *mp[i].in);
+      if (mp[i].in == NULL || mp[i].left == NULL ||
+      mp[i].in[0] = NULL;
+	    new = inboth(lmp->in, rmp->in);
+	    freelist(lmp->in);
+	    free((char *) lmp->in);
+	    lmp->in = new;
+	  for (i = 0; musts[0].in[i] != NULL; ++i)
+	    if (strlen(musts[0].in[i]) > strlen(result))
+	      result = musts[0].in[i];
+	    /* In.  Everything in left, plus everything in
+	    lmp->in = addlists(lmp->in, rmp->in);
+	    if (lmp->in == NULL)
+		lmp->in = enlist(lmp->in, tp,
+		if (lmp->in == NULL)
+	      mp->in = enlist(mp->in, mp->is, 1);
+	      if (mp->in == NULL)
+      fprintf(stderr, "\n  in:");
+      for (i = 0; mp->in[i]; ++i)
+	fprintf(stderr, " \"%s\"", mp->in[i]);
+      freelist(mp[i].in);
+      ifree((char *) mp[i].in);
+   This program is distributed in the hope that it will be useful,
+  char balance;			/* Difference in depths of subtrees. */
+  struct trie *next;		/* List of all trie nodes in level order. */
+  int words;			/* Number of words in the trie. */
+  int mind2;			/* Used in Boyer-Moore search for one string. */
+	 a link in the current trie node's tree. */
+	  /* Install the new tree node in its parent. */
+     index number of this word in the keyword set so far. */
+/* Enqueue the trie nodes referenced from the given tree in the
+  /* Find, in the chain of fails going back to the root, the first
+/* Return true if A has every label in B. */
+      /* Traverse the nodes of the trie in level order, simultaneously
+	  /* Enqueue the immediate descendents in the level order queue. */
+	  /* Update the shifts at each node in the current node's chain
+      /* Traverse the trie in level order again, fixing up all nodes whose
+   is non-NULL store in the referenced location the length of the
+   in the referenced location the index number of the particular
+This program is distributed in the hope that it will be useful,
+   Library, but also included in many other GNU distributions.  Compiling
+   and linking in this code is a waste when using the GNU C library
+   it is simpler to just do this in the source for each such file.  */
+   But in fact it might be less smart and round addresses to as much as
+   in such a case, redefine COPYING_UNIT to `long' (if that works)
+    /* Default size is what GNU malloc can fit in a 4096-byte block.  */
+    /* Default size is what GNU malloc can fit in a 4096-byte block.  */
+  /* If the object just copied was the only data in OLD_CHUNK,
+   If you use it in a program, you are probably losing.  */
+  register struct _obstack_chunk*  lp;	/* below addr of any objects in this chunk */
+/* Free objects in obstack H, including OBJ and everything allocate
+   more recently than OBJ.  If OBJ is zero, free everything in H.  */
+  register struct _obstack_chunk*  lp;	/* below addr of any objects in this chunk */
+    /* obj is not in any of the chunks! */
+  register struct _obstack_chunk*  lp;	/* below addr of any objects in this chunk */
+    /* obj is not in any of the chunks! */
+   they won't pass through the macro names in parentheses.  */
+/* The function names appear in parentheses in order to prevent
+   This program is distributed in the hope that it will be useful,
+   a list of strings, at least one of which is known to occur in
+   which must occur in the match, then we build a kwset matcher
+      /* First, we compile in the substrings known to be exact
+				    Q@#%!# library interface in regex.c.  */
+	     (b) Several alternatives in the pattern might be valid at a given

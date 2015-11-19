@@ -1,0 +1,2944 @@
+   Copyright (C) 1992 Free Software Foundation, Inc.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+   Written July 1992 by Mike Haertel.  */
+/* I added a series define from makefile here in order to run cfe */
+#define GREP 1
+#define STDC_HEADERS 1
+#define HAVE_STRING_H 1
+#define HAVE_SYS_PARAM_H 1
+#define HAVE_UNISTD_H 1
+#define HAVE_ALLOCA_H 1
+#define HAVE_GETPAGESIZE 1
+#define HAVE_MEMCHR 1
+#define HAVE_STRERROR 1
+#define HAVE_VALLOC 1
+#define HAVE_WORKING_MMAP 1
+#ifdef STDC_HEADERS
+#if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
+#ifdef NEED_MEMORY_H
+#ifdef __STDC__
+#ifdef HAVE_UNISTD_H
+#define O_RDONLY 0
+#undef MAX
+#define MAX(A,B) ((A) > (B) ? (A) : (B))
+/* Provide missing ANSI features if necessary. */
+#ifndef HAVE_STRERROR
+#define strerror(E) ((E) < sys_nerr ? sys_errlist[(E)] : "bogus error number")
+#ifndef HAVE_MEMCHR
+#ifdef __STDC__
+#define VOID void
+#define VOID char
+VOID *
+     VOID *vp;
+      return (VOID *) p;
+/* Define flags declared in grep.h. */
+/* Functions we'll use to search. */
+/* For error messages. */
+/* Print a message and possibly an error string.  Remember
+#ifdef __STDC__
+/* Like error(), but die horribly after printing. */
+#ifdef __STDC__
+/* Interface to handle errors and fix library lossage. */
+/* Interface to handle errors and fix some library lossage. */
+#if !defined(HAVE_VALLOC)
+#ifdef __STDC__
+/* Hairy buffering mechanism for grep.  The intent is to keep
+static char *buffer;		/* Base of buffer. */
+static size_t bufsalloc;	/* Allocated size of buffer save region. */
+static size_t bufalloc;		/* Total buffer size. */
+static int bufdesc;		/* File descriptor. */
+static char *bufbeg;		/* Beginning of user-visible stuff. */
+static char *buflim;		/* Limit of user-visible stuff. */
+#if defined(HAVE_WORKING_MMAP)
+static int bufmapped;		/* True for ordinary files. */
+static struct stat bufstat;	/* From fstat(). */
+static off_t bufoffset;		/* What read() normally remembers. */
+/* Reset the buffer for a new file.  Initialize
+#ifndef BUFSALLOC
+      bufsalloc = MAX(8192, getpagesize());
+      bufsalloc = BUFSALLOC;
+      /* The 1 byte of overflow is a kludge for dfaexec(), which
+	 being searched.  There's gotta be a better way... */
+#if defined(HAVE_WORKING_MMAP)
+  if (fstat(fd, &bufstat) < 0 || !S_ISREG(bufstat.st_mode))
+/* Read new stuff into the buffer, saving the specified
+   amount of old stuff.  When we're done, 'bufbeg' points
+   points just after the end.  Return count of new stuff. */
+#if defined(HAVE_WORKING_MMAP)
+  /* We may have allocated a new, larger buffer.  Since
+     about the old one.  Sorry. */
+#if defined(HAVE_WORKING_MMAP)
+      maddr = mmap(maddr, bufalloc - bufsalloc, PROT_READ | PROT_WRITE,
+		   MAP_PRIVATE | MAP_FIXED, bufdesc, bufoffset);
+      /* You might thing this (or MADV_WILLNEED) would help,
+	 but it doesn't, at least not on a Sun running 4.1.
+	 In fact, it actually slows us down about 30%! */
+      madvise(maddr, bufalloc - bufsalloc, MADV_SEQUENTIAL);
+      /* We come here when we're not going to use mmap() any more.
+	 Note that we need to synchronize the file offset the
+/* Flags controlling the style of output. */
+static int out_quiet;		/* Suppress all normal output. */
+static int out_invert;		/* Print nonmatching stuff. */
+static int out_file;		/* Print filenames. */
+static int out_line;		/* Print line numbers. */
+static int out_byte;		/* Print byte offsets. */
+static int out_before;		/* Lines of leading context. */
+static int out_after;		/* Lines of trailing context. */
+/* Internal variables to keep track of byte count, context, etc. */
+static size_t totalcc;		/* Total character count before bufbeg. */
+static char *lastnl;		/* Pointer after last newline counted. */
+static char *lastout;		/* Pointer after last character output;
+				   NULL if no character has been output
+static size_t totalnl;		/* Total newline count before lastnl. */
+static int pending;		/* Pending lines of output. */
+/* Print pending lines of trailing context prior to LIM. */
+/* Print the lines between BEG and LIM.  Deal with context crap.
+   If NLINESP is non-null, store a count of lines between BEG and LIM. */
+      /* Deal with leading context crap. */
+      /* We only print the "--" separator if our output is
+      /* Caller wants a line count. */
+/* Scan the specified portion of the buffer, matching lines (or
+   between matching lines if OUT_INVERT is true).  Return a count of
+      /* Avoid matching the empty line at the end of the buffer. */
+/* Search a given file.  Return a count of lines printed. */
+static char version[] = "GNU grep version 2.0";
+#define USAGE \
+  "usage: %s [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]\n"
+  fprintf(stderr, USAGE, prog);
+/* Go through the matchers vector and look for the specified matcher.
+   If we find it, install it in compile and execute, and return 1.  */
+  FILE *fp;
+  keys = NULL;
+  matcher = NULL;
+  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+	 != EOF)
+      case 'A':
+      case 'B':
+      case 'C':
+      case 'E':
+	  fatal("you may specify only one of -E, -F, or -G", 0);
+      case 'F':
+	  fatal("you may specify only one of -E, -F, or -G", 0);;
+      case 'G':
+	  fatal("you may specify only one of -E, -F, or -G", 0);
+      case 'V':
+      case 'X':
+	/* Nuke the final newline to avoid matching a null string. */
+      case 'y':			/* For old-timers . . . */
+      case 'L':
+	/* Like -l, except list files that don't contain matches.
+	   Inspired by the same option in Hume's gre. */
+	desc = strcmp(argv[optind], "-") ? open(argv[optind], O_RDONLY) : 0;
+/* Getopt for GNU.
+   NOTE: getopt is now part of the C library, so if you don't know what
+   "Keep this file name-space clean" means, talk to roland@gnu.ai.mit.edu
+   Copyright (C) 1987, 88, 89, 90, 91, 92, 1993
+   	Free Software Foundation, Inc.
+   This program is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by the
+   Free Software Foundation; either version 2, or (at your option) any
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
+/* NOTE!!!  AIX requires this to be the first thing in the file.
+   Do not put ANYTHING before it!  */
+#if !defined (__GNUC__) && defined (_AIX)
+#ifdef HAVE_CONFIG_H
+#ifdef __GNUC__
+#else /* not __GNUC__ */
+#if defined (HAVE_ALLOCA_H) || (defined(sparc) && (defined(sun) || (!defined(USG) && !defined(SVR4) && !defined(__svr4__))))
+#ifndef _AIX
+#endif /* not __GNUC__ */
+#if !__STDC__ && !defined(const) && IN_GCC
+/* This tells Alpha OSF/1 not to define a getopt prototype in <stdio.h>.  */
+#ifndef _NO_PROTO
+#define _NO_PROTO
+/* Comment out all this code if we are using the GNU C Library, and are not
+   actually compiling the library itself.  This code is part of the GNU C
+   Library, but also included in many other GNU distributions.  Compiling
+   and linking in this code is a waste when using the GNU C library
+   (especially if it is a shared library).  Rather than having every GNU
+#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
+/* This needs to come after some library #include
+   to get __GNU_LIBRARY__ defined.  */
+#ifdef	__GNU_LIBRARY__
+/* Don't include stdlib.h for non-GNU C libraries because some of them
+#else	/* Not GNU C library.  */
+#endif	/* GNU C library.  */
+/* If GETOPT_COMPAT is defined, `+' as well as `--' can introduce a
+   long-named option.  Because this is not POSIX.2 compliant, it is
+/* #define GETOPT_COMPAT */
+/* This version of `getopt' appears to the caller like standard Unix `getopt'
+   As `getopt' works, it permutes the elements of ARGV so that,
+   when it is done, all the options precede everything else.  Thus
+   Setting the environment variable POSIXLY_CORRECT disables permutation.
+   Then the behavior is completely standard.
+   GNU application programs can use a third alternative mode in which
+/* For communication from `getopt' to the caller.
+   When `getopt' finds an option that takes an argument,
+   Also, when `ordering' is RETURN_IN_ORDER,
+   each non-option ARGV-element is returned here.  */
+/* Index in ARGV of the next element to be scanned.
+   This is used for communication to and from the caller
+   On entry to `getopt', zero means this is the first call; initialize.
+   When `getopt' returns EOF, this is the index of the first of the
+   Otherwise, `optind' communicates from one call to the next
+   how much of ARGV has been scanned so far.  */
+/* XXX 1003.2 says this must be 1 before any call.  */
+/* The next char to be scanned in the option-element
+   This allows us to pick up the scan where we left off.
+   If this is zero, or a null string, it means resume the scan
+   by advancing to the next ARGV-element.  */
+/* Callers store zero here to inhibit the error message
+/* Set to an option character which was unrecognized.
+   This must be initialized on some systems to avoid linking in the
+/* Describe how to deal with options that follow non-option ARGV-elements.
+   If the caller did not specify anything,
+   the default is REQUIRE_ORDER if the environment variable
+   POSIXLY_CORRECT is defined, PERMUTE otherwise.
+   REQUIRE_ORDER means don't recognize them as options;
+   This is what Unix does.
+   This mode of operation is selected by either setting the environment
+   variable POSIXLY_CORRECT, or using `+' as the first character
+   PERMUTE is the default.  We permute the contents of ARGV as we scan,
+   so that eventually all the non-options are at the end.  This allows options
+   RETURN_IN_ORDER is an option available to programs that were written
+   to expect options and other ARGV-elements in any order and that care about
+   the ordering of the two.  We describe each non-option ARGV-element
+   Using `-' as the first character of the list of option characters
+   The special argument `--' forces an end of option-scanning regardless
+   of the value of `ordering'.  In the case of RETURN_IN_ORDER, only
+   `--' can cause `getopt' to return EOF with `optind' != ARGC.  */
+  REQUIRE_ORDER, PERMUTE, RETURN_IN_ORDER
+#ifdef	__GNU_LIBRARY__
+/* We want to avoid inclusion of string.h with non-GNU libraries
+   On some systems, it contains special magic macros that don't work
+   in GCC.  */
+/* Avoid depending on library functions or files
+#endif				/* GNU C library.  */
+/* Handle permutation of arguments.  */
+/* Describe the part of ARGV that contains non-options that have
+   been skipped.  `first_nonopt' is the index in ARGV of the first of them;
+/* Exchange two adjacent subsequences of ARGV.
+   One subsequence is elements [first_nonopt,last_nonopt)
+   The other is elements [last_nonopt,optind), which contains all
+   the new indices of the non-options in ARGV after they are moved.  */
+  /* Interchange the two blocks of data in ARGV.  */
+  /* Update records for the slots the non-options now occupy.  */
+/* Scan elements of ARGV (whose length is ARGC) for option characters
+   given in OPTSTRING.
+   If an element of ARGV starts with '-', and is not exactly "-" or "--",
+   then it is an option element.  The characters of this element
+   (aside from the initial '-') are option characters.  If `getopt'
+   If `getopt' finds another option character, it returns that character,
+   resume the scan with the following option character or ARGV-element.
+   If there are no more option characters, `getopt' returns `EOF'.
+   Then `optind' is the index in ARGV of the first ARGV-element
+   that is not an option.  (The ARGV-elements have been permuted
+   OPTSTRING is a string containing the legitimate option characters.
+   If an option character is seen that is not listed in OPTSTRING,
+   return '?' after printing an error message.  If you set `opterr' to
+   If a char in OPTSTRING is followed by a colon, that means it wants an arg,
+   so the following text in the same ARGV-element, or the text of the following
+   ARGV-element, is returned in `optarg'.  Two colons mean an option that
+   wants an optional arg; if there is text in the current ARGV-element,
+   If OPTSTRING starts with `-' or `+', it requests different methods of
+   handling the non-option ARGV-elements.
+   See the comments about RETURN_IN_ORDER and REQUIRE_ORDER, above.
+   Long-named options begin with `--' instead of `-'.
+   Their names may be abbreviated as long as the abbreviation is unique
+   or is an exact match for some defined option.  If they have an
+   argument, it follows the option name in the same ARGV-element, separated
+   from the option name by a `=', or else the in next ARGV-element.
+   When `getopt' finds a long-named option, it returns 0 if that option's
+   The elements of ARGV aren't really const, because we permute them.
+   But we pretend they're const in the prototype to be compatible
+   LONGOPTS is a vector of `struct option' terminated by an
+   LONGIND returns the index in LONGOPT of the long-named option found.
+   It is only valid when a long-named option has been found by the most
+   If LONG_ONLY is nonzero, '-' as well as '--' can introduce
+  /* Initialize the internal data when the first call is made.
+     Start processing options with ARGV-element 1 (since ARGV-element 0
+     non-option ARGV-elements is empty.  */
+      nextchar = NULL;
+      /* Determine how to handle the ordering of options and nonoptions.  */
+	  ordering = RETURN_IN_ORDER;
+	  ordering = REQUIRE_ORDER;
+      else if (getenv ("POSIXLY_CORRECT") != NULL)
+	ordering = REQUIRE_ORDER;
+	ordering = PERMUTE;
+  if (nextchar == NULL || *nextchar == '\0')
+      if (ordering == PERMUTE)
+	  /* If we have just processed some options following some non-options,
+	  /* Now skip any additional non-options
+#ifdef GETOPT_COMPAT
+		 && (longopts == NULL
+#endif				/* GETOPT_COMPAT */
+      /* Special ARGV-element `--' means premature end of options.
+	 Skip it like a null option,
+      /* If we have done all the ARGV-elements, stop the scan
+	  /* Set the next-arg-index to point at the non-options
+	  return EOF;
+      /* If we have come to a non-option and did not permute it,
+#ifdef GETOPT_COMPAT
+	  && (longopts == NULL
+#endif				/* GETOPT_COMPAT */
+	  if (ordering == REQUIRE_ORDER)
+	    return EOF;
+      /* We have found another option-ARGV-element.
+	 Start decoding its characters.  */
+		  + (longopts != NULL && argv[optind][1] == '-'));
+  if (longopts != NULL
+#ifdef GETOPT_COMPAT
+#endif				/* GETOPT_COMPAT */
+      const struct option *pfound = NULL;
+      /* Test all options for either exact match or abbreviated matches.  */
+		/* Exact match found.  */
+	    else if (pfound == NULL)
+		/* First nonexact match found.  */
+	      /* Second nonexact match found.  */
+      if (pfound != NULL)
+	      /* Don't test has_arg with >, because some C compilers don't
+	  if (longind != NULL)
+      /* Can't find it as a long option.  If this is not getopt_long_only,
+	 Otherwise interpret it as a short option.  */
+#ifdef GETOPT_COMPAT
+#endif				/* GETOPT_COMPAT */
+	  || my_index (optstring, *nextchar) == NULL)
+  /* Look at and handle the next option-character.  */
+    /* Increment `optind' when we start to process its last character.  */
+    if (temp == NULL || c == ':')
+	    /* This is an option that accepts an argument optionally.  */
+	    nextchar = NULL;
+	    /* This is an option that requires an argument.  */
+		/* If we end this ARGV-element by taking the rest as an arg,
+	      /* We already incremented `optind' once;
+		 increment it again when taking next ARGV-elt as argument.  */
+	    nextchar = NULL;
+#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+#ifdef TEST
+/* Compile with -DTEST to make an executable for use in testing
+      if (c == EOF)
+      printf ("non-option ARGV-elements: ");
+#endif /* TEST */
+/* Extended regular expression matching and search library,
+   (Implements POSIX draft P10003.2/D11.2, except for
+   Copyright (C) 1993 Free Software Foundation, Inc.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+/* AIX requires this to be the first thing in the file. */
+#if defined (_AIX) && !defined (REGEX_MALLOC)
+#define _GNU_SOURCE
+/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+#ifdef HAVE_CONFIG_H
+/* The `emacs' switch turns on certain matching commands
+   that make sense only in Emacs. */
+/* Emacs uses `NULL' as a predicate.  */
+#undef NULL
+/* We used to test for `BSTRING' here, but only GCC and Emacs define
+   `BSTRING', as far as I know, and neither of them use this code.  */
+#if HAVE_STRING_H || STDC_HEADERS
+#ifdef STDC_HEADERS
+/* Define the syntax stuff for \<, \>, etc.  */
+/* This must be nonzero for the wordchar and notwordchar pattern
+#ifndef Sword 
+#define Sword 1
+#ifdef SYNTAX_TABLE
+#else /* not SYNTAX_TABLE */
+/* How many characters in the character set.  */
+#define CHAR_SET_SIZE 256
+static char re_syntax_table[CHAR_SET_SIZE];
+     re_syntax_table[c] = Sword;
+   for (c = 'A'; c <= 'Z'; c++)
+     re_syntax_table[c] = Sword;
+     re_syntax_table[c] = Sword;
+   re_syntax_table['_'] = Sword;
+#endif /* not SYNTAX_TABLE */
+#define SYNTAX(c) re_syntax_table[c]
+/* Get the interface, including the syntax bits.  */
+/* Jim Meyering writes:
+   "... Some ctype macros are valid only for character codes that
+   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
+   using /bin/cc or gcc but without giving an ansi option).  So, all
+   ctype uses should be through macros like ISPRINT...  If
+   STDC_HEADERS is defined, then autoconf has verified that the ctype
+   Defining isascii to 1 should let any compiler worth its salt
+#if ! defined (isascii) || defined (STDC_HEADERS)
+#define ISBLANK(c) (isascii (c) && isblank (c))
+#define ISBLANK(c) ((c) == ' ' || (c) == '\t')
+#define ISGRAPH(c) (isascii (c) && isgraph (c))
+#define ISGRAPH(c) (isascii (c) && isprint (c) && !isspace (c))
+#define ISPRINT(c) (isascii (c) && isprint (c))
+#define ISDIGIT(c) (isascii (c) && isdigit (c))
+#define ISALNUM(c) (isascii (c) && isalnum (c))
+#define ISALPHA(c) (isascii (c) && isalpha (c))
+#define ISCNTRL(c) (isascii (c) && iscntrl (c))
+#define ISLOWER(c) (isascii (c) && islower (c))
+#define ISPUNCT(c) (isascii (c) && ispunct (c))
+#define ISSPACE(c) (isascii (c) && isspace (c))
+#define ISUPPER(c) (isascii (c) && isupper (c))
+#define ISXDIGIT(c) (isascii (c) && isxdigit (c))
+#ifndef NULL
+#define NULL 0
+/* We remove any previous definition of `SIGN_EXTEND_CHAR',
+   (Per Bothner suggested the basic approach.)  */
+#undef SIGN_EXTEND_CHAR
+#if __STDC__
+#define SIGN_EXTEND_CHAR(c) ((signed char) (c))
+#else  /* not __STDC__ */
+/* As in Harbison and Steele.  */
+#define SIGN_EXTEND_CHAR(c) ((((unsigned char) (c)) ^ 128) - 128)
+/* Should we use malloc or alloca?  If REGEX_MALLOC is not defined, we
+   use `alloca' instead of `malloc'.  This is because using malloc in
+   re_search* or re_match* could cause memory leaks when C-g is used in
+   Emacs; also, malloc is slower and causes storage fragmentation.  On
+   Because we sometimes use alloca, some routines have to be macros,
+#ifdef REGEX_MALLOC
+#define REGEX_ALLOCATE malloc
+#define REGEX_REALLOCATE(source, osize, nsize) realloc (source, nsize)
+#else /* not REGEX_MALLOC  */
+/* Emacs already defines alloca, sometimes.  */
+/* Make alloca work the best possible way.  */
+#ifdef __GNUC__
+#else /* not __GNUC__ */
+#if HAVE_ALLOCA_H
+#else /* not __GNUC__ or HAVE_ALLOCA_H */
+#ifndef _AIX /* Already did AIX, up at the top.  */
+#endif /* not _AIX */
+#endif /* not HAVE_ALLOCA_H */ 
+#endif /* not __GNUC__ */
+#define REGEX_ALLOCATE alloca
+/* Assumes a `char *destination' variable.  */
+#define REGEX_REALLOCATE(source, osize, nsize)				\
+#endif /* not REGEX_MALLOC */
+/* True if `size1' is non-NULL and PTR is pointing anywhere inside
+   `string1' or just past its end.  This works if PTR is NULL, which is
+#define FIRST_STRING_P(ptr) 					\
+/* (Re)Allocate N items of type T using malloc, or fail.  */
+#define TALLOC(n, t) ((t *) malloc ((n) * sizeof (t)))
+#define RETALLOC(addr, n, t) ((addr) = (t *) realloc (addr, (n) * sizeof (t)))
+#define REGEX_TALLOC(n, t) ((t *) REGEX_ALLOCATE ((n) * sizeof (t)))
+#define BYTEWIDTH 8 /* In bits.  */
+#define STREQ(s1, s2) ((strcmp (s1, s2) == 0))
+#undef MAX               /****** added later *******/
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+/* These are the command codes that appear in compiled regular
+   expressions.  Some opcodes are followed by argument bytes.  A
+   arguments.  Zero bytes may appear in the compiled regular expression.
+   The value of `exactn' is needed in search.c (search_buffer) in Emacs.
+   So regex.h defines a symbol `RE_EXACTN_VALUE' to be 1; the value of
+        /* Followed by one byte giving n, then by n literal bytes.  */
+        /* Matches any (more or less) character.  */
+        /* Matches any one char belonging to specified set.  First
+           following byte is number of bitmap bytes.  Then come bytes
+           for a bitmap saying which chars are in.  Bits in each byte
+           are ordered low-bit-first.  A character is in the set if its
+           bit is 1.  A character too large to have a bit in the map is
+        /* Same parameters as charset, but match any character that is
+        /* Start remembering the text that is matched, for storing in a
+           register.  Followed by one byte with the register number, in
+           field.  Then followed by one byte with the number of groups
+           inner to this one.  (This last has to be part of the
+        /* Stop remembering the text that is matched and store it in a
+           memory register.  Followed by one byte with the register
+           just like `start_memory'.  (We need the number of inner
+        /* Match a duplicate of something remembered. Followed by one
+        /* Fail unless at beginning of line.  */
+        /* Fail unless at end of line.  */
+        /* Succeeds if at beginning of buffer (if emacs) or at beginning
+        /* Analogously, for end of buffer/string.  */
+        /* Followed by two byte relative address to which to jump.  */
+	/* Same as jump, but marks the end of an alternative.  */
+        /* Followed by two-byte relative address of place to resume at
+        /* Like on_failure_jump, but pushes a placeholder instead of the
+        /* Throw away latest failure point and then jump to following
+        /* Change to pop_failure_jump if know won't have to backtrack to
+           match; otherwise change to jump.  This is used to jump
+           back to the beginning of a repeat.  If what follows this jump
+           Followed by two-byte address.  */
+        /* Jump to following two-byte address, and push a dummy failure
+           point. This failure point will be thrown away if an attempt
+           is made to use it for a failure.  A `+' construct makes this
+           before the first repeat.  Also used as an intermediary kind
+	/* Push a dummy failure point and continue.  Used at the end of
+        /* Followed by two-byte relative address and two-byte number n.
+           After matching N times, jump to the address upon failure.  */
+        /* Followed by two-byte relative address, and two-byte number n.
+           Jump to the address N times, then fail.  */
+        /* Set the following two-byte relative address to the
+           subsequent two-byte number.  The address *includes* the two
+  wordchar,	/* Matches any word-constituent character.  */
+  notwordchar,	/* Matches any char that is not a word-constituent.  */
+  wordbeg,	/* Succeeds if at word beginning.  */
+  wordend,	/* Succeeds if at word end.  */
+  wordbound,	/* Succeeds if at a word boundary.  */
+  notwordbound	/* Succeeds if not at a word boundary.  */
+  ,before_dot,	/* Succeeds if before point.  */
+  at_dot,	/* Succeeds if at point.  */
+  after_dot,	/* Succeeds if after point.  */
+	/* Matches any character whose syntax is specified.  Followed by
+           a byte which contains a syntax code, e.g., Sword.  */
+	/* Matches any character whose syntax is not that specified.  */
+/* Common operations on the compiled pattern.  */
+/* Store NUMBER in two contiguous bytes starting at DESTINATION.  */
+#define STORE_NUMBER(destination, number)				\
+/* Same as STORE_NUMBER, except increment DESTINATION to
+   the byte after where the number is stored.  Therefore, DESTINATION
+#define STORE_NUMBER_AND_INCR(destination, number)			\
+    STORE_NUMBER (destination, number);					\
+/* Put into DESTINATION a number stored in two contiguous bytes starting
+   at SOURCE.  */
+#define EXTRACT_NUMBER(destination, source)				\
+    (destination) += SIGN_EXTEND_CHAR (*((source) + 1)) << 8;		\
+#ifdef DEBUG
+  int temp = SIGN_EXTEND_CHAR (*(source + 1)); 
+#ifndef EXTRACT_MACROS /* To debug the macros.  */
+#undef EXTRACT_NUMBER
+#define EXTRACT_NUMBER(dest, src) extract_number (&dest, src)
+#endif /* not EXTRACT_MACROS */
+#endif /* DEBUG */
+/* Same as EXTRACT_NUMBER, except increment SOURCE to after the number.
+   SOURCE must be an lvalue.  */
+#define EXTRACT_NUMBER_AND_INCR(destination, source)			\
+    EXTRACT_NUMBER (destination, source);				\
+#ifdef DEBUG
+#ifndef EXTRACT_MACROS
+#undef EXTRACT_NUMBER_AND_INCR
+#define EXTRACT_NUMBER_AND_INCR(dest, src) \
+#endif /* not EXTRACT_MACROS */
+#endif /* DEBUG */
+/* If DEBUG is defined, Regex prints many voluminous messages about what
+   it is doing (if the variable `debug' is nonzero).  If linked with the
+   interactively.  And if linked with the main program in `main.c' and
+#ifdef DEBUG
+/* We use standard I/O for debugging.  */
+/* It is useful to test things that ``must'' be true when debugging.  */
+#define DEBUG_STATEMENT(e) e
+#define DEBUG_PRINT1(x) if (debug) printf (x)
+#define DEBUG_PRINT2(x1, x2) if (debug) printf (x1, x2)
+#define DEBUG_PRINT3(x1, x2, x3) if (debug) printf (x1, x2, x3)
+#define DEBUG_PRINT4(x1, x2, x3, x4) if (debug) printf (x1, x2, x3, x4)
+#define DEBUG_PRINT_COMPILED_PATTERN(p, s, e) 				\
+#define DEBUG_PRINT_DOUBLE_STRING(w, s1, sz1, s2, sz2)			\
+/* Print the fastmap in human-readable form.  */
+  while (i < (1 << BYTEWIDTH))
+          while (i < (1 << BYTEWIDTH)  &&  fastmap[i])
+/* Print a compiled pattern string in human-readable form, starting at
+   the START pointer into it and ending just before the pointer END.  */
+  if (start == NULL)
+  /* Loop over pattern commands.  */
+		  /* Are we starting a range?  */
+		  /* Have we broken a range?  */
+  /* Perhaps we should print the translate table?  */
+  if (where == NULL)
+      if (FIRST_STRING_P (where))
+#else /* not DEBUG */
+#define DEBUG_STATEMENT(e)
+#define DEBUG_PRINT1(x)
+#define DEBUG_PRINT2(x1, x2)
+#define DEBUG_PRINT3(x1, x2, x3)
+#define DEBUG_PRINT4(x1, x2, x3, x4)
+#define DEBUG_PRINT_COMPILED_PATTERN(p, s, e)
+#define DEBUG_PRINT_DOUBLE_STRING(w, s1, sz1, s2, sz2)
+#endif /* not DEBUG */
+/* Set by `re_set_syntax' to the current regexp syntax to recognize.  Can
+reg_syntax_t re_syntax_options = RE_SYNTAX_EMACS;
+/* Specify the precise syntax of regexps for compilation.  This provides
+   The argument SYNTAX is a bit mask comprised of the various bits
+   defined in regex.h.  We return the old syntax.  */
+/* This table gives an error message for each of the error codes listed
+   in regex.h.  Obviously the order here has to be same as there.  */
+  { NULL,					/* REG_NOERROR */
+    "No match",					/* REG_NOMATCH */
+    "Invalid regular expression",		/* REG_BADPAT */
+    "Invalid collation character",		/* REG_ECOLLATE */
+    "Invalid character class name",		/* REG_ECTYPE */
+    "Trailing backslash",			/* REG_EESCAPE */
+    "Invalid back reference",			/* REG_ESUBREG */
+    "Unmatched [ or [^",			/* REG_EBRACK */
+    "Unmatched ( or \\(",			/* REG_EPAREN */
+    "Unmatched \\{",				/* REG_EBRACE */
+    "Invalid content of \\{\\}",		/* REG_BADBR */
+    "Invalid range end",			/* REG_ERANGE */
+    "Memory exhausted",				/* REG_ESPACE */
+    "Invalid preceding regular expression",	/* REG_BADRPT */
+    "Premature end of regular expression",	/* REG_EEND */
+    "Regular expression too big",		/* REG_ESIZE */
+    "Unmatched ) or \\)",			/* REG_ERPAREN */
+/* Subroutine declarations and macros for regex_compile.  */
+/* Fetch the next character in the uncompiled pattern---translating it 
+   if necessary.  Also cast from a signed character in the constant
+#define PATFETCH(c)							\
+  do {if (p == pend) return REG_EEND;					\
+/* Fetch the next character in the uncompiled pattern, with no
+#define PATFETCH_RAW(c)							\
+  do {if (p == pend) return REG_EEND;					\
+/* Go backwards one character in the pattern.  */
+#define PATUNFETCH p--
+/* If `translate' is non-null, return translate[D], else just D.  We
+   `char *', to avoid warnings when a string constant is passed.  But
+#define TRANSLATE(d) (translate ? translate[(unsigned char) (d)] : (d))
+/* Macros for outputting the compiled pattern into `buffer'.  */
+/* If the buffer isn't allocated when it comes in, use this.  */
+#define INIT_BUF_SIZE  32
+/* Make sure we have at least N more bytes of space in buffer.  */
+#define GET_BUFFER_SPACE(n)						\
+      EXTEND_BUFFER ()
+/* Make sure we have one more byte of buffer space and then add C to it.  */
+#define BUF_PUSH(c)							\
+    GET_BUFFER_SPACE (1);						\
+/* Ensure we have two more bytes of buffer space and then append C1 and C2.  */
+#define BUF_PUSH_2(c1, c2)						\
+    GET_BUFFER_SPACE (2);						\
+/* As with BUF_PUSH_2, except for three bytes.  */
+#define BUF_PUSH_3(c1, c2, c3)						\
+    GET_BUFFER_SPACE (3);						\
+/* Store a jump with opcode OP at LOC to location TO.  We store a
+#define STORE_JUMP(op, loc, to) \
+/* Likewise, for a two-argument jump.  */
+#define STORE_JUMP2(op, loc, to, arg) \
+/* Like `STORE_JUMP', but for inserting.  Assume `b' is the buffer end.  */
+#define INSERT_JUMP(op, loc, to) \
+/* Like `STORE_JUMP2', but for inserting.  Assume `b' is the buffer end.  */
+#define INSERT_JUMP2(op, loc, to, arg) \
+/* This is not an arbitrary limit: the arguments which represent offsets
+   into the pattern are two bytes long.  So if 2^16 bytes turns out to
+#define MAX_BUF_SIZE (1L << 16)
+/* Extend the buffer by twice its current size via realloc and
+   correct places in the new one.  If extending the buffer results in it
+   being larger than MAX_BUF_SIZE, then flag memory exhausted.  */
+#define EXTEND_BUFFER()							\
+    if (bufp->allocated == MAX_BUF_SIZE) 				\
+      return REG_ESIZE;							\
+    if (bufp->allocated > MAX_BUF_SIZE)					\
+      bufp->allocated = MAX_BUF_SIZE; 					\
+    if (bufp->buffer == NULL)						\
+      return REG_ESPACE;						\
+    /* If the buffer moved, move all the pointers into it.  */		\
+/* Since we have one byte reserved for the register number argument to
+#define MAX_REGNUM 255
+/* But patterns can have more than `MAX_REGNUM' registers.  We just
+/* Macros for the compile stack.  */
+/* Since offsets can go either forwards or backwards, this type needs to
+   be able to hold values from -(MAX_BUF_SIZE - 1) to MAX_BUF_SIZE - 1.  */
+  unsigned avail;			/* Offset of next open position.  */
+#define INIT_COMPILE_STACK_SIZE 32
+#define COMPILE_STACK_EMPTY  (compile_stack.avail == 0)
+#define COMPILE_STACK_FULL  (compile_stack.avail == compile_stack.size)
+/* The next available element.  */
+#define COMPILE_STACK_TOP (compile_stack.stack[compile_stack.avail])
+/* Set the bit for character C in a list.  */
+#define SET_LIST_BIT(c)                               \
+  (b[((unsigned char) (c)) / BYTEWIDTH]               \
+   |= 1 << (((unsigned char) c) % BYTEWIDTH))
+/* Get the next unsigned number in the uncompiled pattern.  */
+#define GET_UNSIGNED_NUMBER(num) 					\
+       PATFETCH (c); 							\
+       while (ISDIGIT (c)) 						\
+           PATFETCH (c);						\
+#define CHAR_CLASS_MAX_LENGTH  6 /* Namely, `xdigit'.  */
+#define IS_CHAR_CLASS(string)						\
+   (STREQ (string, "alpha") || STREQ (string, "upper")			\
+    || STREQ (string, "lower") || STREQ (string, "digit")		\
+    || STREQ (string, "alnum") || STREQ (string, "xdigit")		\
+    || STREQ (string, "space") || STREQ (string, "print")		\
+    || STREQ (string, "punct") || STREQ (string, "graph")		\
+    || STREQ (string, "cntrl") || STREQ (string, "blank"))
+/* `regex_compile' compiles PATTERN (of length SIZE) according to SYNTAX.
+   Returns one of error codes defined in `regex.h', or zero for success.
+   Assumes the `allocated' (and perhaps `buffer') and `translate'
+   fields are set in BUFP on entry.
+   If it succeeds, results are put in BUFP (if it returns an error, the
+   contents of BUFP are undefined):
+     `syntax' is set to SYNTAX;
+     `re_nsub' is the number of subexpressions in PATTERN;
+   The `fastmap' and `newline_anchor' fields are neither
+  /* We fetch characters from PATTERN here.  Even though PATTERN is
+  /* A random tempory spot in PATTERN.  */
+  /* Points to the end of the buffer, where we should append.  */
+  /* Keeps track of unclosed groups.  */
+  /* Points to the current (ending) position in the pattern.  */
+  /* How to translate the characters in the pattern.  */
+  /* Address of the count-byte of the most recently inserted `exactn'
+     command.  This makes it possible to tell if a new exact-match
+  /* Address of start of the most recently finished expression.
+     This tells, e.g., postfix * where to find the start of its
+     operand.  Reset at the beginning of groups and alternatives.  */
+  /* Address of beginning of regexp, or inside of last group.  */
+  /* Place in the uncompiled pattern (i.e., the {) to
+  /* Address of the place where a forward jump should go to the end of
+     the containing expression.  Each alternative of an `or' -- except the
+  /* Counts open-groups as they are encountered.  Remembered for the
+#ifdef DEBUG
+  DEBUG_PRINT1 ("\nCompiling pattern: ");
+#endif /* DEBUG */
+  /* Initialize the compile stack.  */
+  compile_stack.stack = TALLOC (INIT_COMPILE_STACK_SIZE, compile_stack_elt_t);
+  if (compile_stack.stack == NULL)
+    return REG_ESPACE;
+  compile_stack.size = INIT_COMPILE_STACK_SIZE;
+  /* Initialize the pattern buffer.  */
+  /* Set `used' to zero, so that if we return an error, the pattern
+     printer (for debugging) will think there's no pattern.  We reset it
+  /* Always count groups, whether or not bufp->no_sub is set.  */
+#if !defined (emacs) && !defined (SYNTAX_TABLE)
+  /* Initialize the syntax table.  */
+	{ /* If zero allocated, but buffer is non-null, try to realloc
+             enough space.  This loses if buffer's address is bogus, but
+          RETALLOC (bufp->buffer, INIT_BUF_SIZE, unsigned char);
+        { /* Caller did not allocate a buffer.  Do it for them.  */
+          bufp->buffer = TALLOC (INIT_BUF_SIZE, unsigned char);
+      if (!bufp->buffer) return REG_ESPACE;
+      bufp->allocated = INIT_BUF_SIZE;
+  /* Loop through the uncompiled pattern until we're at the end.  */
+      PATFETCH (c);
+            if (   /* If at start of pattern, it's an operator.  */
+                   /* If context independent, it's an operator.  */
+                || syntax & RE_CONTEXT_INDEP_ANCHORS
+                   /* Otherwise, depends on what's come before.  */
+              BUF_PUSH (begline);
+            if (   /* If at end of pattern, it's an operator.  */
+                   /* If context independent, it's an operator.  */
+                || syntax & RE_CONTEXT_INDEP_ANCHORS
+                   /* Otherwise, depends on what's next.  */
+               BUF_PUSH (endline);
+          if ((syntax & RE_BK_PLUS_QM)
+              || (syntax & RE_LIMITED_OPS))
+          /* If there is no previous pattern... */
+              if (syntax & RE_CONTEXT_INVALID_OPS)
+                return REG_BADRPT;
+              else if (!(syntax & RE_CONTEXT_INDEP_OPS))
+            /* Are we optimizing this jump?  */
+            /* If there is a sequence of repetition chars, collapse it
+               down to just one (the right one).  We can't combine
+                PATFETCH (c);
+                    || (!(syntax & RE_BK_PLUS_QM) && (c == '+' || c == '?')))
+                else if (syntax & RE_BK_PLUS_QM  &&  c == '\\')
+                    if (p == pend) return REG_EESCAPE;
+                    PATFETCH (c1);
+                        PATUNFETCH;
+                        PATUNFETCH;
+                    PATUNFETCH;
+                /* If we get here, we found another repeat character.  */
+            /* Star, etc. applied to an empty pattern is equivalent
+            /* Now we know whether or not zero matches is allowed
+              { /* More than one repetition is allowed, so put in at the
+                   But if we are at the `*' in the exact sequence `.*\n',
+                   instead of the beginning of the loop.  This way we only
+                /* Allocate the space for the jump.  */
+                GET_BUFFER_SPACE (3);
+                /* We know we are not at the first character of the pattern,
+                   because laststart was nonzero.  And we've already
+                   the `*'.  Do we have to do something analogous here
+                   for null bytes, because of RE_DOT_NOT_NULL?  */
+                if (TRANSLATE (*(p - 2)) == TRANSLATE ('.')
+                    && p < pend && TRANSLATE (*p) == TRANSLATE ('\n')
+                    && !(syntax & RE_DOT_NEWLINE))
+                  { /* We have .*\n.  */
+                    STORE_JUMP (jump, b, laststart);
+                  /* Anything else.  */
+                  STORE_JUMP (maybe_pop_jump, b, laststart - 3);
+                /* We've added more stuff to the buffer.  */
+            /* On failure, jump from laststart to b + 3, which will be the
+            GET_BUFFER_SPACE (3);
+            INSERT_JUMP (keep_string_p ? on_failure_keep_string_jump
+                /* At least one repetition is required, so insert a
+                   `on_failure_jump' instruction of the loop. This
+                GET_BUFFER_SPACE (3);
+                INSERT_JUMP (dummy_failure_jump, laststart, laststart + 6);
+          BUF_PUSH (anychar);
+            if (p == pend) return REG_EBRACK;
+            /* Ensure that we have enough space to push a charset: the
+	    GET_BUFFER_SPACE (34);
+            /* We test `*p == '^' twice, instead of using an if
+               statement, so we only need one BUF_PUSH.  */
+            BUF_PUSH (*p == '^' ? charset_not : charset); 
+            /* Remember the first position in the bracket expression.  */
+            /* Push the number of bytes in the bitmap.  */
+            BUF_PUSH ((1 << BYTEWIDTH) / BYTEWIDTH);
+            /* Clear the whole map.  */
+            bzero (b, (1 << BYTEWIDTH) / BYTEWIDTH);
+                && (syntax & RE_HAT_LISTS_NOT_NEWLINE))
+              SET_LIST_BIT ('\n');
+            /* Read in characters and ranges, setting map bits.  */
+                if (p == pend) return REG_EBRACK;
+                PATFETCH (c);
+                if ((syntax & RE_BACKSLASH_ESCAPE_IN_LISTS) && c == '\\')
+                    if (p == pend) return REG_EESCAPE;
+                    PATFETCH (c1);
+                    SET_LIST_BIT (c1);
+                /* Could be the end of the bracket expression.  If it's
+                /* Look ahead to see if it's a range when the last thing
+                  return REG_ERANGE;
+                /* Look ahead to see if it's a range when the last thing
+                    if (ret != REG_NOERROR) return ret;
+                  { /* This handles ranges made up of characters only.  */
+		    /* Move past the `-'.  */
+                    PATFETCH (c1);
+                    if (ret != REG_NOERROR) return ret;
+                /* See if we're at the beginning of a possible character
+                else if (syntax & RE_CHAR_CLASSES && c == '[' && *p == ':')
+                  { /* Leave room for the null.  */
+                    char str[CHAR_CLASS_MAX_LENGTH + 1];
+                    PATFETCH (c);
+                    /* If pattern is `[[:'.  */
+                    if (p == pend) return REG_EBRACK;
+                        PATFETCH (c);
+                            || c1 == CHAR_CLASS_MAX_LENGTH)
+                    /* If isn't a word bracketed by `[:' and:`]':
+                        boolean is_alnum = STREQ (str, "alnum");
+                        boolean is_alpha = STREQ (str, "alpha");
+                        boolean is_blank = STREQ (str, "blank");
+                        boolean is_cntrl = STREQ (str, "cntrl");
+                        boolean is_digit = STREQ (str, "digit");
+                        boolean is_graph = STREQ (str, "graph");
+                        boolean is_lower = STREQ (str, "lower");
+                        boolean is_print = STREQ (str, "print");
+                        boolean is_punct = STREQ (str, "punct");
+                        boolean is_space = STREQ (str, "space");
+                        boolean is_upper = STREQ (str, "upper");
+                        boolean is_xdigit = STREQ (str, "xdigit");
+                        if (!IS_CHAR_CLASS (str)) return REG_ECTYPE;
+                        /* Throw away the ] at the end of the character
+                        PATFETCH (c);					
+                        if (p == pend) return REG_EBRACK;
+                        for (ch = 0; ch < 1 << BYTEWIDTH; ch++)
+                            if (   (is_alnum  && ISALNUM (ch))
+                                || (is_alpha  && ISALPHA (ch))
+                                || (is_blank  && ISBLANK (ch))
+                                || (is_cntrl  && ISCNTRL (ch))
+                                || (is_digit  && ISDIGIT (ch))
+                                || (is_graph  && ISGRAPH (ch))
+                                || (is_lower  && ISLOWER (ch))
+                                || (is_print  && ISPRINT (ch))
+                                || (is_punct  && ISPUNCT (ch))
+                                || (is_space  && ISSPACE (ch))
+                                || (is_upper  && ISUPPER (ch))
+                                || (is_xdigit && ISXDIGIT (ch)))
+                            SET_LIST_BIT (ch);
+                          PATUNFETCH;
+                        SET_LIST_BIT ('[');
+                        SET_LIST_BIT (':');
+                    SET_LIST_BIT (c);
+            /* Discard any (non)matching list bytes that are all 0 at the
+               end of the map.  Decrease the map-length byte too.  */
+          if (syntax & RE_NO_BK_PARENS)
+          if (syntax & RE_NO_BK_PARENS)
+          if (syntax & RE_NEWLINE_ALT)
+          if (syntax & RE_NO_BK_VBAR)
+           if (syntax & RE_INTERVALS && syntax & RE_NO_BK_BRACES)
+          if (p == pend) return REG_EESCAPE;
+          /* Do not translate the character after the \, so that we can
+             distinguish, e.g., \B from \b, even if we normally would
+             translate, e.g., B to b.  */
+          PATFETCH_RAW (c);
+              if (syntax & RE_NO_BK_PARENS)
+              if (COMPILE_STACK_FULL)
+                  RETALLOC (compile_stack.stack, compile_stack.size << 1,
+                  if (compile_stack.stack == NULL) return REG_ESPACE;
+              /* These are the values to restore when we hit end of this
+                 group.  They are all relative offsets, so that if the
+              COMPILE_STACK_TOP.begalt_offset = begalt - bufp->buffer;
+              COMPILE_STACK_TOP.fixup_alt_jump 
+              COMPILE_STACK_TOP.laststart_offset = b - bufp->buffer;
+              COMPILE_STACK_TOP.regnum = regnum;
+              /* We will eventually replace the 0 with the number of
+                 groups inner to this one.  But do not push a
+              if (regnum <= MAX_REGNUM)
+                  COMPILE_STACK_TOP.inner_group_offset = b - bufp->buffer + 2;
+                  BUF_PUSH_3 (start_memory, regnum, 0);
+	      /* If we've reached MAX_REGNUM groups, then this open
+              if (syntax & RE_NO_BK_PARENS) goto normal_backslash;
+              if (COMPILE_STACK_EMPTY)
+                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD)
+                  return REG_ERPAREN;
+                { /* Push a dummy failure point at the end of the
+                     `pop_failure_jump' to pop.  See comments at
+                  BUF_PUSH (push_dummy_failure);
+                  /* We allocated space for this jump when we assigned
+                  STORE_JUMP (jump_past_alt, fixup_alt_jump, b - 1);
+              /* See similar code for backslashed left paren above.  */
+              if (COMPILE_STACK_EMPTY)
+                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD)
+                  return REG_ERPAREN;
+              /* Since we just checked for an empty stack above, this
+                /* We don't just want to restore into `regnum', because
+                begalt = bufp->buffer + COMPILE_STACK_TOP.begalt_offset;
+                  = COMPILE_STACK_TOP.fixup_alt_jump
+                    ? bufp->buffer + COMPILE_STACK_TOP.fixup_alt_jump - 1 
+                laststart = bufp->buffer + COMPILE_STACK_TOP.laststart_offset;
+                this_group_regnum = COMPILE_STACK_TOP.regnum;
+		/* If we've reached MAX_REGNUM groups, then this open
+                /* We're at the end of the group, so now we know how many
+                if (this_group_regnum <= MAX_REGNUM)
+                      = bufp->buffer + COMPILE_STACK_TOP.inner_group_offset;
+                    BUF_PUSH_3 (stop_memory, this_group_regnum,
+              if (syntax & RE_LIMITED_OPS || syntax & RE_NO_BK_VBAR)
+              if (syntax & RE_LIMITED_OPS)
+              /* Insert before the previous alternative a jump which
+              GET_BUFFER_SPACE (3);
+              INSERT_JUMP (on_failure_jump, begalt, b + 6);
+              /* The alternative before this one has a jump after it
+                 which gets executed if it gets matched.  Adjust that
+                 (if any) alternative's such jump, etc.).  The last such
+                 jump jumps to the correct final destination.  A picture:
+                 If we are at `b', then fixup_alt_jump right now points to a
+                 three-byte space after `a'.  We'll put in the jump, set
+                STORE_JUMP (jump_past_alt, fixup_alt_jump, b);
+              /* Mark and leave space for a jump after this alternative,
+              GET_BUFFER_SPACE (3);
+              /* If \{ is a literal.  */
+              if (!(syntax & RE_INTERVALS)
+                     /* If we're at `\{' and it's not the open-interval 
+                  || ((syntax & RE_INTERVALS) && (syntax & RE_NO_BK_BRACES))
+                /* If got here, then the syntax allows intervals.  */
+                /* At least (most) this many matches must be made.  */
+                    if (syntax & RE_NO_BK_BRACES)
+                      return REG_EBRACE;
+                GET_UNSIGNED_NUMBER (lower_bound);
+                    GET_UNSIGNED_NUMBER (upper_bound);
+                    if (upper_bound < 0) upper_bound = RE_DUP_MAX;
+                  /* Interval such as `{1}' => match exactly once. */
+                if (lower_bound < 0 || upper_bound > RE_DUP_MAX
+                    if (syntax & RE_NO_BK_BRACES)
+                      return REG_BADBR;
+                if (!(syntax & RE_NO_BK_BRACES)) 
+                    if (c != '\\') return REG_EBRACE;
+                    PATFETCH (c);
+                    if (syntax & RE_NO_BK_BRACES)
+                      return REG_BADBR;
+                /* We just parsed a valid interval.  */
+                /* If it's invalid to have no preceding re.  */
+                    if (syntax & RE_CONTEXT_INVALID_OPS)
+                      return REG_BADRPT;
+                    else if (syntax & RE_CONTEXT_INDEP_OPS)
+                /* If the upper bound is zero, don't want to succeed at
+                     GET_BUFFER_SPACE (3);
+                     INSERT_JUMP (jump, laststart, b + 3);
+                 /* Otherwise, we have a nontrivial interval.  When
+                    (The upper bound and `jump_n' are omitted if
+                   { /* If the upper bound is > 1, we need to insert
+                     GET_BUFFER_SPACE (nbytes);
+                     /* Initialize lower bound of the `succeed_n', even
+                        Jump to the `jump_n' we might insert below.  */
+                     INSERT_JUMP2 (succeed_n, laststart,
+                     /* Code to initialize the lower bound.  Insert 
+                        before the `succeed_n'.  The `5' is the last two
+                       { /* More than one repetition is allowed, so
+                            When we've reached this during matching,
+                         STORE_JUMP2 (jump_n, b, laststart + 5,
+                         /* The location we want to set is the second
+                            for the relative address.  But we are
+                            Conclusion: (b - 2) - (laststart + 3) + 5,
+                            We insert this at the beginning of the loop
+                beg_interval = NULL;
+              /* If an invalid interval, match the characters as literals.  */
+               beg_interval = NULL;
+               PATFETCH (c);	
+               if (!(syntax & RE_NO_BK_BRACES))
+            /* There is no way to specify the before_dot and after_dot
+              BUF_PUSH (at_dot);
+              PATFETCH (c);
+              BUF_PUSH_2 (syntaxspec, syntax_spec_code[c]);
+            case 'S':
+              PATFETCH (c);
+              BUF_PUSH_2 (notsyntaxspec, syntax_spec_code[c]);
+              BUF_PUSH (wordchar);
+            case 'W':
+              BUF_PUSH (notwordchar);
+              BUF_PUSH (wordbeg);
+              BUF_PUSH (wordend);
+              BUF_PUSH (wordbound);
+            case 'B':
+              BUF_PUSH (notwordbound);
+              BUF_PUSH (begbuf);
+              BUF_PUSH (endbuf);
+              if (syntax & RE_NO_BK_REFS)
+                return REG_ESUBREG;
+              /* Can't back reference to a subexpression if inside of it.  */
+              BUF_PUSH_2 (duplicate, c1);
+              if (syntax & RE_BK_PLUS_QM)
+              /* You might think it would be useful for \ to mean
+              c = TRANSLATE (c);
+        /* Expects the character in `c'.  */
+	      /* If no exactn currently being built.  */
+              /* If last exactn not at current position.  */
+              /* We have only one byte following the exactn for the count.  */
+	      || *pending_exact == (1 << BYTEWIDTH) - 1
+              /* If followed by a repetition operator.  */
+	      || ((syntax & RE_BK_PLUS_QM)
+	      || ((syntax & RE_INTERVALS)
+                  && ((syntax & RE_NO_BK_BRACES)
+	      /* Start building a new exactn.  */
+	      BUF_PUSH_2 (exactn, 0);
+	  BUF_PUSH (c);
+  /* Through the pattern now.  */
+    STORE_JUMP (jump_past_alt, fixup_alt_jump, b);
+  if (!COMPILE_STACK_EMPTY) 
+    return REG_EPAREN;
+  /* We have succeeded; set the length of the buffer.  */
+#ifdef DEBUG
+      DEBUG_PRINT1 ("\nCompiled pattern: \n");
+#endif /* DEBUG */
+  return REG_NOERROR;
+/* Subroutines for `regex_compile'.  */
+/* Store OP at LOC followed by two-byte integer parameter ARG.  */
+  STORE_NUMBER (loc + 1, arg);
+/* Like `store_op1', but" for 'two two-byte parameters ARG1 and ARG2.  */
+  STORE_NUMBER (loc + 1, arg1);
+  STORE_NUMBER (loc + 3, arg2);
+/* Copy the bytes from LOC to END to open up three bytes of space at LOC
+   for OP followed by two-byte integer parameter ARG.  */
+/* Like `insert_op1', but for two two-byte parameters ARG1 and ARG2.  */
+/* P points to just after a ^ in PATTERN.  Return true if that ^ comes
+   after an alternative or a begin-subexpression.  We assume there is at
+       /* After a subexpression?  */
+       (*prev == '(' && (syntax & RE_NO_BK_PARENS || prev_prev_backslash))
+       /* After an alternative?  */
+    || (*prev == '|' && (syntax & RE_NO_BK_VBAR || prev_prev_backslash));
+/* The dual of at_begline_loc_p.  This one is for $.  We assume there is
+   at least one character after the $, i.e., `P < PEND'.  */
+  const char *next_next = p + 1 < pend ? p + 1 : NULL;
+       /* Before a subexpression?  */
+       (syntax & RE_NO_BK_PARENS ? *next == ')'
+       /* Before an alternative?  */
+    || (syntax & RE_NO_BK_VBAR ? *next == '|'
+/* Returns true if REGNUM is in one of COMPILE_STACK's elements and 
+/* Read the ending character of a range (in a bracket expression) from the
+   uncompiled pattern *P_PTR (which ends at PEND).  We assume the
+   starting character is in `P[-2]'.  (`P[-1]' is the character `-'.)
+   Then we set the translation of all bits between the starting and
+   ending characters (inclusive) in the compiled pattern B.
+   Return an error code.
+   We use these short variable names so we can use the same macros as
+    return REG_ERANGE;
+  /* Even though the pattern is a signed `char *', we need to fetch
+     We also want to fetch the endpoints without translating them; the 
+  /* Have to increment the pointer into the pattern string, so the
+  /* If the start is after the end, the range is empty.  */
+    return syntax & RE_NO_EMPTY_RANGES ? REG_ERANGE : REG_NOERROR;
+  /* Here we see why `this_char' has to be larger than an `unsigned
+      SET_LIST_BIT (TRANSLATE (this_char));
+  return REG_NOERROR;
+/* Failure stack declarations and macros; both re_compile_fastmap and
+   re_match_2 use a failure stack.  These have to be macros because of
+   REGEX_ALLOCATE.  */
+/* Number of failure points for which to initially allocate space
+   when matching.  If this number is exceeded, we allocate more
+#ifndef INIT_FAILURE_ALLOC
+#define INIT_FAILURE_ALLOC 5
+/* Roughly the maximum number of failure points on the stack.  Would be
+   exactly that if always used MAX_FAILURE_SPACE each time we failed.
+   This is a variable only so users of regex can assign to it; we never
+  unsigned avail;			/* Offset of next open position.  */
+#define FAIL_STACK_EMPTY()     (fail_stack.avail == 0)
+#define FAIL_STACK_PTR_EMPTY() (fail_stack_ptr->avail == 0)
+#define FAIL_STACK_FULL()      (fail_stack.avail == fail_stack.size)
+#define FAIL_STACK_TOP()       (fail_stack.stack[fail_stack.avail])
+/* Initialize `fail_stack'.  Do `return -2' if the alloc fails.  */
+#define INIT_FAIL_STACK()						\
+      REGEX_ALLOCATE (INIT_FAILURE_ALLOC * sizeof (fail_stack_elt_t));	\
+    if (fail_stack.stack == NULL)					\
+    fail_stack.size = INIT_FAILURE_ALLOC;				\
+/* Double the size of FAIL_STACK, up to approximately `re_max_failures' items.
+   Return 1 if succeeds, and 0 if either ran out of memory
+   REGEX_REALLOCATE requires `destination' be declared.   */
+#define DOUBLE_FAIL_STACK(fail_stack)					\
+  ((fail_stack).size > re_max_failures * MAX_FAILURE_ITEMS		\
+        REGEX_REALLOCATE ((fail_stack).stack, 				\
+      (fail_stack).stack == NULL					\
+/* Push PATTERN_OP on FAIL_STACK. 
+   Return 1 if was able to do so and 0 if ran out of memory allocating
+#define PUSH_PATTERN_OP(pattern_op, fail_stack)				\
+  ((FAIL_STACK_FULL ()							\
+    && !DOUBLE_FAIL_STACK (fail_stack))					\
+/* This pushes an item onto the failure stack.  Must be a four-byte
+   value.  Assumes the variable `fail_stack'.  Probably should only
+   be called from within `PUSH_FAILURE_POINT'.  */
+#define PUSH_FAILURE_ITEM(item)						\
+/* The complement operation.  Assumes `fail_stack' is nonempty.  */
+#define POP_FAILURE_ITEM() fail_stack.stack[--fail_stack.avail]
+/* Used to omit pushing failure point id's when we're not debugging.  */
+#ifdef DEBUG
+#define DEBUG_PUSH PUSH_FAILURE_ITEM
+#define DEBUG_POP(item_addr) *(item_addr) = POP_FAILURE_ITEM ()
+#define DEBUG_PUSH(item)
+#define DEBUG_POP(item_addr)
+/* Push the information about the state we will need
+   Requires variables fail_stack, regstart, regend, reg_info, and
+   num_regs be declared.  DOUBLE_FAIL_STACK requires `destination' be
+   Does `return FAILURE_CODE' if runs out of memory.  */
+#define PUSH_FAILURE_POINT(pattern_place, string_place, failure_code)	\
+    /* Must be int, so when we don't save any registers, the arithmetic	\
+    DEBUG_STATEMENT (failure_id++);					\
+    DEBUG_STATEMENT (nfailure_points_pushed++);				\
+    DEBUG_PRINT2 ("\nPUSH_FAILURE_POINT #%u:\n", failure_id);		\
+    DEBUG_PRINT2 ("  Before push, next avail: %d\n", (fail_stack).avail);\
+    DEBUG_PRINT2 ("                     size: %d\n", (fail_stack).size);\
+    DEBUG_PRINT2 ("  slots needed: %d\n", NUM_FAILURE_ITEMS);		\
+    DEBUG_PRINT2 ("     available: %d\n", REMAINING_AVAIL_SLOTS);	\
+    /* Ensure we have enough space allocated for what we will push.  */	\
+    while (REMAINING_AVAIL_SLOTS < NUM_FAILURE_ITEMS)			\
+        if (!DOUBLE_FAIL_STACK (fail_stack))			\
+        DEBUG_PRINT2 ("\n  Doubled stack; size now: %d\n",		\
+        DEBUG_PRINT2 ("  slots available: %d\n", REMAINING_AVAIL_SLOTS);\
+    /* Push the info, starting with the registers.  */			\
+    DEBUG_PRINT1 ("\n");						\
+	DEBUG_PRINT2 ("  Pushing reg: %d\n", this_reg);			\
+        DEBUG_STATEMENT (num_regs_pushed++);				\
+	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+        PUSH_FAILURE_ITEM (regstart[this_reg]);				\
+	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+        PUSH_FAILURE_ITEM (regend[this_reg]);				\
+	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+        DEBUG_PRINT2 (" match_null=%d",					\
+                      REG_MATCH_NULL_STRING_P (reg_info[this_reg]));	\
+        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+        DEBUG_PRINT2 (" matched_something=%d",				\
+                      MATCHED_SOMETHING (reg_info[this_reg]));		\
+        DEBUG_PRINT2 (" ever_matched=%d",				\
+                      EVER_MATCHED_SOMETHING (reg_info[this_reg]));	\
+	DEBUG_PRINT1 ("\n");						\
+        PUSH_FAILURE_ITEM (reg_info[this_reg].word);			\
+    DEBUG_PRINT2 ("  Pushing  low active reg: %d\n", lowest_active_reg);\
+    PUSH_FAILURE_ITEM (lowest_active_reg);				\
+    DEBUG_PRINT2 ("  Pushing high active reg: %d\n", highest_active_reg);\
+    PUSH_FAILURE_ITEM (highest_active_reg);				\
+    DEBUG_PRINT2 ("  Pushing pattern 0x%x: ", pattern_place);		\
+    DEBUG_PRINT_COMPILED_PATTERN (bufp, pattern_place, pend);		\
+    PUSH_FAILURE_ITEM (pattern_place);					\
+    DEBUG_PRINT2 ("  Pushing string 0x%x: `", string_place);		\
+    DEBUG_PRINT_DOUBLE_STRING (string_place, string1, size1, string2,   \
+    DEBUG_PRINT1 ("'\n");						\
+    PUSH_FAILURE_ITEM (string_place);					\
+    DEBUG_PRINT2 ("  Pushing failure id: %u\n", failure_id);		\
+    DEBUG_PUSH (failure_id);						\
+/* This is the number of items that are pushed and popped on the stack
+#define NUM_REG_ITEMS  3
+/* Individual items aside from the registers.  */
+#ifdef DEBUG
+#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+#define NUM_NONREG_ITEMS 4
+/* We push at most this many items on the stack.  */
+#define MAX_FAILURE_ITEMS ((num_regs - 1) * NUM_REG_ITEMS + NUM_NONREG_ITEMS)
+/* We actually push this many items.  */
+#define NUM_FAILURE_ITEMS						\
+  ((highest_active_reg - lowest_active_reg + 1) * NUM_REG_ITEMS 	\
+    + NUM_NONREG_ITEMS)
+/* How many items can still be added to the stack without overflowing it.  */
+#define REMAINING_AVAIL_SLOTS ((fail_stack).size - (fail_stack).avail)
+/* Pops what PUSH_FAIL_STACK pushes.
+   We restore into the parameters, all of which should be lvalues:
+     STR -- the saved data position.
+     PAT -- the saved pattern position.
+     LOW_REG, HIGH_REG -- the highest and lowest active registers.
+     REGSTART, REGEND -- arrays of string positions.
+     REG_INFO -- array of information about each subexpression.
+   Also assumes the variables `fail_stack' and (if debugging), `bufp',
+#define POP_FAILURE_POINT(str, pat, low_reg, high_reg, regstart, regend, reg_info)\
+  DEBUG_STATEMENT (fail_stack_elt_t failure_id;)			\
+  assert (!FAIL_STACK_EMPTY ());					\
+  /* Remove failure points and point to how many regs pushed.  */	\
+  DEBUG_PRINT1 ("POP_FAILURE_POINT:\n");				\
+  DEBUG_PRINT2 ("  Before pop, next avail: %d\n", fail_stack.avail);	\
+  DEBUG_PRINT2 ("                    size: %d\n", fail_stack.size);	\
+  assert (fail_stack.avail >= NUM_NONREG_ITEMS);			\
+  DEBUG_POP (&failure_id);						\
+  DEBUG_PRINT2 ("  Popping failure id: %u\n", failure_id);		\
+  /* If the saved string location is NULL, it came from an		\
+     saved NULL, thus retaining our current position in the string.  */	\
+  string_temp = POP_FAILURE_ITEM ();					\
+  if (string_temp != NULL)						\
+  DEBUG_PRINT2 ("  Popping string 0x%x: `", str);			\
+  DEBUG_PRINT_DOUBLE_STRING (str, string1, size1, string2, size2);	\
+  DEBUG_PRINT1 ("'\n");							\
+  pat = (unsigned char *) POP_FAILURE_ITEM ();				\
+  DEBUG_PRINT2 ("  Popping pattern 0x%x: ", pat);			\
+  DEBUG_PRINT_COMPILED_PATTERN (bufp, pat, pend);			\
+  /* Restore register info.  */						\
+  high_reg = (unsigned) POP_FAILURE_ITEM ();				\
+  DEBUG_PRINT2 ("  Popping high active reg: %d\n", high_reg);		\
+  low_reg = (unsigned) POP_FAILURE_ITEM ();				\
+  DEBUG_PRINT2 ("  Popping  low active reg: %d\n", low_reg);		\
+      DEBUG_PRINT2 ("    Popping reg: %d\n", this_reg);			\
+      reg_info[this_reg].word = POP_FAILURE_ITEM ();			\
+      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+      regend[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+      regstart[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+  DEBUG_STATEMENT (nfailure_points_popped++);				\
+} /* POP_FAILURE_POINT */
+   BUFP.  A fastmap records which of the (1 << BYTEWIDTH) possible
+   characters can start a string that matches the pattern.  This fastmap
+   The caller must supply the address of a (1 << BYTEWIDTH)-byte data
+   area as BUFP->fastmap.
+   We set the `fastmap', `fastmap_accurate', and `can_be_null' fields in
+   Returns 0 if we succeed, -2 if an internal error.   */
+#ifndef REGEX_MALLOC
+  /* We don't push any register information onto the failure stack.  */
+  /* Assume that each path through the pattern can be null until
+     proven otherwise.  We set this false at the bottom of switch
+  /* We aren't doing a `succeed_n' to begin with.  */
+  assert (fastmap != NULL && p != NULL);
+  INIT_FAIL_STACK ();
+  bzero (fastmap, 1 << BYTEWIDTH);  /* Assume nothing's valid.  */
+  bufp->fastmap_accurate = 1;	    /* It will be when we're done.  */
+  while (p != pend || !FAIL_STACK_EMPTY ())
+          /* Reset for next path.  */
+      /* We should never be about to go beyond the end of the pattern.  */
+#ifdef SWITCH_ENUM_BUG
+        /* I guess the idea here is to simply not bother with a fastmap
+           the fastmap for the corresponding group.  Setting
+      /* Following are the cases which match a character.  These end
+          for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+	    if (p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH)))
+	  /* Chars beyond end of map must be allowed.  */
+	  for (j = *p * BYTEWIDTH; j < (1 << BYTEWIDTH); j++)
+	  for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+	    if (!(p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH))))
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) == Sword)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) != Sword)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+          if (!(bufp->syntax & RE_DOT_NEWLINE))
+          /* Return if we have already set `can_be_null'; if we have,
+             then the fastmap is irrelevant.  Something's wrong here.  */
+          /* Otherwise, have to check alternative paths.  */
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) == (enum syntaxcode) k)
+	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+	    if (SYNTAX (j) != (enum syntaxcode) k)
+      /* All cases after this match the empty string.  These end with
+          EXTRACT_NUMBER_AND_INCR (j, p);
+          /* Jump backward implies we just went through the body of a
+             loop and matched nothing.  Opcode jumped to should be
+             `on_failure_jump' or `succeed_n'.  Just treat it like an
+             ordinary jump.  For a * loop, it has pushed its failure
+          EXTRACT_NUMBER_AND_INCR (j, p);
+          /* If what's on the stack is where we are now, pop it.  */
+          if (!FAIL_STACK_EMPTY () 
+          EXTRACT_NUMBER_AND_INCR (j, p);
+          /* For some patterns, e.g., `(a?)?', `p+j' here points to the
+             end of the pattern.  We don't want to push such a point,
+             increment `p' past the end of the pattern.  We don't need
+             fastmap entries beyond `pend'.  Such a pattern can match
+              if (!PUSH_PATTERN_OP (p + j, fail_stack))
+              EXTRACT_NUMBER_AND_INCR (k, p);	/* Skip the n.  */
+          /* Get to the number of times to succeed.  */
+          /* Increment p past the n for when k != 0.  */
+          EXTRACT_NUMBER_AND_INCR (k, p);
+  	      succeed_n_p = true;  /* Spaghetti code alert.  */
+          abort (); /* We have listed all the cases.  */
+      /* Getting here means we have found the possible starting
+         string does not match.  We need not follow this path further.
+         Instead, look at the next alternative (remembered on the
+         stack), or quit if no more.  The test at the top of the loop
+  /* Set `can_be_null' for the last path (also the first path, if the
+/* Set REGS to hold NUM_REGS registers, storing them in STARTS and
+   ENDS.  Subsequent matches using PATTERN_BUFFER and REGS will use
+   this memory for recording register information.  STARTS and ENDS
+   be at least NUM_REGS * sizeof (regoff_t) bytes long.
+   If NUM_REGS == 0, then subsequent matches should allocate their own
+   Unless this function is called, the first search or match using
+   PATTERN_BUFFER will allocate its own register data, without
+      bufp->regs_allocated = REGS_REALLOCATE;
+      bufp->regs_allocated = REGS_UNALLOCATED;
+/* Searching routines.  */
+/* Like re_search_2, below, but only one string is specified, and
+  return re_search_2 (bufp, NULL, 0, string, size, startpos, range, 
+/* Using the compiled pattern in BUFP->buffer, first tries to match the
+   virtual concatenation of STRING1 and STRING2, starting first at index
+   STARTPOS, then at STARTPOS + 1, and so on.
+   STRING1 and STRING2 have length SIZE1 and SIZE2, respectively.
+   RANGE is how far to scan while trying to match.  RANGE = 0 means try
+   only at STARTPOS; in general, the last start tried is STARTPOS +
+   RANGE.
+   In REGS, return the indices of the virtual concatenation of STRING1
+   and STRING2 that matched the entire BUFP->buffer and its contained
+   Do not consider matching one past the index STOP in the virtual
+   concatenation of STRING1 and STRING2.
+   We return either the position in the strings at which the match was
+  /* Check for out-of-range STARTPOS.  */
+  /* Fix up RANGE if it might eventually take us outside
+     the virtual concatenation of STRING1 and STRING2.  */
+  /* If the search isn't to be a backwards one, don't waste time in a
+  /* Update the fastmap now if not correct already.  */
+  /* Loop through the string, looking for a place to start matching.  */
+      /* If a fastmap is supplied, skip quickly over characters that
+         cannot be the start of a match.  If the pattern can match the
+	  if (range > 0)	/* Searching forwards.  */
+              /* Written out as an if-else to avoid testing `translate'
+	  else				/* Searching backwards.  */
+	      if (!fastmap[(unsigned char) TRANSLATE (c)])
+      /* If can't match the null string, and that's all we have left, fail.  */
+/* Declarations and macros for re_match_2.  */
+/* Structure for per-register (a.k.a. per-group) information.
+   This must not be longer than one word, because we push this value
+   onto the failure stack.  Other register information, such as the
+   We are making a (strictly speaking) nonportable assumption here: that
+      /* This field is one if this group can match the empty string,
+         zero if not.  If not yet determined,  `MATCH_NULL_UNSET_VALUE'.  */
+#define MATCH_NULL_UNSET_VALUE 3
+#define REG_MATCH_NULL_STRING_P(R)  ((R).bits.match_null_string_p)
+#define IS_ACTIVE(R)  ((R).bits.is_active)
+#define MATCHED_SOMETHING(R)  ((R).bits.matched_something)
+#define EVER_MATCHED_SOMETHING(R)  ((R).bits.ever_matched_something)
+/* Call this when have matched a real character; it sets `matched' flags
+   for the subexpressions which we are currently inside.  Also records
+#define SET_REGS_MATCHED()						\
+          MATCHED_SOMETHING (reg_info[r])				\
+            = EVER_MATCHED_SOMETHING (reg_info[r])			\
+/* This converts PTR, a pointer into one of the search strings `string1'
+#define POINTER_TO_OFFSET(ptr)						\
+  (FIRST_STRING_P (ptr) ? (ptr) - string1 : (ptr) - string2 + size1)
+/* Registers are set to a sentinel when they haven't yet matched.  */
+#define REG_UNSET_VALUE ((char *) -1)
+#define REG_UNSET(e) ((e) == REG_UNSET_VALUE)
+/* Macros for dealing with the split strings in re_match_2.  */
+#define MATCHING_IN_FIRST_STRING  (dend == end_match_1)
+/* Call before fetching a character with *d.  This switches over to
+#define PREFETCH()							\
+      /* End of string2 => fail.  */					\
+      /* End of string1 => advance to string2.  */ 			\
+/* Test if at very beginning or at very end of the virtual concatenation
+   of `string1' and `string2'.  If only one string, it's `string2'.  */
+#define AT_STRINGS_BEG(d) ((d) == (size1 ? string1 : string2) || !size2)
+#define AT_STRINGS_END(d) ((d) == end2)	
+/* Test if D points to a character which is word-constituent.  We have
+#define WORDCHAR_P(d)							\
+  (SYNTAX ((d) == end1 ? *string2					\
+   == Sword)
+/* Test if the character before D and the one at D differ with respect
+#define AT_WORD_BOUNDARY(d)						\
+  (AT_STRINGS_BEG (d) || AT_STRINGS_END (d)				\
+   || WORDCHAR_P (d - 1) != WORDCHAR_P (d))
+/* Free everything we malloc.  */
+#ifdef REGEX_MALLOC
+#define FREE_VAR(var) if (var) free (var); var = NULL
+#define FREE_VARIABLES()						\
+    FREE_VAR (fail_stack.stack);					\
+    FREE_VAR (regstart);						\
+    FREE_VAR (regend);							\
+    FREE_VAR (old_regstart);						\
+    FREE_VAR (old_regend);						\
+    FREE_VAR (best_regstart);						\
+    FREE_VAR (best_regend);						\
+    FREE_VAR (reg_info);						\
+    FREE_VAR (reg_dummy);						\
+    FREE_VAR (reg_info_dummy);						\
+#else /* not REGEX_MALLOC */
+/* Some MIPS systems (at least) want this to free alloca'd storage.  */
+#define FREE_VARIABLES() alloca (0)
+#endif /* not REGEX_MALLOC */
+/* These values must meet several constraints.  They must not be valid
+   use numbers larger than 255.  They must differ by 1, because of
+   NUM_FAILURE_ITEMS above.  And the value for the lowest register must
+#define NO_HIGHEST_ACTIVE_REG (1 << BYTEWIDTH)
+#define NO_LOWEST_ACTIVE_REG (NO_HIGHEST_ACTIVE_REG + 1)
+/* Matching routines.  */
+#ifndef emacs   /* Emacs never uses this.  */
+  return re_match_2 (bufp, NULL, 0, string, size, pos, regs, size); 
+/* re_match_2 matches the compiled pattern in BUFP against the
+   the (virtual) concatenation of STRING1 and STRING2 (of length SIZE1
+   and SIZE2, respectively).  We start matching at POS, and stop
+   matching at STOP.
+   If REGS is non-null and the `no_sub' field of BUFP is nonzero, we
+   store offsets for the substring each group matched in REGS.  See the
+   We return -1 if no match, -2 if an internal error (such as the
+   failure stack overflowing).  Otherwise, we return the length of the
+  /* General temporaries.  */
+  /* Just past the end of the corresponding string.  */
+  /* Pointers into string1 and string2, just past the last characters in
+  /* Where we are in the data, and the end of the current string.  */
+  /* Where we are in the pattern, and the end of the pattern.  */
+  /* We use this to map every character in the string.  */
+  /* Failure point stack.  Each place that can handle a failure further
+     down the line pushes a failure point on this stack.  It consists of
+     registers, and, finally, two char *'s.  The first char * is where
+     scanning the strings.  If the latter is zero, the failure point is
+#ifdef DEBUG
+  /* We fill all the registers internally, independent of what we
+     return, for use in backreferences.  The number here includes
+  /* The currently active registers.  */
+  unsigned lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+  unsigned highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+  /* Information on the contents of registers. These are pointers into
+     stopped matching the regnum-th subexpression.  (The zeroth register
+  /* If a group that's operated upon by a repetition operator fails to
+     are when we last see its open-group operator.  Similarly for a
+  /* The is_active field of reg_info helps us keep track of which (possibly
+     nested) subexpressions we are currently in. The matched_something
+     subexpression.  These two fields get reset each time through any
+  /* The following record the register info as found in the above
+     This happens as we backtrack through the failure points, which in
+  /* Logically, this is `best_regend[0]'.  But we don't want to have to
+     else (see below).  Also, we never need info about register 0 for
+     treat `best_regend' differently than the rest.  So we keep track of
+     the end of the best match so far in a separate variable.  We
+     initialize this to NULL so that when we backtrack the first time
+  const char *match_end = NULL;
+  /* Used when we pop values we don't care about.  */
+#ifdef DEBUG
+  /* Counts the total number of registers pushed.  */
+  DEBUG_PRINT1 ("\n\nEntering re_match_2.\n");
+  INIT_FAIL_STACK ();
+  /* Do not bother to initialize all the register variables if there are
+     no groups in the pattern, as it takes a fair amount of time.  If
+     array indexing.  We should fix this.  */
+      regstart = REGEX_TALLOC (num_regs, const char *);
+      regend = REGEX_TALLOC (num_regs, const char *);
+      old_regstart = REGEX_TALLOC (num_regs, const char *);
+      old_regend = REGEX_TALLOC (num_regs, const char *);
+      best_regstart = REGEX_TALLOC (num_regs, const char *);
+      best_regend = REGEX_TALLOC (num_regs, const char *);
+      reg_info = REGEX_TALLOC (num_regs, register_info_type);
+      reg_dummy = REGEX_TALLOC (num_regs, const char *);
+      reg_info_dummy = REGEX_TALLOC (num_regs, register_info_type);
+          FREE_VARIABLES ();
+#ifdef REGEX_MALLOC
+      /* We must initialize all our variables to NULL, so that
+         `FREE_VARIABLES' doesn't try to free them.  */
+        = best_regend = reg_dummy = NULL;
+      reg_info = reg_info_dummy = (register_info_type *) NULL;
+#endif /* REGEX_MALLOC */
+  /* The starting position is bogus.  */
+      FREE_VARIABLES ();
+  /* Initialize subexpression text positions to -1 to mark ones that no
+     start_memory/stop_memory has been seen for. Also initialize the
+        = old_regstart[mcnt] = old_regend[mcnt] = REG_UNSET_VALUE;
+      REG_MATCH_NULL_STRING_P (reg_info[mcnt]) = MATCH_NULL_UNSET_VALUE;
+      IS_ACTIVE (reg_info[mcnt]) = 0;
+      MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+      EVER_MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+  /* We move `string1' into `string2' if the latter's empty -- but not if
+  if (size2 == 0 && string1 != NULL)
+  /* Compute where to stop matching, within the two strings.  */
+  DEBUG_PRINT1 ("The compiled pattern is: ");
+  DEBUG_PRINT_COMPILED_PATTERN (bufp, p, pend);
+  DEBUG_PRINT1 ("The string to match is: `");
+  DEBUG_PRINT_DOUBLE_STRING (d, string1, size1, string2, size2);
+  DEBUG_PRINT1 ("'\n");
+  /* This loops over pattern commands.  It exits by returning from the
+      DEBUG_PRINT2 ("\n0x%x: ", p);
+	{ /* End of pattern means we might have succeeded.  */
+          DEBUG_PRINT1 ("end of pattern ... ");
+	  /* If we haven't matched the entire string, and we want the
+              DEBUG_PRINT1 ("backtracking.\n");
+              if (!FAIL_STACK_EMPTY ())
+                { /* More failure points to try.  */
+                  boolean same_str_p = (FIRST_STRING_P (match_end) 
+	        	                == MATCHING_IN_FIRST_STRING);
+                  /* If exceeds best match so far, save it.  */
+                      || (!same_str_p && !MATCHING_IN_FIRST_STRING))
+                      DEBUG_PRINT1 ("\nSAVING match as best so far.\n");
+              /* If no failure points, don't restore garbage.  */
+                  /* Restore best match.  It may happen that `dend ==
+                     For example, the pattern `x.*y.*z' against the
+                  DEBUG_PRINT1 ("Restoring best registers.\n");
+          DEBUG_PRINT1 ("Accepting match.\n");
+          /* If caller wants register contents data back, do it.  */
+              /* Have the register data arrays been allocated?  */
+              if (bufp->regs_allocated == REGS_UNALLOCATED)
+                { /* No.  So allocate them with malloc.  We need one
+                     GNU code uses.  */
+                  regs->num_regs = MAX (RE_NREGS, num_regs + 1);
+                  regs->start = TALLOC (regs->num_regs, regoff_t);
+                  regs->end = TALLOC (regs->num_regs, regoff_t);
+                  if (regs->start == NULL || regs->end == NULL)
+                  bufp->regs_allocated = REGS_REALLOCATE;
+              else if (bufp->regs_allocated == REGS_REALLOCATE)
+                { /* Yes.  If we need more elements than were already
+                     allocated, reallocate them.  If we need fewer, just
+                      RETALLOC (regs->start, regs->num_regs, regoff_t);
+                      RETALLOC (regs->end, regs->num_regs, regoff_t);
+                      if (regs->start == NULL || regs->end == NULL)
+		  /* These braces fend off a "empty body in an else-statement"
+		     warning under GCC when assert expands to nothing.  */
+		  assert (bufp->regs_allocated == REGS_FIXED);
+              /* Convert the pointer data in `regstart' and `regend' to
+                 indices.  Register zero has to be set differently,
+                  regs->end[0] = (MATCHING_IN_FIRST_STRING ? d - string1
+              /* Go through the first `min (num_regs, regs->num_regs)'
+	      for (mcnt = 1; mcnt < MIN (num_regs, regs->num_regs); mcnt++)
+                  if (REG_UNSET (regstart[mcnt]) || REG_UNSET (regend[mcnt]))
+		      regs->start[mcnt] = POINTER_TO_OFFSET (regstart[mcnt]);
+                      regs->end[mcnt] = POINTER_TO_OFFSET (regend[mcnt]);
+              /* If the regs structure we return has more elements than
+                 were in the pattern, set the extra elements to -1.  If
+          FREE_VARIABLES ();
+          DEBUG_PRINT4 ("%u failure points pushed, %u popped (%u remain).\n",
+          DEBUG_PRINT2 ("%u registers pushed.\n", num_regs_pushed);
+          mcnt = d - pos - (MATCHING_IN_FIRST_STRING 
+          DEBUG_PRINT2 ("Returning %d from re_match_2.\n", mcnt);
+      /* Otherwise match next pattern command.  */
+#ifdef SWITCH_ENUM_BUG
+        /* Ignore these.  Used to ignore the n of succeed_n's which
+          DEBUG_PRINT1 ("EXECUTING no_op.\n");
+        /* Match the next n pattern characters exactly.  The following
+          DEBUG_PRINT2 ("EXECUTING exactn %d.\n", mcnt);
+          /* This is written out as an if-else so we don't waste time
+		  PREFETCH ();
+		  PREFETCH ();
+	  SET_REGS_MATCHED ();
+        /* Match any character except possibly a newline or a null.  */
+          DEBUG_PRINT1 ("EXECUTING anychar.\n");
+          PREFETCH ();
+          if ((!(bufp->syntax & RE_DOT_NEWLINE) && TRANSLATE (*d) == '\n')
+              || (bufp->syntax & RE_DOT_NOT_NULL && TRANSLATE (*d) == '\000'))
+          SET_REGS_MATCHED ();
+          DEBUG_PRINT2 ("  Matched `%d'.\n", *d);
+            DEBUG_PRINT2 ("EXECUTING charset%s.\n", not ? "_not" : "");
+	    PREFETCH ();
+	    c = TRANSLATE (*d); /* The character to match.  */
+            /* Cast to `unsigned' instead of `unsigned char' in case the
+	    if (c < (unsigned) (*p * BYTEWIDTH)
+		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+	    SET_REGS_MATCHED ();
+        /* The beginning of a group is represented by start_memory.
+           The arguments are the register number in the next byte, and the
+           number of groups inner to this one in the next.  The text
+	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+          /* Find out if this group can match the empty string.  */
+	  p1 = p;		/* To send to group_match_null_string_p.  */
+          if (REG_MATCH_NULL_STRING_P (reg_info[*p]) == MATCH_NULL_UNSET_VALUE)
+            REG_MATCH_NULL_STRING_P (reg_info[*p]) 
+          /* Save the position in the string where we were the last time
+          old_regstart[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+                             ? REG_UNSET (regstart[*p]) ? d : regstart[*p]
+	  DEBUG_PRINT2 ("  old_regstart: %d\n", 
+			 POINTER_TO_OFFSET (old_regstart[*p]));
+	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+          IS_ACTIVE (reg_info[*p]) = 1;
+          MATCHED_SOMETHING (reg_info[*p]) = 0;
+          /* This is the new highest active register.  */
+          /* If nothing was active before, this is the new lowest active
+          if (lowest_active_reg == NO_LOWEST_ACTIVE_REG)
+          /* Move past the register number and inner group count.  */
+        /* The stop_memory opcode represents the end of a group.  Its
+	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+          /* We need to save the string position the last time we were at
+          old_regend[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+                           ? REG_UNSET (regend[*p]) ? d : regend[*p]
+	  DEBUG_PRINT2 ("      old_regend: %d\n", 
+			 POINTER_TO_OFFSET (old_regend[*p]));
+	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+          /* This register isn't active anymore.  */
+          IS_ACTIVE (reg_info[*p]) = 0;
+          /* If this was the only register active, nothing is active
+              lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+              highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+            { /* We must scan for the new highest active register, since
+                 (a(b)c(d(e)f)g).  When group 3 ends, after the f), the
+              while (r > 0 && !IS_ACTIVE (reg_info[r]))
+              /* If we end up at register zero, that means that we saved
+                 `stop_memory'.  For example, in ((.)*) we save
+                 Thus, nothing is active.  */
+                  lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+                  highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+          /* If just failed to match something this time around with a
+          if ((!MATCHED_SOMETHING (reg_info[*p])
+                    EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+              /* If the next operation is a jump backwards in the pattern
+                  /* If this group ever matched anything, then restore
+                     Also restore the registers for inner groups for,
+                  if (EVER_MATCHED_SOMETHING (reg_info[*p]))
+                      EVER_MATCHED_SOMETHING (reg_info[*p]) = 0;
+		      /* Restore this and inner groups' (if any) registers.  */
+                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+                  PUSH_FAILURE_POINT (p1 + mcnt, d, -2);
+          /* Move past the register number and the inner group count.  */
+	    int regno = *p++;   /* Get which register to match against.  */
+	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
+	    /* Can't back reference a group which we've never matched.  */
+            if (REG_UNSET (regstart[regno]) || REG_UNSET (regend[regno]))
+            /* Where in input to try to start matching.  */
+            /* Where to stop matching; if both the place to start and
+            dend2 = ((FIRST_STRING_P (regstart[regno]) 
+		      == FIRST_STRING_P (regend[regno]))
+		/* If necessary, advance to next segment in register
+                    /* End of string1 => advance to string2. */
+		/* At end of register contents => success */
+		/* If necessary, advance to next segment in data.  */
+		PREFETCH ();
+		/* How many characters left in this segment to match.  */
+		/* Want how many consecutive characters we can match in
+		/* Compare that many; failure if mismatch, else move
+          DEBUG_PRINT1 ("EXECUTING begline.\n");
+          if (AT_STRINGS_BEG (d))
+          /* In all other cases, we fail.  */
+          DEBUG_PRINT1 ("EXECUTING endline.\n");
+          if (AT_STRINGS_END (d))
+          /* We have to ``prefetch'' the next character.  */
+	/* Match at the very beginning of the data.  */
+          DEBUG_PRINT1 ("EXECUTING begbuf.\n");
+          if (AT_STRINGS_BEG (d))
+	/* Match at the very end of the data.  */
+          DEBUG_PRINT1 ("EXECUTING endbuf.\n");
+	  if (AT_STRINGS_END (d))
+        /* on_failure_keep_string_jump is used to optimize `.*\n'.  It
+           pushes NULL as the value for the string on the stack.  Then
+           string, instead of restoring it.  To see why, consider
+           matching `foo\nbar' against `.*\n'.  The .* matches the foo;
+           then the . fails against the \n.  But the next thing we want
+           Because this is used only in specific cases, we don't need to
+           sure the right things get saved on the stack.  Hence we don't
+           share its code.  The only reason to push anything on the
+          DEBUG_PRINT1 ("EXECUTING on_failure_keep_string_jump");
+          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          DEBUG_PRINT3 (" %d (to 0x%x):\n", mcnt, p + mcnt);
+          PUSH_FAILURE_POINT (p + mcnt, NULL, -2);
+	/* Uses of on_failure_jump:
+           Each alternative starts with an on_failure_jump that points
+           to the beginning of the next alternative.  Each alternative
+           the rest of the alternatives.  (They really jump to the
+           Repeats start with an on_failure_jump that points past both
+          DEBUG_PRINT1 ("EXECUTING on_failure_jump");
+          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          DEBUG_PRINT3 (" %d (to 0x%x)", mcnt, p + mcnt);
+          /* If this on_failure_jump comes right before a group (i.e.,
+             For example, in \(a*\)*\1, we need the preceding group,
+          /* We can't use `p' to check ahead because we push
+          /* We need to skip no_op's before we look for the
+              /* We have a new highest active register now.  This will
+              if (lowest_active_reg == NO_LOWEST_ACTIVE_REG)
+          DEBUG_PRINT1 (":\n");
+          PUSH_FAILURE_POINT (p + mcnt, d, -2);
+        /* A smart repeat ends with `maybe_pop_jump'.
+	   We change it to either `pop_failure_jump' or `jump'.  */
+          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+          DEBUG_PRINT2 ("EXECUTING maybe_pop_jump %d.\n", mcnt);
+            /* Compare the beginning of the repeat with what in the
+               pattern follows its end. If we can establish that there
+               This is not true in the case of alternatives: in
+               (e.g., if the string was `ab').  But instead of trying to
+	    /* Skip over open/close-group commands.  */
+	      p2 += 3;			/* Skip over args, too.  */
+            /* If we're at the end of the pattern, we can change.  */
+		/* Consider what happens when matching ":\(.*\)"
+		   against ":/".  I don't really understand this code
+                DEBUG_PRINT1
+                  ("  End of pattern: change to `pop_failure_jump'.\n");
+                   to the `maybe_finalize_jump' of this case.  Examine what 
+                    DEBUG_PRINT3 ("  %c != %c => pop_failure_jump.\n",
+		    if (c < (unsigned char) (p1[4] * BYTEWIDTH)
+			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+                        DEBUG_PRINT1 ("  No match => pop_failure_jump.\n");
+	  p -= 2;		/* Point at relative address again.  */
+              DEBUG_PRINT1 ("  Match => jump.\n");
+        /* Note fall through.  */
+	/* The end of a simple repeat has a pop_failure_jump back to
+           failure point.  The pop_failure_jump takes off failure
+            /* We need to pass separate storage for the lowest and
+               actual values.  Otherwise, we will restore only one
+            DEBUG_PRINT1 ("EXECUTING pop_failure_jump.\n");
+            POP_FAILURE_POINT (sdummy, pdummy,
+          /* Note fall through.  */
+        /* Unconditionally jump (without popping any failure points).  */
+	  EXTRACT_NUMBER_AND_INCR (mcnt, p);	/* Get the amount to jump.  */
+          DEBUG_PRINT2 ("EXECUTING jump %d ", mcnt);
+	  p += mcnt;				/* Do the jump.  */
+          DEBUG_PRINT2 ("(to 0x%x).\n", p);
+        /* We need this opcode so we can detect where alternatives end
+          DEBUG_PRINT1 ("EXECUTING jump_past_alt.\n");
+        /* Normally, the on_failure_jump pushes a failure point, which
+           then gets popped at pop_failure_jump.  We will end up at
+          DEBUG_PRINT1 ("EXECUTING dummy_failure_jump.\n");
+          /* It doesn't matter what we push for the string here.  What
+          PUSH_FAILURE_POINT (0, 0, -2);
+        /* At the end of an alternative, we need to push a dummy failure
+           popped.  For example, matching `(a|ab)*' against `aab'
+          DEBUG_PRINT1 ("EXECUTING push_dummy_failure.\n");
+          /* See comments just above at `dummy_failure_jump' about the
+          PUSH_FAILURE_POINT (0, 0, -2);
+        /* Have to succeed matching what follows at least n times.
+           After that, handle like `on_failure_jump'.  */
+          EXTRACT_NUMBER (mcnt, p + 2);
+          DEBUG_PRINT2 ("EXECUTING succeed_n %d.\n", mcnt);
+          /* Originally, this is how many times we HAVE to succeed.  */
+               STORE_NUMBER_AND_INCR (p, mcnt);
+               DEBUG_PRINT3 ("  Setting 0x%x to %d.\n", p, mcnt);
+              DEBUG_PRINT2 ("  Setting two bytes from 0x%x to no_op.\n", p+2);
+          EXTRACT_NUMBER (mcnt, p + 2);
+          DEBUG_PRINT2 ("EXECUTING jump_n %d.\n", mcnt);
+          /* Originally, this is how many times we CAN jump.  */
+               STORE_NUMBER (p + 2, mcnt);
+          /* If don't have to jump any more, skip over the rest of command.  */
+            DEBUG_PRINT1 ("EXECUTING set_number_at.\n");
+            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+            DEBUG_PRINT3 ("  Setting 0x%x to %d.\n", p1, mcnt);
+	    STORE_NUMBER (p1, mcnt);
+          DEBUG_PRINT1 ("EXECUTING wordbound.\n");
+          if (AT_WORD_BOUNDARY (d))
+          DEBUG_PRINT1 ("EXECUTING notwordbound.\n");
+	  if (AT_WORD_BOUNDARY (d))
+          DEBUG_PRINT1 ("EXECUTING wordbeg.\n");
+	  if (WORDCHAR_P (d) && (AT_STRINGS_BEG (d) || !WORDCHAR_P (d - 1)))
+          DEBUG_PRINT1 ("EXECUTING wordend.\n");
+	  if (!AT_STRINGS_BEG (d) && WORDCHAR_P (d - 1)
+              && (!WORDCHAR_P (d) || AT_STRINGS_END (d)))
+          DEBUG_PRINT1 ("EXECUTING before_dot.\n");
+ 	  if (PTR_CHAR_POS ((unsigned char *) d) >= point)
+          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+ 	  if (PTR_CHAR_POS ((unsigned char *) d) != point)
+          DEBUG_PRINT1 ("EXECUTING after_dot.\n");
+          if (PTR_CHAR_POS ((unsigned char *) d) <= point)
+          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+	  if (PTR_CHAR_POS ((unsigned char *) d) + 1 != point)
+          DEBUG_PRINT2 ("EXECUTING syntaxspec %d.\n", mcnt);
+          DEBUG_PRINT1 ("EXECUTING Emacs wordchar.\n");
+	  mcnt = (int) Sword;
+	  PREFETCH ();
+	  if (SYNTAX (*d++) != (enum syntaxcode) mcnt)
+          SET_REGS_MATCHED ();
+          DEBUG_PRINT2 ("EXECUTING notsyntaxspec %d.\n", mcnt);
+          DEBUG_PRINT1 ("EXECUTING Emacs notwordchar.\n");
+	  mcnt = (int) Sword;
+	  PREFETCH ();
+	  if (SYNTAX (*d++) == (enum syntaxcode) mcnt)
+	  SET_REGS_MATCHED ();
+          DEBUG_PRINT1 ("EXECUTING non-Emacs wordchar.\n");
+	  PREFETCH ();
+          if (!WORDCHAR_P (d))
+	  SET_REGS_MATCHED ();
+          DEBUG_PRINT1 ("EXECUTING non-Emacs notwordchar.\n");
+	  PREFETCH ();
+	  if (WORDCHAR_P (d))
+          SET_REGS_MATCHED ();
+      continue;  /* Successfully executed one pattern command; keep going.  */
+    /* We goto here if a matching operation fails. */
+      if (!FAIL_STACK_EMPTY ())
+	{ /* A restart point is known.  Restore to that state.  */
+          DEBUG_PRINT1 ("\nFAIL:\n");
+          POP_FAILURE_POINT (d, p,
+          /* If this failure point is a dummy, try the next one.  */
+          /* If we failed to the end of the pattern, don't examine *p.  */
+              /* If failed to a backwards jump that's part of a repetition
+                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+        break;   /* Matching at this starting point really fails.  */
+  FREE_VARIABLES ();
+  return -1;         			/* Failure to match.  */
+/* Subroutine definitions for re_match_2.  */
+/* We are passed P pointing to a register number after a start_memory.
+   Return true if the pattern up to the corresponding stop_memory can
+   If we find the matching stop_memory, sets P to point to one past its number.
+   Otherwise, sets P to an undefined byte less than or equal to END.
+   We don't handle duplicates properly (yet).  */
+  /* Point to after the args to the start_memory.  */
+      /* Skip over opcodes that can match nothing, and return true or
+        /* Could be either a loop or a series of alternatives.  */
+          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+          /* If the next operation is not a jump backwards in the
+              /* Go through the on_failure_jumps of the alternatives,
+                 The last alternative starts with only a jump,
+                 So, we have to first go through the first (n-1)
+              /* Deal with the first (n-1) alternatives, which start
+                  /* Move to right after this alternative, including the
+                  /* Break if it's the beginning of an n-th alternative
+		  /* Still have to check that it's not an n-th
+                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+		      /* Get to the beginning of the n-th alternative.  */
+              /* Deal with the last alternative: go back and get number
+              EXTRACT_NUMBER (mcnt, p1 - 2);
+              p1 += mcnt;	/* Get past the n-th alternative.  */
+/* Similar to group_match_null_string_p, but doesn't deal with alternatives:
+   It expects P to be the first byte of a single alternative and END one
+   byte past the last. The alternative can contain groups.  */
+      /* Skip over opcodes that can match nothing, and break when we get 
+	/* It's a loop.  */
+          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+/* Deals with the ops common to group_match_null_string_p and
+   Sets P to one after the op and its arguments, if any.  */
+      assert (reg_no > 0 && reg_no <= MAX_REGNUM);
+      /* Have to set this here in case we're checking a group which
+      if (REG_MATCH_NULL_STRING_P (reg_info[reg_no]) == MATCH_NULL_UNSET_VALUE)
+        REG_MATCH_NULL_STRING_P (reg_info[reg_no]) = ret;
+    /* If this is an optimized succeed_n for zero times, make the jump.  */
+      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+      /* Get to the number of times to succeed.  */
+      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+      /* All other opcodes mean we cannot match the empty string.  */
+/* Return zero if TRANSLATE[S1] and TRANSLATE[S2] are identical for LEN
+/* Entry points for GNU code.  */
+/* re_compile_pattern is the GNU regular expression compiler: it
+   compiles PATTERN (of length SIZE) and puts the result in BUFP.
+   Returns 0 if the pattern was valid, otherwise an error string.
+   Assumes the `allocated' (and perhaps `buffer') and `translate' fields
+   are set in BUFP on entry.
+   We call regex_compile to do the actual compilation.  */
+  /* GNU code is written to assume at least RE_NREGS registers will be set
+  bufp->regs_allocated = REGS_UNALLOCATED;
+  /* And GNU code determines whether or not to get register information
+     by passing null for the REGS argument to re_match, etc., not by
+  /* Match anchors at newline.  */
+/* Entry points compatible with 4.2 BSD regex library.  We don't define
+   them if this is an Emacs or POSIX compilation.  */
+#if !defined (emacs) && !defined (_POSIX_SOURCE)
+/* BSD has one and only one pattern buffer.  */
+	return "No previous regular expression";
+      if (re_comp_buf.buffer == NULL)
+        return "Memory exhausted";
+      re_comp_buf.fastmap = (char *) malloc (1 << BYTEWIDTH);
+      if (re_comp_buf.fastmap == NULL)
+	return "Memory exhausted";
+  /* Since `re_exec' always passes NULL for the `regs' argument, we
+  /* Match anchors at newlines.  */
+  /* Yes, we're discarding `const' here.  */
+#endif /* not emacs and not _POSIX_SOURCE */
+/* POSIX.2 functions.  Don't define these for Emacs.  */
+   PREG is a regex_t *.  We do not expect any fields to be initialized,
+   since POSIX says we shouldn't.  Thus, we set
+     `syntax' to RE_SYNTAX_POSIX_EXTENDED if the
+       REG_EXTENDED bit in CFLAGS is set; otherwise, to
+       RE_SYNTAX_POSIX_BASIC;
+     `newline_anchor' to REG_NEWLINE being set in CFLAGS;
+     `re_nsub' to the number of subexpressions in PATTERN.
+   PATTERN is the address of the pattern string.
+   CFLAGS is a series of bits which affect compilation.
+     If REG_EXTENDED is set, we use POSIX extended syntax; otherwise, we
+     use POSIX basic syntax.
+     If REG_NEWLINE is set, then . and [^...] don't match newline.
+     Also, regexec will try a match beginning after every newline.
+     If REG_ICASE is set, then we considers upper- and lowercase
+     If REG_NOSUB is set, then when PREG is passed to regexec, that
+   It returns 0 if it succeeds, nonzero if it doesn't.  (See regex.h for
+    = (cflags & REG_EXTENDED) ?
+      RE_SYNTAX_POSIX_EXTENDED : RE_SYNTAX_POSIX_BASIC;
+  /* Don't bother to use a fastmap when searching.  This simplifies the
+     REG_NEWLINE case: if we used a fastmap, we'd have to put all the
+     characters after newlines into the fastmap.  This way, we just try
+  if (cflags & REG_ICASE)
+      preg->translate = (char *) malloc (CHAR_SET_SIZE);
+      if (preg->translate == NULL)
+        return (int) REG_ESPACE;
+      /* Map uppercase characters to corresponding lowercase ones.  */
+      for (i = 0; i < CHAR_SET_SIZE; i++)
+        preg->translate[i] = ISUPPER (i) ? tolower (i) : i;
+    preg->translate = NULL;
+  /* If REG_NEWLINE is set, newlines are treated differently.  */
+  if (cflags & REG_NEWLINE)
+    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+      syntax &= ~RE_DOT_NEWLINE;
+      syntax |= RE_HAT_LISTS_NOT_NEWLINE;
+      /* It also changes the matching behavior.  */
+  preg->no_sub = !!(cflags & REG_NOSUB);
+  /* POSIX says a null character in the pattern terminates it, so we 
+  /* POSIX doesn't distinguish between an unmatched open-group and an
+     unmatched close-group: both are REG_EPAREN.  */
+  if (ret == REG_ERPAREN) ret = REG_EPAREN;
+/* regexec searches for a given pattern, specified by PREG, in the
+   string STRING.
+   If NMATCH is zero or REG_NOSUB was set in the cflags argument to
+   `regcomp', we ignore PMATCH.  Otherwise, we assume PMATCH has at
+   least NMATCH elements, and we set them to the offsets of the
+   EFLAGS specifies `execution flags' which affect matching: if
+   REG_NOTBOL is set, then ^ does not match at the beginning of the
+   string; if REG_NOTEOL is set, then $ does not match at the end.
+   We return 0 if we find a match and REG_NOMATCH if not.  */
+  private_preg.not_bol = !!(eflags & REG_NOTBOL);
+  private_preg.not_eol = !!(eflags & REG_NOTEOL);
+  /* The user has told us exactly how many registers to return
+     information about, via `nmatch'.  We have to pass that on to the
+  private_preg.regs_allocated = REGS_FIXED;
+      regs.start = TALLOC (nmatch, regoff_t);
+      regs.end = TALLOC (nmatch, regoff_t);
+      if (regs.start == NULL || regs.end == NULL)
+        return (int) REG_NOMATCH;
+  /* Perform the searching operation.  */
+  /* Copy the register information to the POSIX structure.  */
+      /* If we needed the temporary register info, free the space now.  */
+  /* We want zero return to mean success, unlike `re_search'.  */
+  return ret >= 0 ? (int) REG_NOERROR : (int) REG_NOMATCH;
+/* Returns a message corresponding to an error code, ERRCODE, returned
+   from either regcomp or regexec.   We don't use PREG here.  */
+    /* Only error codes returned by the rest of the code should be passed 
+       to this routine.  If we are given anything else, or if other regex
+       Dump core so we can fix it.  */
+  /* POSIX doesn't require that we do anything in this case, but why
+    msg = "Success";
+  msg_size = strlen (msg) + 1; /* Includes the null.  */
+/* Free dynamically allocated space used by PREG.  */
+  if (preg->buffer != NULL)
+  preg->buffer = NULL;
+  if (preg->fastmap != NULL)
+  preg->fastmap = NULL;
+  if (preg->translate != NULL)
+  preg->translate = NULL;
+Local variables:
+End:
+/* dfa.c - deterministic extended regexp routines for GNU
+   Copyright (C) 1988 Free Software Foundation, Inc.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+/* Written June, 1988 by Mike Haertel
+   Modified July, 1988 by Arthur David Olson to assist BMG speedups  */
+#ifdef STDC_HEADERS
+#if defined(HAVE_STRING_H) || defined(STDC_HEADERS)
+#define isgraph(C) (isprint(C) && !isspace(C))
+#undef ISALPHA
+#undef ISUPPER
+#undef ISLOWER
+#undef ISDIGIT
+#undef ISXDIGIT
+#undef ISSPACE
+#undef ISPUNCT
+#undef ISALNUM
+#undef ISPRINT
+#undef ISGRAPH
+#undef ISCNTRL
+#define ISALPHA(C) (isascii(C) && isalpha(C))
+#define ISUPPER(C) (isascii(C) && isupper(C))
+#define ISLOWER(C) (isascii(C) && islower(C))
+#define ISDIGIT(C) (isascii(C) && isdigit(C))
+#define ISXDIGIT(C) (isascii(C) && isxdigit(C))
+#define ISSPACE(C) (isascii(C) && isspace(C))
+#define ISPUNCT(C) (isascii(C) && ispunct(C))
+#define ISALNUM(C) (isascii(C) && isalnum(C))
+#define ISPRINT(C) (isascii(C) && isprint(C))
+#define ISGRAPH(C) (isascii(C) && isgraph(C))
+#define ISCNTRL(C) (isascii(C) && iscntrl(C))
+#define ISALPHA(C) isalpha(C)
+#define ISUPPER(C) isupper(C)
+#define ISLOWER(C) islower(C)
+#define ISDIGIT(C) isdigit(C)
+#define ISXDIGIT(C) isxdigit(C)
+#define ISSPACE(C) isspace(C)
+#define ISPUNCT(C) ispunct(C)
+#define ISALNUM(C) isalnum(C)
+#define ISPRINT(C) isprint(C)
+#define ISGRAPH(C) isgraph(C)
+#define ISCNTRL(C) iscntrl(C)
+#if __STDC__
+    dfaerror("Memory exhausted");
+    dfaerror("Memory exhausted");
+    dfaerror("Memory exhausted");
+#define CALLOC(p, t, n) ((p) = (t *) xcalloc((n), sizeof (t)))
+#define MALLOC(p, t, n) ((p) = (t *) xmalloc_1((n) * sizeof (t)))
+#define REALLOC(p, t, n) ((p) = (t *) xrealloc_1((ptr_t) (p), (n) * sizeof (t)))
+/* Reallocate an array of type t if nalloc is too small for index. */
+#define REALLOC_IF_NECESSARY(p, t, nalloc, index) \
+      REALLOC(p, t, nalloc);			  \
+#ifdef DEBUG
+    fprintf(stderr, "END");
+  else if (t < NOTCHAR)
+	case EMPTY: s = "EMPTY"; break;
+	case BACKREF: s = "BACKREF"; break;
+	case BEGLINE: s = "BEGLINE"; break;
+	case ENDLINE: s = "ENDLINE"; break;
+	case BEGWORD: s = "BEGWORD"; break;
+	case ENDWORD: s = "ENDWORD"; break;
+	case LIMWORD: s = "LIMWORD"; break;
+	case NOTLIMWORD: s = "NOTLIMWORD"; break;
+	case QMARK: s = "QMARK"; break;
+	case STAR: s = "STAR"; break;
+	case PLUS: s = "PLUS"; break;
+	case CAT: s = "CAT"; break;
+	case OR: s = "OR"; break;
+	case ORTOP: s = "ORTOP"; break;
+	case LPAREN: s = "LPAREN"; break;
+	case RPAREN: s = "RPAREN"; break;
+	default: s = "CSET"; break;
+#endif /* DEBUG */
+/* Stuff pertaining to charclasses. */
+  return c[b / INTBITS] & 1 << b % INTBITS;
+  c[b / INTBITS] |= 1 << b % INTBITS;
+  c[b / INTBITS] &= ~(1 << b % INTBITS);
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+  for (i = 0; i < CHARCLASS_INTS; ++i)
+/* A pointer to the current dfa is kept here during parsing. */
+/* Find the index of charclass s in dfa->charclasses, or allocate a new charclass. */
+  REALLOC_IF_NECESSARY(dfa->charclasses, charclass, dfa->calloc, dfa->cindex);
+/* Syntax bits controlling the behavior of the lexical analyzer. */
+/* Flag for case-folding letters into sets. */
+/* Entry point to set syntax options. */
+/* Lexical analyzer.  All the dross that deals with the obnoxious
+   GNU Regex syntax bits is located here.  The poor, suffering
+   reader is referred to the GNU Regex documentation for the
+static char *lexstart;		/* Pointer to beginning of input string. */
+static char *lexptr;		/* Pointer to next input character. */
+static lexleft;			/* Number of characters remaining. */
+static token lasttok;		/* Previous token returned; initially END. */
+static int laststart;		/* True if we're separated from beginning or (, |
+static int parens;		/* Count of outstanding left parens. */
+static int minrep, maxrep;	/* Repeat counts for {m,n}. */
+/* Note that characters become unsigned here. */
+#define FETCH(c, eoferr)   	      \
+	return END;	   	      \
+#define FUNC(F, P) static int F(c) int c; { return P(c); }
+FUNC(is_alpha, ISALPHA)
+FUNC(is_upper, ISUPPER)
+FUNC(is_lower, ISLOWER)
+FUNC(is_digit, ISDIGIT)
+FUNC(is_xdigit, ISXDIGIT)
+FUNC(is_space, ISSPACE)
+FUNC(is_punct, ISPUNCT)
+FUNC(is_alnum, ISALNUM)
+FUNC(is_print, ISPRINT)
+FUNC(is_graph, ISGRAPH)
+FUNC(is_cntrl, ISCNTRL)
+/* The following list maps the names of the Posix named character classes
+   the class.  The leading [ has already been eaten by the lexical analyzer. */
+  /* Basic plan: We fetch a character.  If it's a backslash,
+     On the plus side, this avoids having a duplicate of the
+     main switch inside the backslash case.  On the minus side,
+      FETCH(c, 0);
+	    dfaerror("Unfinished \\ escape");
+	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+	      || lasttok == END
+	      || lasttok == LPAREN
+	      || lasttok == OR)
+	    return lasttok = BEGLINE;
+	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+	      || (syntax_bits & RE_NO_BK_PARENS
+	      || (syntax_bits & RE_NO_BK_VBAR
+	      || ((syntax_bits & RE_NEWLINE_ALT)
+	    return lasttok = ENDLINE;
+	  if (backslash && !(syntax_bits & RE_NO_BK_REFS))
+	      return lasttok = BACKREF;
+	    return lasttok = BEGWORD;
+	    return lasttok = ENDWORD;
+	    return lasttok = LIMWORD;
+	case 'B':
+	    return lasttok = NOTLIMWORD;
+	  if (syntax_bits & RE_LIMITED_OPS)
+	  if (backslash != ((syntax_bits & RE_BK_PLUS_QM) != 0))
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	  return lasttok = QMARK;
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	  return lasttok = STAR;
+	  if (syntax_bits & RE_LIMITED_OPS)
+	  if (backslash != ((syntax_bits & RE_BK_PLUS_QM) != 0))
+	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+	  return lasttok = PLUS;
+	  if (!(syntax_bits & RE_INTERVALS))
+	  if (backslash != ((syntax_bits & RE_NO_BK_BRACES) == 0))
+	  /* Cases:
+	     {M} - exact count
+	     {M,} - minimum count, maximum is infinity
+	     {,M} - 0 through M
+	     {M,N} - M through N */
+	  FETCH(c, "unfinished repeat count");
+	  if (ISDIGIT(c))
+		  FETCH(c, "unfinished repeat count");
+		  if (!ISDIGIT(c))
+		FETCH(c, "unfinished repeat count");
+		if (!ISDIGIT(c))
+	  if (!(syntax_bits & RE_NO_BK_BRACES))
+	      FETCH(c, "unfinished repeat count");
+	  return lasttok = REPMN;
+	  if (syntax_bits & RE_LIMITED_OPS)
+	  if (backslash != ((syntax_bits & RE_NO_BK_VBAR) == 0))
+	  return lasttok = OR;
+	  if (syntax_bits & RE_LIMITED_OPS
+	      || !(syntax_bits & RE_NEWLINE_ALT))
+	  return lasttok = OR;
+	  if (backslash != ((syntax_bits & RE_NO_BK_PARENS) == 0))
+	  return lasttok = LPAREN;
+	  if (backslash != ((syntax_bits & RE_NO_BK_PARENS) == 0))
+	  if (parens == 0 && syntax_bits & RE_UNMATCHED_RIGHT_PAREN_ORD)
+	  return lasttok = RPAREN;
+	  if (!(syntax_bits & RE_DOT_NEWLINE))
+	  if (syntax_bits & RE_DOT_NOT_NULL)
+	  return lasttok = CSET + charclass_index(ccl);
+	case 'W':
+	  for (c2 = 0; c2 < NOTCHAR; ++c2)
+	    if (ISALNUM(c2))
+	  if (c == 'W')
+	  return lasttok = CSET + charclass_index(ccl);
+	  FETCH(c, "Unbalanced [");
+	      FETCH(c, "Unbalanced [");
+	      /* Nobody ever said this had to be fast. :-)
+		 Note that if we're looking at some other [:...:]
+		 characters.  We can do this because we assume
+	      if (c == '[' && (syntax_bits & RE_CHAR_CLASSES))
+		      for (c2 = 0; c2 < NOTCHAR; ++c2)
+		      FETCH(c1, "Unbalanced [");
+	      if (c == '\\' && (syntax_bits & RE_BACKSLASH_ESCAPE_IN_LISTS))
+		FETCH(c, "Unbalanced [");
+	      FETCH(c1, "Unbalanced [");
+		  FETCH(c2, "Unbalanced [");
+		      /* In the case [x-], the - is an ordinary hyphen,
+			  && (syntax_bits & RE_BACKSLASH_ESCAPE_IN_LISTS))
+			FETCH(c2, "Unbalanced [");
+		      FETCH(c1, "Unbalanced [");
+		    if (ISUPPER(c))
+		    else if (ISLOWER(c))
+	      if (syntax_bits & RE_HAT_LISTS_NOT_NEWLINE)
+	  return lasttok = CSET + charclass_index(ccl);
+	  if (case_fold && ISALPHA(c))
+	      return lasttok = CSET + charclass_index(ccl);
+  /* The above loop should consume at most a backslash
+/* Recursive descent parser for regular expressions. */
+static token tok;		/* Lookahead token. */
+static depth;			/* Current depth of a hypothetical stack
+				   holding deferred productions.  This is
+/* Add the given token to the parse tree, maintaining the depth count and
+  REALLOC_IF_NECESSARY(dfa->tokens, token, dfa->talloc, dfa->tindex);
+    case QMARK:
+    case STAR:
+    case PLUS:
+    case CAT:
+    case OR:
+    case ORTOP:
+    case EMPTY:
+/* The grammar understood by the parser is as follows.
+     regexp OR branch
+     closure QMARK
+     closure STAR
+     closure PLUS
+     CSET
+     BACKREF
+     BEGLINE
+     ENDLINE
+     BEGWORD
+     ENDWORD
+     LIMWORD
+     NOTLIMWORD
+   The parser builds a parse tree in postfix form in an array of tokens. */
+#if __STDC__
+  if ((tok >= 0 && tok < NOTCHAR) || tok >= CSET || tok == BACKREF
+      || tok == BEGLINE || tok == ENDLINE || tok == BEGWORD
+      || tok == ENDWORD || tok == LIMWORD || tok == NOTLIMWORD)
+  else if (tok == LPAREN)
+      if (tok != RPAREN)
+	dfaerror("Unbalanced (");
+    addtok(EMPTY);
+/* Return the number of tokens in the given subexpression. */
+    case QMARK:
+    case STAR:
+    case PLUS:
+    case CAT:
+    case OR:
+    case ORTOP:
+/* Copy the given subexpression to the top of the tree. */
+  while (tok == QMARK || tok == STAR || tok == PLUS || tok == REPMN)
+    if (tok == REPMN)
+	  addtok(PLUS);
+	  addtok(QMARK);
+	    addtok(CAT);
+	    addtok(QMARK);
+	    addtok(CAT);
+  while (tok != RPAREN && tok != OR && tok >= 0)
+      addtok(CAT);
+  while (tok == OR)
+	addtok(ORTOP);
+	addtok(OR);
+/* Main entry point for the parser.  S is a string to be parsed, len is the
+   length of the string, so s can include NUL characters.  D is a pointer to
+  lasttok = END;
+    dfaerror("No syntax specified");
+  if (tok != END)
+    dfaerror("Unbalanced )");
+  addtok(END - d->nregexps);
+  addtok(CAT);
+    addtok(ORTOP);
+/* Some primitives for operating on sets of positions. */
+/* Copy one set to another; the destination must be large enough. */
+/* Insert a position in a set.  Position sets are maintained in sorted
+   order according to index.  If position already exists in the set with
+   S->elems must point to an array large enough to hold the resulting set. */
+/* Merge two sets of positions into a third.  The result is exactly as if
+/* Delete a position from a set. */
+/* Find the index of the state corresponding to the given position set with
+   state.  Newline and letter tell whether we got here on a newline or
+  /* Try to find a state that exactly matches the proposed one. */
+  /* We'll have to create a new state. */
+  REALLOC_IF_NECESSARY(d->states, dfa_state, d->salloc, d->sindex);
+  MALLOC(d->states[i].elems.elems, position, s->nelem);
+	if (SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 0)
+	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 1)
+	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 0)
+	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 1))
+    else if (d->tokens[s->elems[j].index] == BACKREF)
+	d->states[i].constraint = NO_CONSTRAINT;
+/* Find the epsilon closure of a set of positions.  If any position of the set
+   constraint.  Repeat exhaustively until no funny positions are left.
+   S->elems must be large enough to hold the result. */
+  MALLOC(visited, int, d->tindex);
+    if (d->tokens[s->elems[i].index] >= NOTCHAR
+	&& d->tokens[s->elems[i].index] != BACKREF
+	&& d->tokens[s->elems[i].index] < CSET)
+	  case BEGLINE:
+	    p.constraint &= BEGLINE_CONSTRAINT;
+	  case ENDLINE:
+	    p.constraint &= ENDLINE_CONSTRAINT;
+	  case BEGWORD:
+	    p.constraint &= BEGWORD_CONSTRAINT;
+	  case ENDWORD:
+	    p.constraint &= ENDWORD_CONSTRAINT;
+	  case LIMWORD:
+	    p.constraint &= LIMWORD_CONSTRAINT;
+	  case NOTLIMWORD:
+	    p.constraint &= NOTLIMWORD_CONSTRAINT;
+	/* Force rescan to start at the beginning. */
+/* Perform bottom-up analysis on the parse tree, computing various functions.
+   Note that at this point, we're pretending constructs like \< are real
+   Nullable:  A node is nullable if it is at the root of a regexp that can
+   *  EMPTY leaves are nullable.
+   * No other leaf is nullable.
+   * A QMARK or STAR node is nullable.
+   * A PLUS node is nullable if its argument is nullable.
+   * A CAT node is nullable if both its arguments are nullable.
+   * An OR node is nullable if either argument is nullable.
+   Firstpos:  The firstpos of a node is the set of positions (nonempty leaves)
+   * EMPTY leaves have empty firstpos.
+   * The firstpos of a nonempty leaf is that leaf itself.
+   * The firstpos of a QMARK, STAR, or PLUS node is the firstpos of its
+   * The firstpos of a CAT node is the firstpos of the left argument, union
+   * The firstpos of an OR node is the union of firstpos of each argument.
+   Lastpos:  The lastpos of a node is the set of positions that could
+   * EMPTY leaves have empty lastpos.
+   * The lastpos of a nonempty leaf is that leaf itself.
+   * The lastpos of a QMARK, STAR, or PLUS node is the lastpos of its
+   * The lastpos of a CAT node is the lastpos of its right argument, union
+   * The lastpos of an OR node is the union of the lastpos of each argument.
+   Follow:  The follow of a position is the set of positions that could
+   a string matching the regexp.  At this point we consider special symbols
+   Later, if we find that a special symbol is in a follow set, we will
+   * Every node in the firstpos of the argument of a STAR or PLUS node is in
+   * Every node in the firstpos of the second argument of a CAT node is in
+   Because of the postfix representation of the parse tree, the depth-first
+   Sets are stored as arrays of the elements, obeying a stack-like allocation
+  int *nullable;		/* Nullable stack. */
+  int *nfirstpos;		/* Element count stack for firstpos sets. */
+  position *firstpos;		/* Array where firstpos elements are stored. */
+  int *nlastpos;		/* Element count stack for lastpos sets. */
+  position *lastpos;		/* Array where lastpos elements are stored. */
+  int *nalloc;			/* Sizes of arrays allocated to follow sets. */
+  position_set tmp;		/* Temporary set for merging sets. */
+  position_set merged;		/* Result of merging sets. */
+  int wants_newline;		/* True if some position wants newline info. */
+#ifdef DEBUG
+  MALLOC(nullable, int, d->depth);
+  MALLOC(nfirstpos, int, d->depth);
+  MALLOC(firstpos, position, d->nleaves);
+  MALLOC(nlastpos, int, d->depth);
+  MALLOC(lastpos, position, d->nleaves);
+  MALLOC(nalloc, int, d->tindex);
+  MALLOC(merged.elems, position, d->nleaves);
+  CALLOC(d->follows, position_set, d->tindex);
+#ifdef DEBUG
+    {				/* Nonsyntactic #ifdef goo... */
+      case EMPTY:
+	/* The empty set is nullable. */
+	/* The firstpos and lastpos of the empty leaf are both empty. */
+      case STAR:
+      case PLUS:
+	/* Every element in the firstpos of the argument is in the follow
+	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+      case QMARK:
+	/* A QMARK or STAR node is automatically nullable. */
+	if (d->tokens[i] != PLUS)
+      case CAT:
+	/* Every element in the firstpos of the second argument is in the
+	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+	/* The firstpos of a CAT node is the firstpos of the first argument,
+	/* The lastpos of a CAT node is the lastpos of the second argument,
+	/* A CAT node is nullable if both arguments are nullable. */
+      case OR:
+      case ORTOP:
+	/* The firstpos is the union of the firstpos of each argument. */
+	/* The lastpos is the union of the lastpos of each argument. */
+	/* An OR node is nullable if either argument is nullable. */
+	/* Anything else is a nonempty position.  (Note that special
+	   Backreferences have to get a real position so we can detect
+	   transitions on them later.  But they are nullable. */
+	*nullable++ = d->tokens[i] == BACKREF;
+	/* This position is in its own firstpos and lastpos. */
+	firstpos->constraint = lastpos->constraint = NO_CONSTRAINT;
+	/* Allocate the follow set for this position. */
+	MALLOC(d->follows[i].elems, position, nalloc[i]);
+#ifdef DEBUG
+  /* For each follow set that is the follow set of a real position, replace
+    if (d->tokens[i] < NOTCHAR || d->tokens[i] == BACKREF
+	|| d->tokens[i] >= CSET)
+#ifdef DEBUG
+	  REALLOC(d->follows[i].elems, position, merged.nelem);
+  /* Get the epsilon closure of the firstpos of the regexp.  The result will
+  /* Check if any of the positions of state 0 will want newline context. */
+    if (PREV_NEWLINE_DEPENDENT(merged.elems[i].constraint))
+  /* Build the initial state. */
+  MALLOC(d->states, dfa_state, d->salloc);
+/* Find, for each character, the transition out of state s of d, and store
+   We divide the positions of s into groups (positions can appear in more
+   than one group).  Each group is labeled with a set of characters that
+   preceding context information of s).  For each group, find the union
+   of the its elements' follows.  This set is the set of positions of the
+   new state.  For each character in the group's label, set the transition
+   If we are building a searching matcher, we include the positions of state
+   The collection of groups is constructed by building an equivalence-class
+   For each position, find the set of characters C that it matches.  Eliminate
+   any characters from C that fail on grounds of backward context.
+   Search through the groups, looking for a group whose label L has nonempty
+   intersection with C.  If L - C is nonempty, create a new group labeled
+   L - C and having the same positions as the current group, and set L to
+   the intersection of L and C.  Insert the position in this group, set
+   C = C - L, and resume scanning.
+   If after comparing with every group there are characters remaining in C,
+   create a new group labeled with the characters of C and insert this
+  position_set grps[NOTCHAR];	/* As many as will ever be needed. */
+  charclass labels[NOTCHAR];	/* Labels corresponding to the groups. */
+  int ngrps = 0;		/* Number of groups actually used. */
+  position pos;			/* Current position being considered. */
+  charclass matches;		/* Set of matching characters. */
+  int matchesf;			/* True if matches is nonempty. */
+  charclass intersect;		/* Intersection with some label set. */
+  int intersectf;		/* True if intersect is nonempty. */
+  charclass leftovers;		/* Stuff in the label that didn't match. */
+  int leftoversf;		/* True if leftovers is nonempty. */
+  static charclass letters;	/* Set of characters considered letters. */
+  static charclass newline;	/* Set of characters that aren't newline. */
+  position_set follows;		/* Union of the follows of some group. */
+  position_set tmp;		/* Temporary space for merging sets. */
+  int state;			/* New state. */
+  int wants_newline;		/* New state wants to know newline context. */
+  int state_newline;		/* New state on a newline transition. */
+  int wants_letter;		/* New state wants to know letter context. */
+  int state_letter;		/* New state on a letter transition. */
+  static initialized;		/* Flag for static initialization. */
+  /* Initialize the set of letters, if necessary. */
+      for (i = 0; i < NOTCHAR; ++i)
+	if (ISALNUM(i))
+      if (d->tokens[pos.index] >= 0 && d->tokens[pos.index] < NOTCHAR)
+      else if (d->tokens[pos.index] >= CSET)
+	copyset(d->charclasses[d->tokens[pos.index] - CSET], matches);
+      /* Some characters may need to be eliminated from matches because
+      if (pos.constraint != 0xFF)
+	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+	    for (j = 0; j < CHARCLASS_INTS; ++j)
+	  if (! MATCHES_LETTER_CONTEXT(pos.constraint,
+	    for (j = 0; j < CHARCLASS_INTS; ++j)
+	  if (! MATCHES_LETTER_CONTEXT(pos.constraint,
+	    for (j = 0; j < CHARCLASS_INTS; ++j)
+	  /* If there are no characters left, there's no point in going on. */
+	  for (j = 0; j < CHARCLASS_INTS && !matches[j]; ++j)
+	  if (j == CHARCLASS_INTS)
+	  /* If matches contains a single character only, and the current
+	  if (d->tokens[pos.index] >= 0 && d->tokens[pos.index] < NOTCHAR
+	  /* Check if this group's label has a nonempty intersection with
+	  for (k = 0; k < CHARCLASS_INTS; ++k)
+	  /* It does; now find the set differences both ways. */
+	  for (k = 0; k < CHARCLASS_INTS; ++k)
+	      /* Even an optimizing compiler can't know this for sure. */
+	  /* If there were leftovers, create a new group labeled with them. */
+	      MALLOC(grps[ngrps].elems, position, d->nleaves);
+	  /* Put the position in the current group.  Note that there is no
+	  /* If every character matching the current position has been
+      /* If we've passed the last group, and there are still characters
+	  MALLOC(grps[ngrps].elems, position, d->nleaves);
+  MALLOC(follows.elems, position, d->nleaves);
+  MALLOC(tmp.elems, position, d->nleaves);
+  /* If we are a searching matcher, the default transition is to a state
+	  if (PREV_NEWLINE_DEPENDENT(d->states[0].elems.elems[i].constraint))
+	  if (PREV_LETTER_DEPENDENT(d->states[0].elems.elems[i].constraint))
+      for (i = 0; i < NOTCHAR; ++i)
+	else if (ISALNUM(i))
+    for (i = 0; i < NOTCHAR; ++i)
+      /* Find the union of the follows of the positions of the group.
+	 This is a hideously inefficient loop.  Fix it someday. */
+      /* If we are building a searching matcher, throw in the positions
+      /* Find out if the new state will want any context information. */
+	  if (PREV_NEWLINE_DEPENDENT(follows.elems[j].constraint))
+      for (j = 0; j < CHARCLASS_INTS; ++j)
+      if (j < CHARCLASS_INTS)
+	  if (PREV_LETTER_DEPENDENT(follows.elems[j].constraint))
+      /* Find the state(s) corresponding to the union of the follows. */
+      /* Set the transitions for each character in the current label. */
+      for (j = 0; j < CHARCLASS_INTS; ++j)
+	for (k = 0; k < INTBITS; ++k)
+	      int c = j * INTBITS + k;
+	      else if (ISALNUM(c))
+	      else if (c < NOTCHAR)
+/* Some routines for manipulating a compiled dfa's transition tables.
+   Each state may or may not have a transition table; if it does, and it
+   If it is an accepting state then d->fails[state] points to its table.
+   If it has no table at all, then d->trans[state] is NULL.
+   TODO: Improve this comment, get rid of the unnecessary redundancy. */
+  int *trans;			/* The new transition table. */
+  /* Set an upper limit on the number of transition tables that will ever
+     exist at once.  1024 is arbitrary.  The idea is that the frequently
+	    d->trans[i] = NULL;
+	    d->fails[i] = NULL;
+  /* Set up the success bits for this state. */
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 1, d->states[s].letter, 0,
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 1,
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 0,
+  MALLOC(trans, int, NOTCHAR);
+  /* Now go through the new transition table, and make sure that the trans
+  for (i = 0; i < NOTCHAR; ++i)
+	REALLOC(d->realtrans, int *, d->tralloc + 1);
+	REALLOC(d->fails, int *, d->tralloc);
+	REALLOC(d->success, int, d->tralloc);
+	REALLOC(d->newlines, int, d->tralloc);
+	    d->trans[oldalloc] = NULL;
+	    d->fails[oldalloc++] = NULL;
+  /* Keep the newline transition in a special place so we can use it as
+  if (ACCEPTING(s, *d))
+  CALLOC(d->realtrans, int *, d->tralloc + 1);
+  CALLOC(d->fails, int *, d->tralloc);
+  MALLOC(d->success, int, d->tralloc);
+  MALLOC(d->newlines, int, d->tralloc);
+/* Search through a buffer looking for a match to the given struct dfa.
+   Find the first occurrence of a string matching the regexp in the buffer,
+   and the shortest possible version thereof.  Return a pointer to the first
+   character after the match, or NULL if none is found.  Begin points to
+   its end.  We store a newline in *end to act as a sentinel, so end had
+   better point somewhere valid.  Newline is a flag indicating whether to
+   allow newlines to be in the matching string.  If count is non-
+   NULL it points to a place we're supposed to increment every time we
+   see a newline.  Finally, if backref is non-NULL it points to a place
+   match needs to be verified by a backtracking matcher.  Otherwise
+  register s, s1, tmp;		/* Current state. */
+  register unsigned char *p;	/* Current input character. */
+  register **trans, *t;		/* Copy of d->trans so it can be optimized
+  static sbit[NOTCHAR];	/* Table for anding with d->success. */
+      for (i = 0; i < NOTCHAR; ++i)
+	else if (ISALNUM(i))
+      /* The dreaded inner loop. */
+      /* If the previous character was a newline, count it. */
+      /* Check if we've run off the end of the buffer. */
+	return NULL;
+/* Initialize the components of a dfa that the other routines don't
+  MALLOC(d->charclasses, charclass, d->calloc);
+  MALLOC(d->tokens, token, d->talloc);
+/* Parse and analyze a single string of the given length. */
+      /* This is a kludge. */
+	if (ISUPPER(s[i]))
+/* Free the storage held by the components of a dfa. */
+/* Having found the postfix representation of the regular expression,
+   Finding a "longest" sequence is beyond the scope here;
+   (Take "(ab|a)b"--please.)
+   We do a bottom-up calculation of sequences of characters that must appear
+   When we get to the root of the tree, we use one of the longest of its
+   calculated "in" sequences as our answer.  The sequence we find is returned in
+   The sequences calculated for the various types of node (in pseudo ANSI c)
+   "ZERO" means "a zero-length sequence" below.
+	Type	left		right		is		in
+	CSET	ZERO		ZERO		ZERO		ZERO
+	STAR	ZERO		ZERO		ZERO		ZERO
+	QMARK	ZERO		ZERO		ZERO		ZERO
+	PLUS	p->left		p->right	ZERO		p->in
+	CAT	(p->is==ZERO)?	(q->is==ZERO)?	(p->is!=ZERO &&	p->in plus
+		p->left :	q->right :	q->is!=ZERO) ?	q->in plus
+						ZERO
+	OR	longest common	longest common	(do p->is and	substrings common to
+		and q->left	and q->right	p->is : NULL	
+   If there's anything else we recognize in the tree, all four sequences get set
+   to zero-length sequences.  If there's something we don't recognize in the tree,
+   Break ties in favor of infrequent letters (choosing 'zzz' in preference to
+   And. . .is it here or someplace that we might ponder "optimizations" such as
+					(Yes, we now find "epsi" as a "string
+   There are several issues:
+   Is optimization easy (enough)?
+   Does optimization actually accomplish anything,
+   Are optimizable r.e.'s likely to be used in real-life situations
+  newsize = (new == NULL) ? 0 : strlen(new);
+  if (old == NULL)
+  if (old == NULL)
+  if (result != NULL && new != NULL)
+  return icatalloc((char *) NULL, string);
+  return NULL;
+  if (cp != NULL)
+  if (cpp == NULL)
+  for (i = 0; cpp[i] != NULL; ++i)
+      cpp[i] = NULL;
+  if (cpp == NULL)
+    return NULL;
+  if ((new = icpyalloc(new)) == NULL)
+      return NULL;
+  /* Is there already something in the list that's new (or longer)? */
+  for (i = 0; cpp[i] != NULL; ++i)
+    if (istrstr(cpp[i], new) != NULL)
+  /* Eliminate any obsoleted strings. */
+  while (cpp[j] != NULL)
+    if (istrstr(new, cpp[j]) == NULL)
+	cpp[i] = NULL;
+  /* Add the new string. */
+  if (cpp == NULL)
+    return NULL;
+  cpp[i + 1] = NULL;
+/* Given pointers to two strings, return a pointer to an allocated
+   list of their distinct common substrings. Return NULL if something
+  if (left == NULL || right == NULL)
+    return NULL;
+  if (cpp == NULL)
+    return NULL;
+  cpp[0] = NULL;
+      while (rcp != NULL)
+      if ((cpp = enlist(cpp, lcp, len)) == NULL)
+  if (old == NULL || new == NULL)
+    return NULL;
+  for (i = 0; new[i] != NULL; ++i)
+      if (old == NULL)
+/* Given two lists of substrings, return a new list giving substrings
+  if (left == NULL || right == NULL)
+    return NULL;
+  if (both == NULL)
+    return NULL;
+  both[0] = NULL;
+  for (lnum = 0; left[lnum] != NULL; ++lnum)
+      for (rnum = 0; right[rnum] != NULL; ++rnum)
+	  if (temp == NULL)
+	      return NULL;
+	  if (both == NULL)
+	    return NULL;
+  if (musts == NULL)
+      if (mp[i].in == NULL || mp[i].left == NULL ||
+	  mp[i].right == NULL || mp[i].is == NULL)
+      mp[i].in[0] = NULL;
+#ifdef DEBUG
+	case LPAREN:
+	case RPAREN:
+	case EMPTY:
+	case BEGLINE:
+	case ENDLINE:
+	case BEGWORD:
+	case ENDWORD:
+	case LIMWORD:
+	case NOTLIMWORD:
+	case BACKREF:
+	case STAR:
+	case QMARK:
+	case OR:
+	case ORTOP:
+	    /* Guaranteed to be.  Unlikely, but. . . */
+	    /* Left side--easy */
+	    /* Right side */
+	    if (new == NULL)
+	case PLUS:
+	case END:
+	  for (i = 0; musts[0].in[i] != NULL; ++i)
+	case CAT:
+	    /* In.  Everything in left, plus everything in
+	    if (lmp->in == NULL)
+		if (tp == NULL)
+		if (tp == NULL)
+		if (lmp->in == NULL)
+	    /* Left-hand */
+		if (lmp->left == NULL)
+	    /* Right-hand */
+	    if (lmp->right == NULL)
+	    /* Guaranteed to be */
+		if (lmp->is == NULL)
+	  if (t < END)
+	  else if (t >= CSET)
+	      if (mp->in == NULL)
+#ifdef DEBUG
+   Copyright 1989 Free Software Foundation
+		  Written August 1989 by Mike Haertel.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 1, or (at your option)
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+   The author may be reached (Email) at the address mike@ai.mit.edu,
+   or (US mail) as Mike Haertel c/o Free Software Foundation. */
+/* The algorithm implemented by these routines bears a startling resemblence
+   to one discovered by Beate Commentz-Walter, although it is not identical.
+   See "A String Matching Algorithm Fast on the Average," Technical Report,
+   IBM-Germany, Scientific Center Heidelberg, Tiergartenstrasse 15, D-6900
+   Heidelberg, Germany.  See also Aho, A.V., and M. Corasick, "Efficient
+   String Matching:  An Aid to Bibliographic Search," CACM June 1975,
+   Vol. 18, No. 6, which describes the failure function used below. */
+#ifdef STDC_HEADERS
+#undef RE_DUP_MAX
+#define INT_MAX 2147483647
+#define UCHAR_MAX 255
+#ifdef __STDC__
+#ifdef HAVE_MEMCHR
+#ifdef NEED_MEMORY_H
+#ifdef __STDC__
+#ifdef GREP
+#define NCHAR (UCHAR_MAX + 1)
+/* Balanced tree of edges and labels leaving a given trie node. */
+  struct tree *llink;		/* Left link; MUST be first field. */
+  struct tree *rlink;		/* Right link (to larger labels). */
+  struct trie *trie;		/* Trie node pointed to by this edge. */
+  unsigned char label;		/* Label on this edge. */
+  char balance;			/* Difference in depths of subtrees. */
+/* Node of a trie representing a set of reversed keywords. */
+  unsigned int accepting;	/* Word index of accepted word, or zero. */
+  struct tree *links;		/* Tree of edges leaving this node. */
+  struct trie *parent;		/* Parent of this node. */
+  struct trie *next;		/* List of all trie nodes in level order. */
+  struct trie *fail;		/* Aho-Corasick failure function. */
+  int depth;			/* Depth of this node from the root. */
+  int shift;			/* Shift function for search failures. */
+  int maxshift;			/* Max shift of self and descendents. */
+/* Structure returned opaquely to the caller, containing everything. */
+  struct obstack obstack;	/* Obstack for node allocation. */
+  int words;			/* Number of words in the trie. */
+  struct trie *trie;		/* The trie itself. */
+  int mind;			/* Minimum depth of an accepting node. */
+  int maxd;			/* Maximum depth of any node. */
+  unsigned char delta[NCHAR];	/* Delta table for rapid search. */
+  struct trie *next[NCHAR];	/* Table of children of the root. */
+  char *target;			/* Target string if there's only one. */
+  int mind2;			/* Used in Boyer-Moore search for one string. */
+  char *trans;			/* Character translation table. */
+/* Allocate and initialize a keyword set object, returning an opaque
+   pointer to it.  Return NULL if memory is not available. */
+  kwset->mind = INT_MAX;
+/* Add the given string to the contents of the keyword set.  Return NULL
+  enum { L, R } dirs[12];
+  /* Descend the trie (built of reversed keywords) character-by-character,
+      /* Descend the tree of outgoing links for this trie node,
+      dirs[0] = L;
+	    dirs[depth++] = L, link = link->llink;
+	    dirs[depth++] = R, link = link->rlink;
+      /* The current character doesn't have an outgoing link at
+	  /* Install the new tree node in its parent. */
+	  if (dirs[--depth] == L)
+	  /* Back up the tree fixing the balance flags. */
+	      if (dirs[depth] == L)
+	  /* Rebalance the tree by pointer rotations if necessary. */
+	  if (depth && ((dirs[depth] == L && --links[depth]->balance)
+			|| (dirs[depth] == R && ++links[depth]->balance)))
+		    case L:
+		    case R:
+		    case R:
+		    case L:
+	      if (dirs[depth - 1] == L)
+  /* Mark the node we finally reached as accepting, encoding the
+  /* Keep track of the longest and shortest string of the keyword set. */
+/* Enqueue the trie nodes referenced from the given tree in the
+/* Compute the Aho-Corasick failure function for the trie nodes referenced
+  /* Find, in the chain of fails going back to the root, the first
+/* Set delta entries for the links of the given tree such that
+/* Return true if A has every label in B. */
+/* Compute a vector, indexed by character code, of the trie nodes
+/* Compute the shift for each trie node, as well as the delta
+  unsigned char delta[NCHAR];
+  struct trie *last, *next[NCHAR];
+  /* Initial values for the delta table; will be changed later.  The
+    for (i = 0; i < NCHAR; ++i)
+    for (i = 0; i < NCHAR; ++i)
+  /* Check if we can use the simple boyer-moore algorithm, instead
+      /* Looking for just one string.  Extract it from the trie. */
+      /* Build the Boyer Moore delta.  Boy that's easy compared to CW. */
+      /* Find the minimal delta2 shift that we might make after
+      /* Traverse the nodes of the trie in level order, simultaneously
+	  /* Enqueue the immediate descendents in the level order queue. */
+	  /* Update the delta table for the descendents of this node. */
+	  /* Compute the failure function for the decendents of this node. */
+	  /* Update the shifts at each node in the current node's chain
+	      /* If the current node has some outgoing edge that the fail
+	      /* If the current node is accepting then the shift at the
+      /* Traverse the trie in level order again, fixing up all nodes whose
+      /* Create a vector, indexed by character code, of the outgoing links
+      for (i = 0; i < NCHAR; ++i)
+	for (i = 0; i < NCHAR; ++i)
+	for (i = 0; i < NCHAR; ++i)
+  /* Fix things up for any translation table. */
+    for (i = 0; i < NCHAR; ++i)
+    for (i = 0; i < NCHAR; ++i)
+#define U(C) ((unsigned char) (C))
+/* Fast boyer-moore search. */
+  gc = U(sp[-2]);
+  /* Significance of 12: 1 (initial offset) + 10 (skip loop) + 1 (md2). */
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	if (U(tp[-2]) == gc)
+	    for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+  /* Now we have only a few characters left to search.  We
+  d = d1[U(tp[-1])];
+      d = d1[U((tp += d)[-1])];
+	  for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+/* Hairy multiple string search. */
+  /* Initialize register copies and look for easy ways out. */
+  /* Given a known match, find the longest possible match anchored
+     at or before its starting point.  This is nearly a verbatim
+/* Search through the given text for a match of any member of the
+   given keyword set.  Return a pointer to the first character of
+   the matching substring, or NULL if no match is found.  If FOUNDLEN
+   is non-NULL store in the referenced location the length of the
+   matching substring.  Similarly, if FOUNDIDX is non-NULL, store
+/* Free the components of the given keyword set. */
+   Copyright (C) 1988, 1993 Free Software Foundation, Inc.
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2, or (at your option) any
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
+/* This is just to get __GNU_LIBRARY__ defined.  */
+/* Comment out all this code if we are using the GNU C Library, and are not
+   actually compiling the library itself.  This code is part of the GNU C
+   Library, but also included in many other GNU distributions.  Compiling
+   and linking in this code is a waste when using the GNU C library
+   (especially if it is a shared library).  Rather than having every GNU
+#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
+#ifdef __STDC__
+#define POINTER void *
+#define POINTER char *
+/* Determine default alignment.  */
+#define DEFAULT_ALIGNMENT  \
+  ((PTR_INT_TYPE) ((char *)&((struct fooalign *) 0)->d - (char *)0))
+/* If malloc were really smart, it would round addresses to DEFAULT_ALIGNMENT.
+   But in fact it might be less smart and round addresses to as much as
+   DEFAULT_ROUNDING.  So we prepare for it to do that.  */
+#define DEFAULT_ROUNDING (sizeof (union fooround))
+/* When we copy a long block of data, this is the unit to do it with.
+   On some machines, copying successive ints does not work;
+   in such a case, redefine COPYING_UNIT to `long' (if that works)
+#ifndef COPYING_UNIT
+#define COPYING_UNIT int
+/* The non-GNU-C macros copy the obstack into this global variable
+/* Define a macro that either calls functions with the traditional malloc/free
+   For free, do not use ?:, since some compilers, like the MIPS compilers,
+#define CALL_CHUNKFUN(h, size) \
+#define CALL_FREEFUN(h, old_chunk) \
+/* Initialize an obstack H for use.  Specify chunk size SIZE (0 means default).
+   Objects start on multiples of ALIGNMENT (0 means use default).
+   CHUNKFUN is the function to use to allocate chunks,
+   and FREEFUN the function to free them.  */
+     POINTER (*chunkfun) ();
+    alignment = DEFAULT_ALIGNMENT;
+    /* Default size is what GNU malloc can fit in a 4096-byte block.  */
+      /* 12 is sizeof (mhead) and 4 is EXTRA from GNU malloc.
+	 Use the values for range checking, because if range checking is off,
+	 These number are irrelevant to the new GNU malloc.  I suspect it is
+      int extra = ((((12 + DEFAULT_ROUNDING - 1) & ~(DEFAULT_ROUNDING - 1))
+		    + 4 + DEFAULT_ROUNDING - 1)
+		   & ~(DEFAULT_ROUNDING - 1));
+  chunk = h->chunk = CALL_CHUNKFUN (h, h -> chunk_size);
+  /* The initial chunk now contains no empty object.  */
+     POINTER (*chunkfun) ();
+     POINTER arg;
+    alignment = DEFAULT_ALIGNMENT;
+    /* Default size is what GNU malloc can fit in a 4096-byte block.  */
+      /* 12 is sizeof (mhead) and 4 is EXTRA from GNU malloc.
+	 Use the values for range checking, because if range checking is off,
+	 These number are irrelevant to the new GNU malloc.  I suspect it is
+      int extra = ((((12 + DEFAULT_ROUNDING - 1) & ~(DEFAULT_ROUNDING - 1))
+		    + 4 + DEFAULT_ROUNDING - 1)
+		   & ~(DEFAULT_ROUNDING - 1));
+  chunk = h->chunk = CALL_CHUNKFUN (h, h -> chunk_size);
+  /* The initial chunk now contains no empty object.  */
+/* Allocate a new current chunk for the obstack *H
+   on the assumption that LENGTH bytes need to be added
+   to the current object, or a new object of length LENGTH allocated.
+   Copies any partial object from the end of the old chunk
+  /* Compute size for new chunk.  */
+  /* Allocate and initialize the new chunk.  */
+  new_chunk = h->chunk = CALL_CHUNKFUN (h, new_size);
+  /* Move the existing object to the new chunk.
+     Word at a time is fast and is safe if the object
+  if (h->alignment_mask + 1 >= DEFAULT_ALIGNMENT)
+      for (i = obj_size / sizeof (COPYING_UNIT) - 1;
+	((COPYING_UNIT *)new_chunk->contents)[i]
+	  = ((COPYING_UNIT *)h->object_base)[i];
+      /* We used to copy the odd few remaining bytes as one extra COPYING_UNIT,
+	 which does not do strict alignment for COPYING_UNITS.  */
+      already = obj_size / sizeof (COPYING_UNIT) * sizeof (COPYING_UNIT);
+  /* Copy remaining bytes one by one.  */
+  /* If the object just copied was the only data in OLD_CHUNK,
+     But not if that chunk might contain an empty object.  */
+      CALL_FREEFUN (h, old_chunk);
+  /* The new chunk certainly contains no empty object yet.  */
+/* Return nonzero if object OBJ has been allocated from obstack H.
+   This is here for debugging.
+   If you use it in a program, you are probably losing.  */
+     POINTER obj;
+  /* We use >= rather than > since the object cannot be exactly at
+  while (lp != 0 && ((POINTER)lp >= obj || (POINTER)(lp)->limit < obj))
+/* Free objects in obstack H, including OBJ and everything allocate
+   more recently than OBJ.  If OBJ is zero, free everything in H.  */
+/* This function has two names with identical definitions.
+   This is the first one, called from non-ANSI code.  */
+     POINTER obj;
+  /* We use >= because there cannot be an object at the beginning of a chunk.
+     But there can be an empty object at that address
+  while (lp != 0 && ((POINTER)lp >= obj || (POINTER)(lp)->limit < obj))
+      CALL_FREEFUN (h, lp);
+      /* If we switch chunks, we can't tell whether the new current
+/* This function is used from ANSI code.  */
+     POINTER obj;
+  /* We use >= because there cannot be an object at the beginning of a chunk.
+     But there can be an empty object at that address
+  while (lp != 0 && ((POINTER)lp >= obj || (POINTER)(lp)->limit < obj))
+      CALL_FREEFUN (h, lp);
+      /* If we switch chunks, we can't tell whether the new current
+/* These are now turned off because the applications do not use it
+   and it uses bcopy via obstack_grow, which causes trouble on sysV.  */
+/* Now define the functional versions of the obstack macros.
+   Define them to simply use the corresponding macros to do the job.  */
+#ifdef __STDC__
+/* These function definitions do not work with non-ANSI preprocessors;
+/* The function names appear in parentheses in order to prevent
+POINTER (obstack_base) (obstack)
+POINTER (obstack_next_free) (obstack)
+     POINTER pointer;
+     POINTER pointer;
+POINTER (obstack_finish) (obstack)
+POINTER (obstack_alloc) (obstack, length)
+POINTER (obstack_copy) (obstack, pointer, length)
+     POINTER pointer;
+POINTER (obstack_copy0) (obstack, pointer, length)
+     POINTER pointer;
+#endif /* __STDC__ */
+#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+   Copyright (C) 1992 Free Software Foundation, Inc.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+   Written August 1992 by Mike Haertel. */
+#ifdef STDC_HEADERS
+#undef RE_DUP_MAX
+#define UCHAR_MAX 255
+#ifdef HAVE_MEMCHR
+#ifdef NEED_MEMORY_H
+#ifdef __STDC__
+#if defined(HAVE_STRING_H) || defined(STDC_HEADERS)
+#define ISALNUM(C) (isascii(C) && isalnum(C))
+#define ISUPPER(C) (isascii(C) && isupper(C))
+#define ISALNUM(C) isalnum(C)
+#define ISUPPER(C) isupper(C)
+#define TOLOWER(C) (ISUPPER(C) ? tolower(C) : (C))
+#define NCHAR (UCHAR_MAX + 1)
+#if __STDC__
+static void Gcompile(char *, size_t);
+static void Ecompile(char *, size_t);
+static char *EGexecute(char *, size_t, char **);
+static void Fcompile(char *, size_t);
+static char *Fexecute(char *, size_t, char **);
+static void Gcompile();
+static void Ecompile();
+static char *EGexecute();
+static void Fcompile();
+static char *Fexecute();
+/* Here is the matchers vector for the main program. */
+  { "default", Gcompile, EGexecute },
+  { "grep", Gcompile, EGexecute },
+  { "ggrep", Gcompile, EGexecute },
+  { "egrep", Ecompile, EGexecute },
+  { "posix-egrep", Ecompile, EGexecute },
+  { "gegrep", Ecompile, EGexecute },
+  { "fgrep", Fcompile, Fexecute },
+  { "gfgrep", Fcompile, Fexecute },
+/* For -w, we also consider _ to be word constituent.  */
+#define WCHAR(C) (ISALNUM(C) || (C) == '_')
+/* DFA compiled regexp. */
+/* Regex compiled regexp. */
+/* KWset compiled pattern.  For Ecompile and Gcompile, we compile
+/* Last compiled fixed string known to exactly match the regexp.
+   If kwsexec() returns < lastexact, then we don't need to
+  static char trans[NCHAR];
+    for (i = 0; i < NCHAR; ++i)
+      trans[i] = TOLOWER(i);
+/* If the DFA turns out to have some set of fixed strings one of
+      /* First, we compile in the substrings known to be exact
+	 matches.  The kwset matcher will return the index
+      /* Now, we compile the substrings that will require
+Gcompile(pattern, size)
+#ifdef __STDC__
+  re_set_syntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE);
+  dfasyntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE, match_icase);
+  /* In the match_words and match_lines cases, we use a different pattern
+     for the DFA matcher that will quickly throw out cases that won't work.
+     Then if DFA succeeds we do some hairy stuff using the regex matcher
+      /* In the whole-word case, we use the pattern:
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 In the whole-line case, we use the pattern:
+	 BUG: Using [A-Za-z_] is locale-dependent!  */
+	strcpy(n, "\\(^\\|[^0-9A-Za-z_]\\)\\(");
+	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+Ecompile(pattern, size)
+#ifdef __STDC__
+      re_set_syntax(RE_SYNTAX_POSIX_EGREP);
+      dfasyntax(RE_SYNTAX_POSIX_EGREP, match_icase);
+      re_set_syntax(RE_SYNTAX_EGREP);
+      dfasyntax(RE_SYNTAX_EGREP, match_icase);
+  /* In the match_words and match_lines cases, we use a different pattern
+     for the DFA matcher that will quickly throw out cases that won't work.
+     Then if DFA succeeds we do some hairy stuff using the regex matcher
+      /* In the whole-word case, we use the pattern:
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 In the whole-line case, we use the pattern:
+	 BUG: Using [A-Za-z_] is locale-dependent!  */
+	strcpy(n, "(^|[^0-9A-Za-z_])(");
+	strcpy(n + i, ")([^0-9A-Za-z_]|$)");
+EGexecute(buf, size, endp)
+  static struct re_registers regs; /* This is static on account of a BRAIN-DEAD
+				    Q@#%!# library interface in regex.c.  */
+	  /* Find a possible match using the KWset matcher. */
+	  /* Narrow down to the line containing the candidate, and
+	     run it through DFA. */
+	  /* Successful, no backreferences encountered. */
+	  /* No good fixed strings; start with DFA. */
+	  /* Narrow down to the line we've found. */
+	  /* Successful, no backreferences encountered! */
+      /* If we've made it to this point, this means DFA has seen
+	 a probable match, and we need to run it through Regex. */
+	  /* If -w, check if the match aligns with word boundaries.
+	     We do this iteratively because:
+	     (b) Several alternatives in the pattern might be valid at a given
+		if ((start == 0 || !WCHAR(beg[start - 1]))
+		    && (len == end - beg || !WCHAR(beg[start + len])))
+		    /* Try a shorter length anchored at the same place. */
+		    /* Try looking further on. */
+Fcompile(pattern, size)
+Fexecute(buf, size, endp)
+	    if (try > buf && WCHAR((unsigned char) try[-1]))
+	    if (try + len < buf + size && WCHAR((unsigned char) try[len]))

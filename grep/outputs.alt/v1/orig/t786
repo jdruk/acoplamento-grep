@@ -1,0 +1,661 @@
+extern char *sys_errlist[];
+#define strerror(E) ((E) < sys_nerr ? sys_errlist[(E)] : "bogus error number")
+	  while (p > bp && p[-1] != '\n');
+      if (b == lim && ((b > beg && b[-1] == '\n') || b == beg))
+      for (lim = buflim; lim > beg && lim[-1] != '\n'; --lim)
+	  while (beg > bufbeg && beg[-1] != '\n');
+static char version[] = "GNU grep version 2.0";
+  "usage: %s [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]\n"
+  for (i = 0; matchers[i].name; ++i)
+    if (strcmp(name, matchers[i].name) == 0)
+	compile = matchers[i].compile;
+	execute = matchers[i].execute;
+     char *argv[];
+  prog = argv[0];
+	  keys[keycc++] = '\n';
+	strcpy(&keys[keycc], optarg);
+	  keys[keycc++] = '\n';
+	if (keycc - oldcc > 0 && keys[keycc - 1] == '\n')
+	keys = argv[optind++];
+	desc = strcmp(argv[optind], "-") ? open(argv[optind], O_RDONLY) : 0;
+	      error(argv[optind], errno);
+	    filename = desc == 0 ? "(standard input)" : argv[optind];
+    to[i] = from[i];
+   One subsequence is elements [first_nonopt,last_nonopt)
+   The other is elements [last_nonopt,optind), which contains all
+  my_bcopy ((char *) &argv[first_nonopt], (char *) temp, nonopts_size);
+  my_bcopy ((char *) &argv[last_nonopt], (char *) &argv[first_nonopt],
+	    (char *) &argv[first_nonopt + optind - last_nonopt],
+      if (optstring[0] == '-')
+      else if (optstring[0] == '+')
+		 && (argv[optind][0] != '-' || argv[optind][1] == '\0')
+		     || argv[optind][0] != '+' || argv[optind][1] == '\0')
+      if (optind != argc && !strcmp (argv[optind], "--"))
+      if ((argv[optind][0] != '-' || argv[optind][1] == '\0')
+	      || argv[optind][0] != '+' || argv[optind][1] == '\0')
+	  optarg = argv[optind++];
+      nextchar = (argv[optind] + 1
+		  + (longopts != NULL && argv[optind][1] == '-'));
+      && ((argv[optind][0] == '-'
+	   && (argv[optind][1] == '-' || long_only))
+	  || argv[optind][0] == '+'
+		     argv[0], argv[optind]);
+		      if (argv[optind - 1][1] == '-')
+				 argv[0], pfound->name);
+			     argv[0], argv[optind - 1][0], pfound->name);
+		optarg = argv[optind++];
+			     argv[0], argv[optind - 1]);
+		  return optstring[0] == ':' ? ':' : '?';
+      if (!long_only || argv[optind][1] == '-'
+	  || argv[optind][0] == '+'
+	      if (argv[optind][1] == '-')
+			 argv[0], nextchar);
+			 argv[0], argv[optind][0], nextchar);
+		       argv[0], c);
+	      fprintf (stderr, "%s: unrecognized option `-%c'\n", argv[0], c);
+	    fprintf (stderr, "%s: illegal option -- %c\n", argv[0], c);
+    if (temp[1] == ':')
+	if (temp[2] == ':')
+			     argv[0], c);
+			     argv[0], c);
+		if (optstring[0] == ':')
+	      optarg = argv[optind++];
+	printf ("%s ", argv[optind++]);
+static char re_syntax_table[CHAR_SET_SIZE];
+     re_syntax_table[c] = Sword;
+     re_syntax_table[c] = Sword;
+     re_syntax_table[c] = Sword;
+   re_syntax_table['_'] = Sword;
+#define SYNTAX(c) re_syntax_table[c]
+    (destination)[0] = (number) & 0377;					\
+    (destination)[1] = (number) >> 8;					\
+      if (fastmap[i++])
+          while (i < (1 << BYTEWIDTH)  &&  fastmap[i])
+	    printf ("/charset [%s",
+		  && (p[1 + (c/8)] & (1 << (c % 8))))
+            printchar (string1[this_char]);
+        printchar (string2[this_char]);
+static const char *re_error_msg[] =
+    "Unmatched [ or [^",			/* REG_EBRACK */
+    if (translate) c = translate[c]; 					\
+/* If `translate' is non-null, return translate[D], else just D.  We
+#define TRANSLATE(d) (translate ? translate[(unsigned char) (d)] : (d))
+#define COMPILE_STACK_TOP (compile_stack.stack[compile_stack.avail])
+  (b[((unsigned char) (c)) / BYTEWIDTH]               \
+        printchar (pattern[debug_count]);
+        case '[':
+            if ((re_opcode_t) b[-2] == charset_not
+                /* \ might escape characters inside [...] and [^...].  */
+                   not (i.e., when the bracket expression is `[]' so
+                    && !(p - 2 >= pattern && p[-2] == '[') 
+                    && !(p - 3 >= pattern && p[-3] == '[' && p[-2] == '^')
+                else if (p[0] == '-' && p[1] != ']')
+                else if (syntax & RE_CHAR_CLASSES && c == '[' && *p == ':')
+                    char str[CHAR_CLASS_MAX_LENGTH + 1];
+                    /* If pattern is `[[:'.  */
+                        str[c1++] = c;
+                    str[c1] = '\0';
+                    /* If isn't a word bracketed by `[:' and:`]':
+                       the leading `:' and `[' (but set bits for them).  */
+                        SET_LIST_BIT ('[');
+            while ((int) b[-1] > 0 && b[b[-1] - 1] == 0) 
+              b[-1]--; 
+            b += b[-1];
+                   if (p > pattern  &&  p[-1] == '\\')
+              BUF_PUSH_2 (syntaxspec, syntax_spec_code[c]);
+              BUF_PUSH_2 (notsyntaxspec, syntax_spec_code[c]);
+		  ? *p == '\\' && (p[1] == '+' || p[1] == '?')
+                      : (p[0] == '\\' && p[1] == '{'))))
+  boolean prev_prev_backslash = prev > pattern && prev[-1] == '\\';
+    if (compile_stack.stack[this_element].regnum == regnum)
+   starting character is in `P[-2]'.  (`P[-1]' is the character `-'.)
+  range_start = ((unsigned char *) p)[-2];
+  range_end   = ((unsigned char *) p)[0];
+#define FAIL_STACK_TOP()       (fail_stack.stack[fail_stack.avail])
+    : ((fail_stack).stack[(fail_stack).avail++] = pattern_op,		\
+  fail_stack.stack[fail_stack.avail++] = (fail_stack_elt_t) item
+#define POP_FAILURE_ITEM() fail_stack.stack[--fail_stack.avail]
+	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+        PUSH_FAILURE_ITEM (regstart[this_reg]);				\
+	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+        PUSH_FAILURE_ITEM (regend[this_reg]);				\
+	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+                      REG_MATCH_NULL_STRING_P (reg_info[this_reg]));	\
+        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+                      MATCHED_SOMETHING (reg_info[this_reg]));		\
+                      EVER_MATCHED_SOMETHING (reg_info[this_reg]));	\
+        PUSH_FAILURE_ITEM (reg_info[this_reg].word);			\
+      reg_info[this_reg].word = POP_FAILURE_ITEM ();			\
+      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+      regend[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+      regstart[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+          p = fail_stack.stack[--fail_stack.avail];
+          fastmap[p[1]] = 1;
+	    if (p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH)))
+              fastmap[j] = 1;
+            fastmap[j] = 1;
+	    if (!(p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH))))
+              fastmap[j] = 1;
+	      fastmap[j] = 1;
+	      fastmap[j] = 1;
+            fastmap[j] = 1;
+            fastmap['\n'] = 0;
+	      fastmap[j] = 1;
+	      fastmap[j] = 1;
+	      && fail_stack.stack[fail_stack.avail - 1] == p)
+  if (bufp->used > 0 && (re_opcode_t) bufp->buffer[0] == begbuf && range > 0)
+                       && !fastmap[(unsigned char)
+				   translate[(unsigned char) *d++]])
+                while (range > lim && !fastmap[(unsigned char) *d++])
+                                 ? string2[startpos - size1] 
+                                 : string1[startpos]);
+	      if (!fastmap[(unsigned char) TRANSLATE (c)])
+          MATCHED_SOMETHING (reg_info[r])				\
+            = EVER_MATCHED_SOMETHING (reg_info[r])			\
+     field of reg_info[reg_num] helps us tell whether or not we have
+  /* Logically, this is `best_regend[0]'.  But we don't want to have to
+      regstart[mcnt] = regend[mcnt] 
+        = old_regstart[mcnt] = old_regend[mcnt] = REG_UNSET_VALUE;
+      REG_MATCH_NULL_STRING_P (reg_info[mcnt]) = MATCH_NULL_UNSET_VALUE;
+      IS_ACTIVE (reg_info[mcnt]) = 0;
+      MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+      EVER_MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+                          best_regstart[mcnt] = regstart[mcnt];
+                          best_regend[mcnt] = regend[mcnt];
+		      regstart[mcnt] = best_regstart[mcnt];
+		      regend[mcnt] = best_regend[mcnt];
+                  regs->start[0] = pos;
+                  regs->end[0] = (MATCHING_IN_FIRST_STRING ? d - string1
+                  if (REG_UNSET (regstart[mcnt]) || REG_UNSET (regend[mcnt]))
+                    regs->start[mcnt] = regs->end[mcnt] = -1;
+		      regs->start[mcnt] = POINTER_TO_OFFSET (regstart[mcnt]);
+                      regs->end[mcnt] = POINTER_TO_OFFSET (regend[mcnt]);
+                regs->start[mcnt] = regs->end[mcnt] = -1;
+		  if (translate[(unsigned char) *d++] != (char) *p++)
+		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+          if (REG_MATCH_NULL_STRING_P (reg_info[*p]) == MATCH_NULL_UNSET_VALUE)
+            REG_MATCH_NULL_STRING_P (reg_info[*p]) 
+          old_regstart[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+                             ? REG_UNSET (regstart[*p]) ? d : regstart[*p]
+                             : regstart[*p];
+			 POINTER_TO_OFFSET (old_regstart[*p]));
+          regstart[*p] = d;
+	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+          IS_ACTIVE (reg_info[*p]) = 1;
+          MATCHED_SOMETHING (reg_info[*p]) = 0;
+	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+          old_regend[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+                           ? REG_UNSET (regend[*p]) ? d : regend[*p]
+			   : regend[*p];
+			 POINTER_TO_OFFSET (old_regend[*p]));
+          regend[*p] = d;
+	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+          IS_ACTIVE (reg_info[*p]) = 0;
+              while (r > 0 && !IS_ACTIVE (reg_info[r]))
+          if ((!MATCHED_SOMETHING (reg_info[*p])
+               || (re_opcode_t) p[-3] == start_memory)
+                  && (re_opcode_t) p1[3] == start_memory && p1[4] == *p)
+                     regstart[1], and, e.g., with `((a*)*(b*)*)*'
+                     against `aba' for regend[3].
+                  if (EVER_MATCHED_SOMETHING (reg_info[*p]))
+                      EVER_MATCHED_SOMETHING (reg_info[*p]) = 0;
+                          regstart[r] = old_regstart[r];
+                          if ((int) old_regend[r] >= (int) regstart[r])
+                            regend[r] = old_regend[r];
+            if (REG_UNSET (regstart[regno]) || REG_UNSET (regend[regno]))
+            d2 = regstart[regno];
+            dend2 = ((FIRST_STRING_P (regstart[regno]) 
+		      == FIRST_STRING_P (regend[regno]))
+		     ? regend[regno] : end_match_1);
+		    if (dend2 == regend[regno]) break;
+                    dend2 = regend[regno];
+          else if (d[-1] == '\n' && bufp->newline_anchor)
+  	        p[-3] = (unsigned char) pop_failure_jump;
+                  = *p2 == (unsigned char) endline ? '\n' : p2[2];
+                /* p1[0] ... p1[2] are the `on_failure_jump' corresponding
+                if ((re_opcode_t) p1[3] == exactn && p1[5] != c)
+  		    p[-3] = (unsigned char) pop_failure_jump;
+                                  c, p1[5]);
+		else if ((re_opcode_t) p1[3] == charset
+			 || (re_opcode_t) p1[3] == charset_not)
+		    int not = (re_opcode_t) p1[3] == charset_not;
+		    if (c < (unsigned char) (p1[4] * BYTEWIDTH)
+			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+  		        p[-3] = (unsigned char) pop_failure_jump;
+	  if ((re_opcode_t) p[-1] != pop_failure_jump)
+	      p[-1] = (unsigned char) jump;
+	      p[2] = (unsigned char) no_op;
+              p[3] = (unsigned char) no_op;
+              while ((re_opcode_t) p1[mcnt-3] == jump_past_alt)
+                  if ((re_opcode_t) p1[mcnt-3] != jump_past_alt)
+	  assert (p1[1] == **p);
+      if (REG_MATCH_NULL_STRING_P (reg_info[reg_no]) == MATCH_NULL_UNSET_VALUE)
+        REG_MATCH_NULL_STRING_P (reg_info[reg_no]) = ret;
+      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+/* Return zero if TRANSLATE[S1] and TRANSLATE[S2] are identical for LEN
+      if (translate[*p1++] != translate[*p2++]) return 1;
+  return re_error_msg[(int) ret];
+  return (char *) re_error_msg[(int) ret];
+     If REG_NEWLINE is set, then . and [^...] don't match newline.
+        preg->translate[i] = ISUPPER (i) ? tolower (i) : i;
+    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+    regmatch_t pmatch[]; 
+              pmatch[r].rm_so = regs.start[r];
+              pmatch[r].rm_eo = regs.end[r];
+      || errcode >= (sizeof (re_error_msg) / sizeof (re_error_msg[0])))
+  msg = re_error_msg[errcode];
+          errbuf[errbuf_size - 1] = 0;
+  return c[b / INTBITS] & 1 << b % INTBITS;
+  c[b / INTBITS] |= 1 << b % INTBITS;
+  c[b / INTBITS] &= ~(1 << b % INTBITS);
+    dst[i] = src[i];
+    s[i] = 0;
+    s[i] = ~s[i];
+    if (s1[i] != s2[i])
+    if (equal(s, dfa->charclasses[i]))
+  copyset(s, dfa->charclasses[i]);
+   the class.  The leading [ has already been eaten by the lexical analyzer. */
+} prednames[] = {
+		  : lexleft > 1 && lexptr[0] == '\\' && lexptr[1] == ')')
+		  : lexleft > 1 && lexptr[0] == '\\' && lexptr[1] == '|')
+	case '[':
+	  FETCH(c, "Unbalanced [");
+	      FETCH(c, "Unbalanced [");
+		 Note that if we're looking at some other [:...:]
+	      if (c == '[' && (syntax_bits & RE_CHAR_CLASSES))
+		for (c1 = 0; prednames[c1].name; ++c1)
+		  if (looking_at(prednames[c1].name))
+			if ((*prednames[c1].pred)(c2))
+		      lexptr += strlen(prednames[c1].name);
+		      lexleft -= strlen(prednames[c1].name);
+		      FETCH(c1, "Unbalanced [");
+		FETCH(c, "Unbalanced [");
+	      FETCH(c1, "Unbalanced [");
+		  FETCH(c2, "Unbalanced [");
+		      /* In the case [x-], the - is an ordinary hyphen,
+			FETCH(c2, "Unbalanced [");
+		      FETCH(c1, "Unbalanced [");
+  dfa->tokens[dfa->tindex++] = t;
+  switch (dfa->tokens[tindex - 1])
+    addtok(dfa->tokens[tindex + i]);
+    dst->elems[i] = src->elems[i];
+  for (i = 0; i < s->nelem && p.index < s->elems[i].index; ++i)
+  if (i < s->nelem && p.index == s->elems[i].index)
+    s->elems[i].constraint |= p.constraint;
+	  t2 = s->elems[i];
+	  s->elems[i++] = t1;
+    if (s1->elems[i].index > s2->elems[j].index)
+      m->elems[m->nelem++] = s1->elems[i++];
+    else if (s1->elems[i].index < s2->elems[j].index)
+      m->elems[m->nelem++] = s2->elems[j++];
+	m->elems[m->nelem] = s1->elems[i++];
+	m->elems[m->nelem++].constraint |= s2->elems[j++].constraint;
+    m->elems[m->nelem++] = s1->elems[i++];
+    m->elems[m->nelem++] = s2->elems[j++];
+    if (p.index == s->elems[i].index)
+      s->elems[i] = s->elems[i + 1];
+    hash ^= s->elems[i].index + s->elems[i].constraint;
+      if (hash != d->states[i].hash || s->nelem != d->states[i].elems.nelem
+	  || newline != d->states[i].newline || letter != d->states[i].letter)
+	if (s->elems[j].constraint
+	    != d->states[i].elems.elems[j].constraint
+	    || s->elems[j].index != d->states[i].elems.elems[j].index)
+  d->states[i].hash = hash;
+  MALLOC(d->states[i].elems.elems, position, s->nelem);
+  copy(s, &d->states[i].elems);
+  d->states[i].newline = newline;
+  d->states[i].letter = letter;
+  d->states[i].backref = 0;
+  d->states[i].constraint = 0;
+  d->states[i].first_end = 0;
+    if (d->tokens[s->elems[j].index] < 0)
+	constraint = s->elems[j].constraint;
+	  d->states[i].constraint |= constraint;
+	if (! d->states[i].first_end)
+	  d->states[i].first_end = d->tokens[s->elems[j].index];
+    else if (d->tokens[s->elems[j].index] == BACKREF)
+	d->states[i].constraint = NO_CONSTRAINT;
+	d->states[i].backref = 1;
+    visited[i] = 0;
+    if (d->tokens[s->elems[i].index] >= NOTCHAR
+	&& d->tokens[s->elems[i].index] != BACKREF
+	&& d->tokens[s->elems[i].index] < CSET)
+	old = s->elems[i];
+	delete(s->elems[i], s);
+	if (visited[old.index])
+	visited[old.index] = 1;
+	switch (d->tokens[old.index])
+	for (j = 0; j < d->follows[old.index].nelem; ++j)
+	    p.index = d->follows[old.index].elems[j].index;
+      prtok(d->tokens[i]);
+    nalloc[i] = 0;
+    switch (d->tokens[i])
+	tmp.nelem = nfirstpos[-1];
+	for (j = 0; j < nlastpos[-1]; ++j)
+	    merge(&tmp, &d->follows[pos[j].index], &merged);
+	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+				 nalloc[pos[j].index], merged.nelem - 1);
+	    copy(&merged, &d->follows[pos[j].index]);
+	if (d->tokens[i] != PLUS)
+	  nullable[-1] = 1;
+	tmp.nelem = nfirstpos[-1];
+	pos = lastpos + nlastpos[-1];
+	for (j = 0; j < nlastpos[-2]; ++j)
+	    merge(&tmp, &d->follows[pos[j].index], &merged);
+	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+				 nalloc[pos[j].index], merged.nelem - 1);
+	    copy(&merged, &d->follows[pos[j].index]);
+	if (nullable[-2])
+	  nfirstpos[-2] += nfirstpos[-1];
+	  firstpos += nfirstpos[-1];
+	if (nullable[-1])
+	  nlastpos[-2] += nlastpos[-1];
+	    pos = lastpos + nlastpos[-2];
+	    for (j = nlastpos[-1] - 1; j >= 0; --j)
+	      pos[j] = lastpos[j];
+	    lastpos += nlastpos[-2];
+	    nlastpos[-2] = nlastpos[-1];
+	nullable[-2] = nullable[-1] && nullable[-2];
+	nfirstpos[-2] += nfirstpos[-1];
+	nlastpos[-2] += nlastpos[-1];
+	nullable[-2] = nullable[-1] || nullable[-2];
+	*nullable++ = d->tokens[i] == BACKREF;
+	nalloc[i] = 1;
+	MALLOC(d->follows[i].elems, position, nalloc[i]);
+      prtok(d->tokens[i]);
+      fprintf(stderr, nullable[-1] ? " nullable: yes\n" : " nullable: no\n");
+      for (j = nfirstpos[-1] - 1; j >= 0; --j)
+	  fprintf(stderr, " %d:", firstpos[j].index);
+	  prtok(d->tokens[firstpos[j].index]);
+      for (j = nlastpos[-1] - 1; j >= 0; --j)
+	  fprintf(stderr, " %d:", lastpos[j].index);
+	  prtok(d->tokens[lastpos[j].index]);
+    if (d->tokens[i] < NOTCHAR || d->tokens[i] == BACKREF
+	|| d->tokens[i] >= CSET)
+	prtok(d->tokens[i]);
+	for (j = d->follows[i].nelem - 1; j >= 0; --j)
+	    fprintf(stderr, " %d:", d->follows[i].elems[j].index);
+	    prtok(d->tokens[d->follows[i].elems[j].index]);
+	copy(&d->follows[i], &merged);
+	if (d->follows[i].nelem < merged.nelem)
+	  REALLOC(d->follows[i].elems, position, merged.nelem);
+	copy(&merged, &d->follows[i]);
+  for (i = 0; i < nfirstpos[-1]; ++i)
+    insert(firstpos[i], &merged);
+    if (PREV_NEWLINE_DEPENDENT(merged.elems[i].constraint))
+     int trans[];
+  position_set grps[NOTCHAR];	/* As many as will ever be needed. */
+  charclass labels[NOTCHAR];	/* Labels corresponding to the groups. */
+  for (i = 0; i < d->states[s].elems.nelem; ++i)
+      pos = d->states[s].elems.elems[i];
+      if (d->tokens[pos.index] >= 0 && d->tokens[pos.index] < NOTCHAR)
+	setbit(d->tokens[pos.index], matches);
+      else if (d->tokens[pos.index] >= CSET)
+	copyset(d->charclasses[d->tokens[pos.index] - CSET], matches);
+					 d->states[s].newline, 1))
+					 d->states[s].newline, 0))
+	      matches[j] &= newline[j];
+					d->states[s].letter, 1))
+	      matches[j] &= ~letters[j];
+					d->states[s].letter, 0))
+	      matches[j] &= letters[j];
+	  for (j = 0; j < CHARCLASS_INTS && !matches[j]; ++j)
+	  if (d->tokens[pos.index] >= 0 && d->tokens[pos.index] < NOTCHAR
+	      && !tstbit(d->tokens[pos.index], labels[j]))
+	    (intersect[k] = matches[k] & labels[j][k]) ? intersectf = 1 : 0;
+	      int match = matches[k], label = labels[j][k];
+	      (leftovers[k] = ~match & label) ? leftoversf = 1 : 0;
+	      (matches[k] = match & ~label) ? matchesf = 1 : 0;
+	      copyset(leftovers, labels[ngrps]);
+	      copyset(intersect, labels[j]);
+	      MALLOC(grps[ngrps].elems, position, d->nleaves);
+	      copy(&grps[j], &grps[ngrps]);
+	  grps[j].elems[grps[j].nelem++] = pos;
+	  copyset(matches, labels[ngrps]);
+	  MALLOC(grps[ngrps].elems, position, d->nleaves);
+	  grps[ngrps].nelem = 1;
+	  grps[ngrps].elems[0] = pos;
+      for (i = 0; i < d->states[0].elems.nelem; ++i)
+	  if (PREV_NEWLINE_DEPENDENT(d->states[0].elems.elems[i].constraint))
+	  if (PREV_LETTER_DEPENDENT(d->states[0].elems.elems[i].constraint))
+      copy(&d->states[0].elems, &follows);
+	  trans[i] = state_newline;
+	  trans[i] = state_letter;
+	  trans[i] = state;
+      trans[i] = -1;
+      for (j = 0; j < grps[i].nelem; ++j)
+	for (k = 0; k < d->follows[grps[i].elems[j].index].nelem; ++k)
+	  insert(d->follows[grps[i].elems[j].index].elems[k], &follows);
+	for (j = 0; j < d->states[0].elems.nelem; ++j)
+	  insert(d->states[0].elems.elems[j], &follows);
+      if (tstbit('\n', labels[i]))
+	  if (PREV_NEWLINE_DEPENDENT(follows.elems[j].constraint))
+	if (labels[i][j] & letters[j])
+	  if (PREV_LETTER_DEPENDENT(follows.elems[j].constraint))
+	  if (labels[i][j] & 1 << k)
+		trans[c] = state_newline;
+		trans[c] = state_letter;
+		trans[c] = state;
+    free(grps[i].elems);
+   is a non-accepting state, then d->trans[state] points to its table.
+   If it is an accepting state then d->fails[state] points to its table.
+   If it has no table at all, then d->trans[state] is NULL.
+	if (d->trans[i])
+	    free((ptr_t) d->trans[i]);
+	    d->trans[i] = NULL;
+	else if (d->fails[i])
+	    free((ptr_t) d->fails[i]);
+	    d->fails[i] = NULL;
+  d->success[s] = 0;
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 1, d->states[s].letter, 0,
+    d->success[s] |= 4;
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 1,
+    d->success[s] |= 2;
+  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 0,
+    d->success[s] |= 1;
+    if (trans[i] >= d->tralloc)
+	while (trans[i] >= d->tralloc)
+	    d->trans[oldalloc] = NULL;
+	    d->fails[oldalloc++] = NULL;
+  d->newlines[s] = trans['\n'];
+  trans['\n'] = -1;
+    d->fails[s] = trans;
+    d->trans[s] = trans;
+  static sbit[NOTCHAR];	/* Table for anding with d->success. */
+	  sbit[i] = 4;
+	  sbit[i] = 2;
+	  sbit[i] = 1;
+      if ((t = trans[s]) != 0)
+	    s1 = t[*p++];
+	    if (! (t = trans[s1]))
+	    s = t[*p++];
+        while ((t = trans[s]) != 0);
+      if (s >= 0 && p <= (unsigned char *) end && d->fails[s])
+	  if (d->success[s] & sbit[*p])
+		if (d->states[s].backref)
+	  s = d->fails[s][*p++];
+      if (count && (char *) p <= end && p[-1] == '\n')
+      if (p[-1] == '\n' && newline)
+	  s = d->newlines[s1];
+	if (ISUPPER(s[i]))
+	  copy[i] = tolower(s[i]);
+	  copy[i] = s[i];
+    free((ptr_t) d->states[i].elems.elems);
+    if (d->follows[i].elems)
+      free((ptr_t) d->follows[i].elems);
+    if (d->trans[i])
+      free((ptr_t) d->trans[i]);
+    else if (d->fails[i])
+      free((ptr_t) d->fails[i]);
+	grep '[c]'		->	grep 'c'
+  for (i = 0; cpp[i] != NULL; ++i)
+      free(cpp[i]);
+      cpp[i] = NULL;
+  new[len] = '\0';
+  for (i = 0; cpp[i] != NULL; ++i)
+    if (istrstr(cpp[i], new) != NULL)
+  while (cpp[j] != NULL)
+    if (istrstr(new, cpp[j]) == NULL)
+	free(cpp[j]);
+	cpp[j] = cpp[i];
+	cpp[i] = NULL;
+  cpp[i] = new;
+  cpp[i + 1] = NULL;
+  cpp[0] = NULL;
+	  for (i = 1; lcp[i] != '\0' && lcp[i] == rcp[i]; ++i)
+  for (i = 0; new[i] != NULL; ++i)
+      old = enlist(old, new[i], strlen(new[i]));
+  both[0] = NULL;
+  for (lnum = 0; left[lnum] != NULL; ++lnum)
+      for (rnum = 0; right[rnum] != NULL; ++rnum)
+	  temp = comsubs(left[lnum], right[rnum]);
+  mp->left[0] = mp->right[0] = mp->is[0] = '\0';
+    mp[i] = must0;
+      mp[i].in = (char **) malloc(sizeof *mp[i].in);
+      mp[i].left = malloc(2);
+      mp[i].right = malloc(2);
+      mp[i].is = malloc(2);
+      if (mp[i].in == NULL || mp[i].left == NULL ||
+	  mp[i].right == NULL || mp[i].is == NULL)
+      mp[i].left[0] = mp[i].right[0] = mp[i].is[0] = '\0';
+      mp[i].in[0] = NULL;
+      prtok(dfa->tokens[i]);
+      switch (t = dfa->tokens[ri])
+	  if (mp < &musts[2])
+	      lmp->is[0] = '\0';
+	    while (lmp->left[i] != '\0' && lmp->left[i] == rmp->left[i])
+	    lmp->left[i] = '\0';
+	      if (lmp->right[ln - i - 1] != rmp->right[rn - i - 1])
+	      lmp->right[j] = lmp->right[(ln - i) + j];
+	    lmp->right[j] = '\0';
+	  mp->is[0] = '\0';
+	  if (mp != &musts[1])
+	  for (i = 0; musts[0].in[i] != NULL; ++i)
+	    if (strlen(musts[0].in[i]) > strlen(result))
+	      result = musts[0].in[i];
+	  if (strcmp(result, musts[0].is) == 0)
+	  if (mp < &musts[2])
+	    if (lmp->right[0] != '\0' &&
+		rmp->left[0] != '\0')
+	    if (lmp->is[0] != '\0')
+	    if (rmp->is[0] == '\0')
+	      lmp->right[0] = '\0';
+	    if (lmp->is[0] != '\0' && rmp->is[0] != '\0')
+	      lmp->is[0] = '\0';
+	      mp->is[0] = mp->left[0] = mp->right[0] = t;
+	      mp->is[1] = mp->left[1] = mp->right[1] = '\0';
+      prtok(dfa->tokens[ri]);
+      for (i = 0; mp->in[i]; ++i)
+	fprintf(stderr, " \"%s\"", mp->in[i]);
+      freelist(mp[i].in);
+      ifree((char *) mp[i].in);
+      ifree(mp[i].left);
+      ifree(mp[i].right);
+      ifree(mp[i].is);
+  unsigned char delta[NCHAR];	/* Delta table for rapid search. */
+  struct trie *next[NCHAR];	/* Table of children of the root. */
+  struct tree *links[12];
+  enum { L, R } dirs[12];
+      label = kwset->trans ? kwset->trans[(unsigned char) *--text] : *--text;
+      links[0] = (struct tree *) &trie->links;
+      dirs[0] = L;
+	  links[depth] = link;
+	    dirs[depth++] = L, link = link->llink;
+	    dirs[depth++] = R, link = link->rlink;
+	  if (dirs[--depth] == L)
+	    links[depth]->llink = link;
+	    links[depth]->rlink = link;
+	  while (depth && !links[depth]->balance)
+	      if (dirs[depth] == L)
+		--links[depth]->balance;
+		++links[depth]->balance;
+	  if (depth && ((dirs[depth] == L && --links[depth]->balance)
+			|| (dirs[depth] == R && ++links[depth]->balance)))
+	      switch (links[depth]->balance)
+		  switch (dirs[depth + 1])
+		      r = links[depth], t = r->llink, rl = t->rlink;
+		      r = links[depth], l = r->llink, t = l->rlink;
+		  switch (dirs[depth + 1])
+		      l = links[depth], t = l->rlink, lr = t->llink;
+		      l = links[depth], r = l->rlink, t = r->llink;
+	      if (dirs[depth - 1] == L)
+		links[depth - 1]->llink = t;
+		links[depth - 1]->rlink = t;
+     unsigned char delta[];
+  if (depth < delta[tree->label])
+    delta[tree->label] = depth;
+     struct trie *next[];
+  next[tree->label] = tree->trie;
+  unsigned char delta[NCHAR];
+  struct trie *last, *next[NCHAR];
+      delta[i] = kwset->mind;
+      delta[i] = 255;
+	  kwset->target[i] = curr->links->label;
+	delta[(unsigned char) kwset->target[i]] = kwset->mind - (i + 1);
+	if (kwset->target[i] == kwset->target[kwset->mind - 1])
+	next[i] = 0;
+	  kwset->next[i] = next[(unsigned char) trans[i]];
+	  kwset->next[i] = next[i];
+      kwset->delta[i] = delta[(unsigned char) trans[i]];
+      kwset->delta[i] = delta[i];
+    return memchr(text, kwset->target[0], size);
+  gc = U(sp[-2]);
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	if (U(tp[-2]) == gc)
+	    for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+  d = d1[U(tp[-1])];
+      d = d1[U((tp += d)[-1])];
+      if (tp[-2] == gc)
+	  for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+	  while ((d = delta[c = *end]) && end < qlim)
+	      end += delta[(unsigned char) *end];
+	      end += delta[(unsigned char) *end];
+	d = delta[c = (end += d)[-1]];
+      trie = next[c];
+	  c = trans ? trans[(unsigned char) *--beg] : *--beg;
+      if ((d = delta[c = (end += d)[-1]]) != 0)
+      if (!(trie = next[c]))
+	  c = trans ? trans[(unsigned char) *--beg] : *--beg;
+      kwsmatch->beg[0] = mch;
+      kwsmatch->size[0] = accept->depth;
+	  kwsmatch->beg[0] = ret;
+	  kwsmatch->size[0] = kwset->mind;
+	((COPYING_UNIT *)new_chunk->contents)[i]
+	  = ((COPYING_UNIT *)h->object_base)[i];
+    new_chunk->contents[i] = h->object_base[i];
+struct matcher matchers[] = {
+  static char trans[NCHAR];
+      trans[i] = TOLOWER(i);
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 BUG: Using [A-Za-z_] is locale-dependent!  */
+	strcpy(n, "\\(^\\|[^0-9A-Za-z_]\\)\\(");
+	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+	 BUG: Using [A-Za-z_] is locale-dependent!  */
+	strcpy(n, "(^|[^0-9A-Za-z_])(");
+	strcpy(n + i, ")([^0-9A-Za-z_]|$)");
+	  while (beg > buf && beg[-1] != '\n')
+	  while (beg > buf && beg[-1] != '\n')
+	  len = regs.end[0] - start;
+		if ((start == 0 || !WCHAR(beg[start - 1]))
+		    && (len == end - beg || !WCHAR(beg[start + len])))
+		    len = regs.end[0] - start;
+      len = kwsmatch.size[0];
+	  if (beg > buf && beg[-1] != '\n')
+	  if (beg + len < buf + size && beg[len] != '\n')
+	    if (try > buf && WCHAR((unsigned char) try[-1]))
+	    if (try + len < buf + size && WCHAR((unsigned char) try[len]))
+		len = kwsmatch.size[0];
+  while (beg > buf && beg[-1] != '\n')

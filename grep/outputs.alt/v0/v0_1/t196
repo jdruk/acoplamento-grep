@@ -1,0 +1,2 @@
+../inputs/grep1.dat:if (gout)
+../inputs/grep1.dat:    if (gout)

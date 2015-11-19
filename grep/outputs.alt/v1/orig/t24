@@ -1,0 +1,2 @@
+           the range 0 to one less than the pattern buffer's re_nsub
+              || pending_exact + *pending_exact + 1 != b

@@ -1,0 +1,6 @@
+../inputs/grep1.dat:if aout
+../inputs/grep1.dat:if ag
+../inputs/grep1.dat:dseif aout
+../inputs/grep1.dat:dseif aoutvfv
+../inputs/grep1.dat:  if aout
+../inputs/grep1.dat:          if ag

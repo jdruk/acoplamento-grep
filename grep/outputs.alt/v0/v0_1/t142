@@ -1,0 +1,13 @@
+../inputs/grep1.dat:if out
+../inputs/grep1.dat:if gout
+../inputs/grep1.dat:if agout
+../inputs/grep1.dat:if agout end = buf + size;
+../inputs/grep1.dat:if aout
+../inputs/grep1.dat:if ag
+../inputs/grep1.dat:if g
+../inputs/grep1.dat:wswswsif out
+../inputs/grep1.dat:dseif aout
+../inputs/grep1.dat:wswswsif outvfvf
+../inputs/grep1.dat:dseif aoutvfv
+../inputs/grep1.dat:  if out
+../inputs/grep1.dat:  if aout

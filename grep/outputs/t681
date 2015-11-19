@@ -1,0 +1,127 @@
+extern char *sys_errlist[];
+	  while (p > bp && p[-1] != '\n');
+      if (b == lim && ((b > beg && b[-1] == '\n') || b == beg))
+      for (lim = buflim; lim > beg && lim[-1] != '\n'; --lim)
+	  while (beg > bufbeg && beg[-1] != '\n');
+static char version[] = "GNU grep version 2.0";
+     char *argv[];
+	if (keycc - oldcc > 0 && keys[keycc - 1] == '\n')
+		 && (argv[optind][0] != '-' || argv[optind][1] == '\0')
+		     || argv[optind][0] != '+' || argv[optind][1] == '\0')
+      if ((argv[optind][0] != '-' || argv[optind][1] == '\0')
+	      || argv[optind][0] != '+' || argv[optind][1] == '\0')
+		  + (longopts != NULL && argv[optind][1] == '-'));
+	   && (argv[optind][1] == '-' || long_only))
+		      if (argv[optind - 1][1] == '-')
+			     argv[0], argv[optind - 1][0], pfound->name);
+			     argv[0], argv[optind - 1]);
+      if (!long_only || argv[optind][1] == '-'
+	      if (argv[optind][1] == '-')
+    if (temp[1] == ':')
+    (destination)[1] = (number) >> 8;					\
+static const char *re_error_msg[] =
+                   not (i.e., when the bracket expression is `[]' so
+                else if (p[0] == '-' && p[1] != ']')
+                    char str[CHAR_CLASS_MAX_LENGTH + 1];
+                    str[c1] = '\0';
+            while ((int) b[-1] > 0 && b[b[-1] - 1] == 0) 
+              b[-1]--; 
+            b += b[-1];
+                   if (p > pattern  &&  p[-1] == '\\')
+		  ? *p == '\\' && (p[1] == '+' || p[1] == '?')
+                      : (p[0] == '\\' && p[1] == '{'))))
+  boolean prev_prev_backslash = prev > pattern && prev[-1] == '\\';
+   starting character is in `P[-2]'.  (`P[-1]' is the character `-'.)
+          fastmap[p[1]] = 1;
+	      && fail_stack.stack[fail_stack.avail - 1] == p)
+                                 ? string2[startpos - size1] 
+	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+                     regstart[1], and, e.g., with `((a*)*(b*)*)*'
+          else if (d[-1] == '\n' && bufp->newline_anchor)
+	  if ((re_opcode_t) p[-1] != pop_failure_jump)
+	      p[-1] = (unsigned char) jump;
+	  assert (p1[1] == **p);
+      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+/* Return zero if TRANSLATE[S1] and TRANSLATE[S2] are identical for LEN
+    regmatch_t pmatch[]; 
+          errbuf[errbuf_size - 1] = 0;
+} prednames[] = {
+  ":alpha:]", is_alpha,
+  ":upper:]", is_upper,
+  ":lower:]", is_lower,
+  ":digit:]", is_digit,
+  ":xdigit:]", is_xdigit,
+  ":space:]", is_space,
+  ":punct:]", is_punct,
+  ":alnum:]", is_alnum,
+  ":print:]", is_print,
+  ":graph:]", is_graph,
+  ":cntrl:]", is_cntrl,
+		  : lexleft > 1 && lexptr[0] == '\\' && lexptr[1] == ')')
+		  : lexleft > 1 && lexptr[0] == '\\' && lexptr[1] == '|')
+		 Note that if we're looking at some other [:...:]
+		for (c1 = 0; prednames[c1].name; ++c1)
+		  if (looking_at(prednames[c1].name))
+			if ((*prednames[c1].pred)(c2))
+		      lexptr += strlen(prednames[c1].name);
+		      lexleft -= strlen(prednames[c1].name);
+  switch (dfa->tokens[tindex - 1])
+      s->elems[i] = s->elems[i + 1];
+	tmp.nelem = nfirstpos[-1];
+	for (j = 0; j < nlastpos[-1]; ++j)
+	  nullable[-1] = 1;
+	tmp.nelem = nfirstpos[-1];
+	pos = lastpos + nlastpos[-1];
+	  nfirstpos[-2] += nfirstpos[-1];
+	  firstpos += nfirstpos[-1];
+	if (nullable[-1])
+	  nlastpos[-2] += nlastpos[-1];
+	    for (j = nlastpos[-1] - 1; j >= 0; --j)
+	    nlastpos[-2] = nlastpos[-1];
+	nullable[-2] = nullable[-1] && nullable[-2];
+	nfirstpos[-2] += nfirstpos[-1];
+	nlastpos[-2] += nlastpos[-1];
+	nullable[-2] = nullable[-1] || nullable[-2];
+      fprintf(stderr, nullable[-1] ? " nullable: yes\n" : " nullable: no\n");
+      for (j = nfirstpos[-1] - 1; j >= 0; --j)
+      for (j = nlastpos[-1] - 1; j >= 0; --j)
+  for (i = 0; i < nfirstpos[-1]; ++i)
+     int trans[];
+	    if (! (t = trans[s1]))
+      if (count && (char *) p <= end && p[-1] == '\n')
+      if (p[-1] == '\n' && newline)
+	  s = d->newlines[s1];
+  cpp[i + 1] = NULL;
+	      if (lmp->right[ln - i - 1] != rmp->right[rn - i - 1])
+	  if (mp != &musts[1])
+	      mp->is[1] = mp->left[1] = mp->right[1] = '\0';
+		  switch (dirs[depth + 1])
+		  switch (dirs[depth + 1])
+	      if (dirs[depth - 1] == L)
+		links[depth - 1]->llink = t;
+		links[depth - 1]->rlink = t;
+     unsigned char delta[];
+     struct trie *next[];
+	if (kwset->target[i] == kwset->target[kwset->mind - 1])
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+	    d = d1[U(tp[-1])], tp += d;
+  d = d1[U(tp[-1])];
+      d = d1[U((tp += d)[-1])];
+	d = delta[c = (end += d)[-1]];
+      if ((d = delta[c = (end += d)[-1]]) != 0)
+struct matcher matchers[] = {
+	  while (beg > buf && beg[-1] != '\n')
+	  while (beg > buf && beg[-1] != '\n')
+		if ((start == 0 || !WCHAR(beg[start - 1]))
+	  if (beg > buf && beg[-1] != '\n')
+	    if (try > buf && WCHAR((unsigned char) try[-1]))
+  while (beg > buf && beg[-1] != '\n')

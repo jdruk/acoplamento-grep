@@ -1,0 +1,137 @@
+../inputs/grep1.dat:    abort();
+../inputs/grep1.dat:     there is no portable vfree(), we just have to forget
+../inputs/grep1.dat:     about the old one.  Sorry. */
+../inputs/grep1.dat:	 In fact, it actually slows us down about 30%! */
+../inputs/grep1.dat:/* Internal variables to keep track of byte count, context, etc. */
+../inputs/grep1.dat:    abort();
+../inputs/grep1.dat:   Setting the environment variable POSIXLY_CORRECT disables permutation.
+../inputs/grep1.dat:   the default is REQUIRE_ORDER if the environment variable
+../inputs/grep1.dat:   variable POSIXLY_CORRECT, or using `+' as the first character
+../inputs/grep1.dat:   RETURN_IN_ORDER is an option available to programs that were written
+../inputs/grep1.dat:   to expect options and other ARGV-elements in any order and that care about
+../inputs/grep1.dat:   See the comments about RETURN_IN_ORDER and REQUIRE_ORDER, above.
+../inputs/grep1.dat:/* Compile with -DTEST to make an executable for use in testing
+../inputs/grep1.dat:   the above definition of `getopt'.  */
+../inputs/grep1.dat:extern char *re_syntax_table;
+../inputs/grep1.dat:static char re_syntax_table[CHAR_SET_SIZE];
+../inputs/grep1.dat:   bzero (re_syntax_table, sizeof re_syntax_table);
+../inputs/grep1.dat:     re_syntax_table[c] = Sword;
+../inputs/grep1.dat:     re_syntax_table[c] = Sword;
+../inputs/grep1.dat:     re_syntax_table[c] = Sword;
+../inputs/grep1.dat:   re_syntax_table['_'] = Sword;
+../inputs/grep1.dat:#define SYNTAX(c) re_syntax_table[c]
+../inputs/grep1.dat:   the other hand, malloc is more portable, and easier to debug.  
+../inputs/grep1.dat:/* Assumes a `char *destination' variable.  */
+../inputs/grep1.dat:/* If DEBUG is defined, Regex prints many voluminous messages about what
+../inputs/grep1.dat:   it is doing (if the variable `debug' is nonzero).  If linked with the
+../inputs/grep1.dat:/* Print the fastmap in human-readable form.  */
+../inputs/grep1.dat:/* Print a compiled pattern string in human-readable form, starting at
+../inputs/grep1.dat:  /* Perhaps we should print the translate table?  */
+../inputs/grep1.dat:/* This table gives an error message for each of the error codes listed
+../inputs/grep1.dat:   things about is what fits in that byte.  */
+../inputs/grep1.dat:   be able to hold values from -(MAX_BUF_SIZE - 1) to MAX_BUF_SIZE - 1.  */
+../inputs/grep1.dat:/* The next available element.  */
+../inputs/grep1.dat:     `char *' (i.e., signed), we declare these variables as unsigned, so
+../inputs/grep1.dat:     they can be reliably used as array indices.  */
+../inputs/grep1.dat:  /* Initialize the syntax table.  */
+../inputs/grep1.dat:              /* See similar code for backslashed left paren above.  */
+../inputs/grep1.dat:              /* Since we just checked for an empty stack above, this
+../inputs/grep1.dat:                            the `set_number_at' we're about to insert;
+../inputs/grep1.dat:   We use these short variable names so we can use the same macros as
+../inputs/grep1.dat:   This is a variable only so users of regex can assign to it; we never
+../inputs/grep1.dat:   Return 1 if was able to do so and 0 if ran out of memory allocating
+../inputs/grep1.dat:   value.  Assumes the variable `fail_stack'.  Probably should only
+../inputs/grep1.dat:/* Push the information about the state we will need
+../inputs/grep1.dat:   Requires variables fail_stack, regstart, regend, reg_info, and
+../inputs/grep1.dat:    DEBUG_PRINT2 ("     available: %d\n", REMAINING_AVAIL_SLOTS);	\
+../inputs/grep1.dat:        DEBUG_PRINT2 ("  slots available: %d\n", REMAINING_AVAIL_SLOTS);\
+../inputs/grep1.dat:     REG_INFO -- array of information about each subexpression.
+../inputs/grep1.dat:   Also assumes the variables `fail_stack' and (if debugging), `bufp',
+../inputs/grep1.dat:      /* We should never be about to go beyond the end of the pattern.  */
+../inputs/grep1.dat:             since when we restore it above, entering the switch will
+../inputs/grep1.dat:          abort (); /* We have listed all the cases.  */
+../inputs/grep1.dat:   variables.  
+../inputs/grep1.dat:   We are making a (strictly speaking) nonportable assumption here: that
+../inputs/grep1.dat:   NUM_FAILURE_ITEMS above.  And the value for the lowest register must
+../inputs/grep1.dat:  /* The following record the register info as found in the above
+../inputs/grep1.dat:     variables when we find a match better than any we've seen before. 
+../inputs/grep1.dat:     else (see below).  Also, we never need info about register 0 for
+../inputs/grep1.dat:     the end of the best match so far in a separate variable.  We
+../inputs/grep1.dat:  /* Used when we pop values we don't care about.  */
+../inputs/grep1.dat:  /* Do not bother to initialize all the register variables if there are
+../inputs/grep1.dat:      /* We must initialize all our variables to NULL, so that
+../inputs/grep1.dat:                 get reset at the start_memory we are about to get to,
+../inputs/grep1.dat:                 this repetition op, as described above.  */
+../inputs/grep1.dat:               pattern follows its end. If we can establish that there
+../inputs/grep1.dat:               highest registers, even though we don't care about the
+../inputs/grep1.dat:          /* See comments just above at `dummy_failure_jump' about the
+../inputs/grep1.dat:          abort ();
+../inputs/grep1.dat:                 with an on_failure_jump (see above) that jumps to right
+../inputs/grep1.dat:     routine will report only success or failure, and nothing about the
+../inputs/grep1.dat:     information about, via `nmatch'.  We have to pass that on to the
+../inputs/grep1.dat:    abort ();
+../inputs/grep1.dat:Local variables:
+../inputs/grep1.dat:     it means that just about every case begins with
+../inputs/grep1.dat:  /* The above loop should consume at most a backslash
+../inputs/grep1.dat:  abort();
+../inputs/grep1.dat:   Nullable:  A node is nullable if it is at the root of a regexp that can
+../inputs/grep1.dat:   *  EMPTY leaves are nullable.
+../inputs/grep1.dat:   * No other leaf is nullable.
+../inputs/grep1.dat:   * A QMARK or STAR node is nullable.
+../inputs/grep1.dat:   * A PLUS node is nullable if its argument is nullable.
+../inputs/grep1.dat:   * A CAT node is nullable if both its arguments are nullable.
+../inputs/grep1.dat:   * An OR node is nullable if either argument is nullable.
+../inputs/grep1.dat:     the firstpos of the right if the left argument is nullable.
+../inputs/grep1.dat:     the lastpos of the left if the right argument is nullable.
+../inputs/grep1.dat:  int *nullable;		/* Nullable stack. */
+../inputs/grep1.dat:  int *o_nullable;
+../inputs/grep1.dat:  MALLOC(nullable, int, d->depth);
+../inputs/grep1.dat:  o_nullable = nullable;
+../inputs/grep1.dat:	/* The empty set is nullable. */
+../inputs/grep1.dat:	*nullable++ = 1;
+../inputs/grep1.dat:	/* A QMARK or STAR node is automatically nullable. */
+../inputs/grep1.dat:	  nullable[-1] = 1;
+../inputs/grep1.dat:	   union that of the second argument if the first is nullable. */
+../inputs/grep1.dat:	if (nullable[-2])
+../inputs/grep1.dat:	   union that of the first argument if the second is nullable. */
+../inputs/grep1.dat:	if (nullable[-1])
+../inputs/grep1.dat:	/* A CAT node is nullable if both arguments are nullable. */
+../inputs/grep1.dat:	nullable[-2] = nullable[-1] && nullable[-2];
+../inputs/grep1.dat:	--nullable;
+../inputs/grep1.dat:	/* An OR node is nullable if either argument is nullable. */
+../inputs/grep1.dat:	nullable[-2] = nullable[-1] || nullable[-2];
+../inputs/grep1.dat:	--nullable;
+../inputs/grep1.dat:	   an "epsilon closure" effectively makes them nullable later.
+../inputs/grep1.dat:	   transitions on them later.  But they are nullable. */
+../inputs/grep1.dat:	*nullable++ = d->tokens[i] == BACKREF;
+../inputs/grep1.dat:    /* ... balance the above nonsyntactic #ifdef goo... */
+../inputs/grep1.dat:      fprintf(stderr, nullable[-1] ? " nullable: yes\n" : " nullable: no\n");
+../inputs/grep1.dat:  free(o_nullable);
+../inputs/grep1.dat:     is to fail miserably. */
+../inputs/grep1.dat:/* Some routines for manipulating a compiled dfa's transition tables.
+../inputs/grep1.dat:   Each state may or may not have a transition table; if it does, and it
+../inputs/grep1.dat:   is a non-accepting state, then d->trans[state] points to its table.
+../inputs/grep1.dat:   If it is an accepting state then d->fails[state] points to its table.
+../inputs/grep1.dat:   If it has no table at all, then d->trans[state] is NULL.
+../inputs/grep1.dat:  int *trans;			/* The new transition table. */
+../inputs/grep1.dat:  /* Set an upper limit on the number of transition tables that will ever
+../inputs/grep1.dat:     used transition tables will be quickly rebuilt, whereas the ones that
+../inputs/grep1.dat:  /* Now go through the new transition table, and make sure that the trans
+../inputs/grep1.dat:     largest state mentioned in the table. */
+../inputs/grep1.dat:  static sbit[NOTCHAR];	/* Table for anding with d->success. */
+../inputs/grep1.dat:   Are optimizable r.e.'s likely to be used in real-life situations
+../inputs/grep1.dat:   (something like 'ab*' is probably unlikely; something like is
+../inputs/grep1.dat:  unsigned char delta[NCHAR];	/* Delta table for rapid search. */
+../inputs/grep1.dat:  struct trie *next[NCHAR];	/* Table of children of the root. */
+../inputs/grep1.dat:  char *trans;			/* Character translation table. */
+../inputs/grep1.dat:   pointer to it.  Return NULL if memory is not available. */
+../inputs/grep1.dat:   table and next cache for the given keyword set. */
+../inputs/grep1.dat:  /* Initial values for the delta table; will be changed later.  The
+../inputs/grep1.dat:	 computing the delta table, failure function, and shift function. */
+../inputs/grep1.dat:	  /* Update the delta table for the descendents of this node. */
+../inputs/grep1.dat:  /* Fix things up for any translation table. */
+../inputs/grep1.dat:/* The non-GNU-C macros copy the obstack into this global variable
+../inputs/grep1.dat:   If you use it in a program, you are probably losing.  */
+../inputs/grep1.dat:    abort ();
+../inputs/grep1.dat:    abort ();
+../inputs/grep1.dat:	 a probable match, and we need to run it through Regex. */

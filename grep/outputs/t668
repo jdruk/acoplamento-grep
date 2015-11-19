@@ -1,0 +1,520 @@
+/* grep.c - main driver file for grep.
+   Copyright (C) 1992 Free Software Foundation, Inc.
+   the Free Software Foundation; either version 2, or (at your option)
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+   Written July 1992 by Mike Haertel.  */
+#define GREP 1
+#define STDC_HEADERS 1
+#define HAVE_STRING_H 1
+#define HAVE_SYS_PARAM_H 1
+#define HAVE_UNISTD_H 1
+#define HAVE_ALLOCA_H 1
+#define HAVE_GETPAGESIZE 1
+#define HAVE_MEMCHR 1
+#define HAVE_STRERROR 1
+#define HAVE_VALLOC 1
+#define HAVE_WORKING_MMAP 1
+#define flag_stdlib 1
+#define flag_systypes 1
+#define flag_string 1
+#define flag_memory 1
+#define flag_strings 1
+#if flag_systypes==0
+#define flag_systypes 1
+#define O_RDONLY 0
+  for (p = (unsigned char *) vp; n--; ++p)
+  return 0;
+  errseen = 1;
+  exit(2);
+    fatal("memory exhausted", 0);
+    fatal("memory exhausted", 0);
+static char *bufbeg;		/* Beginning of user-visible stuff. */
+static char *buflim;		/* Limit of user-visible stuff. */
+#if flag_systypes==0
+#define flag_systypes 1
+      initialized = 1;
+      bufsalloc = MAX(8192, getpagesize());
+      bufalloc = 5 * bufsalloc;
+      /* The 1 byte of overflow is a kludge for dfaexec(), which
+      buffer = valloc(bufalloc + 1);
+	fatal("memory exhausted", 0);
+  if (fstat(fd, &bufstat) < 0 || !S_ISREG(bufstat.st_mode))
+    bufmapped = 0;
+      bufmapped = 1;
+      bufoffset = lseek(fd, 0, 1);
+  if (pagesize == 0 && (pagesize = getpagesize()) == 0)
+	bufsalloc *= 2;
+      bufalloc = 5 * bufsalloc;
+      nbuffer = valloc(bufalloc + 1);
+	fatal("memory exhausted", 0);
+  sp = buflim - save;
+  dp = nbuffer + bufsalloc - save;
+  while (save--)
+  if (bufmapped && bufoffset % pagesize == 0
+      && bufstat.st_size - bufoffset >= bufalloc - bufsalloc)
+      maddr = mmap(maddr, bufalloc - bufsalloc, PROT_READ | PROT_WRITE,
+      if (maddr == (caddr_t) -1)
+#if 0
+	 but it doesn't, at least not on a Sun running 4.1.
+	 In fact, it actually slows us down about 30%! */
+      madvise(maddr, bufalloc - bufsalloc, MADV_SEQUENTIAL);
+      cc = bufalloc - bufsalloc;
+	  bufmapped = 0;
+	  lseek(bufdesc, bufoffset, 0);
+      cc = read(bufdesc, buffer + bufsalloc, bufalloc - bufsalloc);
+  cc = read(bufdesc, buffer + bufsalloc, bufalloc - bufsalloc);
+  if (cc > 0)
+    printf("%lu%c", totalcc + (beg - bufbeg), sep);
+  fwrite(beg, 1, lim - beg, stdout);
+  while (pending > 0 && lastout < lim)
+      --pending;
+      if ((nl = memchr(lastout, '\n', lim - lastout)) != 0)
+      prline(lastout, nl, '-');
+   If NLINESP is non-null, store a count of lines between BEG and LIM. */
+  static int used;		/* avoid printing "--" before any output */
+  if (!out_quiet && pending > 0)
+      for (i = 0; i < out_before; ++i)
+	    --p;
+	  while (p > bp && p[-1] != '\n');
+      /* We only print the "--" separator if our output is
+	puts("--");
+	  nl = memchr(p, '\n', beg - p);
+	  prline(p, nl + 1, '-');
+	  p = nl + 1;
+      for (n = 0; p < lim; ++n)
+	  if ((nl = memchr(p, '\n', lim - p)) != 0)
+  used = 1;
+  nlines = 0;
+  while ((b = (*execute)(p, lim - p, &endp)) != 0)
+      if (b == lim && ((b > beg && b[-1] == '\n') || b == beg))
+	  prtext(b, endp, (int *) 0);
+	  nlines += 1;
+  totalcc = 0;
+  lastout = 0;
+  totalnl = 0;
+  pending = 0;
+  nlines = 0;
+  residue = 0;
+  save = 0;
+      if (fillbuf(save) < 0)
+      if (buflim - bufbeg == save)
+      beg = bufbeg + save - residue;
+      for (lim = buflim; lim > beg && lim[-1] != '\n'; --lim)
+      residue = buflim - lim;
+      i = 0;
+	    --beg;
+	  while (beg > bufbeg && beg[-1] != '\n');
+	lastout = 0;
+      save = residue + lim - beg;
+      totalcc += buflim - bufbeg - save;
+      nlines += grepbuf(bufbeg + save - residue, buflim);
+static char version[] = "GNU grep version 2.0";
+  "usage: %s [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]\n"
+  exit(2);
+   If we find it, install it in compile and execute, and return 1.  */
+  for (i = 0; matchers[i].name; ++i)
+    if (strcmp(name, matchers[i].name) == 0)
+	return 1;
+  return 0;
+  prog = argv[0];
+    prog = strrchr(prog, '/') + 1;
+  keycc = 0;
+  keyfound = 0;
+  count_matches = 0;
+  no_filenames = 0;
+  list_files = 0;
+  suppress_errors = 0;
+  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+	out_before = 10 * out_before + opt - '0';
+	out_after = 10 * out_after + opt - '0';
+	if (out_after < 0)
+	if (out_before < 0)
+	out_before = out_after = 2;
+	if (matcher && strcmp(matcher, "egrep") != 0)
+	  fatal("you may specify only one of -E, -F, or -G", 0);
+	matcher = "posix-egrep";
+	if (matcher && strcmp(matcher, "fgrep") != 0)
+	  fatal("you may specify only one of -E, -F, or -G", 0);;
+	if (matcher && strcmp(matcher, "grep") != 0)
+	  fatal("you may specify only one of -E, -F, or -G", 0);
+	  fatal("matcher already specified", 0);
+	out_byte = 1;
+	out_quiet = 1;
+	count_matches = 1;
+	keys = xrealloc(keys, keycc + cc + 1);
+	keyfound = 1;
+	fp = strcmp(optarg, "-") != 0 ? fopen(optarg, "r") : stdin;
+	for (keyalloc = 1; keyalloc <= keycc; keyalloc *= 2)
+	       && (cc = fread(keys + keycc, 1, keyalloc - keycc, fp)) > 0)
+	      keys = xrealloc(keys, keyalloc *= 2);
+	if (keycc - oldcc > 0 && keys[keycc - 1] == '\n')
+	  --keycc;
+	keyfound = 1;
+	no_filenames = 1;
+      case 'y':			/* For old-timers . . . */
+	match_icase = 1;
+	/* Like -l, except list files that don't contain matches.
+	out_quiet = 1;
+	list_files = -1;
+	out_quiet = 1;
+	list_files = 1;
+	out_line = 1;
+	out_quiet = 1;
+	suppress_errors = 1;
+	out_invert = 1;
+	match_words = 1;
+	match_lines = 1;
+  if (argc - optind > 1 && !no_filenames)
+    out_file = 1;
+  status = 1;
+	desc = strcmp(argv[optind], "-") ? open(argv[optind], O_RDONLY) : 0;
+	if (desc < 0)
+	    filename = desc == 0 ? "(standard input)" : argv[optind];
+		status = 0;
+		if (list_files == 1)
+	    else if (list_files == -1)
+	if (desc != 0)
+      count = grep(0);
+	  status = 0;
+	  if (list_files == 1)
+      else if (list_files == -1)
+  exit(errseen ? 2 : status);
+   "Keep this file name-space clean" means, talk to roland@gnu.ai.mit.edu
+   Copyright (C) 1987, 88, 89, 90, 91, 92, 1993
+   Free Software Foundation; either version 2, or (at your option) any
+   Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
+#define flag_config 1
+#if defined (HAVE_ALLOCA_H) || (defined(sparc) && (defined(sun) || (!defined(USG) && !defined(SVR4) && !defined(__svr4__))))
+#define flag_alloca 1
+/* This tells Alpha OSF/1 not to define a getopt prototype in <stdio.h>.  */
+   program understand `configure --with-gnu-libc' and omit the object files,
+/* Don't include stdlib.h for non-GNU C libraries because some of them
+#if flag_stdlib==0   
+#define flag_stdlib 1
+/* If GETOPT_COMPAT is defined, `+' as well as `--' can introduce a
+   long-named option.  Because this is not POSIX.2 compliant, it is
+   each non-option ARGV-element is returned here.  */
+char *optarg = 0;
+   non-option elements that the caller should itself scan.
+/* XXX 1003.2 says this must be 1 before any call.  */
+int optind = 0;
+/* The next char to be scanned in the option-element
+   by advancing to the next ARGV-element.  */
+int opterr = 1;
+/* Describe how to deal with options that follow non-option ARGV-elements.
+   stop option processing when the first non-option is seen.
+   so that eventually all the non-options are at the end.  This allows options
+   to expect options and other ARGV-elements in any order and that care about
+   the ordering of the two.  We describe each non-option ARGV-element
+   as if it were the argument of an option with character code 1.
+   Using `-' as the first character of the list of option characters
+   The special argument `--' forces an end of option-scanning regardless
+   `--' can cause `getopt' to return EOF with `optind' != ARGC.  */
+/* We want to avoid inclusion of string.h with non-GNU libraries
+#if flag_string==0   
+#define flag_string 1
+  return 0;
+  for (i = 0; i < size; i++)
+/* Describe the part of ARGV that contains non-options that have
+   which contains all the non-options that have been skipped so far.
+   the options processed since those non-options were skipped.
+   the new indices of the non-options in ARGV after they are moved.  */
+  int nonopts_size = (last_nonopt - first_nonopt) * sizeof (char *);
+	    (optind - last_nonopt) * sizeof (char *));
+	    (char *) &argv[first_nonopt + optind - last_nonopt],
+  /* Update records for the slots the non-options now occupy.  */
+  first_nonopt += (optind - last_nonopt);
+   If an element of ARGV starts with '-', and is not exactly "-" or "--",
+   (aside from the initial '-') are option characters.  If `getopt'
+   resume the scan with the following option character or ARGV-element.
+   Then `optind' is the index in ARGV of the first ARGV-element
+   that is not an option.  (The ARGV-elements have been permuted
+   so the following text in the same ARGV-element, or the text of the following
+   ARGV-element, is returned in `optarg'.  Two colons mean an option that
+   wants an optional arg; if there is text in the current ARGV-element,
+   If OPTSTRING starts with `-' or `+', it requests different methods of
+   handling the non-option ARGV-elements.
+   Long-named options begin with `--' instead of `-'.
+   argument, it follows the option name in the same ARGV-element, separated
+   from the option name by a `=', or else the in next ARGV-element.
+   When `getopt' finds a long-named option, it returns 0 if that option's
+   LONGIND returns the index in LONGOPT of the long-named option found.
+   It is only valid when a long-named option has been found by the most
+   If LONG_ONLY is nonzero, '-' as well as '--' can introduce
+   long-named options.  */
+  optarg = 0;
+     Start processing options with ARGV-element 1 (since ARGV-element 0
+     non-option ARGV-elements is empty.  */
+  if (optind == 0)
+      first_nonopt = last_nonopt = optind = 1;
+      if (optstring[0] == '-')
+      else if (optstring[0] == '+')
+  if (nextchar == NULL || *nextchar == '\0')
+	  /* If we have just processed some options following some non-options,
+	  /* Now skip any additional non-options
+	     and extend the range of non-options previously skipped.  */
+		 && (argv[optind][0] != '-' || argv[optind][1] == '\0')
+		     || argv[optind][0] != '+' || argv[optind][1] == '\0')
+      /* Special ARGV-element `--' means premature end of options.
+	 then exchange with previous non-options as if it were an option,
+	 then skip everything else like a non-option.  */
+      if (optind != argc && !strcmp (argv[optind], "--"))
+      /* If we have done all the ARGV-elements, stop the scan
+	 and back over any non-options that we skipped and permuted.  */
+	  /* Set the next-arg-index to point at the non-options
+      /* If we have come to a non-option and did not permute it,
+      if ((argv[optind][0] != '-' || argv[optind][1] == '\0')
+	      || argv[optind][0] != '+' || argv[optind][1] == '\0')
+	  return 1;
+      /* We have found another option-ARGV-element.
+      nextchar = (argv[optind] + 1
+		  + (longopts != NULL && argv[optind][1] == '-'));
+      && ((argv[optind][0] == '-'
+	   && (argv[optind][1] == '-' || long_only))
+	  || argv[optind][0] == '+'
+      int exact = 0;
+      int ambig = 0;
+      for (p = longopts, option_index = 0; p->name;
+	if (!strncmp (p->name, nextchar, s - nextchar))
+	    if (s - nextchar == strlen (p->name))
+		exact = 1;
+	      ambig = 1;
+		     argv[0], argv[optind]);
+	      if (pfound->has_arg)
+		optarg = s + 1;
+		      if (argv[optind - 1][1] == '-')
+			/* --option */
+				 "%s: option `--%s' doesn't allow an argument\n",
+				 argv[0], pfound->name);
+			/* +option or -option */
+			     argv[0], argv[optind - 1][0], pfound->name);
+	  else if (pfound->has_arg == 1)
+			     argv[0], argv[optind - 1]);
+		  return optstring[0] == ':' ? ':' : '?';
+	  if (pfound->flag)
+	      *(pfound->flag) = pfound->val;
+	      return 0;
+	  return pfound->val;
+	 or the option starts with '--' or is not a valid short
+      if (!long_only || argv[optind][1] == '-'
+	  || argv[optind][0] == '+'
+	      if (argv[optind][1] == '-')
+		/* --option */
+		fprintf (stderr, "%s: unrecognized option `--%s'\n",
+			 argv[0], nextchar);
+		/* +option or -option */
+			 argv[0], argv[optind][0], nextchar);
+  /* Look at and handle the next option-character.  */
+    if (*nextchar == '\0')
+#if 0
+	    if (c < 040 || c >= 0177)
+	      fprintf (stderr, "%s: unrecognized option, character code 0%o\n",
+		       argv[0], c);
+	      fprintf (stderr, "%s: unrecognized option `-%c'\n", argv[0], c);
+	    /* 1003.2 specifies the format of this message.  */
+	    fprintf (stderr, "%s: illegal option -- %c\n", argv[0], c);
+    if (temp[1] == ':')
+	if (temp[2] == ':')
+	    if (*nextchar != '\0')
+	      optarg = 0;
+	    if (*nextchar != '\0')
+		/* If we end this ARGV-element by taking the rest as an arg,
+#if 0
+		    fprintf (stderr, "%s: option `-%c' requires an argument\n",
+			     argv[0], c);
+		    /* 1003.2 specifies the format of this message.  */
+		    fprintf (stderr, "%s: option requires an argument -- %c\n",
+			     argv[0], c);
+		if (optstring[0] == ':')
+		 increment it again when taking next ARGV-elt as argument.  */
+			   (const struct option *) 0,
+			   (int *) 0,
+			   0);
+/* Compile with -DTEST to make an executable for use in testing
+  int digit_optind = 0;
+  while (1)
+      int this_option_optind = optind ? optind : 1;
+      c = getopt (argc, argv, "abc:d:0123456789");
+	case '0':
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '5':
+	case '6':
+	case '7':
+	case '8':
+	case '9':
+	  if (digit_optind != 0 && digit_optind != this_option_optind)
+	    printf ("digits occur in two different argv-elements.\n");
+	  printf ("?? getopt returned character code 0%o ??\n", c);
+      printf ("non-option ARGV-elements: ");
+  exit (0);
+   version 0.12.
+   (Implements POSIX draft P10003.2/D11.2, except for
+   Copyright (C) 1993 Free Software Foundation, Inc.
+   the Free Software Foundation; either version 2, or (at your option)
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+#if flag_systypes==0
+#define flag_systypes 1
+#if flag_config==0
+#define flag_config 1
+#if flag_string==0
+#define flag_string 1
+#define bcmp(s1, s2, n)	memcmp ((s1), (s2), (n))
+#define bzero(s, n)	memset ((s), 0, (n))
+#if flag_strings==0
+#define flag_strings 1
+#if flag_stdlib==0 
+#define flag_stdlib 1
+   commands in re_match_2.  */
+#define Sword 1
+#define CHAR_SET_SIZE 256
+   static int done = 0;
+   for (c = '0'; c <= '9'; c++)
+   done = 1;
+   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
+   Defining isascii to 1 should let any compiler worth its salt
+#define isascii(c) 1
+#define NULL 0
+#define SIGN_EXTEND_CHAR(c) ((((unsigned char) (c)) ^ 128) - 128)
+   re_search* or re_match* could cause memory leaks when C-g is used in
+   not functions -- `alloca'-allocated space disappears at the end of the
+#if flag_alloca==0
+#define flag_alloca 1
+/* True if `size1' is non-NULL and PTR is pointing anywhere inside
+   `string1' or just past its end.  This works if PTR is NULL, which is
+  (size1 && string1 <= (ptr) && (ptr) <= string1 + size1)
+#define BYTEWIDTH 8 /* In bits.  */
+#define STREQ(s1, s2) ((strcmp (s1, s2) == 0))
+#define false 0
+#define true 1
+   So regex.h defines a symbol `RE_EXACTN_VALUE' to be 1; the value of
+   `exactn' we use here must also be 1.  */
+  no_op = 0,
+  exactn = 1,
+           are ordered low-bit-first.  A character is in the set if its
+           bit is 1.  A character too large to have a bit in the map is
+           the range 0 to one less than the pattern buffer's re_nsub
+           of re_match_2.)  */
+           number, in the range 0 to one less than `re_nsub' in the
+        /* Followed by two-byte relative address of place to resume at
+           two-byte relative address.  */
+           Followed by two-byte address.  */
+        /* Jump to following two-byte address, and push a dummy failure
+        /* Followed by two-byte relative address and two-byte number n.
+        /* Followed by two-byte relative address, and two-byte number n.
+        /* Set the following two-byte relative address to the
+           subsequent two-byte number.  The address *includes* the two
+  wordchar,	/* Matches any word-constituent character.  */
+  notwordchar,	/* Matches any char that is not a word-constituent.  */
+    (destination)[0] = (number) & 0377;					\
+    (destination)[1] = (number) >> 8;					\
+  } while (0)
+    (destination) += 2;							\
+  } while (0)
+    (destination) = *(source) & 0377;					\
+    (destination) += SIGN_EXTEND_CHAR (*((source) + 1)) << 8;		\
+  } while (0)
+  int temp = SIGN_EXTEND_CHAR (*(source + 1)); 
+  *dest = *source & 0377;
+  *dest += temp << 8;
+    (source) += 2; 							\
+  } while (0)
+  *source += 2;
+   the other test files, you can run the already-written tests.  */
+static int debug = 0;
+#define DEBUG_PRINT1(x) if (debug) printf (x)
+#define DEBUG_PRINT2(x1, x2) if (debug) printf (x1, x2)
+#define DEBUG_PRINT3(x1, x2, x3) if (debug) printf (x1, x2, x3)
+#define DEBUG_PRINT4(x1, x2, x3, x4) if (debug) printf (x1, x2, x3, x4)
+#define DEBUG_PRINT_DOUBLE_STRING(w, s1, sz1, s2, sz2)			\
+  if (debug) print_double_string (w, s1, sz1, s2, sz2)
+/* Print the fastmap in human-readable form.  */
+  unsigned was_a_range = 0;
+  unsigned i = 0;  
+  while (i < (1 << BYTEWIDTH))
+	  was_a_range = 0;
+          printchar (i - 1);
+          while (i < (1 << BYTEWIDTH)  &&  fastmap[i])
+              was_a_range = 1;
+              printf ("-");
+              printchar (i - 1);
+/* Print a compiled pattern string in human-readable form, starting at
+  int mcnt, mcnt2;
+      printf ("%d:\t", p - start);
+          while (--mcnt);
+            register int c, last = -100;
+	    register int in_range = 0;
+	            (re_opcode_t) *(p - 1) == charset_not ? "^" : "");
+            for (c = 0; c < 256; c++)
+	      if (c / 8 < *p
+		  && (p[1 + (c/8)] & (1 << (c % 8))))
+		  if (last + 1 == c && ! in_range)
+		      putchar ('-');
+		      in_range = 1;
+		  else if (last + 1 != c && in_range)
+		      in_range = 0;
+	    p += 1 + *p;
+  	  printf ("/on_failure_jump to %d", p + mcnt - start);
+  	  printf ("/on_failure_keep_string_jump to %d", p + mcnt - start);
+  	  printf ("/dummy_failure_jump to %d", p + mcnt - start);
+  	  printf ("/maybe_pop_jump to %d", p + mcnt - start);
+  	  printf ("/pop_failure_jump to %d", p + mcnt - start);
+  	  printf ("/jump_past_alt to %d", p + mcnt - start);
+  	  printf ("/jump to %d", p + mcnt - start);
+          extract_number_and_incr (&mcnt2, &p);
+	  printf ("/succeed_n to %d, %d times", p + mcnt - start, mcnt2);
+          extract_number_and_incr (&mcnt2, &p);
+	  printf ("/jump_n to %d, %d times", p + mcnt - start, mcnt2);
+          extract_number_and_incr (&mcnt2, &p);
+	  printf ("/set_number_at location %d to %d", p + mcnt - start, mcnt2);
+          printf ("?%d", *(p-1));
+  printf ("%d:\tend of pattern.\n", p - start);
+  unsigned char *buffer = bufp->buffer;
+  print_partial_compiled_pattern (buffer, buffer + bufp->used);
+  printf ("%d bytes used/%d bytes allocated.\n", bufp->used, bufp->allocated);
+  if (bufp->fastmap_accurate && bufp->fastmap)
+      print_fastmap (bufp->fastmap);
+  printf ("re_nsub: %d\t", bufp->re_nsub);
+  printf ("regs_alloc: %d\t", bufp->regs_allocated);
+  printf ("can_be_null: %d\t", bufp->can_be_null);
+  printf ("newline_anchor: %d\n", bufp->newline_anchor);
+  printf ("no_sub: %d\t", bufp->no_sub);
+  printf ("not_bol: %d\t", bufp->not_bol);
+  printf ("not_eol: %d\t", bufp->not_eol);
+  printf ("syntax: %d\n", bufp->syntax);
+print_double_string (where, string1, size1, string2, size2)
+    const char *string1;
+    const char *string2;
+    int size1;
+    int size2;
+          for (this_char = where - string1; this_char < size1; this_char++)
+            printchar (string1[this_char]);
+          where = string2;    
+      for (this_char = where - string2; this_char < size2; this_char++)
+        printchar (string2[this_char]);
+#define DEBUG_PRINT1(x)
+#define DEBUG_PRINT2(x1, x2)
+#define DEBUG_PRINT3(x1, x2, x3)
+#define DEBUG_PRINT4(x1, x2, x3, x4)
+#define DEBUG_PRINT_DOUBLE_STRING(w, s1, sz1, s2, sz2)
+static void store_op1 (), store_op2 ();
+static void insert_op1 (), insert_op2 ();
+/* Fetch the next character in the uncompiled pattern---translating it 
+  } while (0)
+  } while (0)
+#define PATUNFETCH p--
+/* If `translate' is non-null, return translate[D], else just D.  We
+#define INIT_BUF_SIZE  32
+    while (b - buSegmentation fault

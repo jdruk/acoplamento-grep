@@ -1,0 +1,5 @@
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:  private_preg = *preg;
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:    regex_t *preg;

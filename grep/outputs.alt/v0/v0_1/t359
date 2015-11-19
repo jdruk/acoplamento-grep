@@ -1,0 +1,1386 @@
+../inputs/grep1.dat:/*** end of cfe purpose **/
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#undef MAX
+../inputs/grep1.dat:#define MAX(A,B) ((A) > (B) ? (A) : (B))
+../inputs/grep1.dat:extern char *sys_errlist[];
+../inputs/grep1.dat:#define strerror(E) ((E) < sys_nerr ? sys_errlist[(E)] : "bogus error number")
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      bufsalloc = MAX(8192, getpagesize());
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:	 inserts a sentinel newline at the end of the buffer
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:   points just after the end.  Return count of new stuff. */
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:		   MAP_PRIVATE | MAP_FIXED, bufdesc, bufoffset);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:static int pending;		/* Pending lines of output. */
+../inputs/grep1.dat:/* Print pending lines of trailing context prior to LIM. */
+../inputs/grep1.dat:prpending(lim)
+../inputs/grep1.dat:  while (pending > 0 && lastout < lim)
+../inputs/grep1.dat:      --pending;
+../inputs/grep1.dat:  if (!out_quiet && pending > 0)
+../inputs/grep1.dat:    prpending(beg);
+../inputs/grep1.dat:	  while (p > bp && p[-1] != '\n');
+../inputs/grep1.dat:  pending = out_after;
+../inputs/grep1.dat:  char *endp;
+../inputs/grep1.dat:  while ((b = (*execute)(p, lim - p, &endp)) != 0)
+../inputs/grep1.dat:      /* Avoid matching the empty line at the end of the buffer. */
+../inputs/grep1.dat:      if (b == lim && ((b > beg && b[-1] == '\n') || b == beg))
+../inputs/grep1.dat:	  prtext(b, endp, (int *) 0);
+../inputs/grep1.dat:      p = endp;
+../inputs/grep1.dat:  pending = 0;
+../inputs/grep1.dat:      for (lim = buflim; lim > beg && lim[-1] != '\n'; --lim)
+../inputs/grep1.dat:	  if (pending)
+../inputs/grep1.dat:	    prpending(lim);
+../inputs/grep1.dat:	  while (beg > bufbeg && beg[-1] != '\n');
+../inputs/grep1.dat:      if (pending)
+../inputs/grep1.dat:	prpending(buflim);
+../inputs/grep1.dat:static char version[] = "GNU grep version 2.0";
+../inputs/grep1.dat:  "usage: %s [-[[AB] ]<num>] [-[CEFGVchilnqsvwx]] [-[ef]] <expr> [<files...>]\n"
+../inputs/grep1.dat:  for (i = 0; matchers[i].name; ++i)
+../inputs/grep1.dat:    if (strcmp(name, matchers[i].name) == 0)
+../inputs/grep1.dat:	compile = matchers[i].compile;
+../inputs/grep1.dat:	execute = matchers[i].execute;
+../inputs/grep1.dat:     char *argv[];
+../inputs/grep1.dat:  prog = argv[0];
+../inputs/grep1.dat:  while ((opt = getopt(argc, argv, "0123456789A:B:CEFGVX:bce:f:hiLlnqsvwxy"))
+../inputs/grep1.dat:      case 'X':
+../inputs/grep1.dat:	  keys[keycc++] = '\n';
+../inputs/grep1.dat:	strcpy(&keys[keycc], optarg);
+../inputs/grep1.dat:	  keys[keycc++] = '\n';
+../inputs/grep1.dat:	if (keycc - oldcc > 0 && keys[keycc - 1] == '\n')
+../inputs/grep1.dat:	keys = argv[optind++];
+../inputs/grep1.dat:	desc = strcmp(argv[optind], "-") ? open(argv[optind], O_RDONLY) : 0;
+../inputs/grep1.dat:	      error(argv[optind], errno);
+../inputs/grep1.dat:	    filename = desc == 0 ? "(standard input)" : argv[optind];
+../inputs/grep1.dat:/* NOTE!!!  AIX requires this to be the first thing in the file.
+../inputs/grep1.dat:#if !defined (__GNUC__) && defined (_AIX)
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#ifndef _AIX
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif /* alloca.h */
+../inputs/grep1.dat:#endif /* not __GNUC__ */
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif	/* GNU C library.  */
+../inputs/grep1.dat:   long-named option.  Because this is not POSIX.2 compliant, it is
+../inputs/grep1.dat:   all application programs are extended to handle flexible argument order.
+../inputs/grep1.dat:   Setting the environment variable POSIXLY_CORRECT disables permutation.
+../inputs/grep1.dat:/* XXX 1003.2 says this must be 1 before any call.  */
+../inputs/grep1.dat:   POSIXLY_CORRECT is defined, PERMUTE otherwise.
+../inputs/grep1.dat:   variable POSIXLY_CORRECT, or using `+' as the first character
+../inputs/grep1.dat:   so that eventually all the non-options are at the end.  This allows options
+../inputs/grep1.dat:   The special argument `--' forces an end of option-scanning regardless
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:/* Avoid depending on library functions or files
+../inputs/grep1.dat:    to[i] = from[i];
+../inputs/grep1.dat:#endif				/* GNU C library.  */
+../inputs/grep1.dat:  my_bcopy ((char *) &argv[first_nonopt], (char *) temp, nonopts_size);
+../inputs/grep1.dat:  my_bcopy ((char *) &argv[last_nonopt], (char *) &argv[first_nonopt],
+../inputs/grep1.dat:	    (char *) &argv[first_nonopt + optind - last_nonopt],
+../inputs/grep1.dat:   But we pretend they're const in the prototype to be compatible
+../inputs/grep1.dat:      if (optstring[0] == '-')
+../inputs/grep1.dat:      else if (optstring[0] == '+')
+../inputs/grep1.dat:      else if (getenv ("POSIXLY_CORRECT") != NULL)
+../inputs/grep1.dat:	     and extend the range of non-options previously skipped.  */
+../inputs/grep1.dat:		 && (argv[optind][0] != '-' || argv[optind][1] == '\0')
+../inputs/grep1.dat:		     || argv[optind][0] != '+' || argv[optind][1] == '\0')
+../inputs/grep1.dat:#endif				/* GETOPT_COMPAT */
+../inputs/grep1.dat:      /* Special ARGV-element `--' means premature end of options.
+../inputs/grep1.dat:      if (optind != argc && !strcmp (argv[optind], "--"))
+../inputs/grep1.dat:      if ((argv[optind][0] != '-' || argv[optind][1] == '\0')
+../inputs/grep1.dat:	      || argv[optind][0] != '+' || argv[optind][1] == '\0')
+../inputs/grep1.dat:#endif				/* GETOPT_COMPAT */
+../inputs/grep1.dat:	  optarg = argv[optind++];
+../inputs/grep1.dat:      nextchar = (argv[optind] + 1
+../inputs/grep1.dat:		  + (longopts != NULL && argv[optind][1] == '-'));
+../inputs/grep1.dat:      && ((argv[optind][0] == '-'
+../inputs/grep1.dat:	   && (argv[optind][1] == '-' || long_only))
+../inputs/grep1.dat:	  || argv[optind][0] == '+'
+../inputs/grep1.dat:#endif				/* GETOPT_COMPAT */
+../inputs/grep1.dat:		     argv[0], argv[optind]);
+../inputs/grep1.dat:		      if (argv[optind - 1][1] == '-')
+../inputs/grep1.dat:				 argv[0], pfound->name);
+../inputs/grep1.dat:			     argv[0], argv[optind - 1][0], pfound->name);
+../inputs/grep1.dat:		optarg = argv[optind++];
+../inputs/grep1.dat:			     argv[0], argv[optind - 1]);
+../inputs/grep1.dat:		  return optstring[0] == ':' ? ':' : '?';
+../inputs/grep1.dat:      if (!long_only || argv[optind][1] == '-'
+../inputs/grep1.dat:	  || argv[optind][0] == '+'
+../inputs/grep1.dat:#endif				/* GETOPT_COMPAT */
+../inputs/grep1.dat:	      if (argv[optind][1] == '-')
+../inputs/grep1.dat:			 argv[0], nextchar);
+../inputs/grep1.dat:			 argv[0], argv[optind][0], nextchar);
+../inputs/grep1.dat:		       argv[0], c);
+../inputs/grep1.dat:	      fprintf (stderr, "%s: unrecognized option `-%c'\n", argv[0], c);
+../inputs/grep1.dat:	    fprintf (stderr, "%s: illegal option -- %c\n", argv[0], c);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:    if (temp[1] == ':')
+../inputs/grep1.dat:	if (temp[2] == ':')
+../inputs/grep1.dat:		/* If we end this ARGV-element by taking the rest as an arg,
+../inputs/grep1.dat:			     argv[0], c);
+../inputs/grep1.dat:			     argv[0], c);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:		if (optstring[0] == ':')
+../inputs/grep1.dat:	      optarg = argv[optind++];
+../inputs/grep1.dat:#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+../inputs/grep1.dat:	printf ("%s ", argv[optind++]);
+../inputs/grep1.dat:#endif /* TEST */
+../inputs/grep1.dat:/* Extended regular expression matching and search library,
+../inputs/grep1.dat:   (Implements POSIX draft P10003.2/D11.2, except for
+../inputs/grep1.dat:/* AIX requires this to be the first thing in the file. */
+../inputs/grep1.dat:#if defined (_AIX) && !defined (REGEX_MALLOC)
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#ifdef SYNTAX_TABLE
+../inputs/grep1.dat:#else /* not SYNTAX_TABLE */
+../inputs/grep1.dat:static char re_syntax_table[CHAR_SET_SIZE];
+../inputs/grep1.dat:     re_syntax_table[c] = Sword;
+../inputs/grep1.dat:     re_syntax_table[c] = Sword;
+../inputs/grep1.dat:     re_syntax_table[c] = Sword;
+../inputs/grep1.dat:   re_syntax_table['_'] = Sword;
+../inputs/grep1.dat:#endif /* not SYNTAX_TABLE */
+../inputs/grep1.dat:#define SYNTAX(c) re_syntax_table[c]
+../inputs/grep1.dat:#endif /* not emacs */
+../inputs/grep1.dat:   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#define ISXDIGIT(c) (isascii (c) && isxdigit (c))
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:/* We remove any previous definition of `SIGN_EXTEND_CHAR',
+../inputs/grep1.dat:#undef SIGN_EXTEND_CHAR
+../inputs/grep1.dat:#define SIGN_EXTEND_CHAR(c) ((signed char) (c))
+../inputs/grep1.dat:#define SIGN_EXTEND_CHAR(c) ((((unsigned char) (c)) ^ 128) - 128)
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:/* Should we use malloc or alloca?  If REGEX_MALLOC is not defined, we
+../inputs/grep1.dat:   not functions -- `alloca'-allocated space disappears at the end of the
+../inputs/grep1.dat:#ifdef REGEX_MALLOC
+../inputs/grep1.dat:#define REGEX_ALLOCATE malloc
+../inputs/grep1.dat:#define REGEX_REALLOCATE(source, osize, nsize) realloc (source, nsize)
+../inputs/grep1.dat:#else /* not REGEX_MALLOC  */
+../inputs/grep1.dat:#endif 
+../inputs/grep1.dat:#ifndef _AIX /* Already did AIX, up at the top.  */
+../inputs/grep1.dat:#endif /* not _AIX */
+../inputs/grep1.dat:#endif /* not HAVE_ALLOCA_H */ 
+../inputs/grep1.dat:#endif /* not __GNUC__ */
+../inputs/grep1.dat:#endif /* not alloca */
+../inputs/grep1.dat:#define REGEX_ALLOCATE alloca
+../inputs/grep1.dat:#define REGEX_REALLOCATE(source, osize, nsize)				\
+../inputs/grep1.dat:#endif /* not REGEX_MALLOC */
+../inputs/grep1.dat:   `string1' or just past its end.  This works if PTR is NULL, which is
+../inputs/grep1.dat:#define REGEX_TALLOC(n, t) ((t *) REGEX_ALLOCATE ((n) * sizeof (t)))
+../inputs/grep1.dat:#undef MAX               /****** added later *******/
+../inputs/grep1.dat:#define MAX(a, b) ((a) > (b) ? (a) : (b))
+../inputs/grep1.dat:   So regex.h defines a symbol `RE_EXACTN_VALUE' to be 1; the value of
+../inputs/grep1.dat:        /* Fail unless at end of line.  */
+../inputs/grep1.dat:  endline,
+../inputs/grep1.dat:        /* Analogously, for end of buffer/string.  */
+../inputs/grep1.dat:  endbuf,
+../inputs/grep1.dat:	/* Same as jump, but marks the end of an alternative.  */
+../inputs/grep1.dat:	/* Push a dummy failure point and continue.  Used at the end of
+../inputs/grep1.dat:  wordend,	/* Succeeds if at word end.  */
+../inputs/grep1.dat:#endif /* emacs */
+../inputs/grep1.dat:    (destination)[0] = (number) & 0377;					\
+../inputs/grep1.dat:    (destination)[1] = (number) >> 8;					\
+../inputs/grep1.dat:#define EXTRACT_NUMBER(destination, source)				\
+../inputs/grep1.dat:    (destination) += SIGN_EXTEND_CHAR (*((source) + 1)) << 8;		\
+../inputs/grep1.dat:  int temp = SIGN_EXTEND_CHAR (*(source + 1)); 
+../inputs/grep1.dat:#ifndef EXTRACT_MACROS /* To debug the macros.  */
+../inputs/grep1.dat:#undef EXTRACT_NUMBER
+../inputs/grep1.dat:#define EXTRACT_NUMBER(dest, src) extract_number (&dest, src)
+../inputs/grep1.dat:#endif /* not EXTRACT_MACROS */
+../inputs/grep1.dat:#endif /* DEBUG */
+../inputs/grep1.dat:/* Same as EXTRACT_NUMBER, except increment SOURCE to after the number.
+../inputs/grep1.dat:#define EXTRACT_NUMBER_AND_INCR(destination, source)			\
+../inputs/grep1.dat:    EXTRACT_NUMBER (destination, source);				\
+../inputs/grep1.dat:#ifndef EXTRACT_MACROS
+../inputs/grep1.dat:#undef EXTRACT_NUMBER_AND_INCR
+../inputs/grep1.dat:#define EXTRACT_NUMBER_AND_INCR(dest, src) \
+../inputs/grep1.dat:#endif /* not EXTRACT_MACROS */
+../inputs/grep1.dat:#endif /* DEBUG */
+../inputs/grep1.dat:      if (fastmap[i++])
+../inputs/grep1.dat:          while (i < (1 << BYTEWIDTH)  &&  fastmap[i])
+../inputs/grep1.dat:   the START pointer into it and ending just before the pointer END.  */
+../inputs/grep1.dat:print_partial_compiled_pattern (start, end)
+../inputs/grep1.dat:    unsigned char *end;
+../inputs/grep1.dat:  unsigned char *pend = end;
+../inputs/grep1.dat:  while (p < pend)
+../inputs/grep1.dat:            assert (p + *p < pend);
+../inputs/grep1.dat:		  && (p[1 + (c/8)] & (1 << (c % 8))))
+../inputs/grep1.dat:	    putchar (']');
+../inputs/grep1.dat:	case endline:
+../inputs/grep1.dat:          printf ("/endline");
+../inputs/grep1.dat:	case wordend:
+../inputs/grep1.dat:	  printf ("/wordend");
+../inputs/grep1.dat:#endif /* emacs */
+../inputs/grep1.dat:	case endbuf:
+../inputs/grep1.dat:	  printf ("/endbuf");
+../inputs/grep1.dat:  printf ("%d:\tend of pattern.\n", p - start);
+../inputs/grep1.dat:            printchar (string1[this_char]);
+../inputs/grep1.dat:        printchar (string2[this_char]);
+../inputs/grep1.dat:#endif /* not DEBUG */
+../inputs/grep1.dat:reg_syntax_t re_syntax_options = RE_SYNTAX_EMACS;
+../inputs/grep1.dat:   The argument SYNTAX is a bit mask comprised of the various bits
+../inputs/grep1.dat:static const char *re_error_msg[] =
+../inputs/grep1.dat:    "Invalid range end",			/* REG_ERANGE */
+../inputs/grep1.dat:    "Premature end of regular expression",	/* REG_EEND */
+../inputs/grep1.dat:static boolean at_begline_loc_p (), at_endline_loc_p ();
+../inputs/grep1.dat:  do {if (p == pend) return REG_EEND;					\
+../inputs/grep1.dat:    if (translate) c = translate[c]; 					\
+../inputs/grep1.dat:  do {if (p == pend) return REG_EEND;					\
+../inputs/grep1.dat:/* If `translate' is non-null, return translate[D], else just D.  We
+../inputs/grep1.dat:#define TRANSLATE(d) (translate ? translate[(unsigned char) (d)] : (d))
+../inputs/grep1.dat:      EXTEND_BUFFER ()
+../inputs/grep1.dat:/* Ensure we have two more bytes of buffer space and then append C1 and C2.  */
+../inputs/grep1.dat:/* Like `STORE_JUMP', but for inserting.  Assume `b' is the buffer end.  */
+../inputs/grep1.dat:/* Like `STORE_JUMP2', but for inserting.  Assume `b' is the buffer end.  */
+../inputs/grep1.dat:#define MAX_BUF_SIZE (1L << 16)
+../inputs/grep1.dat:/* Extend the buffer by twice its current size via realloc and
+../inputs/grep1.dat:   correct places in the new one.  If extending the buffer results in it
+../inputs/grep1.dat:   being larger than MAX_BUF_SIZE, then flag memory exhausted.  */
+../inputs/grep1.dat:#define EXTEND_BUFFER()							\
+../inputs/grep1.dat:    if (bufp->allocated == MAX_BUF_SIZE) 				\
+../inputs/grep1.dat:    if (bufp->allocated > MAX_BUF_SIZE)					\
+../inputs/grep1.dat:      bufp->allocated = MAX_BUF_SIZE; 					\
+../inputs/grep1.dat:        if (pending_exact)						\
+../inputs/grep1.dat:          pending_exact = (pending_exact - old_buffer) + bufp->buffer;	\
+../inputs/grep1.dat:#define MAX_REGNUM 255
+../inputs/grep1.dat:/* But patterns can have more than `MAX_REGNUM' registers.  We just
+../inputs/grep1.dat:   be able to hold values from -(MAX_BUF_SIZE - 1) to MAX_BUF_SIZE - 1.  */
+../inputs/grep1.dat:#define COMPILE_STACK_TOP (compile_stack.stack[compile_stack.avail])
+../inputs/grep1.dat:  (b[((unsigned char) (c)) / BYTEWIDTH]               \
+../inputs/grep1.dat:  { if (p != pend)							\
+../inputs/grep1.dat:           if (p == pend) 						\
+../inputs/grep1.dat:#define CHAR_CLASS_MAX_LENGTH  6 /* Namely, `xdigit'.  */
+../inputs/grep1.dat:/* `regex_compile' compiles PATTERN (of length SIZE) according to SYNTAX.
+../inputs/grep1.dat:     `syntax' is set to SYNTAX;
+../inputs/grep1.dat:  /* Points to the end of the buffer, where we should append.  */
+../inputs/grep1.dat:  /* Points to the current (ending) position in the pattern.  */
+../inputs/grep1.dat:  const char *pend = pattern + size;
+../inputs/grep1.dat:  unsigned char *pending_exact = 0;
+../inputs/grep1.dat:  /* Address of the place where a forward jump should go to the end of
+../inputs/grep1.dat:     last -- ends with a forward jump of this sort.  */
+../inputs/grep1.dat:        printchar (pattern[debug_count]);
+../inputs/grep1.dat:#endif /* DEBUG */
+../inputs/grep1.dat:     at the end.  */
+../inputs/grep1.dat:#if !defined (emacs) && !defined (SYNTAX_TABLE)
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:  /* Loop through the uncompiled pattern until we're at the end.  */
+../inputs/grep1.dat:  while (p != pend)
+../inputs/grep1.dat:                   /* If context independent, it's an operator.  */
+../inputs/grep1.dat:                || syntax & RE_CONTEXT_INDEP_ANCHORS
+../inputs/grep1.dat:                   /* Otherwise, depends on what's come before.  */
+../inputs/grep1.dat:            if (   /* If at end of pattern, it's an operator.  */
+../inputs/grep1.dat:                   p == pend 
+../inputs/grep1.dat:                   /* If context independent, it's an operator.  */
+../inputs/grep1.dat:                || syntax & RE_CONTEXT_INDEP_ANCHORS
+../inputs/grep1.dat:                   /* Otherwise, depends on what's next.  */
+../inputs/grep1.dat:                || at_endline_loc_p (p, pend, syntax))
+../inputs/grep1.dat:               BUF_PUSH (endline);
+../inputs/grep1.dat:              if (syntax & RE_CONTEXT_INVALID_OPS)
+../inputs/grep1.dat:              else if (!(syntax & RE_CONTEXT_INDEP_OPS))
+../inputs/grep1.dat:                if (p == pend)
+../inputs/grep1.dat:                    if (p == pend) return REG_EESCAPE;
+../inputs/grep1.dat:                   end a backward relative jump from `b' to before the next
+../inputs/grep1.dat:                    && p < pend && TRANSLATE (*p) == TRANSLATE ('\n')
+../inputs/grep1.dat:               end of the buffer after this jump is inserted.  */
+../inputs/grep1.dat:            pending_exact = 0;
+../inputs/grep1.dat:            if (p == pend) return REG_EBRACK;
+../inputs/grep1.dat:            if ((re_opcode_t) b[-2] == charset_not
+../inputs/grep1.dat:                if (p == pend) return REG_EBRACK;
+../inputs/grep1.dat:                /* \ might escape characters inside [...] and [^...].  */
+../inputs/grep1.dat:                    if (p == pend) return REG_EESCAPE;
+../inputs/grep1.dat:                /* Could be the end of the bracket expression.  If it's
+../inputs/grep1.dat:                   not (i.e., when the bracket expression is `[]' so
+../inputs/grep1.dat:                   far), the ']' character bit gets set way below.  */
+../inputs/grep1.dat:                if (c == ']' && p != p1 + 1)
+../inputs/grep1.dat:                if (had_char_class && c == '-' && *p != ']')
+../inputs/grep1.dat:                   beginning or the end of a list, then it's the range
+../inputs/grep1.dat:                    && !(p - 2 >= pattern && p[-2] == '[') 
+../inputs/grep1.dat:                    && !(p - 3 >= pattern && p[-3] == '[' && p[-2] == '^')
+../inputs/grep1.dat:                    && *p != ']')
+../inputs/grep1.dat:                      = compile_range (&p, pend, translate, syntax, b);
+../inputs/grep1.dat:                else if (p[0] == '-' && p[1] != ']')
+../inputs/grep1.dat:                    ret = compile_range (&p, pend, translate, syntax, b);
+../inputs/grep1.dat:                    char str[CHAR_CLASS_MAX_LENGTH + 1];
+../inputs/grep1.dat:                    if (p == pend) return REG_EBRACK;
+../inputs/grep1.dat:                        if (c == ':' || c == ']' || p == pend
+../inputs/grep1.dat:                            || c1 == CHAR_CLASS_MAX_LENGTH)
+../inputs/grep1.dat:                        str[c1++] = c;
+../inputs/grep1.dat:                    str[c1] = '\0';
+../inputs/grep1.dat:                    /* If isn't a word bracketed by `[:' and:`]':
+../inputs/grep1.dat:                       undo the ending character, the letters, and leave 
+../inputs/grep1.dat:                    if (c == ':' && *p == ']')
+../inputs/grep1.dat:                        /* Throw away the ] at the end of the character
+../inputs/grep1.dat:                        if (p == pend) return REG_EBRACK;
+../inputs/grep1.dat:                                || (is_xdigit && ISXDIGIT (ch)))
+../inputs/grep1.dat:               end of the map.  Decrease the map-length byte too.  */
+../inputs/grep1.dat:            while ((int) b[-1] > 0 && b[b[-1] - 1] == 0) 
+../inputs/grep1.dat:              b[-1]--; 
+../inputs/grep1.dat:            b += b[-1];
+../inputs/grep1.dat:          if (p == pend) return REG_EESCAPE;
+../inputs/grep1.dat:              /* These are the values to restore when we hit end of this
+../inputs/grep1.dat:              if (regnum <= MAX_REGNUM)
+../inputs/grep1.dat:	      /* If we've reached MAX_REGNUM groups, then this open
+../inputs/grep1.dat:		 clear pending_exact explicitly.  */
+../inputs/grep1.dat:	      pending_exact = 0;
+../inputs/grep1.dat:                { /* Push a dummy failure point at the end of the
+../inputs/grep1.dat:		/* If we've reached MAX_REGNUM groups, then this open
+../inputs/grep1.dat:		   clear pending_exact explicitly.  */
+../inputs/grep1.dat:		pending_exact = 0;
+../inputs/grep1.dat:                /* We're at the end of the group, so now we know how many
+../inputs/grep1.dat:                if (this_group_regnum <= MAX_REGNUM)
+../inputs/grep1.dat:              pending_exact = 0;
+../inputs/grep1.dat:                 when know we're at the end of a series of alternatives.  */
+../inputs/grep1.dat:                  || (p - 2 == pattern  &&  p == pend))
+../inputs/grep1.dat:                if (p == pend)
+../inputs/grep1.dat:                    if (upper_bound < 0) upper_bound = RE_DUP_MAX;
+../inputs/grep1.dat:                if (lower_bound < 0 || upper_bound > RE_DUP_MAX
+../inputs/grep1.dat:                    if (syntax & RE_CONTEXT_INVALID_OPS)
+../inputs/grep1.dat:                    else if (syntax & RE_CONTEXT_INDEP_OPS)
+../inputs/grep1.dat:                   the end of the buffer after we insert the jump.  */
+../inputs/grep1.dat:                        more at the end of the loop.  */
+../inputs/grep1.dat:                        attendant `set_number_at' (inserted next),
+../inputs/grep1.dat:                            append a backward jump to the `succeed_n'
+../inputs/grep1.dat:                pending_exact = 0;
+../inputs/grep1.dat:                   if (p > pattern  &&  p[-1] == '\\')
+../inputs/grep1.dat:              BUF_PUSH_2 (syntaxspec, syntax_spec_code[c]);
+../inputs/grep1.dat:              BUF_PUSH_2 (notsyntaxspec, syntax_spec_code[c]);
+../inputs/grep1.dat:#endif /* emacs */
+../inputs/grep1.dat:              BUF_PUSH (wordend);
+../inputs/grep1.dat:              BUF_PUSH (endbuf);
+../inputs/grep1.dat:          if (!pending_exact 
+../inputs/grep1.dat:              || pending_exact + *pending_exact + 1 != b
+../inputs/grep1.dat:	      || *pending_exact == (1 << BYTEWIDTH) - 1
+../inputs/grep1.dat:		  ? *p == '\\' && (p[1] == '+' || p[1] == '?')
+../inputs/grep1.dat:                      : (p[0] == '\\' && p[1] == '{'))))
+../inputs/grep1.dat:	      pending_exact = b - 1;
+../inputs/grep1.dat:          (*pending_exact)++;
+../inputs/grep1.dat:    } /* while p != pend */
+../inputs/grep1.dat:#endif /* DEBUG */
+../inputs/grep1.dat:insert_op1 (op, loc, arg, end)
+../inputs/grep1.dat:    unsigned char *end;    
+../inputs/grep1.dat:  register unsigned char *pfrom = end;
+../inputs/grep1.dat:  register unsigned char *pto = end + 3;
+../inputs/grep1.dat:insert_op2 (op, loc, arg1, arg2, end)
+../inputs/grep1.dat:    unsigned char *end;    
+../inputs/grep1.dat:  register unsigned char *pfrom = end;
+../inputs/grep1.dat:  register unsigned char *pto = end + 5;
+../inputs/grep1.dat:  boolean prev_prev_backslash = prev > pattern && prev[-1] == '\\';
+../inputs/grep1.dat:at_endline_loc_p (p, pend, syntax)
+../inputs/grep1.dat:    const char *p, *pend;
+../inputs/grep1.dat:  const char *next_next = p + 1 < pend ? p + 1 : NULL;
+../inputs/grep1.dat:    if (compile_stack.stack[this_element].regnum == regnum)
+../inputs/grep1.dat:/* Read the ending character of a range (in a bracket expression) from the
+../inputs/grep1.dat:   uncompiled pattern *P_PTR (which ends at PEND).  We assume the
+../inputs/grep1.dat:   starting character is in `P[-2]'.  (`P[-1]' is the character `-'.)
+../inputs/grep1.dat:   ending characters (inclusive) in the compiled pattern B.
+../inputs/grep1.dat:compile_range (p_ptr, pend, translate, syntax, b)
+../inputs/grep1.dat:    const char **p_ptr, *pend;
+../inputs/grep1.dat:  int range_start, range_end;
+../inputs/grep1.dat:  if (p == pend)
+../inputs/grep1.dat:     is set, the range endpoints will be negative if we fetch using a
+../inputs/grep1.dat:     We also want to fetch the endpoints without translating them; the 
+../inputs/grep1.dat:  range_start = ((unsigned char *) p)[-2];
+../inputs/grep1.dat:  range_end   = ((unsigned char *) p)[0];
+../inputs/grep1.dat:     caller isn't still at the ending character.  */
+../inputs/grep1.dat:  /* If the start is after the end, the range is empty.  */
+../inputs/grep1.dat:  if (range_start > range_end)
+../inputs/grep1.dat:     char' -- the range is inclusive, so if `range_end' == 0xff
+../inputs/grep1.dat:  for (this_char = range_start; this_char <= range_end; this_char++)
+../inputs/grep1.dat:   REGEX_ALLOCATE.  */
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:   exactly that if always used MAX_FAILURE_SPACE each time we failed.
+../inputs/grep1.dat:#define FAIL_STACK_TOP()       (fail_stack.stack[fail_stack.avail])
+../inputs/grep1.dat:      REGEX_ALLOCATE (INIT_FAILURE_ALLOC * sizeof (fail_stack_elt_t));	\
+../inputs/grep1.dat:   REGEX_REALLOCATE requires `destination' be declared.   */
+../inputs/grep1.dat:  ((fail_stack).size > re_max_failures * MAX_FAILURE_ITEMS		\
+../inputs/grep1.dat:        REGEX_REALLOCATE ((fail_stack).stack, 				\
+../inputs/grep1.dat:    : ((fail_stack).stack[(fail_stack).avail++] = pattern_op,		\
+../inputs/grep1.dat:  fail_stack.stack[fail_stack.avail++] = (fail_stack_elt_t) item
+../inputs/grep1.dat:#define POP_FAILURE_ITEM() fail_stack.stack[--fail_stack.avail]
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:   Requires variables fail_stack, regstart, regend, reg_info, and
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+../inputs/grep1.dat:        PUSH_FAILURE_ITEM (regstart[this_reg]);				\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+../inputs/grep1.dat:        PUSH_FAILURE_ITEM (regend[this_reg]);				\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+../inputs/grep1.dat:                      REG_MATCH_NULL_STRING_P (reg_info[this_reg]));	\
+../inputs/grep1.dat:        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+../inputs/grep1.dat:                      MATCHED_SOMETHING (reg_info[this_reg]));		\
+../inputs/grep1.dat:                      EVER_MATCHED_SOMETHING (reg_info[this_reg]));	\
+../inputs/grep1.dat:        PUSH_FAILURE_ITEM (reg_info[this_reg].word);			\
+../inputs/grep1.dat:    DEBUG_PRINT_COMPILED_PATTERN (bufp, pattern_place, pend);		\
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#define MAX_FAILURE_ITEMS ((num_regs - 1) * NUM_REG_ITEMS + NUM_NONREG_ITEMS)
+../inputs/grep1.dat:   `pend', `string1', `size1', `string2', and `size2'.  */
+../inputs/grep1.dat:#define POP_FAILURE_POINT(str, pat, low_reg, high_reg, regstart, regend, reg_info)\
+../inputs/grep1.dat:  DEBUG_PRINT_COMPILED_PATTERN (bufp, pat, pend);			\
+../inputs/grep1.dat:      reg_info[this_reg].word = POP_FAILURE_ITEM ();			\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+../inputs/grep1.dat:      regend[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+../inputs/grep1.dat:      regstart[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+../inputs/grep1.dat:#ifndef REGEX_MALLOC
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:  register unsigned char *pend = pattern + size;
+../inputs/grep1.dat:  while (p != pend || !FAIL_STACK_EMPTY ())
+../inputs/grep1.dat:      if (p == pend)
+../inputs/grep1.dat:          p = fail_stack.stack[--fail_stack.avail];
+../inputs/grep1.dat:      /* We should never be about to go beyond the end of the pattern.  */
+../inputs/grep1.dat:      assert (p < pend);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      /* Following are the cases which match a character.  These end
+../inputs/grep1.dat:          fastmap[p[1]] = 1;
+../inputs/grep1.dat:	    if (p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH)))
+../inputs/grep1.dat:              fastmap[j] = 1;
+../inputs/grep1.dat:	  /* Chars beyond end of map must be allowed.  */
+../inputs/grep1.dat:            fastmap[j] = 1;
+../inputs/grep1.dat:	    if (!(p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH))))
+../inputs/grep1.dat:              fastmap[j] = 1;
+../inputs/grep1.dat:	    if (SYNTAX (j) == Sword)
+../inputs/grep1.dat:	      fastmap[j] = 1;
+../inputs/grep1.dat:	    if (SYNTAX (j) != Sword)
+../inputs/grep1.dat:	      fastmap[j] = 1;
+../inputs/grep1.dat:            fastmap[j] = 1;
+../inputs/grep1.dat:            fastmap['\n'] = 0;
+../inputs/grep1.dat:	    if (SYNTAX (j) == (enum syntaxcode) k)
+../inputs/grep1.dat:	      fastmap[j] = 1;
+../inputs/grep1.dat:	    if (SYNTAX (j) != (enum syntaxcode) k)
+../inputs/grep1.dat:	      fastmap[j] = 1;
+../inputs/grep1.dat:      /* All cases after this match the empty string.  These end with
+../inputs/grep1.dat:#endif /* not emacs */
+../inputs/grep1.dat:        case endline:
+../inputs/grep1.dat:	case endbuf:
+../inputs/grep1.dat:	case wordend:
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (j, p);
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (j, p);
+../inputs/grep1.dat:	      && fail_stack.stack[fail_stack.avail - 1] == p)
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (j, p);
+../inputs/grep1.dat:             end of the pattern.  We don't want to push such a point,
+../inputs/grep1.dat:             increment `p' past the end of the pattern.  We don't need
+../inputs/grep1.dat:             fastmap entries beyond `pend'.  Such a pattern can match
+../inputs/grep1.dat:          if (p + j < pend)
+../inputs/grep1.dat:              EXTRACT_NUMBER_AND_INCR (k, p);	/* Skip the n.  */
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (k, p);
+../inputs/grep1.dat:      p = pend;
+../inputs/grep1.dat:re_set_registers (bufp, regs, num_regs, starts, ends)
+../inputs/grep1.dat:    regoff_t *starts, *ends;
+../inputs/grep1.dat:      regs->end = ends;
+../inputs/grep1.dat:      regs->start = regs->end = (regoff_t) 0;
+../inputs/grep1.dat:  int endpos = startpos + range;
+../inputs/grep1.dat:  if (endpos < -1)
+../inputs/grep1.dat:  else if (endpos > total_size)
+../inputs/grep1.dat:  if (bufp->used > 0 && (re_opcode_t) bufp->buffer[0] == begbuf && range > 0)
+../inputs/grep1.dat:				   translate[(unsigned char) *d++]])
+../inputs/grep1.dat:                while (range > lim && !fastmap[(unsigned char) *d++])
+../inputs/grep1.dat:                                 ? string2[startpos - size1] 
+../inputs/grep1.dat:                                 : string1[startpos]);
+../inputs/grep1.dat:	      if (!fastmap[(unsigned char) TRANSLATE (c)])
+../inputs/grep1.dat:   starting and ending positions (which are addresses), and the list of
+../inputs/grep1.dat:          MATCHED_SOMETHING (reg_info[r])				\
+../inputs/grep1.dat:            = EVER_MATCHED_SOMETHING (reg_info[r])			\
+../inputs/grep1.dat:#define MATCHING_IN_FIRST_STRING  (dend == end_match_1)
+../inputs/grep1.dat:  while (d == dend)						    	\
+../inputs/grep1.dat:      if (dend == end_match_2) 						\
+../inputs/grep1.dat:      dend = end_match_2;						\
+../inputs/grep1.dat:/* Test if at very beginning or at very end of the virtual concatenation
+../inputs/grep1.dat:#define AT_STRINGS_END(d) ((d) == end2)	
+../inputs/grep1.dat:   two special cases to check for: if past the end of string1, look at
+../inputs/grep1.dat:  (SYNTAX ((d) == end1 ? *string2					\
+../inputs/grep1.dat:           : (d) == string2 - 1 ? *(end1 - 1) : *(d))			\
+../inputs/grep1.dat:#ifdef REGEX_MALLOC
+../inputs/grep1.dat:    FREE_VAR (regend);							\
+../inputs/grep1.dat:    FREE_VAR (old_regend);						\
+../inputs/grep1.dat:    FREE_VAR (best_regend);						\
+../inputs/grep1.dat:#else /* not REGEX_MALLOC */
+../inputs/grep1.dat:#endif /* not REGEX_MALLOC */
+../inputs/grep1.dat:#endif /* not emacs */
+../inputs/grep1.dat:  /* Just past the end of the corresponding string.  */
+../inputs/grep1.dat:  const char *end1, *end2;
+../inputs/grep1.dat:  const char *end_match_1, *end_match_2;
+../inputs/grep1.dat:  /* Where we are in the data, and the end of the current string.  */
+../inputs/grep1.dat:  const char *d, *dend;
+../inputs/grep1.dat:  /* Where we are in the pattern, and the end of the pattern.  */
+../inputs/grep1.dat:  register unsigned char *pend = p + bufp->used;
+../inputs/grep1.dat:     restart, regend, and reg_info for all registers corresponding to
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:  /* We fill all the registers internally, independent of what we
+../inputs/grep1.dat:     matching and the regnum-th regend points to right after where we
+../inputs/grep1.dat:  const char **regstart, **regend;
+../inputs/grep1.dat:     register's end.  */
+../inputs/grep1.dat:  const char **old_regstart, **old_regend;
+../inputs/grep1.dat:     field of reg_info[reg_num] helps us tell whether or not we have
+../inputs/grep1.dat:  const char **best_regstart, **best_regend;
+../inputs/grep1.dat:  /* Logically, this is `best_regend[0]'.  But we don't want to have to
+../inputs/grep1.dat:     treat `best_regend' differently than the rest.  So we keep track of
+../inputs/grep1.dat:     the end of the best match so far in a separate variable.  We
+../inputs/grep1.dat:  const char *match_end = NULL;
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      regstart = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      regend = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      old_regstart = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      old_regend = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      best_regstart = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      best_regend = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      reg_info = REGEX_TALLOC (num_regs, register_info_type);
+../inputs/grep1.dat:      reg_dummy = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      reg_info_dummy = REGEX_TALLOC (num_regs, register_info_type);
+../inputs/grep1.dat:      if (!(regstart && regend && old_regstart && old_regend && reg_info 
+../inputs/grep1.dat:            && best_regstart && best_regend && reg_dummy && reg_info_dummy)) 
+../inputs/grep1.dat:#ifdef REGEX_MALLOC
+../inputs/grep1.dat:      regstart = regend = old_regstart = old_regend = best_regstart
+../inputs/grep1.dat:        = best_regend = reg_dummy = NULL;
+../inputs/grep1.dat:#endif /* REGEX_MALLOC */
+../inputs/grep1.dat:      regstart[mcnt] = regend[mcnt] 
+../inputs/grep1.dat:        = old_regstart[mcnt] = old_regend[mcnt] = REG_UNSET_VALUE;
+../inputs/grep1.dat:      REG_MATCH_NULL_STRING_P (reg_info[mcnt]) = MATCH_NULL_UNSET_VALUE;
+../inputs/grep1.dat:      IS_ACTIVE (reg_info[mcnt]) = 0;
+../inputs/grep1.dat:      MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+../inputs/grep1.dat:      EVER_MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+../inputs/grep1.dat:  end1 = string1 + size1;
+../inputs/grep1.dat:  end2 = string2 + size2;
+../inputs/grep1.dat:      end_match_1 = string1 + stop;
+../inputs/grep1.dat:      end_match_2 = string2;
+../inputs/grep1.dat:      end_match_1 = end1;
+../inputs/grep1.dat:      end_match_2 = string2 + stop - size1;
+../inputs/grep1.dat:     `dend' is the end of the input string that `d' points within.  `d'
+../inputs/grep1.dat:     loop, `d' can be pointing at the end of a string, but it cannot
+../inputs/grep1.dat:      dend = end_match_1;
+../inputs/grep1.dat:      dend = end_match_2;
+../inputs/grep1.dat:  DEBUG_PRINT_COMPILED_PATTERN (bufp, p, pend);
+../inputs/grep1.dat:      if (p == pend)
+../inputs/grep1.dat:          DEBUG_PRINT1 ("end of pattern ... ");
+../inputs/grep1.dat:          if (d != end_match_2)
+../inputs/grep1.dat:                  boolean same_str_p = (FIRST_STRING_P (match_end) 
+../inputs/grep1.dat:                      || (same_str_p && d > match_end)
+../inputs/grep1.dat:                      match_end = d;
+../inputs/grep1.dat:                          best_regstart[mcnt] = regstart[mcnt];
+../inputs/grep1.dat:                          best_regend[mcnt] = regend[mcnt];
+../inputs/grep1.dat:                  /* Restore best match.  It may happen that `dend ==
+../inputs/grep1.dat:                     end_match_1' while the restored d is in string2.
+../inputs/grep1.dat:                  d = match_end;
+../inputs/grep1.dat:                  dend = ((d >= string1 && d <= end1)
+../inputs/grep1.dat:		           ? end_match_1 : end_match_2);
+../inputs/grep1.dat:		      regstart[mcnt] = best_regstart[mcnt];
+../inputs/grep1.dat:		      regend[mcnt] = best_regend[mcnt];
+../inputs/grep1.dat:            } /* d != end_match_2 */
+../inputs/grep1.dat:                  regs->num_regs = MAX (RE_NREGS, num_regs + 1);
+../inputs/grep1.dat:                  regs->end = TALLOC (regs->num_regs, regoff_t);
+../inputs/grep1.dat:                  if (regs->start == NULL || regs->end == NULL)
+../inputs/grep1.dat:                      RETALLOC (regs->end, regs->num_regs, regoff_t);
+../inputs/grep1.dat:                      if (regs->start == NULL || regs->end == NULL)
+../inputs/grep1.dat:		  /* These braces fend off a "empty body in an else-statement"
+../inputs/grep1.dat:		  assert (bufp->regs_allocated == REGS_FIXED);
+../inputs/grep1.dat:              /* Convert the pointer data in `regstart' and `regend' to
+../inputs/grep1.dat:                  regs->start[0] = pos;
+../inputs/grep1.dat:                  regs->end[0] = (MATCHING_IN_FIRST_STRING ? d - string1
+../inputs/grep1.dat:                  if (REG_UNSET (regstart[mcnt]) || REG_UNSET (regend[mcnt]))
+../inputs/grep1.dat:                    regs->start[mcnt] = regs->end[mcnt] = -1;
+../inputs/grep1.dat:		      regs->start[mcnt] = POINTER_TO_OFFSET (regstart[mcnt]);
+../inputs/grep1.dat:                      regs->end[mcnt] = POINTER_TO_OFFSET (regend[mcnt]);
+../inputs/grep1.dat:                 -1 at the end.  */
+../inputs/grep1.dat:                regs->start[mcnt] = regs->end[mcnt] = -1;
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING no_op.\n");
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING exactn %d.\n", mcnt);
+../inputs/grep1.dat:		  if (translate[(unsigned char) *d++] != (char) *p++)
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING anychar.\n");
+../inputs/grep1.dat:            DEBUG_PRINT2 ("EXECUTING charset%s.\n", not ? "_not" : "");
+../inputs/grep1.dat:		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+../inputs/grep1.dat:	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+../inputs/grep1.dat:	  p1 = p;		/* To send to group_match_null_string_p.  */
+../inputs/grep1.dat:          if (REG_MATCH_NULL_STRING_P (reg_info[*p]) == MATCH_NULL_UNSET_VALUE)
+../inputs/grep1.dat:            REG_MATCH_NULL_STRING_P (reg_info[*p]) 
+../inputs/grep1.dat:              = group_match_null_string_p (&p1, pend, reg_info);
+../inputs/grep1.dat:          old_regstart[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+../inputs/grep1.dat:                             ? REG_UNSET (regstart[*p]) ? d : regstart[*p]
+../inputs/grep1.dat:                             : regstart[*p];
+../inputs/grep1.dat:			 POINTER_TO_OFFSET (old_regstart[*p]));
+../inputs/grep1.dat:          regstart[*p] = d;
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+../inputs/grep1.dat:          IS_ACTIVE (reg_info[*p]) = 1;
+../inputs/grep1.dat:          MATCHED_SOMETHING (reg_info[*p]) = 0;
+../inputs/grep1.dat:        /* The stop_memory opcode represents the end of a group.  Its
+../inputs/grep1.dat:	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+../inputs/grep1.dat:          old_regend[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+../inputs/grep1.dat:                           ? REG_UNSET (regend[*p]) ? d : regend[*p]
+../inputs/grep1.dat:			   : regend[*p];
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      old_regend: %d\n", 
+../inputs/grep1.dat:			 POINTER_TO_OFFSET (old_regend[*p]));
+../inputs/grep1.dat:          regend[*p] = d;
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+../inputs/grep1.dat:          IS_ACTIVE (reg_info[*p]) = 0;
+../inputs/grep1.dat:                 (a(b)c(d(e)f)g).  When group 3 ends, after the f), the
+../inputs/grep1.dat:              while (r > 0 && !IS_ACTIVE (reg_info[r]))
+../inputs/grep1.dat:              /* If we end up at register zero, that means that we saved
+../inputs/grep1.dat:          if ((!MATCHED_SOMETHING (reg_info[*p])
+../inputs/grep1.dat:               || (re_opcode_t) p[-3] == start_memory)
+../inputs/grep1.dat:	      && (p + 2) < pend)              
+../inputs/grep1.dat:                    EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:                  && (re_opcode_t) p1[3] == start_memory && p1[4] == *p)
+../inputs/grep1.dat:                     regstart[1], and, e.g., with `((a*)*(b*)*)*'
+../inputs/grep1.dat:                     against `aba' for regend[3].
+../inputs/grep1.dat:                  if (EVER_MATCHED_SOMETHING (reg_info[*p]))
+../inputs/grep1.dat:                      EVER_MATCHED_SOMETHING (reg_info[*p]) = 0;
+../inputs/grep1.dat:                          regstart[r] = old_regstart[r];
+../inputs/grep1.dat:                          if ((int) old_regend[r] >= (int) regstart[r])
+../inputs/grep1.dat:                            regend[r] = old_regend[r];
+../inputs/grep1.dat:                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:	    register const char *d2, *dend2;
+../inputs/grep1.dat:	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
+../inputs/grep1.dat:            if (REG_UNSET (regstart[regno]) || REG_UNSET (regend[regno]))
+../inputs/grep1.dat:            d2 = regstart[regno];
+../inputs/grep1.dat:               the end of the first string.  */
+../inputs/grep1.dat:            dend2 = ((FIRST_STRING_P (regstart[regno]) 
+../inputs/grep1.dat:		      == FIRST_STRING_P (regend[regno]))
+../inputs/grep1.dat:		     ? regend[regno] : end_match_1);
+../inputs/grep1.dat:		while (d2 == dend2)
+../inputs/grep1.dat:		    if (dend2 == end_match_2) break;
+../inputs/grep1.dat:		    if (dend2 == regend[regno]) break;
+../inputs/grep1.dat:                    dend2 = regend[regno];
+../inputs/grep1.dat:		/* At end of register contents => success */
+../inputs/grep1.dat:		if (d2 == dend2) break;
+../inputs/grep1.dat:		mcnt = dend - d;
+../inputs/grep1.dat:                if (mcnt > dend2 - d2)
+../inputs/grep1.dat:		  mcnt = dend2 - d2;
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING begline.\n");
+../inputs/grep1.dat:          else if (d[-1] == '\n' && bufp->newline_anchor)
+../inputs/grep1.dat:        /* endline is the dual of begline.  */
+../inputs/grep1.dat:	case endline:
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING endline.\n");
+../inputs/grep1.dat:          else if ((d == end1 ? *string2 : *d) == '\n'
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING begbuf.\n");
+../inputs/grep1.dat:	/* Match at the very end of the data.  */
+../inputs/grep1.dat:        case endbuf:
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING endbuf.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING on_failure_keep_string_jump");
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+../inputs/grep1.dat:           except the last ends with a jump that in effect jumps past
+../inputs/grep1.dat:           ending jump of the following alternative, because tensioning
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING on_failure_jump");
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+../inputs/grep1.dat:          while (p1 < pend && (re_opcode_t) *p1 == no_op)
+../inputs/grep1.dat:          if (p1 < pend && (re_opcode_t) *p1 == start_memory)
+../inputs/grep1.dat:        /* A smart repeat ends with `maybe_pop_jump'.
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING maybe_pop_jump %d.\n", mcnt);
+../inputs/grep1.dat:               pattern follows its end. If we can establish that there
+../inputs/grep1.dat:               failure point which is what we will end up popping.  */
+../inputs/grep1.dat:	    while (p2 + 2 < pend
+../inputs/grep1.dat:            /* If we're at the end of the pattern, we can change.  */
+../inputs/grep1.dat:            if (p2 == pend)
+../inputs/grep1.dat:  	        p[-3] = (unsigned char) pop_failure_jump;
+../inputs/grep1.dat:		     || (bufp->newline_anchor && (re_opcode_t) *p2 == endline))
+../inputs/grep1.dat:                  = *p2 == (unsigned char) endline ? '\n' : p2[2];
+../inputs/grep1.dat:                /* p1[0] ... p1[2] are the `on_failure_jump' corresponding
+../inputs/grep1.dat:                if ((re_opcode_t) p1[3] == exactn && p1[5] != c)
+../inputs/grep1.dat:  		    p[-3] = (unsigned char) pop_failure_jump;
+../inputs/grep1.dat:                                  c, p1[5]);
+../inputs/grep1.dat:		else if ((re_opcode_t) p1[3] == charset
+../inputs/grep1.dat:			 || (re_opcode_t) p1[3] == charset_not)
+../inputs/grep1.dat:		    int not = (re_opcode_t) p1[3] == charset_not;
+../inputs/grep1.dat:		    if (c < (unsigned char) (p1[4] * BYTEWIDTH)
+../inputs/grep1.dat:			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+../inputs/grep1.dat:  		        p[-3] = (unsigned char) pop_failure_jump;
+../inputs/grep1.dat:	  if ((re_opcode_t) p[-1] != pop_failure_jump)
+../inputs/grep1.dat:	      p[-1] = (unsigned char) jump;
+../inputs/grep1.dat:	/* The end of a simple repeat has a pop_failure_jump back to
+../inputs/grep1.dat:            DEBUG_PRINT1 ("EXECUTING pop_failure_jump.\n");
+../inputs/grep1.dat:	  EXTRACT_NUMBER_AND_INCR (mcnt, p);	/* Get the amount to jump.  */
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING jump %d ", mcnt);
+../inputs/grep1.dat:        /* We need this opcode so we can detect where alternatives end
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING jump_past_alt.\n");
+../inputs/grep1.dat:           then gets popped at pop_failure_jump.  We will end up at
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING dummy_failure_jump.\n");
+../inputs/grep1.dat:        /* At the end of an alternative, we need to push a dummy failure
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING push_dummy_failure.\n");
+../inputs/grep1.dat:          EXTRACT_NUMBER (mcnt, p + 2);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING succeed_n %d.\n", mcnt);
+../inputs/grep1.dat:	      p[2] = (unsigned char) no_op;
+../inputs/grep1.dat:              p[3] = (unsigned char) no_op;
+../inputs/grep1.dat:          EXTRACT_NUMBER (mcnt, p + 2);
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING jump_n %d.\n", mcnt);
+../inputs/grep1.dat:            DEBUG_PRINT1 ("EXECUTING set_number_at.\n");
+../inputs/grep1.dat:            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+../inputs/grep1.dat:            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING wordbound.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING notwordbound.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING wordbeg.\n");
+../inputs/grep1.dat:	case wordend:
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING wordend.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING before_dot.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING after_dot.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+../inputs/grep1.dat:#endif /* not emacs19 */
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING syntaxspec %d.\n", mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING Emacs wordchar.\n");
+../inputs/grep1.dat:	  if (SYNTAX (*d++) != (enum syntaxcode) mcnt)
+../inputs/grep1.dat:          DEBUG_PRINT2 ("EXECUTING notsyntaxspec %d.\n", mcnt);
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING Emacs notwordchar.\n");
+../inputs/grep1.dat:	  if (SYNTAX (*d++) == (enum syntaxcode) mcnt)
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING non-Emacs wordchar.\n");
+../inputs/grep1.dat:          DEBUG_PRINT1 ("EXECUTING non-Emacs notwordchar.\n");
+../inputs/grep1.dat:#endif /* not emacs */
+../inputs/grep1.dat:                             regstart, regend, reg_info);
+../inputs/grep1.dat:          /* If we failed to the end of the pattern, don't examine *p.  */
+../inputs/grep1.dat:	  assert (p <= pend);
+../inputs/grep1.dat:          if (p < pend)
+../inputs/grep1.dat:                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:          if (d >= string1 && d <= end1)
+../inputs/grep1.dat:	    dend = end_match_1;
+../inputs/grep1.dat:group_match_null_string_p (p, end, reg_info)
+../inputs/grep1.dat:    unsigned char **p, *end;
+../inputs/grep1.dat:  while (p1 < end)
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:                 whereas the rest start with on_failure_jump and end
+../inputs/grep1.dat:              while ((re_opcode_t) p1[mcnt-3] == jump_past_alt)
+../inputs/grep1.dat:                     is, including the ending `jump_past_alt' and
+../inputs/grep1.dat:                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:                  if ((re_opcode_t) p1[mcnt-3] != jump_past_alt)
+../inputs/grep1.dat:              EXTRACT_NUMBER (mcnt, p1 - 2);
+../inputs/grep1.dat:	  assert (p1[1] == **p);
+../inputs/grep1.dat:          if (!common_op_match_null_string_p (&p1, end, reg_info))
+../inputs/grep1.dat:    } /* while p1 < end */
+../inputs/grep1.dat:alt_match_null_string_p (p, end, reg_info)
+../inputs/grep1.dat:    unsigned char *p, *end;
+../inputs/grep1.dat:  while (p1 < end)
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:          if (!common_op_match_null_string_p (&p1, end, reg_info))
+../inputs/grep1.dat:    }  /* while p1 < end */
+../inputs/grep1.dat:common_op_match_null_string_p (p, end, reg_info)
+../inputs/grep1.dat:    unsigned char **p, *end;
+../inputs/grep1.dat:    case endline:
+../inputs/grep1.dat:    case endbuf:
+../inputs/grep1.dat:    case wordend:
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      assert (reg_no > 0 && reg_no <= MAX_REGNUM);
+../inputs/grep1.dat:      ret = group_match_null_string_p (&p1, end, reg_info);
+../inputs/grep1.dat:      if (REG_MATCH_NULL_STRING_P (reg_info[reg_no]) == MATCH_NULL_UNSET_VALUE)
+../inputs/grep1.dat:        REG_MATCH_NULL_STRING_P (reg_info[reg_no]) = ret;
+../inputs/grep1.dat:      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+../inputs/grep1.dat:      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+../inputs/grep1.dat:/* Return zero if TRANSLATE[S1] and TRANSLATE[S2] are identical for LEN
+../inputs/grep1.dat:      if (translate[*p1++] != translate[*p2++]) return 1;
+../inputs/grep1.dat:  return re_error_msg[(int) ret];
+../inputs/grep1.dat:   them if this is an Emacs or POSIX compilation.  */
+../inputs/grep1.dat:#if !defined (emacs) && !defined (_POSIX_SOURCE)
+../inputs/grep1.dat:  return (char *) re_error_msg[(int) ret];
+../inputs/grep1.dat:#endif /* not emacs and not _POSIX_SOURCE */
+../inputs/grep1.dat:/* POSIX.2 functions.  Don't define these for Emacs.  */
+../inputs/grep1.dat:   since POSIX says we shouldn't.  Thus, we set
+../inputs/grep1.dat:     `syntax' to RE_SYNTAX_POSIX_EXTENDED if the
+../inputs/grep1.dat:       REG_EXTENDED bit in CFLAGS is set; otherwise, to
+../inputs/grep1.dat:       RE_SYNTAX_POSIX_BASIC;
+../inputs/grep1.dat:     If REG_EXTENDED is set, we use POSIX extended syntax; otherwise, we
+../inputs/grep1.dat:     use POSIX basic syntax.
+../inputs/grep1.dat:     If REG_NEWLINE is set, then . and [^...] don't match newline.
+../inputs/grep1.dat:    = (cflags & REG_EXTENDED) ?
+../inputs/grep1.dat:      RE_SYNTAX_POSIX_EXTENDED : RE_SYNTAX_POSIX_BASIC;
+../inputs/grep1.dat:        preg->translate[i] = ISUPPER (i) ? tolower (i) : i;
+../inputs/grep1.dat:    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+../inputs/grep1.dat:  /* POSIX says a null character in the pattern terminates it, so we 
+../inputs/grep1.dat:  /* POSIX doesn't distinguish between an unmatched open-group and an
+../inputs/grep1.dat:   string; if REG_NOTEOL is set, then $ does not match at the end.
+../inputs/grep1.dat:    regmatch_t pmatch[]; 
+../inputs/grep1.dat:  private_preg.regs_allocated = REGS_FIXED;
+../inputs/grep1.dat:      regs.end = TALLOC (nmatch, regoff_t);
+../inputs/grep1.dat:      if (regs.start == NULL || regs.end == NULL)
+../inputs/grep1.dat:  /* Copy the register information to the POSIX structure.  */
+../inputs/grep1.dat:              pmatch[r].rm_so = regs.start[r];
+../inputs/grep1.dat:              pmatch[r].rm_eo = regs.end[r];
+../inputs/grep1.dat:      free (regs.end);
+../inputs/grep1.dat:      || errcode >= (sizeof (re_error_msg) / sizeof (re_error_msg[0])))
+../inputs/grep1.dat:  msg = re_error_msg[errcode];
+../inputs/grep1.dat:  /* POSIX doesn't require that we do anything in this case, but why
+../inputs/grep1.dat:          errbuf[errbuf_size - 1] = 0;
+../inputs/grep1.dat:#endif /* not emacs  */
+../inputs/grep1.dat:/* dfa.c - deterministic extended regexp routines for GNU
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#undef ISXDIGIT
+../inputs/grep1.dat:#define ISXDIGIT(C) (isascii(C) && isxdigit(C))
+../inputs/grep1.dat:#define ISXDIGIT(C) isxdigit(C)
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif /* DEBUG */
+../inputs/grep1.dat:  return c[b / INTBITS] & 1 << b % INTBITS;
+../inputs/grep1.dat:  c[b / INTBITS] |= 1 << b % INTBITS;
+../inputs/grep1.dat:  c[b / INTBITS] &= ~(1 << b % INTBITS);
+../inputs/grep1.dat:    dst[i] = src[i];
+../inputs/grep1.dat:    s[i] = 0;
+../inputs/grep1.dat:    s[i] = ~s[i];
+../inputs/grep1.dat:    if (s1[i] != s2[i])
+../inputs/grep1.dat:    if (equal(s, dfa->charclasses[i]))
+../inputs/grep1.dat:  copyset(s, dfa->charclasses[i]);
+../inputs/grep1.dat:FUNC(is_xdigit, ISXDIGIT)
+../inputs/grep1.dat:} prednames[] = {
+../inputs/grep1.dat:  ":alpha:]", is_alpha,
+../inputs/grep1.dat:  ":upper:]", is_upper,
+../inputs/grep1.dat:  ":lower:]", is_lower,
+../inputs/grep1.dat:  ":digit:]", is_digit,
+../inputs/grep1.dat:  ":xdigit:]", is_xdigit,
+../inputs/grep1.dat:  ":space:]", is_space,
+../inputs/grep1.dat:  ":punct:]", is_punct,
+../inputs/grep1.dat:  ":alnum:]", is_alnum,
+../inputs/grep1.dat:  ":print:]", is_print,
+../inputs/grep1.dat:  ":graph:]", is_graph,
+../inputs/grep1.dat:  ":cntrl:]", is_cntrl,
+../inputs/grep1.dat:	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+../inputs/grep1.dat:	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+../inputs/grep1.dat:		  : lexleft > 1 && lexptr[0] == '\\' && lexptr[1] == ')')
+../inputs/grep1.dat:		  : lexleft > 1 && lexptr[0] == '\\' && lexptr[1] == '|')
+../inputs/grep1.dat:	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+../inputs/grep1.dat:	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+../inputs/grep1.dat:	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+../inputs/grep1.dat:		 Note that if we're looking at some other [:...:]
+../inputs/grep1.dat:		for (c1 = 0; prednames[c1].name; ++c1)
+../inputs/grep1.dat:		  if (looking_at(prednames[c1].name))
+../inputs/grep1.dat:			if ((*prednames[c1].pred)(c2))
+../inputs/grep1.dat:		      lexptr += strlen(prednames[c1].name);
+../inputs/grep1.dat:		      lexleft -= strlen(prednames[c1].name);
+../inputs/grep1.dat:		  if (c2 == ']')
+../inputs/grep1.dat:		      /* In the case [x-], the - is an ordinary hyphen,
+../inputs/grep1.dat:	  while ((c = c1) != ']');
+../inputs/grep1.dat:  dfa->tokens[dfa->tindex++] = t;
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:  switch (dfa->tokens[tindex - 1])
+../inputs/grep1.dat:    addtok(dfa->tokens[tindex + i]);
+../inputs/grep1.dat:    dst->elems[i] = src->elems[i];
+../inputs/grep1.dat:  for (i = 0; i < s->nelem && p.index < s->elems[i].index; ++i)
+../inputs/grep1.dat:  if (i < s->nelem && p.index == s->elems[i].index)
+../inputs/grep1.dat:    s->elems[i].constraint |= p.constraint;
+../inputs/grep1.dat:	  t2 = s->elems[i];
+../inputs/grep1.dat:	  s->elems[i++] = t1;
+../inputs/grep1.dat:    if (s1->elems[i].index > s2->elems[j].index)
+../inputs/grep1.dat:      m->elems[m->nelem++] = s1->elems[i++];
+../inputs/grep1.dat:    else if (s1->elems[i].index < s2->elems[j].index)
+../inputs/grep1.dat:      m->elems[m->nelem++] = s2->elems[j++];
+../inputs/grep1.dat:	m->elems[m->nelem] = s1->elems[i++];
+../inputs/grep1.dat:	m->elems[m->nelem++].constraint |= s2->elems[j++].constraint;
+../inputs/grep1.dat:    m->elems[m->nelem++] = s1->elems[i++];
+../inputs/grep1.dat:    m->elems[m->nelem++] = s2->elems[j++];
+../inputs/grep1.dat:    if (p.index == s->elems[i].index)
+../inputs/grep1.dat:      s->elems[i] = s->elems[i + 1];
+../inputs/grep1.dat:    hash ^= s->elems[i].index + s->elems[i].constraint;
+../inputs/grep1.dat:      if (hash != d->states[i].hash || s->nelem != d->states[i].elems.nelem
+../inputs/grep1.dat:	  || newline != d->states[i].newline || letter != d->states[i].letter)
+../inputs/grep1.dat:	if (s->elems[j].constraint
+../inputs/grep1.dat:	    != d->states[i].elems.elems[j].constraint
+../inputs/grep1.dat:	    || s->elems[j].index != d->states[i].elems.elems[j].index)
+../inputs/grep1.dat:  d->states[i].hash = hash;
+../inputs/grep1.dat:  MALLOC(d->states[i].elems.elems, position, s->nelem);
+../inputs/grep1.dat:  copy(s, &d->states[i].elems);
+../inputs/grep1.dat:  d->states[i].newline = newline;
+../inputs/grep1.dat:  d->states[i].letter = letter;
+../inputs/grep1.dat:  d->states[i].backref = 0;
+../inputs/grep1.dat:  d->states[i].constraint = 0;
+../inputs/grep1.dat:  d->states[i].first_end = 0;
+../inputs/grep1.dat:    if (d->tokens[s->elems[j].index] < 0)
+../inputs/grep1.dat:	constraint = s->elems[j].constraint;
+../inputs/grep1.dat:	if (SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 0)
+../inputs/grep1.dat:	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 1)
+../inputs/grep1.dat:	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 0)
+../inputs/grep1.dat:	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 1))
+../inputs/grep1.dat:	  d->states[i].constraint |= constraint;
+../inputs/grep1.dat:	if (! d->states[i].first_end)
+../inputs/grep1.dat:	  d->states[i].first_end = d->tokens[s->elems[j].index];
+../inputs/grep1.dat:    else if (d->tokens[s->elems[j].index] == BACKREF)
+../inputs/grep1.dat:	d->states[i].constraint = NO_CONSTRAINT;
+../inputs/grep1.dat:	d->states[i].backref = 1;
+../inputs/grep1.dat:    visited[i] = 0;
+../inputs/grep1.dat:    if (d->tokens[s->elems[i].index] >= NOTCHAR
+../inputs/grep1.dat:	&& d->tokens[s->elems[i].index] != BACKREF
+../inputs/grep1.dat:	&& d->tokens[s->elems[i].index] < CSET)
+../inputs/grep1.dat:	old = s->elems[i];
+../inputs/grep1.dat:	delete(s->elems[i], s);
+../inputs/grep1.dat:	if (visited[old.index])
+../inputs/grep1.dat:	visited[old.index] = 1;
+../inputs/grep1.dat:	switch (d->tokens[old.index])
+../inputs/grep1.dat:	for (j = 0; j < d->follows[old.index].nelem; ++j)
+../inputs/grep1.dat:	    p.index = d->follows[old.index].elems[j].index;
+../inputs/grep1.dat:   Note that at this point, we're pretending constructs like \< are real
+../inputs/grep1.dat:      prtok(d->tokens[i]);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:    nalloc[i] = 0;
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:    switch (d->tokens[i])
+../inputs/grep1.dat:	tmp.nelem = nfirstpos[-1];
+../inputs/grep1.dat:	for (j = 0; j < nlastpos[-1]; ++j)
+../inputs/grep1.dat:	    merge(&tmp, &d->follows[pos[j].index], &merged);
+../inputs/grep1.dat:	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+../inputs/grep1.dat:				 nalloc[pos[j].index], merged.nelem - 1);
+../inputs/grep1.dat:	    copy(&merged, &d->follows[pos[j].index]);
+../inputs/grep1.dat:	if (d->tokens[i] != PLUS)
+../inputs/grep1.dat:	  nullable[-1] = 1;
+../inputs/grep1.dat:	tmp.nelem = nfirstpos[-1];
+../inputs/grep1.dat:	pos = lastpos + nlastpos[-1];
+../inputs/grep1.dat:	for (j = 0; j < nlastpos[-2]; ++j)
+../inputs/grep1.dat:	    merge(&tmp, &d->follows[pos[j].index], &merged);
+../inputs/grep1.dat:	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+../inputs/grep1.dat:				 nalloc[pos[j].index], merged.nelem - 1);
+../inputs/grep1.dat:	    copy(&merged, &d->follows[pos[j].index]);
+../inputs/grep1.dat:	if (nullable[-2])
+../inputs/grep1.dat:	  nfirstpos[-2] += nfirstpos[-1];
+../inputs/grep1.dat:	  firstpos += nfirstpos[-1];
+../inputs/grep1.dat:	if (nullable[-1])
+../inputs/grep1.dat:	  nlastpos[-2] += nlastpos[-1];
+../inputs/grep1.dat:	    pos = lastpos + nlastpos[-2];
+../inputs/grep1.dat:	    for (j = nlastpos[-1] - 1; j >= 0; --j)
+../inputs/grep1.dat:	      pos[j] = lastpos[j];
+../inputs/grep1.dat:	    lastpos += nlastpos[-2];
+../inputs/grep1.dat:	    nlastpos[-2] = nlastpos[-1];
+../inputs/grep1.dat:	nullable[-2] = nullable[-1] && nullable[-2];
+../inputs/grep1.dat:	nfirstpos[-2] += nfirstpos[-1];
+../inputs/grep1.dat:	nlastpos[-2] += nlastpos[-1];
+../inputs/grep1.dat:	nullable[-2] = nullable[-1] || nullable[-2];
+../inputs/grep1.dat:	*nullable++ = d->tokens[i] == BACKREF;
+../inputs/grep1.dat:	nalloc[i] = 1;
+../inputs/grep1.dat:	MALLOC(d->follows[i].elems, position, nalloc[i]);
+../inputs/grep1.dat:      prtok(d->tokens[i]);
+../inputs/grep1.dat:      fprintf(stderr, nullable[-1] ? " nullable: yes\n" : " nullable: no\n");
+../inputs/grep1.dat:      for (j = nfirstpos[-1] - 1; j >= 0; --j)
+../inputs/grep1.dat:	  fprintf(stderr, " %d:", firstpos[j].index);
+../inputs/grep1.dat:	  prtok(d->tokens[firstpos[j].index]);
+../inputs/grep1.dat:      for (j = nlastpos[-1] - 1; j >= 0; --j)
+../inputs/grep1.dat:	  fprintf(stderr, " %d:", lastpos[j].index);
+../inputs/grep1.dat:	  prtok(d->tokens[lastpos[j].index]);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:    if (d->tokens[i] < NOTCHAR || d->tokens[i] == BACKREF
+../inputs/grep1.dat:	|| d->tokens[i] >= CSET)
+../inputs/grep1.dat:	prtok(d->tokens[i]);
+../inputs/grep1.dat:	for (j = d->follows[i].nelem - 1; j >= 0; --j)
+../inputs/grep1.dat:	    fprintf(stderr, " %d:", d->follows[i].elems[j].index);
+../inputs/grep1.dat:	    prtok(d->tokens[d->follows[i].elems[j].index]);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:	copy(&d->follows[i], &merged);
+../inputs/grep1.dat:	if (d->follows[i].nelem < merged.nelem)
+../inputs/grep1.dat:	  REALLOC(d->follows[i].elems, position, merged.nelem);
+../inputs/grep1.dat:	copy(&merged, &d->follows[i]);
+../inputs/grep1.dat:  for (i = 0; i < nfirstpos[-1]; ++i)
+../inputs/grep1.dat:    insert(firstpos[i], &merged);
+../inputs/grep1.dat:    if (PREV_NEWLINE_DEPENDENT(merged.elems[i].constraint))
+../inputs/grep1.dat:     int trans[];
+../inputs/grep1.dat:  position_set grps[NOTCHAR];	/* As many as will ever be needed. */
+../inputs/grep1.dat:  charclass labels[NOTCHAR];	/* Labels corresponding to the groups. */
+../inputs/grep1.dat:  for (i = 0; i < d->states[s].elems.nelem; ++i)
+../inputs/grep1.dat:      pos = d->states[s].elems.elems[i];
+../inputs/grep1.dat:      if (d->tokens[pos.index] >= 0 && d->tokens[pos.index] < NOTCHAR)
+../inputs/grep1.dat:	setbit(d->tokens[pos.index], matches);
+../inputs/grep1.dat:      else if (d->tokens[pos.index] >= CSET)
+../inputs/grep1.dat:	copyset(d->charclasses[d->tokens[pos.index] - CSET], matches);
+../inputs/grep1.dat:	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+../inputs/grep1.dat:					 d->states[s].newline, 1))
+../inputs/grep1.dat:	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+../inputs/grep1.dat:					 d->states[s].newline, 0))
+../inputs/grep1.dat:	      matches[j] &= newline[j];
+../inputs/grep1.dat:	  if (! MATCHES_LETTER_CONTEXT(pos.constraint,
+../inputs/grep1.dat:					d->states[s].letter, 1))
+../inputs/grep1.dat:	      matches[j] &= ~letters[j];
+../inputs/grep1.dat:	  if (! MATCHES_LETTER_CONTEXT(pos.constraint,
+../inputs/grep1.dat:					d->states[s].letter, 0))
+../inputs/grep1.dat:	      matches[j] &= letters[j];
+../inputs/grep1.dat:	  for (j = 0; j < CHARCLASS_INTS && !matches[j]; ++j)
+../inputs/grep1.dat:	  if (d->tokens[pos.index] >= 0 && d->tokens[pos.index] < NOTCHAR
+../inputs/grep1.dat:	      && !tstbit(d->tokens[pos.index], labels[j]))
+../inputs/grep1.dat:	    (intersect[k] = matches[k] & labels[j][k]) ? intersectf = 1 : 0;
+../inputs/grep1.dat:	      int match = matches[k], label = labels[j][k];
+../inputs/grep1.dat:	      (leftovers[k] = ~match & label) ? leftoversf = 1 : 0;
+../inputs/grep1.dat:	      (matches[k] = match & ~label) ? matchesf = 1 : 0;
+../inputs/grep1.dat:	      copyset(leftovers, labels[ngrps]);
+../inputs/grep1.dat:	      copyset(intersect, labels[j]);
+../inputs/grep1.dat:	      MALLOC(grps[ngrps].elems, position, d->nleaves);
+../inputs/grep1.dat:	      copy(&grps[j], &grps[ngrps]);
+../inputs/grep1.dat:	  grps[j].elems[grps[j].nelem++] = pos;
+../inputs/grep1.dat:	  copyset(matches, labels[ngrps]);
+../inputs/grep1.dat:	  MALLOC(grps[ngrps].elems, position, d->nleaves);
+../inputs/grep1.dat:	  grps[ngrps].nelem = 1;
+../inputs/grep1.dat:	  grps[ngrps].elems[0] = pos;
+../inputs/grep1.dat:      for (i = 0; i < d->states[0].elems.nelem; ++i)
+../inputs/grep1.dat:	  if (PREV_NEWLINE_DEPENDENT(d->states[0].elems.elems[i].constraint))
+../inputs/grep1.dat:	  if (PREV_LETTER_DEPENDENT(d->states[0].elems.elems[i].constraint))
+../inputs/grep1.dat:      copy(&d->states[0].elems, &follows);
+../inputs/grep1.dat:	  trans[i] = state_newline;
+../inputs/grep1.dat:	  trans[i] = state_letter;
+../inputs/grep1.dat:	  trans[i] = state;
+../inputs/grep1.dat:      trans[i] = -1;
+../inputs/grep1.dat:      for (j = 0; j < grps[i].nelem; ++j)
+../inputs/grep1.dat:	for (k = 0; k < d->follows[grps[i].elems[j].index].nelem; ++k)
+../inputs/grep1.dat:	  insert(d->follows[grps[i].elems[j].index].elems[k], &follows);
+../inputs/grep1.dat:	for (j = 0; j < d->states[0].elems.nelem; ++j)
+../inputs/grep1.dat:	  insert(d->states[0].elems.elems[j], &follows);
+../inputs/grep1.dat:      if (tstbit('\n', labels[i]))
+../inputs/grep1.dat:	  if (PREV_NEWLINE_DEPENDENT(follows.elems[j].constraint))
+../inputs/grep1.dat:	if (labels[i][j] & letters[j])
+../inputs/grep1.dat:	  if (PREV_LETTER_DEPENDENT(follows.elems[j].constraint))
+../inputs/grep1.dat:	  if (labels[i][j] & 1 << k)
+../inputs/grep1.dat:		trans[c] = state_newline;
+../inputs/grep1.dat:		trans[c] = state_letter;
+../inputs/grep1.dat:		trans[c] = state;
+../inputs/grep1.dat:    free(grps[i].elems);
+../inputs/grep1.dat:   is a non-accepting state, then d->trans[state] points to its table.
+../inputs/grep1.dat:   If it is an accepting state then d->fails[state] points to its table.
+../inputs/grep1.dat:   If it has no table at all, then d->trans[state] is NULL.
+../inputs/grep1.dat:	if (d->trans[i])
+../inputs/grep1.dat:	    free((ptr_t) d->trans[i]);
+../inputs/grep1.dat:	    d->trans[i] = NULL;
+../inputs/grep1.dat:	else if (d->fails[i])
+../inputs/grep1.dat:	    free((ptr_t) d->fails[i]);
+../inputs/grep1.dat:	    d->fails[i] = NULL;
+../inputs/grep1.dat:  d->success[s] = 0;
+../inputs/grep1.dat:  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 1, d->states[s].letter, 0,
+../inputs/grep1.dat:    d->success[s] |= 4;
+../inputs/grep1.dat:  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 1,
+../inputs/grep1.dat:    d->success[s] |= 2;
+../inputs/grep1.dat:  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 0,
+../inputs/grep1.dat:    d->success[s] |= 1;
+../inputs/grep1.dat:    if (trans[i] >= d->tralloc)
+../inputs/grep1.dat:	while (trans[i] >= d->tralloc)
+../inputs/grep1.dat:	    d->trans[oldalloc] = NULL;
+../inputs/grep1.dat:	    d->fails[oldalloc++] = NULL;
+../inputs/grep1.dat:  d->newlines[s] = trans['\n'];
+../inputs/grep1.dat:  trans['\n'] = -1;
+../inputs/grep1.dat:    d->fails[s] = trans;
+../inputs/grep1.dat:    d->trans[s] = trans;
+../inputs/grep1.dat:   the beginning of the buffer, and end points to the first character after
+../inputs/grep1.dat:   its end.  We store a newline in *end to act as a sentinel, so end had
+../inputs/grep1.dat:dfaexec(d, begin, end, newline, count, backref)
+../inputs/grep1.dat:     char *end;
+../inputs/grep1.dat:  static sbit[NOTCHAR];	/* Table for anding with d->success. */
+../inputs/grep1.dat:	  sbit[i] = 4;
+../inputs/grep1.dat:	  sbit[i] = 2;
+../inputs/grep1.dat:	  sbit[i] = 1;
+../inputs/grep1.dat:  *end = '\n';
+../inputs/grep1.dat:      if ((t = trans[s]) != 0)
+../inputs/grep1.dat:	    s1 = t[*p++];
+../inputs/grep1.dat:	    if (! (t = trans[s1]))
+../inputs/grep1.dat:	    s = t[*p++];
+../inputs/grep1.dat:        while ((t = trans[s]) != 0);
+../inputs/grep1.dat:      if (s >= 0 && p <= (unsigned char *) end && d->fails[s])
+../inputs/grep1.dat:	  if (d->success[s] & sbit[*p])
+../inputs/grep1.dat:		if (d->states[s].backref)
+../inputs/grep1.dat:	  s = d->fails[s][*p++];
+../inputs/grep1.dat:      if (count && (char *) p <= end && p[-1] == '\n')
+../inputs/grep1.dat:      /* Check if we've run off the end of the buffer. */
+../inputs/grep1.dat:      if ((char *) p > end)
+../inputs/grep1.dat:      if (p[-1] == '\n' && newline)
+../inputs/grep1.dat:	  s = d->newlines[s1];
+../inputs/grep1.dat:	if (ISUPPER(s[i]))
+../inputs/grep1.dat:	  copy[i] = tolower(s[i]);
+../inputs/grep1.dat:	  copy[i] = s[i];
+../inputs/grep1.dat:    free((ptr_t) d->states[i].elems.elems);
+../inputs/grep1.dat:    if (d->follows[i].elems)
+../inputs/grep1.dat:      free((ptr_t) d->follows[i].elems);
+../inputs/grep1.dat:    if (d->trans[i])
+../inputs/grep1.dat:      free((ptr_t) d->trans[i]);
+../inputs/grep1.dat:    else if (d->fails[i])
+../inputs/grep1.dat:      free((ptr_t) d->fails[i]);
+../inputs/grep1.dat:	grep '[c]'		->	grep 'c'
+../inputs/grep1.dat:  for (i = 0; cpp[i] != NULL; ++i)
+../inputs/grep1.dat:      free(cpp[i]);
+../inputs/grep1.dat:      cpp[i] = NULL;
+../inputs/grep1.dat:  new[len] = '\0';
+../inputs/grep1.dat:  for (i = 0; cpp[i] != NULL; ++i)
+../inputs/grep1.dat:    if (istrstr(cpp[i], new) != NULL)
+../inputs/grep1.dat:  while (cpp[j] != NULL)
+../inputs/grep1.dat:    if (istrstr(new, cpp[j]) == NULL)
+../inputs/grep1.dat:	free(cpp[j]);
+../inputs/grep1.dat:	cpp[j] = cpp[i];
+../inputs/grep1.dat:	cpp[i] = NULL;
+../inputs/grep1.dat:  cpp[i] = new;
+../inputs/grep1.dat:  cpp[i + 1] = NULL;
+../inputs/grep1.dat:  cpp[0] = NULL;
+../inputs/grep1.dat:	  for (i = 1; lcp[i] != '\0' && lcp[i] == rcp[i]; ++i)
+../inputs/grep1.dat:  for (i = 0; new[i] != NULL; ++i)
+../inputs/grep1.dat:      old = enlist(old, new[i], strlen(new[i]));
+../inputs/grep1.dat:  both[0] = NULL;
+../inputs/grep1.dat:  for (lnum = 0; left[lnum] != NULL; ++lnum)
+../inputs/grep1.dat:      for (rnum = 0; right[rnum] != NULL; ++rnum)
+../inputs/grep1.dat:	  temp = comsubs(left[lnum], right[rnum]);
+../inputs/grep1.dat:  mp->left[0] = mp->right[0] = mp->is[0] = '\0';
+../inputs/grep1.dat:    mp[i] = must0;
+../inputs/grep1.dat:      mp[i].in = (char **) malloc(sizeof *mp[i].in);
+../inputs/grep1.dat:      mp[i].left = malloc(2);
+../inputs/grep1.dat:      mp[i].right = malloc(2);
+../inputs/grep1.dat:      mp[i].is = malloc(2);
+../inputs/grep1.dat:      if (mp[i].in == NULL || mp[i].left == NULL ||
+../inputs/grep1.dat:	  mp[i].right == NULL || mp[i].is == NULL)
+../inputs/grep1.dat:      mp[i].left[0] = mp[i].right[0] = mp[i].is[0] = '\0';
+../inputs/grep1.dat:      mp[i].in[0] = NULL;
+../inputs/grep1.dat:      prtok(dfa->tokens[i]);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      switch (t = dfa->tokens[ri])
+../inputs/grep1.dat:	  if (mp < &musts[2])
+../inputs/grep1.dat:	      lmp->is[0] = '\0';
+../inputs/grep1.dat:	    while (lmp->left[i] != '\0' && lmp->left[i] == rmp->left[i])
+../inputs/grep1.dat:	    lmp->left[i] = '\0';
+../inputs/grep1.dat:	      if (lmp->right[ln - i - 1] != rmp->right[rn - i - 1])
+../inputs/grep1.dat:	      lmp->right[j] = lmp->right[(ln - i) + j];
+../inputs/grep1.dat:	    lmp->right[j] = '\0';
+../inputs/grep1.dat:	  mp->is[0] = '\0';
+../inputs/grep1.dat:	  if (mp != &musts[1])
+../inputs/grep1.dat:	  for (i = 0; musts[0].in[i] != NULL; ++i)
+../inputs/grep1.dat:	    if (strlen(musts[0].in[i]) > strlen(result))
+../inputs/grep1.dat:	      result = musts[0].in[i];
+../inputs/grep1.dat:	  if (strcmp(result, musts[0].is) == 0)
+../inputs/grep1.dat:	  if (mp < &musts[2])
+../inputs/grep1.dat:	    if (lmp->right[0] != '\0' &&
+../inputs/grep1.dat:		rmp->left[0] != '\0')
+../inputs/grep1.dat:	    if (lmp->is[0] != '\0')
+../inputs/grep1.dat:	    if (rmp->is[0] == '\0')
+../inputs/grep1.dat:	      lmp->right[0] = '\0';
+../inputs/grep1.dat:	    if (lmp->is[0] != '\0' && rmp->is[0] != '\0')
+../inputs/grep1.dat:	      lmp->is[0] = '\0';
+../inputs/grep1.dat:	      mp->is[0] = mp->left[0] = mp->right[0] = t;
+../inputs/grep1.dat:	      mp->is[1] = mp->left[1] = mp->right[1] = '\0';
+../inputs/grep1.dat:      prtok(dfa->tokens[ri]);
+../inputs/grep1.dat:      for (i = 0; mp->in[i]; ++i)
+../inputs/grep1.dat:	fprintf(stderr, " \"%s\"", mp->in[i]);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      freelist(mp[i].in);
+../inputs/grep1.dat:      ifree((char *) mp[i].in);
+../inputs/grep1.dat:      ifree(mp[i].left);
+../inputs/grep1.dat:      ifree(mp[i].right);
+../inputs/grep1.dat:      ifree(mp[i].is);
+../inputs/grep1.dat:#undef RE_DUP_MAX
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#define INT_MAX 2147483647
+../inputs/grep1.dat:#define UCHAR_MAX 255
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#define NCHAR (UCHAR_MAX + 1)
+../inputs/grep1.dat:  int maxshift;			/* Max shift of self and descendents. */
+../inputs/grep1.dat:  unsigned char delta[NCHAR];	/* Delta table for rapid search. */
+../inputs/grep1.dat:  struct trie *next[NCHAR];	/* Table of children of the root. */
+../inputs/grep1.dat:  kwset->mind = INT_MAX;
+../inputs/grep1.dat:  struct tree *links[12];
+../inputs/grep1.dat:  enum { L, R } dirs[12];
+../inputs/grep1.dat:  /* Descend the trie (built of reversed keywords) character-by-character,
+../inputs/grep1.dat:      label = kwset->trans ? kwset->trans[(unsigned char) *--text] : *--text;
+../inputs/grep1.dat:      /* Descend the tree of outgoing links for this trie node,
+../inputs/grep1.dat:      links[0] = (struct tree *) &trie->links;
+../inputs/grep1.dat:      dirs[0] = L;
+../inputs/grep1.dat:	  links[depth] = link;
+../inputs/grep1.dat:	    dirs[depth++] = L, link = link->llink;
+../inputs/grep1.dat:	    dirs[depth++] = R, link = link->rlink;
+../inputs/grep1.dat:	  if (dirs[--depth] == L)
+../inputs/grep1.dat:	    links[depth]->llink = link;
+../inputs/grep1.dat:	    links[depth]->rlink = link;
+../inputs/grep1.dat:	  while (depth && !links[depth]->balance)
+../inputs/grep1.dat:	      if (dirs[depth] == L)
+../inputs/grep1.dat:		--links[depth]->balance;
+../inputs/grep1.dat:		++links[depth]->balance;
+../inputs/grep1.dat:	  if (depth && ((dirs[depth] == L && --links[depth]->balance)
+../inputs/grep1.dat:			|| (dirs[depth] == R && ++links[depth]->balance)))
+../inputs/grep1.dat:	      switch (links[depth]->balance)
+../inputs/grep1.dat:		  switch (dirs[depth + 1])
+../inputs/grep1.dat:		      r = links[depth], t = r->llink, rl = t->rlink;
+../inputs/grep1.dat:		      r = links[depth], l = r->llink, t = l->rlink;
+../inputs/grep1.dat:		  switch (dirs[depth + 1])
+../inputs/grep1.dat:		      l = links[depth], t = l->rlink, lr = t->llink;
+../inputs/grep1.dat:		      l = links[depth], r = l->rlink, t = r->llink;
+../inputs/grep1.dat:	      if (dirs[depth - 1] == L)
+../inputs/grep1.dat:		links[depth - 1]->llink = t;
+../inputs/grep1.dat:		links[depth - 1]->rlink = t;
+../inputs/grep1.dat:     node that has a descendent on the current label. */
+../inputs/grep1.dat:     unsigned char delta[];
+../inputs/grep1.dat:  if (depth < delta[tree->label])
+../inputs/grep1.dat:    delta[tree->label] = depth;
+../inputs/grep1.dat:     struct trie *next[];
+../inputs/grep1.dat:  next[tree->label] = tree->trie;
+../inputs/grep1.dat:  unsigned char delta[NCHAR];
+../inputs/grep1.dat:  struct trie *last, *next[NCHAR];
+../inputs/grep1.dat:      delta[i] = kwset->mind;
+../inputs/grep1.dat:      delta[i] = 255;
+../inputs/grep1.dat:	  kwset->target[i] = curr->links->label;
+../inputs/grep1.dat:	delta[(unsigned char) kwset->target[i]] = kwset->mind - (i + 1);
+../inputs/grep1.dat:	if (kwset->target[i] == kwset->target[kwset->mind - 1])
+../inputs/grep1.dat:	  /* Enqueue the immediate descendents in the level order queue. */
+../inputs/grep1.dat:	  /* Update the delta table for the descendents of this node. */
+../inputs/grep1.dat:	  /* Compute the failure function for the decendents of this node. */
+../inputs/grep1.dat:		 fail and its descendents should be no larger than the
+../inputs/grep1.dat:	next[i] = 0;
+../inputs/grep1.dat:	  kwset->next[i] = next[(unsigned char) trans[i]];
+../inputs/grep1.dat:	  kwset->next[i] = next[i];
+../inputs/grep1.dat:      kwset->delta[i] = delta[(unsigned char) trans[i]];
+../inputs/grep1.dat:      kwset->delta[i] = delta[i];
+../inputs/grep1.dat:    return memchr(text, kwset->target[0], size);
+../inputs/grep1.dat:  gc = U(sp[-2]);
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	    d = d1[U(tp[-1])], tp += d;
+../inputs/grep1.dat:	if (U(tp[-2]) == gc)
+../inputs/grep1.dat:	    for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+../inputs/grep1.dat:  d = d1[U(tp[-1])];
+../inputs/grep1.dat:      d = d1[U((tp += d)[-1])];
+../inputs/grep1.dat:      if (tp[-2] == gc)
+../inputs/grep1.dat:	  for (i = 3; i <= len && U(tp[-i]) == U(sp[-i]); ++i)
+../inputs/grep1.dat:  register char *end, *qlim;
+../inputs/grep1.dat:  end = text;
+../inputs/grep1.dat:  while (lim - end >= d)
+../inputs/grep1.dat:      if (qlim && end <= qlim)
+../inputs/grep1.dat:	  end += d - 1;
+../inputs/grep1.dat:	  while ((d = delta[c = *end]) && end < qlim)
+../inputs/grep1.dat:	      end += d;
+../inputs/grep1.dat:	      end += delta[(unsigned char) *end];
+../inputs/grep1.dat:	      end += delta[(unsigned char) *end];
+../inputs/grep1.dat:	  ++end;
+../inputs/grep1.dat:	d = delta[c = (end += d)[-1]];
+../inputs/grep1.dat:      beg = end - 1;
+../inputs/grep1.dat:      trie = next[c];
+../inputs/grep1.dat:	  c = trans ? trans[(unsigned char) *--beg] : *--beg;
+../inputs/grep1.dat:  while (lim - end >= d)
+../inputs/grep1.dat:      if ((d = delta[c = (end += d)[-1]]) != 0)
+../inputs/grep1.dat:      beg = end - 1;
+../inputs/grep1.dat:      if (!(trie = next[c]))
+../inputs/grep1.dat:	  c = trans ? trans[(unsigned char) *--beg] : *--beg;
+../inputs/grep1.dat:      kwsmatch->beg[0] = mch;
+../inputs/grep1.dat:      kwsmatch->size[0] = accept->depth;
+../inputs/grep1.dat:   matching substring.  Similarly, if FOUNDIDX is non-NULL, store
+../inputs/grep1.dat:	  kwsmatch->beg[0] = ret;
+../inputs/grep1.dat:	  kwsmatch->size[0] = kwset->mind;
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      /* 12 is sizeof (mhead) and 4 is EXTRA from GNU malloc.
+../inputs/grep1.dat:      /* 12 is sizeof (mhead) and 4 is EXTRA from GNU malloc.
+../inputs/grep1.dat:   Copies any partial object from the end of the old chunk
+../inputs/grep1.dat:	((COPYING_UNIT *)new_chunk->contents)[i]
+../inputs/grep1.dat:	  = ((COPYING_UNIT *)h->object_base)[i];
+../inputs/grep1.dat:    new_chunk->contents[i] = h->object_base[i];
+../inputs/grep1.dat:     at the end of an adjacent chunk. */
+../inputs/grep1.dat:     at the end of another chunk.  */
+../inputs/grep1.dat:     at the end of another chunk.  */
+../inputs/grep1.dat:#endif /* __STDC__ */
+../inputs/grep1.dat:#endif /* 0 */
+../inputs/grep1.dat:#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+../inputs/grep1.dat:#undef RE_DUP_MAX
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#define UCHAR_MAX 255
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:#define NCHAR (UCHAR_MAX + 1)
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:struct matcher matchers[] = {
+../inputs/grep1.dat:  static char trans[NCHAR];
+../inputs/grep1.dat:      trans[i] = TOLOWER(i);
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:  re_set_syntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE);
+../inputs/grep1.dat:  dfasyntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE, match_icase);
+../inputs/grep1.dat:	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+../inputs/grep1.dat:	 BUG: Using [A-Za-z_] is locale-dependent!  */
+../inputs/grep1.dat:	strcpy(n, "\\(^\\|[^0-9A-Za-z_]\\)\\(");
+../inputs/grep1.dat:	strcpy(n + i, "\\)\\([^0-9A-Za-z_]\\|$\\)");
+../inputs/grep1.dat:#endif
+../inputs/grep1.dat:      re_set_syntax(RE_SYNTAX_POSIX_EGREP);
+../inputs/grep1.dat:      dfasyntax(RE_SYNTAX_POSIX_EGREP, match_icase);
+../inputs/grep1.dat:      re_set_syntax(RE_SYNTAX_EGREP);
+../inputs/grep1.dat:      dfasyntax(RE_SYNTAX_EGREP, match_icase);
+../inputs/grep1.dat:	 (^|[^A-Za-z_])(userpattern)([^A-Za-z_]|$).
+../inputs/grep1.dat:	 BUG: Using [A-Za-z_] is locale-dependent!  */
+../inputs/grep1.dat:	strcpy(n, "(^|[^0-9A-Za-z_])(");
+../inputs/grep1.dat:	strcpy(n + i, ")([^0-9A-Za-z_]|$)");
+../inputs/grep1.dat:EGexecute(buf, size, endp)
+../inputs/grep1.dat:     char **endp;
+../inputs/grep1.dat:  register char *buflim, *beg, *end, save;
+../inputs/grep1.dat:  for (beg = end = buf; end < buflim; beg = end + 1)
+../inputs/grep1.dat:	  end = memchr(beg, '\n', buflim - beg);
+../inputs/grep1.dat:	  if (!end)
+../inputs/grep1.dat:	    end = buflim;
+../inputs/grep1.dat:	  while (beg > buf && beg[-1] != '\n')
+../inputs/grep1.dat:	  save = *end;
+../inputs/grep1.dat:	  if (!dfaexec(&dfa_1, beg, end, 0, (int *) 0, &backref))
+../inputs/grep1.dat:	      *end = save;
+../inputs/grep1.dat:	  *end = save;
+../inputs/grep1.dat:	  end = memchr(beg, '\n', buflim - beg);
+../inputs/grep1.dat:	  if (!end)
+../inputs/grep1.dat:	    end = buflim;
+../inputs/grep1.dat:	  while (beg > buf && beg[-1] != '\n')
+../inputs/grep1.dat:      if ((start = re_search(&regex, beg, end - beg, 0, end - beg, &regs)) >= 0)
+../inputs/grep1.dat:	  len = regs.end[0] - start;
+../inputs/grep1.dat:	  if (!match_lines && !match_words || match_lines && len == end - beg)
+../inputs/grep1.dat:		if ((start == 0 || !WCHAR(beg[start - 1]))
+../inputs/grep1.dat:		    && (len == end - beg || !WCHAR(beg[start + len])))
+../inputs/grep1.dat:		    if (start == end - beg)
+../inputs/grep1.dat:		    start = re_search(&regex, beg, end - beg,
+../inputs/grep1.dat:				      start, end - beg - start, &regs);
+../inputs/grep1.dat:		    len = regs.end[0] - start;
+../inputs/grep1.dat:  *endp = end < buflim ? end + 1 : end;
+../inputs/grep1.dat:Fexecute(buf, size, endp)
+../inputs/grep1.dat:     char **endp;
+../inputs/grep1.dat:  register char *beg, *try, *end;
+../inputs/grep1.dat:      len = kwsmatch.size[0];
+../inputs/grep1.dat:	  if (beg > buf && beg[-1] != '\n')
+../inputs/grep1.dat:	  if (beg + len < buf + size && beg[len] != '\n')
+../inputs/grep1.dat:	    if (try > buf && WCHAR((unsigned char) try[-1]))
+../inputs/grep1.dat:	    if (try + len < buf + size && WCHAR((unsigned char) try[len]))
+../inputs/grep1.dat:		len = kwsmatch.size[0];
+../inputs/grep1.dat:  if ((end = memchr(beg + len, '\n', (buf + size) - (beg + len))) != 0)
+../inputs/grep1.dat:    ++end;
+../inputs/grep1.dat:    end = buf + size;
+../inputs/grep1.dat:  *endp = end;
+../inputs/grep1.dat:  while (beg > buf && beg[-1] != '\n')
+../inputs/grep1.dat:if agout end = buf + size;
+../inputs/grep1.dat:3eif agout end = buf + size;
+../inputs/grep1.dat:3eif agoutvf end = buf + size;
+../inputs/grep1.dat:argue if agout end = buf + size;

@@ -1,0 +1,512 @@
+../inputs/grep1.dat:static size_t bufsalloc;	/* Allocated size of buffer save region. */
+../inputs/grep1.dat:  register char *p, *b;
+../inputs/grep1.dat:   The special argument `--' forces an end of option-scanning regardless
+../inputs/grep1.dat:/* Extended regular expression matching and search library,
+../inputs/grep1.dat:/* We need this for `regex.h', and perhaps for the Emacs include files.  */
+../inputs/grep1.dat:   register int c;
+../inputs/grep1.dat:#include "regex.h"
+../inputs/grep1.dat:/* These are the command codes that appear in compiled regular
+../inputs/grep1.dat:   arguments.  Zero bytes may appear in the compiled regular expression.
+../inputs/grep1.dat:   So regex.h defines a symbol `RE_EXACTN_VALUE' to be 1; the value of
+../inputs/grep1.dat:           register.  Followed by one byte with the register number, in
+../inputs/grep1.dat:           memory register.  Followed by one byte with the register
+../inputs/grep1.dat:           byte containing the register number.  */
+../inputs/grep1.dat:            register int c, last = -100;
+../inputs/grep1.dat:	    register int in_range = 0;
+../inputs/grep1.dat:  printf ("regs_alloc: %d\t", bufp->regs_allocated);
+../inputs/grep1.dat:/* Set by `re_set_syntax' to the current regexp syntax to recognize.  Can
+../inputs/grep1.dat:   syntax, so it can be changed between regex compilations.  */
+../inputs/grep1.dat:/* Specify the precise syntax of regexps for compilation.  This provides
+../inputs/grep1.dat:   defined in regex.h.  We return the old syntax.  */
+../inputs/grep1.dat:    reg_syntax_t syntax;
+../inputs/grep1.dat:  reg_syntax_t ret = re_syntax_options;
+../inputs/grep1.dat:   in regex.h.  Obviously the order here has to be same as there.  */
+../inputs/grep1.dat:    "Invalid regular expression",		/* REG_BADPAT */
+../inputs/grep1.dat:    "Invalid preceding regular expression",	/* REG_BADRPT */
+../inputs/grep1.dat:    "Premature end of regular expression",	/* REG_EEND */
+../inputs/grep1.dat:/* Subroutine declarations and macros for regex_compile.  */
+../inputs/grep1.dat:static reg_errcode_t compile_range ();
+../inputs/grep1.dat:/* Since we have one byte reserved for the register number argument to
+../inputs/grep1.dat:/* But patterns can have more than `MAX_REGNUM' registers.  We just
+../inputs/grep1.dat:typedef unsigned regnum_t;
+../inputs/grep1.dat:  regnum_t regnum;
+../inputs/grep1.dat:/* `regex_compile' compiles PATTERN (of length SIZE) according to SYNTAX.
+../inputs/grep1.dat:   Returns one of error codes defined in `regex.h', or zero for success.
+../inputs/grep1.dat:static reg_errcode_t
+../inputs/grep1.dat:     reg_syntax_t syntax;
+../inputs/grep1.dat:  register unsigned char c, c1;
+../inputs/grep1.dat:  register unsigned char *b;
+../inputs/grep1.dat:  /* Address of beginning of regexp, or inside of last group.  */
+../inputs/grep1.dat:     matching close-group on the compile stack, so the same register
+../inputs/grep1.dat:  regnum_t regnum = 0;
+../inputs/grep1.dat:                    reg_errcode_t ret
+../inputs/grep1.dat:                    reg_errcode_t ret;
+../inputs/grep1.dat:              regnum++;
+../inputs/grep1.dat:              COMPILE_STACK_TOP.regnum = regnum;
+../inputs/grep1.dat:              if (regnum <= MAX_REGNUM)
+../inputs/grep1.dat:                  BUF_PUSH_3 (start_memory, regnum, 0);
+../inputs/grep1.dat:                /* We don't just want to restore into `regnum', because
+../inputs/grep1.dat:                regnum_t this_group_regnum;
+../inputs/grep1.dat:                this_group_regnum = COMPILE_STACK_TOP.regnum;
+../inputs/grep1.dat:                if (this_group_regnum <= MAX_REGNUM)
+../inputs/grep1.dat:                    *inner_group_loc = regnum - this_group_regnum;
+../inputs/grep1.dat:                    BUF_PUSH_3 (stop_memory, this_group_regnum,
+../inputs/grep1.dat:                                regnum - this_group_regnum);
+../inputs/grep1.dat:              if (c1 > regnum)
+../inputs/grep1.dat:} /* regex_compile */
+../inputs/grep1.dat:/* Subroutines for `regex_compile'.  */
+../inputs/grep1.dat:  register unsigned char *pfrom = end;
+../inputs/grep1.dat:  register unsigned char *pto = end + 3;
+../inputs/grep1.dat:  register unsigned char *pfrom = end;
+../inputs/grep1.dat:  register unsigned char *pto = end + 5;
+../inputs/grep1.dat:    reg_syntax_t syntax;
+../inputs/grep1.dat:group_in_compile_stack (compile_stack, regnum)
+../inputs/grep1.dat:    regnum_t regnum;
+../inputs/grep1.dat:    if (compile_stack.stack[this_element].regnum == regnum)
+../inputs/grep1.dat:   `regex_compile' itself.  */
+../inputs/grep1.dat:static reg_errcode_t
+../inputs/grep1.dat:    reg_syntax_t syntax;
+../inputs/grep1.dat:   This is a variable only so users of regex can assign to it; we never
+../inputs/grep1.dat:   Requires variables fail_stack, regstart, regend, reg_info, and
+../inputs/grep1.dat:   num_regs be declared.  DOUBLE_FAIL_STACK requires `destination' be
+../inputs/grep1.dat:    /* Must be int, so when we don't save any registers, the arithmetic	\
+../inputs/grep1.dat:    int this_reg;							\
+../inputs/grep1.dat:    /* Push the info, starting with the registers.  */			\
+../inputs/grep1.dat:    for (this_reg = lowest_active_reg; this_reg <= highest_active_reg;	\
+../inputs/grep1.dat:         this_reg++)							\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("  Pushing reg: %d\n", this_reg);			\
+../inputs/grep1.dat:        DEBUG_STATEMENT (num_regs_pushed++);				\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+../inputs/grep1.dat:        PUSH_FAILURE_ITEM (regstart[this_reg]);				\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+../inputs/grep1.dat:        PUSH_FAILURE_ITEM (regend[this_reg]);				\
+../inputs/grep1.dat:	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+../inputs/grep1.dat:                      REG_MATCH_NULL_STRING_P (reg_info[this_reg]));	\
+../inputs/grep1.dat:        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+../inputs/grep1.dat:                      MATCHED_SOMETHING (reg_info[this_reg]));		\
+../inputs/grep1.dat:                      EVER_MATCHED_SOMETHING (reg_info[this_reg]));	\
+../inputs/grep1.dat:        PUSH_FAILURE_ITEM (reg_info[this_reg].word);			\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing  low active reg: %d\n", lowest_active_reg);\
+../inputs/grep1.dat:    PUSH_FAILURE_ITEM (lowest_active_reg);				\
+../inputs/grep1.dat:    DEBUG_PRINT2 ("  Pushing high active reg: %d\n", highest_active_reg);\
+../inputs/grep1.dat:    PUSH_FAILURE_ITEM (highest_active_reg);				\
+../inputs/grep1.dat:   for each register.  */
+../inputs/grep1.dat:/* Individual items aside from the registers.  */
+../inputs/grep1.dat:#define MAX_FAILURE_ITEMS ((num_regs - 1) * NUM_REG_ITEMS + NUM_NONREG_ITEMS)
+../inputs/grep1.dat:  ((highest_active_reg - lowest_active_reg + 1) * NUM_REG_ITEMS 	\
+../inputs/grep1.dat:     LOW_REG, HIGH_REG -- the highest and lowest active registers.
+../inputs/grep1.dat:#define POP_FAILURE_POINT(str, pat, low_reg, high_reg, regstart, regend, reg_info)\
+../inputs/grep1.dat:  int this_reg;								\
+../inputs/grep1.dat:  /* Remove failure points and point to how many regs pushed.  */	\
+../inputs/grep1.dat:  /* Restore register info.  */						\
+../inputs/grep1.dat:  high_reg = (unsigned) POP_FAILURE_ITEM ();				\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping high active reg: %d\n", high_reg);		\
+../inputs/grep1.dat:  low_reg = (unsigned) POP_FAILURE_ITEM ();				\
+../inputs/grep1.dat:  DEBUG_PRINT2 ("  Popping  low active reg: %d\n", low_reg);		\
+../inputs/grep1.dat:  for (this_reg = high_reg; this_reg >= low_reg; this_reg--)		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("    Popping reg: %d\n", this_reg);			\
+../inputs/grep1.dat:      reg_info[this_reg].word = POP_FAILURE_ITEM ();			\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+../inputs/grep1.dat:      regend[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+../inputs/grep1.dat:      regstart[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+../inputs/grep1.dat:      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+../inputs/grep1.dat:  /* We don't push any register information onto the failure stack.  */
+../inputs/grep1.dat:  unsigned num_regs = 0;
+../inputs/grep1.dat:  register char *fastmap = bufp->fastmap;
+../inputs/grep1.dat:  register unsigned char *pend = pattern + size;
+../inputs/grep1.dat:/* Set REGS to hold NUM_REGS registers, storing them in STARTS and
+../inputs/grep1.dat:   this memory for recording register information.  STARTS and ENDS
+../inputs/grep1.dat:   be at least NUM_REGS * sizeof (regoff_t) bytes long.
+../inputs/grep1.dat:   register data.
+../inputs/grep1.dat:   PATTERN_BUFFER will allocate its own register data, without
+../inputs/grep1.dat:re_set_registers (bufp, regs, num_regs, starts, ends)
+../inputs/grep1.dat:    struct re_registers *regs;
+../inputs/grep1.dat:    unsigned num_regs;
+../inputs/grep1.dat:    regoff_t *starts, *ends;
+../inputs/grep1.dat:  if (num_regs)
+../inputs/grep1.dat:      bufp->regs_allocated = REGS_REALLOCATE;
+../inputs/grep1.dat:      regs->num_regs = num_regs;
+../inputs/grep1.dat:      regs->start = starts;
+../inputs/grep1.dat:      regs->end = ends;
+../inputs/grep1.dat:      bufp->regs_allocated = REGS_UNALLOCATED;
+../inputs/grep1.dat:      regs->num_regs = 0;
+../inputs/grep1.dat:      regs->start = regs->end = (regoff_t) 0;
+../inputs/grep1.dat:re_search (bufp, string, size, startpos, range, regs)
+../inputs/grep1.dat:     struct re_registers *regs;
+../inputs/grep1.dat:		      regs, size);
+../inputs/grep1.dat:re_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, stop)
+../inputs/grep1.dat:     struct re_registers *regs;
+../inputs/grep1.dat:  register char *fastmap = bufp->fastmap;
+../inputs/grep1.dat:  register char *translate = bufp->translate;
+../inputs/grep1.dat:	      register const char *d;
+../inputs/grep1.dat:	      register int lim = 0;
+../inputs/grep1.dat:	      register char c = (size1 == 0 || startpos >= size1
+../inputs/grep1.dat:	                startpos, regs, stop);
+../inputs/grep1.dat:/* Structure for per-register (a.k.a. per-group) information.
+../inputs/grep1.dat:   onto the failure stack.  Other register information, such as the
+../inputs/grep1.dat:} register_info_type;
+../inputs/grep1.dat:      for (r = lowest_active_reg; r <= highest_active_reg; r++)		\
+../inputs/grep1.dat:          MATCHED_SOMETHING (reg_info[r])				\
+../inputs/grep1.dat:            = EVER_MATCHED_SOMETHING (reg_info[r])			\
+../inputs/grep1.dat:    FREE_VAR (regstart);						\
+../inputs/grep1.dat:    FREE_VAR (regend);							\
+../inputs/grep1.dat:    FREE_VAR (old_regstart);						\
+../inputs/grep1.dat:    FREE_VAR (old_regend);						\
+../inputs/grep1.dat:    FREE_VAR (best_regstart);						\
+../inputs/grep1.dat:    FREE_VAR (best_regend);						\
+../inputs/grep1.dat:    FREE_VAR (reg_info);						\
+../inputs/grep1.dat:    FREE_VAR (reg_dummy);						\
+../inputs/grep1.dat:    FREE_VAR (reg_info_dummy);						\
+../inputs/grep1.dat:   register values; since we have a limit of 255 registers (because
+../inputs/grep1.dat:   we use only one byte in the pattern for the register number), we can
+../inputs/grep1.dat:   NUM_FAILURE_ITEMS above.  And the value for the lowest register must
+../inputs/grep1.dat:   be larger than the value for the highest register, so we do not try
+../inputs/grep1.dat:   to actually save any registers when none are active.  */
+../inputs/grep1.dat:re_match (bufp, string, size, pos, regs)
+../inputs/grep1.dat:     struct re_registers *regs;
+../inputs/grep1.dat:  return re_match_2 (bufp, NULL, 0, string, size, pos, regs, size); 
+../inputs/grep1.dat:re_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
+../inputs/grep1.dat:     struct re_registers *regs;
+../inputs/grep1.dat:  register unsigned char *pend = p + bufp->used;
+../inputs/grep1.dat:     restart, regend, and reg_info for all registers corresponding to
+../inputs/grep1.dat:     registers, and, finally, two char *'s.  The first char * is where
+../inputs/grep1.dat:  /* We fill all the registers internally, independent of what we
+../inputs/grep1.dat:     an element for register zero.  */
+../inputs/grep1.dat:  unsigned num_regs = bufp->re_nsub + 1;
+../inputs/grep1.dat:  /* The currently active registers.  */
+../inputs/grep1.dat:  unsigned lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+../inputs/grep1.dat:  unsigned highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+../inputs/grep1.dat:  /* Information on the contents of registers. These are pointers into
+../inputs/grep1.dat:     regnum-th regstart pointer points to where in the pattern we began
+../inputs/grep1.dat:     matching and the regnum-th regend points to right after where we
+../inputs/grep1.dat:     stopped matching the regnum-th subexpression.  (The zeroth register
+../inputs/grep1.dat:  const char **regstart, **regend;
+../inputs/grep1.dat:     match anything, then the register for its start will need to be
+../inputs/grep1.dat:     register's end.  */
+../inputs/grep1.dat:  const char **old_regstart, **old_regend;
+../inputs/grep1.dat:  /* The is_active field of reg_info helps us keep track of which (possibly
+../inputs/grep1.dat:     field of reg_info[reg_num] helps us tell whether or not we have
+../inputs/grep1.dat:     matched any of the pattern so far this time through the reg_num-th
+../inputs/grep1.dat:     loop their register is in.  */
+../inputs/grep1.dat:  register_info_type *reg_info; 
+../inputs/grep1.dat:  /* The following record the register info as found in the above
+../inputs/grep1.dat:  unsigned best_regs_set = false;
+../inputs/grep1.dat:  const char **best_regstart, **best_regend;
+../inputs/grep1.dat:  /* Logically, this is `best_regend[0]'.  But we don't want to have to
+../inputs/grep1.dat:     else (see below).  Also, we never need info about register 0 for
+../inputs/grep1.dat:     any of the other register vectors, and it seems rather a kludge to
+../inputs/grep1.dat:     treat `best_regend' differently than the rest.  So we keep track of
+../inputs/grep1.dat:  const char **reg_dummy;
+../inputs/grep1.dat:  register_info_type *reg_info_dummy;
+../inputs/grep1.dat:  /* Counts the total number of registers pushed.  */
+../inputs/grep1.dat:  unsigned num_regs_pushed = 0; 	
+../inputs/grep1.dat:  /* Do not bother to initialize all the register variables if there are
+../inputs/grep1.dat:     there are groups, we include space for register 0 (the whole
+../inputs/grep1.dat:      regstart = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      regend = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      old_regstart = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      old_regend = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      best_regstart = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      best_regend = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      reg_info = REGEX_TALLOC (num_regs, register_info_type);
+../inputs/grep1.dat:      reg_dummy = REGEX_TALLOC (num_regs, const char *);
+../inputs/grep1.dat:      reg_info_dummy = REGEX_TALLOC (num_regs, register_info_type);
+../inputs/grep1.dat:      if (!(regstart && regend && old_regstart && old_regend && reg_info 
+../inputs/grep1.dat:            && best_regstart && best_regend && reg_dummy && reg_info_dummy)) 
+../inputs/grep1.dat:      regstart = regend = old_regstart = old_regend = best_regstart
+../inputs/grep1.dat:        = best_regend = reg_dummy = NULL;
+../inputs/grep1.dat:      reg_info = reg_info_dummy = (register_info_type *) NULL;
+../inputs/grep1.dat:     register information struct.  */
+../inputs/grep1.dat:  for (mcnt = 1; mcnt < num_regs; mcnt++)
+../inputs/grep1.dat:      regstart[mcnt] = regend[mcnt] 
+../inputs/grep1.dat:        = old_regstart[mcnt] = old_regend[mcnt] = REG_UNSET_VALUE;
+../inputs/grep1.dat:      REG_MATCH_NULL_STRING_P (reg_info[mcnt]) = MATCH_NULL_UNSET_VALUE;
+../inputs/grep1.dat:      IS_ACTIVE (reg_info[mcnt]) = 0;
+../inputs/grep1.dat:      MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+../inputs/grep1.dat:      EVER_MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+../inputs/grep1.dat:                  if (!best_regs_set
+../inputs/grep1.dat:                      best_regs_set = true;
+../inputs/grep1.dat:                      for (mcnt = 1; mcnt < num_regs; mcnt++)
+../inputs/grep1.dat:                          best_regstart[mcnt] = regstart[mcnt];
+../inputs/grep1.dat:                          best_regend[mcnt] = regend[mcnt];
+../inputs/grep1.dat:              else if (best_regs_set)   
+../inputs/grep1.dat:  	        restore_best_regs:
+../inputs/grep1.dat:                  DEBUG_PRINT1 ("Restoring best registers.\n");
+../inputs/grep1.dat:		  for (mcnt = 1; mcnt < num_regs; mcnt++)
+../inputs/grep1.dat:		      regstart[mcnt] = best_regstart[mcnt];
+../inputs/grep1.dat:		      regend[mcnt] = best_regend[mcnt];
+../inputs/grep1.dat:          /* If caller wants register contents data back, do it.  */
+../inputs/grep1.dat:          if (regs && !bufp->no_sub)
+../inputs/grep1.dat:              /* Have the register data arrays been allocated?  */
+../inputs/grep1.dat:              if (bufp->regs_allocated == REGS_UNALLOCATED)
+../inputs/grep1.dat:                     extra element beyond `num_regs' for the `-1' marker
+../inputs/grep1.dat:                  regs->num_regs = MAX (RE_NREGS, num_regs + 1);
+../inputs/grep1.dat:                  regs->start = TALLOC (regs->num_regs, regoff_t);
+../inputs/grep1.dat:                  regs->end = TALLOC (regs->num_regs, regoff_t);
+../inputs/grep1.dat:                  if (regs->start == NULL || regs->end == NULL)
+../inputs/grep1.dat:                  bufp->regs_allocated = REGS_REALLOCATE;
+../inputs/grep1.dat:              else if (bufp->regs_allocated == REGS_REALLOCATE)
+../inputs/grep1.dat:                  if (regs->num_regs < num_regs + 1)
+../inputs/grep1.dat:                      regs->num_regs = num_regs + 1;
+../inputs/grep1.dat:                      RETALLOC (regs->start, regs->num_regs, regoff_t);
+../inputs/grep1.dat:                      RETALLOC (regs->end, regs->num_regs, regoff_t);
+../inputs/grep1.dat:                      if (regs->start == NULL || regs->end == NULL)
+../inputs/grep1.dat:		  assert (bufp->regs_allocated == REGS_FIXED);
+../inputs/grep1.dat:              /* Convert the pointer data in `regstart' and `regend' to
+../inputs/grep1.dat:              if (regs->num_regs > 0)
+../inputs/grep1.dat:                  regs->start[0] = pos;
+../inputs/grep1.dat:                  regs->end[0] = (MATCHING_IN_FIRST_STRING ? d - string1
+../inputs/grep1.dat:              /* Go through the first `min (num_regs, regs->num_regs)'
+../inputs/grep1.dat:                 registers, since that is all we initialized.  */
+../inputs/grep1.dat:	      for (mcnt = 1; mcnt < MIN (num_regs, regs->num_regs); mcnt++)
+../inputs/grep1.dat:                  if (REG_UNSET (regstart[mcnt]) || REG_UNSET (regend[mcnt]))
+../inputs/grep1.dat:                    regs->start[mcnt] = regs->end[mcnt] = -1;
+../inputs/grep1.dat:		      regs->start[mcnt] = POINTER_TO_OFFSET (regstart[mcnt]);
+../inputs/grep1.dat:                      regs->end[mcnt] = POINTER_TO_OFFSET (regend[mcnt]);
+../inputs/grep1.dat:              /* If the regs structure we return has more elements than
+../inputs/grep1.dat:                 we (re)allocated the registers, this is the case,
+../inputs/grep1.dat:              for (mcnt = num_regs; mcnt < regs->num_regs; mcnt++)
+../inputs/grep1.dat:                regs->start[mcnt] = regs->end[mcnt] = -1;
+../inputs/grep1.dat:	    } /* regs && !bufp->no_sub */
+../inputs/grep1.dat:          DEBUG_PRINT2 ("%u registers pushed.\n", num_regs_pushed);
+../inputs/grep1.dat:	    register unsigned char c;
+../inputs/grep1.dat:           The arguments are the register number in the next byte, and the
+../inputs/grep1.dat:           registers data structure) under the register number.  */
+../inputs/grep1.dat:          if (REG_MATCH_NULL_STRING_P (reg_info[*p]) == MATCH_NULL_UNSET_VALUE)
+../inputs/grep1.dat:            REG_MATCH_NULL_STRING_P (reg_info[*p]) 
+../inputs/grep1.dat:              = group_match_null_string_p (&p1, pend, reg_info);
+../inputs/grep1.dat:          old_regstart[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+../inputs/grep1.dat:                             ? REG_UNSET (regstart[*p]) ? d : regstart[*p]
+../inputs/grep1.dat:                             : regstart[*p];
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("  old_regstart: %d\n", 
+../inputs/grep1.dat:			 POINTER_TO_OFFSET (old_regstart[*p]));
+../inputs/grep1.dat:          regstart[*p] = d;
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+../inputs/grep1.dat:          IS_ACTIVE (reg_info[*p]) = 1;
+../inputs/grep1.dat:          MATCHED_SOMETHING (reg_info[*p]) = 0;
+../inputs/grep1.dat:          /* This is the new highest active register.  */
+../inputs/grep1.dat:          highest_active_reg = *p;
+../inputs/grep1.dat:             register.  */
+../inputs/grep1.dat:          if (lowest_active_reg == NO_LOWEST_ACTIVE_REG)
+../inputs/grep1.dat:            lowest_active_reg = *p;
+../inputs/grep1.dat:          /* Move past the register number and inner group count.  */
+../inputs/grep1.dat:           arguments are the same as start_memory's: the register
+../inputs/grep1.dat:          old_regend[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+../inputs/grep1.dat:                           ? REG_UNSET (regend[*p]) ? d : regend[*p]
+../inputs/grep1.dat:			   : regend[*p];
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      old_regend: %d\n", 
+../inputs/grep1.dat:			 POINTER_TO_OFFSET (old_regend[*p]));
+../inputs/grep1.dat:          regend[*p] = d;
+../inputs/grep1.dat:	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+../inputs/grep1.dat:          /* This register isn't active anymore.  */
+../inputs/grep1.dat:          IS_ACTIVE (reg_info[*p]) = 0;
+../inputs/grep1.dat:          /* If this was the only register active, nothing is active
+../inputs/grep1.dat:          if (lowest_active_reg == highest_active_reg)
+../inputs/grep1.dat:              lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+../inputs/grep1.dat:              highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+../inputs/grep1.dat:            { /* We must scan for the new highest active register, since
+../inputs/grep1.dat:                 new highest active register is 1.  */
+../inputs/grep1.dat:              while (r > 0 && !IS_ACTIVE (reg_info[r]))
+../inputs/grep1.dat:              /* If we end up at register zero, that means that we saved
+../inputs/grep1.dat:                 the registers as the result of an `on_failure_jump', not
+../inputs/grep1.dat:                 registers 1 and 2 as a result of the *, but when we pop
+../inputs/grep1.dat:                  lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+../inputs/grep1.dat:                  highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+../inputs/grep1.dat:                highest_active_reg = r;
+../inputs/grep1.dat:             force exit from the ``loop'', and restore the register
+../inputs/grep1.dat:          if ((!MATCHED_SOMETHING (reg_info[*p])
+../inputs/grep1.dat:                     what its registers were before trying this last
+../inputs/grep1.dat:                     regstart[1], and, e.g., with `((a*)*(b*)*)*'
+../inputs/grep1.dat:                     against `aba' for regend[3].
+../inputs/grep1.dat:                     Also restore the registers for inner groups for,
+../inputs/grep1.dat:                     e.g., `((a*)(b*))*' against `aba' (register 3 would
+../inputs/grep1.dat:                  if (EVER_MATCHED_SOMETHING (reg_info[*p]))
+../inputs/grep1.dat:                      EVER_MATCHED_SOMETHING (reg_info[*p]) = 0;
+../inputs/grep1.dat:		      /* Restore this and inner groups' (if any) registers.  */
+../inputs/grep1.dat:                          regstart[r] = old_regstart[r];
+../inputs/grep1.dat:                          if ((int) old_regend[r] >= (int) regstart[r])
+../inputs/grep1.dat:                            regend[r] = old_regend[r];
+../inputs/grep1.dat:          /* Move past the register number and the inner group count.  */
+../inputs/grep1.dat:           followed by the numeric value of <digit> as the register number.  */
+../inputs/grep1.dat:	    register const char *d2, *dend2;
+../inputs/grep1.dat:	    int regno = *p++;   /* Get which register to match against.  */
+../inputs/grep1.dat:	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
+../inputs/grep1.dat:            if (REG_UNSET (regstart[regno]) || REG_UNSET (regend[regno]))
+../inputs/grep1.dat:            d2 = regstart[regno];
+../inputs/grep1.dat:            dend2 = ((FIRST_STRING_P (regstart[regno]) 
+../inputs/grep1.dat:		      == FIRST_STRING_P (regend[regno]))
+../inputs/grep1.dat:		     ? regend[regno] : end_match_1);
+../inputs/grep1.dat:		/* If necessary, advance to next segment in register
+../inputs/grep1.dat:		    if (dend2 == regend[regno]) break;
+../inputs/grep1.dat:                    dend2 = regend[regno];
+../inputs/grep1.dat:		/* At end of register contents => success */
+../inputs/grep1.dat:              /* We have a new highest active register now.  This will
+../inputs/grep1.dat:                 but we will have saved all the registers relevant to
+../inputs/grep1.dat:              highest_active_reg = *(p1 + 1) + *(p1 + 2);
+../inputs/grep1.dat:              if (lowest_active_reg == NO_LOWEST_ACTIVE_REG)
+../inputs/grep1.dat:                lowest_active_reg = *(p1 + 1);
+../inputs/grep1.dat:	    register unsigned char *p2 = p;
+../inputs/grep1.dat:		register unsigned char c
+../inputs/grep1.dat:               highest registers, even though we don't care about the
+../inputs/grep1.dat:               register from the stack, since lowest will == highest in
+../inputs/grep1.dat:            unsigned dummy_low_reg, dummy_high_reg;
+../inputs/grep1.dat:                               dummy_low_reg, dummy_high_reg,
+../inputs/grep1.dat:                               reg_dummy, reg_dummy, reg_info_dummy);
+../inputs/grep1.dat:                             lowest_active_reg, highest_active_reg,
+../inputs/grep1.dat:                             regstart, regend, reg_info);
+../inputs/grep1.dat:  if (best_regs_set)
+../inputs/grep1.dat:    goto restore_best_regs;
+../inputs/grep1.dat:/* We are passed P pointing to a register number after a start_memory.
+../inputs/grep1.dat:group_match_null_string_p (p, end, reg_info)
+../inputs/grep1.dat:    register_info_type *reg_info;
+../inputs/grep1.dat:				                      reg_info))
+../inputs/grep1.dat:              if (!alt_match_null_string_p (p1, p1 + mcnt, reg_info))
+../inputs/grep1.dat:          if (!common_op_match_null_string_p (&p1, end, reg_info))
+../inputs/grep1.dat:alt_match_null_string_p (p, end, reg_info)
+../inputs/grep1.dat:    register_info_type *reg_info;
+../inputs/grep1.dat:          if (!common_op_match_null_string_p (&p1, end, reg_info))
+../inputs/grep1.dat:common_op_match_null_string_p (p, end, reg_info)
+../inputs/grep1.dat:    register_info_type *reg_info;
+../inputs/grep1.dat:  int reg_no;
+../inputs/grep1.dat:      reg_no = *p1;
+../inputs/grep1.dat:      assert (reg_no > 0 && reg_no <= MAX_REGNUM);
+../inputs/grep1.dat:      ret = group_match_null_string_p (&p1, end, reg_info);
+../inputs/grep1.dat:      if (REG_MATCH_NULL_STRING_P (reg_info[reg_no]) == MATCH_NULL_UNSET_VALUE)
+../inputs/grep1.dat:        REG_MATCH_NULL_STRING_P (reg_info[reg_no]) = ret;
+../inputs/grep1.dat:      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+../inputs/grep1.dat:     register int len;
+../inputs/grep1.dat:  register unsigned char *p1 = s1, *p2 = s2;
+../inputs/grep1.dat:/* re_compile_pattern is the GNU regular expression compiler: it
+../inputs/grep1.dat:   We call regex_compile to do the actual compilation.  */
+../inputs/grep1.dat:  reg_errcode_t ret;
+../inputs/grep1.dat:  /* GNU code is written to assume at least RE_NREGS registers will be set
+../inputs/grep1.dat:  bufp->regs_allocated = REGS_UNALLOCATED;
+../inputs/grep1.dat:  /* And GNU code determines whether or not to get register information
+../inputs/grep1.dat:  ret = regex_compile (pattern, length, re_syntax_options, bufp);
+../inputs/grep1.dat:/* Entry points compatible with 4.2 BSD regex library.  We don't define
+../inputs/grep1.dat:  reg_errcode_t ret;
+../inputs/grep1.dat:	return "No previous regular expression";
+../inputs/grep1.dat:  /* Since `re_exec' always passes NULL for the `regs' argument, we
+../inputs/grep1.dat:  ret = regex_compile (s, strlen (s), re_syntax_options, &re_comp_buf);
+../inputs/grep1.dat:    0 <= re_search (&re_comp_buf, s, len, 0, len, (struct re_registers *) 0);
+../inputs/grep1.dat:/* regcomp takes a regular expression as a string and compiles it.
+../inputs/grep1.dat:   PREG is a regex_t *.  We do not expect any fields to be initialized,
+../inputs/grep1.dat:     Also, regexec will try a match beginning after every newline.
+../inputs/grep1.dat:     If REG_NOSUB is set, then when PREG is passed to regexec, that
+../inputs/grep1.dat:     registers.
+../inputs/grep1.dat:   It returns 0 if it succeeds, nonzero if it doesn't.  (See regex.h for
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:  reg_errcode_t ret;
+../inputs/grep1.dat:  /* regex_compile will allocate the space for the compiled pattern.  */
+../inputs/grep1.dat:  ret = regex_compile (pattern, strlen (pattern), syntax, preg);
+../inputs/grep1.dat:/* regexec searches for a given pattern, specified by PREG, in the
+../inputs/grep1.dat:   `regcomp', we ignore PMATCH.  Otherwise, we assume PMATCH has at
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:    regmatch_t pmatch[]; 
+../inputs/grep1.dat:  struct re_registers regs;
+../inputs/grep1.dat:  regex_t private_preg;
+../inputs/grep1.dat:  boolean want_reg_info = !preg->no_sub && nmatch > 0;
+../inputs/grep1.dat:  /* The user has told us exactly how many registers to return
+../inputs/grep1.dat:  private_preg.regs_allocated = REGS_FIXED;
+../inputs/grep1.dat:  if (want_reg_info)
+../inputs/grep1.dat:      regs.num_regs = nmatch;
+../inputs/grep1.dat:      regs.start = TALLOC (nmatch, regoff_t);
+../inputs/grep1.dat:      regs.end = TALLOC (nmatch, regoff_t);
+../inputs/grep1.dat:      if (regs.start == NULL || regs.end == NULL)
+../inputs/grep1.dat:                   want_reg_info ? &regs : (struct re_registers *) 0);
+../inputs/grep1.dat:  /* Copy the register information to the POSIX structure.  */
+../inputs/grep1.dat:  if (want_reg_info)
+../inputs/grep1.dat:              pmatch[r].rm_so = regs.start[r];
+../inputs/grep1.dat:              pmatch[r].rm_eo = regs.end[r];
+../inputs/grep1.dat:      /* If we needed the temporary register info, free the space now.  */
+../inputs/grep1.dat:      free (regs.start);
+../inputs/grep1.dat:      free (regs.end);
+../inputs/grep1.dat:   from either regcomp or regexec.   We don't use PREG here.  */
+../inputs/grep1.dat:    const regex_t *preg;
+../inputs/grep1.dat:       to this routine.  If we are given anything else, or if other regex
+../inputs/grep1.dat:    regex_t *preg;
+../inputs/grep1.dat:/* dfa.c - deterministic extended regexp routines for GNU
+../inputs/grep1.dat:/*#include "regex.h"*/
+../inputs/grep1.dat:		 regex has checked for syntax errors before
+../inputs/grep1.dat:/* Recursive descent parser for regular expressions. */
+../inputs/grep1.dat:   regexp:
+../inputs/grep1.dat:     regexp OR branch
+../inputs/grep1.dat:static void regexp(int);
+../inputs/grep1.dat:static void regexp();
+../inputs/grep1.dat:      regexp(0);
+../inputs/grep1.dat:  regexp(1);
+../inputs/grep1.dat:   Nullable:  A node is nullable if it is at the root of a regexp that can
+../inputs/grep1.dat:   regexp rooted at the given node.
+../inputs/grep1.dat:   correspond to the last character of a string matching the regexp at
+../inputs/grep1.dat:   a string matching the regexp.  At this point we consider special symbols
+../inputs/grep1.dat:  /* Get the epsilon closure of the firstpos of the regexp.  The result will
+../inputs/grep1.dat:   Find the first occurrence of a string matching the regexp in the buffer,
+../inputs/grep1.dat:  register s, s1, tmp;		/* Current state. */
+../inputs/grep1.dat:  register unsigned char *p;	/* Current input character. */
+../inputs/grep1.dat:  register **trans, *t;		/* Copy of d->trans so it can be optimized
+../inputs/grep1.dat:				   into a register. */
+../inputs/grep1.dat:/* Having found the postfix representation of the regular expression,
+../inputs/grep1.dat:  register struct trie *trie;
+../inputs/grep1.dat:  register unsigned char label;
+../inputs/grep1.dat:  register struct tree *link;
+../inputs/grep1.dat:  register int depth;
+../inputs/grep1.dat:     register struct tree *tree;
+../inputs/grep1.dat:  register struct tree *link;
+../inputs/grep1.dat:     register struct tree *tree;
+../inputs/grep1.dat:     register unsigned int depth;
+../inputs/grep1.dat:     register struct tree *a;
+../inputs/grep1.dat:     register struct tree *b;
+../inputs/grep1.dat:  register struct kwset *kwset;
+../inputs/grep1.dat:  register int i;
+../inputs/grep1.dat:  register struct trie *curr, *fail;
+../inputs/grep1.dat:  register char *trans;
+../inputs/grep1.dat:  register unsigned char *d1;
+../inputs/grep1.dat:  register char *ep, *sp, *tp;
+../inputs/grep1.dat:  register int d, gc, i, len, md2;
+../inputs/grep1.dat:  register unsigned char c, *delta;
+../inputs/grep1.dat:  register int d;
+../inputs/grep1.dat:  register char *end, *qlim;
+../inputs/grep1.dat:  register struct tree *tree;
+../inputs/grep1.dat:  register char *trans;
+../inputs/grep1.dat:  /* Initialize register copies and look for easy ways out. */
+../inputs/grep1.dat:  register struct _obstack_chunk* chunk; /* points to new chunk */
+../inputs/grep1.dat:  register struct _obstack_chunk* chunk; /* points to new chunk */
+../inputs/grep1.dat:  register struct _obstack_chunk*	old_chunk = h->chunk;
+../inputs/grep1.dat:  register struct _obstack_chunk*	new_chunk;
+../inputs/grep1.dat:  register long	new_size;
+../inputs/grep1.dat:  register int obj_size = h->next_free - h->object_base;
+../inputs/grep1.dat:  register int i;
+../inputs/grep1.dat:  register struct _obstack_chunk*  lp;	/* below addr of any objects in this chunk */
+../inputs/grep1.dat:  register struct _obstack_chunk*  plp;	/* point to previous chunk if any */
+../inputs/grep1.dat:  register struct _obstack_chunk*  lp;	/* below addr of any objects in this chunk */
+../inputs/grep1.dat:  register struct _obstack_chunk*  plp;	/* point to previous chunk if any */
+../inputs/grep1.dat:  register struct _obstack_chunk*  lp;	/* below addr of any objects in this chunk */
+../inputs/grep1.dat:  register struct _obstack_chunk*  plp;	/* point to previous chunk if any */
+../inputs/grep1.dat:/* search.c - searching subroutines using dfa, kwset and regex for grep.
+../inputs/grep1.dat:/*#include "regex.h"*/
+../inputs/grep1.dat:/* DFA compiled regexp. */
+../inputs/grep1.dat:/* Regex compiled regexp. */
+../inputs/grep1.dat:static struct re_pattern_buffer regex;
+../inputs/grep1.dat:   any string matching the regexp. */
+../inputs/grep1.dat:/* Last compiled fixed string known to exactly match the regexp.
+../inputs/grep1.dat:   call the regexp matcher at all. */
+../inputs/grep1.dat:	 the use of the regexp matcher.  */
+../inputs/grep1.dat:  if ((err = re_compile_pattern(pattern, size, &regex)) != 0)
+../inputs/grep1.dat:     Then if DFA succeeds we do some hairy stuff using the regex matcher
+../inputs/grep1.dat:  if ((err = re_compile_pattern(pattern, size, &regex)) != 0)
+../inputs/grep1.dat:     Then if DFA succeeds we do some hairy stuff using the regex matcher
+../inputs/grep1.dat:  register char *buflim, *beg, *end, save;
+../inputs/grep1.dat:  static struct re_registers regs; /* This is static on account of a BRAIN-DEAD
+../inputs/grep1.dat:				    Q@#%!# library interface in regex.c.  */
+../inputs/grep1.dat:      regex.not_eol = 0;
+../inputs/grep1.dat:      if ((start = re_search(&regex, beg, end - beg, 0, end - beg, &regs)) >= 0)
+../inputs/grep1.dat:	  len = regs.end[0] - start;
+../inputs/grep1.dat:		    regex.not_eol = 1;
+../inputs/grep1.dat:		    len = re_match(&regex, beg, start + len, start, &regs);
+../inputs/grep1.dat:		    regex.not_eol = 0;
+../inputs/grep1.dat:		    start = re_search(&regex, beg, end - beg,
+../inputs/grep1.dat:				      start, end - beg - start, &regs);
+../inputs/grep1.dat:		    len = regs.end[0] - start;
+../inputs/grep1.dat:  register char *beg, *try, *end;
+../inputs/grep1.dat:  register size_t len;

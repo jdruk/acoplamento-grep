@@ -1,0 +1,976 @@
+2:   Copyright (C) 1992 Free Software Foundation, Inc.
+10:   but WITHOUT ANY WARRANTY; without even the implied warranty of
+11:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+16:   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+21:/* I added a series define from makefile here in order to run cfe */
+24:#define HAVE_STRING_H 1
+26:#define HAVE_UNISTD_H 1
+28:#define HAVE_GETPAGESIZE 1
+32:#define HAVE_WORKING_MMAP 1
+52:#if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
+70:#ifdef HAVE_UNISTD_H
+88:/* Provide missing ANSI features if necessary. */
+98:#define VOID void
+100:#define VOID char
+102:VOID *
+104:     VOID *vp;
+112:      return (VOID *) p;
+162:/* Interface to handle errors and fix library lossage. */
+175:/* Interface to handle errors and fix some library lossage. */
+213:#if defined(HAVE_WORKING_MMAP)
+226:/* Reset the buffer for a new file.  Initialize
+253:#if defined(HAVE_WORKING_MMAP)
+254:  if (fstat(fd, &bufstat) < 0 || !S_ISREG(bufstat.st_mode))
+274:#if defined(HAVE_WORKING_MMAP)
+305:#if defined(HAVE_WORKING_MMAP)
+310:      maddr = mmap(maddr, bufalloc - bufsalloc, PROT_READ | PROT_WRITE,
+311:		   MAP_PRIVATE | MAP_FIXED, bufdesc, bufoffset);
+319:      /* You might thing this (or MADV_WILLNEED) would help,
+321:	 In fact, it actually slows us down about 30%! */
+322:      madvise(maddr, bufalloc - bufsalloc, MADV_SEQUENTIAL);
+359:/* Internal variables to keep track of byte count, context, etc. */
+402:/* Print pending lines of trailing context prior to LIM. */
+422:/* Print the lines between BEG and LIM.  Deal with context crap.
+423:   If NLINESP is non-null, store a count of lines between BEG and LIM. */
+487:   between matching lines if OUT_INVERT is true).  Return a count of
+605:   If we find it, install it in compile and execute, and return 1.  */
+631:  FILE *fp;
+750:	   Inspired by the same option in Hume's gre. */
+859:   	Free Software Foundation, Inc.
+867:   but WITHOUT ANY WARRANTY; without even the implied warranty of
+868:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+875:/* NOTE!!!  AIX requires this to be the first thing in the file.
+876:   Do not put ANYTHING before it!  */
+877:#if !defined (__GNUC__) && defined (_AIX)
+881:#ifdef HAVE_CONFIG_H
+893:#ifndef _AIX
+899:#if !__STDC__ && !defined(const) && IN_GCC
+918:#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
+922:   to get __GNU_LIBRARY__ defined.  */
+923:#ifdef	__GNU_LIBRARY__
+935:/* If GETOPT_COMPAT is defined, `+' as well as `--' can introduce a
+936:   long-named option.  Because this is not POSIX.2 compliant, it is
+948:   Setting the environment variable POSIXLY_CORRECT disables permutation.
+959:   Also, when `ordering' is RETURN_IN_ORDER,
+964:/* Index in ARGV of the next element to be scanned.
+983:   If this is zero, or a null string, it means resume the scan
+1001:   If the caller did not specify anything,
+1002:   the default is REQUIRE_ORDER if the environment variable
+1003:   POSIXLY_CORRECT is defined, PERMUTE otherwise.
+1005:   REQUIRE_ORDER means don't recognize them as options;
+1009:   variable POSIXLY_CORRECT, or using `+' as the first character
+1017:   RETURN_IN_ORDER is an option available to programs that were written
+1025:   of the value of `ordering'.  In the case of RETURN_IN_ORDER, only
+1030:  REQUIRE_ORDER, PERMUTE, RETURN_IN_ORDER
+1033:#ifdef	__GNU_LIBRARY__
+1102:  /* Interchange the two blocks of data in ARGV.  */
+1118:   given in OPTSTRING.
+1120:   If an element of ARGV starts with '-', and is not exactly "-" or "--",
+1122:   (aside from the initial '-') are option characters.  If `getopt'
+1126:   If `getopt' finds another option character, it returns that character,
+1130:   If there are no more option characters, `getopt' returns `EOF'.
+1135:   OPTSTRING is a string containing the legitimate option characters.
+1136:   If an option character is seen that is not listed in OPTSTRING,
+1137:   return '?' after printing an error message.  If you set `opterr' to
+1140:   If a char in OPTSTRING is followed by a colon, that means it wants an arg,
+1146:   If OPTSTRING starts with `-' or `+', it requests different methods of
+1148:   See the comments about RETURN_IN_ORDER and REQUIRE_ORDER, above.
+1152:   or is an exact match for some defined option.  If they have an
+1166:   LONGIND returns the index in LONGOPT of the long-named option found.
+1167:   It is only valid when a long-named option has been found by the most
+1170:   If LONG_ONLY is nonzero, '-' as well as '--' can introduce
+1186:  /* Initialize the internal data when the first call is made.
+1201:	  ordering = RETURN_IN_ORDER;
+1206:	  ordering = REQUIRE_ORDER;
+1209:      else if (getenv ("POSIXLY_CORRECT") != NULL)
+1210:	ordering = REQUIRE_ORDER;
+1219:	  /* If we have just processed some options following some non-options,
+1259:      /* If we have done all the ARGV-elements, stop the scan
+1271:      /* If we have come to a non-option and did not permute it,
+1281:	  if (ordering == REQUIRE_ORDER)
+1398:      /* Can't find it as a long option.  If this is not getopt_long_only,
+1431:    /* Increment `optind' when we start to process its last character.  */
+1473:		/* If we end this ARGV-element by taking the rest as an arg,
+1519:#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+1594:   (Implements POSIX draft P10003.2/D11.2, except for
+1597:   Copyright (C) 1993 Free Software Foundation, Inc.
+1605:   but WITHOUT ANY WARRANTY; without even the implied warranty of
+1606:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+1611:   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+1613:/* AIX requires this to be the first thing in the file. */
+1614:#if defined (_AIX) && !defined (REGEX_MALLOC)
+1626:#ifdef HAVE_CONFIG_H
+1646:/* We used to test for `BSTRING' here, but only GCC and Emacs define
+1647:   `BSTRING', as far as I know, and neither of them use this code.  */
+1648:#if HAVE_STRING_H || STDC_HEADERS
+1695:#define CHAR_SET_SIZE 256
+1697:static char re_syntax_table[CHAR_SET_SIZE];
+1739:   isascii says are ASCII (SGI's IRIX-4.0.5 is one such system --when
+1741:   ctype uses should be through macros like ISPRINT...  If
+1752:#define ISBLANK(c) (isascii (c) && isblank (c))
+1754:#define ISBLANK(c) ((c) == ' ' || (c) == '\t')
+1757:#define ISGRAPH(c) (isascii (c) && isgraph (c))
+1759:#define ISGRAPH(c) (isascii (c) && isprint (c) && !isspace (c))
+1762:#define ISPRINT(c) (isascii (c) && isprint (c))
+1763:#define ISDIGIT(c) (isascii (c) && isdigit (c))
+1764:#define ISALNUM(c) (isascii (c) && isalnum (c))
+1765:#define ISALPHA(c) (isascii (c) && isalpha (c))
+1766:#define ISCNTRL(c) (isascii (c) && iscntrl (c))
+1767:#define ISLOWER(c) (isascii (c) && islower (c))
+1768:#define ISPUNCT(c) (isascii (c) && ispunct (c))
+1769:#define ISSPACE(c) (isascii (c) && isspace (c))
+1770:#define ISUPPER(c) (isascii (c) && isupper (c))
+1771:#define ISXDIGIT(c) (isascii (c) && isxdigit (c))
+1777:/* We remove any previous definition of `SIGN_EXTEND_CHAR',
+1781:#undef SIGN_EXTEND_CHAR
+1783:#define SIGN_EXTEND_CHAR(c) ((signed char) (c))
+1786:#define SIGN_EXTEND_CHAR(c) ((((unsigned char) (c)) ^ 128) - 128)
+1789:/* Should we use malloc or alloca?  If REGEX_MALLOC is not defined, we
+1819:#ifndef _AIX /* Already did AIX, up at the top.  */
+1821:#endif /* not _AIX */
+1841:#define FIRST_STRING_P(ptr) 					\
+1849:#define BYTEWIDTH 8 /* In bits.  */
+1855:#define MIN(a, b) ((a) < (b) ? (a) : (b))
+1947:           back to the beginning of a repeat.  If what follows this jump
+2003:/* Store NUMBER in two contiguous bytes starting at DESTINATION.  */
+2011:/* Same as STORE_NUMBER, except increment DESTINATION to
+2012:   the byte after where the number is stored.  Therefore, DESTINATION
+2015:#define STORE_NUMBER_AND_INCR(destination, number)			\
+2021:/* Put into DESTINATION a number stored in two contiguous bytes starting
+2027:    (destination) += SIGN_EXTEND_CHAR (*((source) + 1)) << 8;		\
+2036:  int temp = SIGN_EXTEND_CHAR (*(source + 1)); 
+2051:#define EXTRACT_NUMBER_AND_INCR(destination, source)			\
+2068:#undef EXTRACT_NUMBER_AND_INCR
+2069:#define EXTRACT_NUMBER_AND_INCR(dest, src) \
+2075:/* If DEBUG is defined, Regex prints many voluminous messages about what
+2076:   it is doing (if the variable `debug' is nonzero).  If linked with the
+2083:/* We use standard I/O for debugging.  */
+2086:/* It is useful to test things that ``must'' be true when debugging.  */
+2092:#define DEBUG_PRINT1(x) if (debug) printf (x)
+2093:#define DEBUG_PRINT2(x1, x2) if (debug) printf (x1, x2)
+2094:#define DEBUG_PRINT3(x1, x2, x3) if (debug) printf (x1, x2, x3)
+2095:#define DEBUG_PRINT4(x1, x2, x3, x4) if (debug) printf (x1, x2, x3, x4)
+2096:#define DEBUG_PRINT_COMPILED_PATTERN(p, s, e) 				\
+2098:#define DEBUG_PRINT_DOUBLE_STRING(w, s1, sz1, s2, sz2)			\
+2113:  while (i < (1 << BYTEWIDTH))
+2119:          while (i < (1 << BYTEWIDTH)  &&  fastmap[i])
+2410:      if (FIRST_STRING_P (where))
+2429:#define DEBUG_PRINT1(x)
+2430:#define DEBUG_PRINT2(x1, x2)
+2431:#define DEBUG_PRINT3(x1, x2, x3)
+2432:#define DEBUG_PRINT4(x1, x2, x3, x4)
+2433:#define DEBUG_PRINT_COMPILED_PATTERN(p, s, e)
+2434:#define DEBUG_PRINT_DOUBLE_STRING(w, s1, sz1, s2, sz2)
+2467:    "Invalid regular expression",		/* REG_BADPAT */
+2468:    "Invalid collation character",		/* REG_ECOLLATE */
+2469:    "Invalid character class name",		/* REG_ECTYPE */
+2471:    "Invalid back reference",			/* REG_ESUBREG */
+2475:    "Invalid content of \\{\\}",		/* REG_BADBR */
+2476:    "Invalid range end",			/* REG_ERANGE */
+2478:    "Invalid preceding regular expression",	/* REG_BADRPT */
+2480:    "Regular expression too big",		/* REG_ESIZE */
+2513:/* If `translate' is non-null, return translate[D], else just D.  We
+2522:/* If the buffer isn't allocated when it comes in, use this.  */
+2523:#define INIT_BUF_SIZE  32
+2567:#define INSERT_JUMP(op, loc, to) \
+2571:#define INSERT_JUMP2(op, loc, to, arg) \
+2578:#define MAX_BUF_SIZE (1L << 16)
+2583:   correct places in the new one.  If extending the buffer results in it
+2584:   being larger than MAX_BUF_SIZE, then flag memory exhausted.  */
+2588:    if (bufp->allocated == MAX_BUF_SIZE) 				\
+2589:      return REG_ESIZE;							\
+2591:    if (bufp->allocated > MAX_BUF_SIZE)					\
+2592:      bufp->allocated = MAX_BUF_SIZE; 					\
+2596:    /* If the buffer moved, move all the pointers into it.  */		\
+2624:   be able to hold values from -(MAX_BUF_SIZE - 1) to MAX_BUF_SIZE - 1.  */
+2645:#define INIT_COMPILE_STACK_SIZE 32
+2647:#define COMPILE_STACK_EMPTY  (compile_stack.avail == 0)
+2648:#define COMPILE_STACK_FULL  (compile_stack.avail == compile_stack.size)
+2651:#define COMPILE_STACK_TOP (compile_stack.stack[compile_stack.avail])
+2655:#define SET_LIST_BIT(c)                               \
+2656:  (b[((unsigned char) (c)) / BYTEWIDTH]               \
+2657:   |= 1 << (((unsigned char) c) % BYTEWIDTH))
+2661:#define GET_UNSIGNED_NUMBER(num) 					\
+2665:       while (ISDIGIT (c)) 						\
+2679:#define IS_CHAR_CLASS(string)						\
+2687:/* `regex_compile' compiles PATTERN (of length SIZE) according to SYNTAX.
+2693:   If it succeeds, results are put in BUFP (if it returns an error, the
+2762:  DEBUG_PRINT1 ("\nCompiling pattern: ");
+2773:  /* Initialize the compile stack.  */
+2774:  compile_stack.stack = TALLOC (INIT_COMPILE_STACK_SIZE, compile_stack_elt_t);
+2778:  compile_stack.size = INIT_COMPILE_STACK_SIZE;
+2781:  /* Initialize the pattern buffer.  */
+2795:  /* Initialize the syntax table.  */
+2802:	{ /* If zero allocated, but buffer is non-null, try to realloc
+2805:          RETALLOC (bufp->buffer, INIT_BUF_SIZE, unsigned char);
+2809:          bufp->buffer = TALLOC (INIT_BUF_SIZE, unsigned char);
+2813:      bufp->allocated = INIT_BUF_SIZE;
+2827:            if (   /* If at start of pattern, it's an operator.  */
+2829:                   /* If context independent, it's an operator.  */
+2830:                || syntax & RE_CONTEXT_INDEP_ANCHORS
+2842:            if (   /* If at end of pattern, it's an operator.  */
+2844:                   /* If context independent, it's an operator.  */
+2845:                || syntax & RE_CONTEXT_INDEP_ANCHORS
+2858:              || (syntax & RE_LIMITED_OPS))
+2862:          /* If there is no previous pattern... */
+2865:              if (syntax & RE_CONTEXT_INVALID_OPS)
+2867:              else if (!(syntax & RE_CONTEXT_INDEP_OPS))
+2878:            /* If there is a sequence of repetition chars, collapse it
+2917:                /* If we get here, we found another repeat character.  */
+2951:                    && !(syntax & RE_DOT_NEWLINE))
+2967:            INSERT_JUMP (keep_string_p ? on_failure_keep_string_jump
+2981:                INSERT_JUMP (dummy_failure_jump, laststart, laststart + 6);
+3016:            BUF_PUSH ((1 << BYTEWIDTH) / BYTEWIDTH);
+3019:            bzero (b, (1 << BYTEWIDTH) / BYTEWIDTH);
+3023:                && (syntax & RE_HAT_LISTS_NOT_NEWLINE))
+3024:              SET_LIST_BIT ('\n');
+3034:                if ((syntax & RE_BACKSLASH_ESCAPE_IN_LISTS) && c == '\\')
+3039:                    SET_LIST_BIT (c1);
+3043:                /* Could be the end of the bracket expression.  If it's
+3089:                    /* If pattern is `[[:'.  */
+3102:                    /* If isn't a word bracketed by `[:' and:`]':
+3121:                        if (!IS_CHAR_CLASS (str)) return REG_ECTYPE;
+3129:                        for (ch = 0; ch < 1 << BYTEWIDTH; ch++)
+3131:                            if (   (is_alnum  && ISALNUM (ch))
+3132:                                || (is_alpha  && ISALPHA (ch))
+3133:                                || (is_blank  && ISBLANK (ch))
+3134:                                || (is_cntrl  && ISCNTRL (ch))
+3135:                                || (is_digit  && ISDIGIT (ch))
+3136:                                || (is_graph  && ISGRAPH (ch))
+3137:                                || (is_lower  && ISLOWER (ch))
+3138:                                || (is_print  && ISPRINT (ch))
+3139:                                || (is_punct  && ISPUNCT (ch))
+3140:                                || (is_space  && ISSPACE (ch))
+3141:                                || (is_upper  && ISUPPER (ch))
+3142:                                || (is_xdigit && ISXDIGIT (ch)))
+3143:                            SET_LIST_BIT (ch);
+3152:                        SET_LIST_BIT ('[');
+3153:                        SET_LIST_BIT (':');
+3160:                    SET_LIST_BIT (c);
+3188:          if (syntax & RE_NEWLINE_ALT)
+3202:           if (syntax & RE_INTERVALS && syntax & RE_NO_BK_BRACES)
+3226:              if (COMPILE_STACK_FULL)
+3239:              COMPILE_STACK_TOP.begalt_offset = begalt - bufp->buffer;
+3240:              COMPILE_STACK_TOP.fixup_alt_jump 
+3242:              COMPILE_STACK_TOP.laststart_offset = b - bufp->buffer;
+3243:              COMPILE_STACK_TOP.regnum = regnum;
+3251:                  COMPILE_STACK_TOP.inner_group_offset = b - bufp->buffer + 2;
+3260:	      /* If we've reached MAX_REGNUM groups, then this open
+3270:              if (COMPILE_STACK_EMPTY)
+3271:                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD)
+3290:              if (COMPILE_STACK_EMPTY)
+3291:                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD)
+3306:                begalt = bufp->buffer + COMPILE_STACK_TOP.begalt_offset;
+3308:                  = COMPILE_STACK_TOP.fixup_alt_jump
+3309:                    ? bufp->buffer + COMPILE_STACK_TOP.fixup_alt_jump - 1 
+3311:                laststart = bufp->buffer + COMPILE_STACK_TOP.laststart_offset;
+3312:                this_group_regnum = COMPILE_STACK_TOP.regnum;
+3313:		/* If we've reached MAX_REGNUM groups, then this open
+3323:                      = bufp->buffer + COMPILE_STACK_TOP.inner_group_offset;
+3334:              if (syntax & RE_LIMITED_OPS || syntax & RE_NO_BK_VBAR)
+3337:              if (syntax & RE_LIMITED_OPS)
+3340:              /* Insert before the previous alternative a jump which
+3343:              INSERT_JUMP (on_failure_jump, begalt, b + 6);
+3358:                 If we are at `b', then fixup_alt_jump right now points to a
+3379:              /* If \{ is a literal.  */
+3380:              if (!(syntax & RE_INTERVALS)
+3381:                     /* If we're at `\{' and it's not the open-interval 
+3383:                  || ((syntax & RE_INTERVALS) && (syntax & RE_NO_BK_BRACES))
+3389:                /* If got here, then the syntax allows intervals.  */
+3404:                GET_UNSIGNED_NUMBER (lower_bound);
+3408:                    GET_UNSIGNED_NUMBER (upper_bound);
+3412:                  /* Interval such as `{1}' => match exactly once. */
+3441:                /* If it's invalid to have no preceding re.  */
+3444:                    if (syntax & RE_CONTEXT_INVALID_OPS)
+3446:                    else if (syntax & RE_CONTEXT_INDEP_OPS)
+3452:                /* If the upper bound is zero, don't want to succeed at
+3458:                     INSERT_JUMP (jump, laststart, b + 3);
+3472:                   { /* If the upper bound is > 1, we need to insert
+3478:                     /* Initialize lower bound of the `succeed_n', even
+3483:                     INSERT_JUMP2 (succeed_n, laststart,
+3488:                     /* Code to initialize the lower bound.  Insert 
+3532:              /* If an invalid interval, match the characters as literals.  */
+3644:	      /* If no exactn currently being built.  */
+3647:              /* If last exactn not at current position.  */
+3651:	      || *pending_exact == (1 << BYTEWIDTH) - 1
+3653:              /* If followed by a repetition operator.  */
+3658:	      || ((syntax & RE_INTERVALS)
+3683:  if (!COMPILE_STACK_EMPTY) 
+3694:      DEBUG_PRINT1 ("\nCompiled pattern: \n");
+3812:/* Returns true if REGNUM is in one of COMPILE_STACK's elements and 
+3872:  /* If the start is after the end, the range is empty.  */
+3882:      SET_LIST_BIT (TRANSLATE (this_char));
+3894:   when matching.  If this number is exceeded, we allocate more
+3896:#ifndef INIT_FAILURE_ALLOC
+3897:#define INIT_FAILURE_ALLOC 5
+3901:   exactly that if always used MAX_FAILURE_SPACE each time we failed.
+3915:#define FAIL_STACK_EMPTY()     (fail_stack.avail == 0)
+3916:#define FAIL_STACK_PTR_EMPTY() (fail_stack_ptr->avail == 0)
+3917:#define FAIL_STACK_FULL()      (fail_stack.avail == fail_stack.size)
+3918:#define FAIL_STACK_TOP()       (fail_stack.stack[fail_stack.avail])
+3921:/* Initialize `fail_stack'.  Do `return -2' if the alloc fails.  */
+3923:#define INIT_FAIL_STACK()						\
+3926:      REGEX_ALLOCATE (INIT_FAILURE_ALLOC * sizeof (fail_stack_elt_t));	\
+3931:    fail_stack.size = INIT_FAILURE_ALLOC;				\
+3936:/* Double the size of FAIL_STACK, up to approximately `re_max_failures' items.
+3943:#define DOUBLE_FAIL_STACK(fail_stack)					\
+3944:  ((fail_stack).size > re_max_failures * MAX_FAILURE_ITEMS		\
+3957:/* Push PATTERN_OP on FAIL_STACK. 
+3962:  ((FAIL_STACK_FULL ()							\
+3963:    && !DOUBLE_FAIL_STACK (fail_stack))					\
+3970:   be called from within `PUSH_FAILURE_POINT'.  */
+3971:#define PUSH_FAILURE_ITEM(item)						\
+3975:#define POP_FAILURE_ITEM() fail_stack.stack[--fail_stack.avail]
+3979:#define DEBUG_PUSH PUSH_FAILURE_ITEM
+3980:#define DEBUG_POP(item_addr) *(item_addr) = POP_FAILURE_ITEM ()
+3991:   num_regs be declared.  DOUBLE_FAIL_STACK requires `destination' be
+3994:   Does `return FAILURE_CODE' if runs out of memory.  */
+3996:#define PUSH_FAILURE_POINT(pattern_place, string_place, failure_code)	\
+4005:    DEBUG_PRINT2 ("\nPUSH_FAILURE_POINT #%u:\n", failure_id);		\
+4006:    DEBUG_PRINT2 ("  Before push, next avail: %d\n", (fail_stack).avail);\
+4007:    DEBUG_PRINT2 ("                     size: %d\n", (fail_stack).size);\
+4009:    DEBUG_PRINT2 ("  slots needed: %d\n", NUM_FAILURE_ITEMS);		\
+4010:    DEBUG_PRINT2 ("     available: %d\n", REMAINING_AVAIL_SLOTS);	\
+4013:    while (REMAINING_AVAIL_SLOTS < NUM_FAILURE_ITEMS)			\
+4015:        if (!DOUBLE_FAIL_STACK (fail_stack))			\
+4018:        DEBUG_PRINT2 ("\n  Doubled stack; size now: %d\n",		\
+4020:        DEBUG_PRINT2 ("  slots available: %d\n", REMAINING_AVAIL_SLOTS);\
+4024:    DEBUG_PRINT1 ("\n");						\
+4029:	DEBUG_PRINT2 ("  Pushing reg: %d\n", this_reg);			\
+4032:	DEBUG_PRINT2 ("    start: 0x%x\n", regstart[this_reg]);		\
+4033:        PUSH_FAILURE_ITEM (regstart[this_reg]);				\
+4035:	DEBUG_PRINT2 ("    end: 0x%x\n", regend[this_reg]);		\
+4036:        PUSH_FAILURE_ITEM (regend[this_reg]);				\
+4038:	DEBUG_PRINT2 ("    info: 0x%x\n      ", reg_info[this_reg]);	\
+4039:        DEBUG_PRINT2 (" match_null=%d",					\
+4040:                      REG_MATCH_NULL_STRING_P (reg_info[this_reg]));	\
+4041:        DEBUG_PRINT2 (" active=%d", IS_ACTIVE (reg_info[this_reg]));	\
+4042:        DEBUG_PRINT2 (" matched_something=%d",				\
+4043:                      MATCHED_SOMETHING (reg_info[this_reg]));		\
+4044:        DEBUG_PRINT2 (" ever_matched=%d",				\
+4045:                      EVER_MATCHED_SOMETHING (reg_info[this_reg]));	\
+4046:	DEBUG_PRINT1 ("\n");						\
+4047:        PUSH_FAILURE_ITEM (reg_info[this_reg].word);			\
+4050:    DEBUG_PRINT2 ("  Pushing  low active reg: %d\n", lowest_active_reg);\
+4051:    PUSH_FAILURE_ITEM (lowest_active_reg);				\
+4053:    DEBUG_PRINT2 ("  Pushing high active reg: %d\n", highest_active_reg);\
+4054:    PUSH_FAILURE_ITEM (highest_active_reg);				\
+4056:    DEBUG_PRINT2 ("  Pushing pattern 0x%x: ", pattern_place);		\
+4057:    DEBUG_PRINT_COMPILED_PATTERN (bufp, pattern_place, pend);		\
+4058:    PUSH_FAILURE_ITEM (pattern_place);					\
+4060:    DEBUG_PRINT2 ("  Pushing string 0x%x: `", string_place);		\
+4061:    DEBUG_PRINT_DOUBLE_STRING (string_place, string1, size1, string2,   \
+4063:    DEBUG_PRINT1 ("'\n");						\
+4064:    PUSH_FAILURE_ITEM (string_place);					\
+4066:    DEBUG_PRINT2 ("  Pushing failure id: %u\n", failure_id);		\
+4072:#define NUM_REG_ITEMS  3
+4074:/* Individual items aside from the registers.  */
+4076:#define NUM_NONREG_ITEMS 5 /* Includes failure point id.  */
+4078:#define NUM_NONREG_ITEMS 4
+4082:#define MAX_FAILURE_ITEMS ((num_regs - 1) * NUM_REG_ITEMS + NUM_NONREG_ITEMS)
+4085:#define NUM_FAILURE_ITEMS						\
+4086:  ((highest_active_reg - lowest_active_reg + 1) * NUM_REG_ITEMS 	\
+4087:    + NUM_NONREG_ITEMS)
+4090:#define REMAINING_AVAIL_SLOTS ((fail_stack).size - (fail_stack).avail)
+4093:/* Pops what PUSH_FAIL_STACK pushes.
+4098:     LOW_REG, HIGH_REG -- the highest and lowest active registers.
+4100:     REG_INFO -- array of information about each subexpression.
+4105:#define POP_FAILURE_POINT(str, pat, low_reg, high_reg, regstart, regend, reg_info)\
+4111:  assert (!FAIL_STACK_EMPTY ());					\
+4114:  DEBUG_PRINT1 ("POP_FAILURE_POINT:\n");				\
+4115:  DEBUG_PRINT2 ("  Before pop, next avail: %d\n", fail_stack.avail);	\
+4116:  DEBUG_PRINT2 ("                    size: %d\n", fail_stack.size);	\
+4118:  assert (fail_stack.avail >= NUM_NONREG_ITEMS);			\
+4121:  DEBUG_PRINT2 ("  Popping failure id: %u\n", failure_id);		\
+4123:  /* If the saved string location is NULL, it came from an		\
+4126:  string_temp = POP_FAILURE_ITEM ();					\
+4130:  DEBUG_PRINT2 ("  Popping string 0x%x: `", str);			\
+4131:  DEBUG_PRINT_DOUBLE_STRING (str, string1, size1, string2, size2);	\
+4132:  DEBUG_PRINT1 ("'\n");							\
+4134:  pat = (unsigned char *) POP_FAILURE_ITEM ();				\
+4135:  DEBUG_PRINT2 ("  Popping pattern 0x%x: ", pat);			\
+4136:  DEBUG_PRINT_COMPILED_PATTERN (bufp, pat, pend);			\
+4139:  high_reg = (unsigned) POP_FAILURE_ITEM ();				\
+4140:  DEBUG_PRINT2 ("  Popping high active reg: %d\n", high_reg);		\
+4142:  low_reg = (unsigned) POP_FAILURE_ITEM ();				\
+4143:  DEBUG_PRINT2 ("  Popping  low active reg: %d\n", low_reg);		\
+4147:      DEBUG_PRINT2 ("    Popping reg: %d\n", this_reg);			\
+4149:      reg_info[this_reg].word = POP_FAILURE_ITEM ();			\
+4150:      DEBUG_PRINT2 ("      info: 0x%x\n", reg_info[this_reg]);		\
+4152:      regend[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+4153:      DEBUG_PRINT2 ("      end: 0x%x\n", regend[this_reg]);		\
+4155:      regstart[this_reg] = (const char *) POP_FAILURE_ITEM ();		\
+4156:      DEBUG_PRINT2 ("      start: 0x%x\n", regstart[this_reg]);		\
+4160:} /* POP_FAILURE_POINT */
+4163:   BUFP.  A fastmap records which of the (1 << BYTEWIDTH) possible
+4167:   The caller must supply the address of a (1 << BYTEWIDTH)-byte data
+4204:  INIT_FAIL_STACK ();
+4205:  bzero (fastmap, 1 << BYTEWIDTH);  /* Assume nothing's valid.  */
+4206:  bufp->fastmap_accurate = 1;	    /* It will be when we're done.  */
+4209:  while (p != pend || !FAIL_STACK_EMPTY ())
+4224:#ifdef SWITCH_ENUM_BUG
+4231:        /* I guess the idea here is to simply not bother with a fastmap
+4250:          for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+4251:	    if (p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH)))
+4258:	  for (j = *p * BYTEWIDTH; j < (1 << BYTEWIDTH); j++)
+4261:	  for (j = *p++ * BYTEWIDTH - 1; j >= 0; j--)
+4262:	    if (!(p[j / BYTEWIDTH] & (1 << (j % BYTEWIDTH))))
+4268:	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+4275:	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+4283:	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+4287:          if (!(bufp->syntax & RE_DOT_NEWLINE))
+4302:	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+4310:	  for (j = 0; j < (1 << BYTEWIDTH); j++)
+4346:          EXTRACT_NUMBER_AND_INCR (j, p);
+4361:          EXTRACT_NUMBER_AND_INCR (j, p);
+4364:          /* If what's on the stack is where we are now, pop it.  */
+4365:          if (!FAIL_STACK_EMPTY () 
+4375:          EXTRACT_NUMBER_AND_INCR (j, p);
+4394:              EXTRACT_NUMBER_AND_INCR (k, p);	/* Skip the n.  */
+4405:          /* Increment p past the n for when k != 0.  */
+4406:          EXTRACT_NUMBER_AND_INCR (k, p);
+4434:         Instead, look at the next alternative (remembered on the
+4453:   If NUM_REGS == 0, then subsequent matches should allocate their own
+4500:   virtual concatenation of STRING1 and STRING2, starting first at index
+4503:   STRING1 and STRING2 have length SIZE1 and SIZE2, respectively.
+4509:   In REGS, return the indices of the virtual concatenation of STRING1
+4510:   and STRING2 that matched the entire BUFP->buffer and its contained
+4514:   concatenation of STRING1 and STRING2.
+4541:     the virtual concatenation of STRING1 and STRING2.  */
+4547:  /* If the search isn't to be a backwards one, don't waste time in a
+4565:      /* If a fastmap is supplied, skip quickly over characters that
+4566:         cannot be the start of a match.  If the pattern can match the
+4606:      /* If can't match the null string, and that's all we have left, fail.  */
+4660:         zero if not.  If not yet determined,  `MATCH_NULL_UNSET_VALUE'.  */
+4669:#define REG_MATCH_NULL_STRING_P(R)  ((R).bits.match_null_string_p)
+4670:#define IS_ACTIVE(R)  ((R).bits.is_active)
+4671:#define MATCHED_SOMETHING(R)  ((R).bits.matched_something)
+4672:#define EVER_MATCHED_SOMETHING(R)  ((R).bits.ever_matched_something)
+4684:          MATCHED_SOMETHING (reg_info[r])				\
+4685:            = EVER_MATCHED_SOMETHING (reg_info[r])			\
+4694:#define POINTER_TO_OFFSET(ptr)						\
+4695:  (FIRST_STRING_P (ptr) ? (ptr) - string1 : (ptr) - string2 + size1)
+4704:#define MATCHING_IN_FIRST_STRING  (dend == end_match_1)
+4721:   of `string1' and `string2'.  If only one string, it's `string2'.  */
+4722:#define AT_STRINGS_BEG(d) ((d) == (size1 ? string1 : string2) || !size2)
+4723:#define AT_STRINGS_END(d) ((d) == end2)	
+4738:  (AT_STRINGS_BEG (d) || AT_STRINGS_END (d)				\
+4745:#define FREE_VARIABLES()						\
+4759:/* Some MIPS systems (at least) want this to free alloca'd storage.  */
+4760:#define FREE_VARIABLES() alloca (0)
+4768:   NUM_FAILURE_ITEMS above.  And the value for the lowest register must
+4771:#define NO_HIGHEST_ACTIVE_REG (1 << BYTEWIDTH)
+4772:#define NO_LOWEST_ACTIVE_REG (NO_HIGHEST_ACTIVE_REG + 1)
+4792:   the (virtual) concatenation of STRING1 and STRING2 (of length SIZE1
+4793:   and SIZE2, respectively).  We start matching at POS, and stop
+4796:   If REGS is non-null and the `no_sub' field of BUFP is nonzero, we
+4835:     down the line pushes a failure point on this stack.  It consists of
+4840:     scanning the strings.  If the latter is zero, the failure point is
+4855:  unsigned lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+4856:  unsigned highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+4858:  /* Information on the contents of registers. These are pointers into
+4867:  /* If a group that's operated upon by a repetition operator fails to
+4908:  DEBUG_PRINT1 ("\n\nEntering re_match_2.\n");
+4910:  INIT_FAIL_STACK ();
+4913:     no groups in the pattern, as it takes a fair amount of time.  If
+4932:          FREE_VARIABLES ();
+4940:         `FREE_VARIABLES' doesn't try to free them.  */
+4950:      FREE_VARIABLES ();
+4954:  /* Initialize subexpression text positions to -1 to mark ones that no
+4962:      REG_MATCH_NULL_STRING_P (reg_info[mcnt]) = MATCH_NULL_UNSET_VALUE;
+4963:      IS_ACTIVE (reg_info[mcnt]) = 0;
+4964:      MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+4965:      EVER_MATCHED_SOMETHING (reg_info[mcnt]) = 0;
+5009:  DEBUG_PRINT1 ("The compiled pattern is: ");
+5010:  DEBUG_PRINT_COMPILED_PATTERN (bufp, p, pend);
+5011:  DEBUG_PRINT1 ("The string to match is: `");
+5012:  DEBUG_PRINT_DOUBLE_STRING (d, string1, size1, string2, size2);
+5013:  DEBUG_PRINT1 ("'\n");
+5015:  /* This loops over pattern commands.  It exits by returning from the
+5020:      DEBUG_PRINT2 ("\n0x%x: ", p);
+5024:          DEBUG_PRINT1 ("end of pattern ... ");
+5026:	  /* If we haven't matched the entire string, and we want the
+5030:              DEBUG_PRINT1 ("backtracking.\n");
+5032:              if (!FAIL_STACK_EMPTY ())
+5034:                  boolean same_str_p = (FIRST_STRING_P (match_end) 
+5035:	        	                == MATCHING_IN_FIRST_STRING);
+5037:                  /* If exceeds best match so far, save it.  */
+5040:                      || (!same_str_p && !MATCHING_IN_FIRST_STRING))
+5045:                      DEBUG_PRINT1 ("\nSAVING match as best so far.\n");
+5056:              /* If no failure points, don't restore garbage.  */
+5060:                  /* Restore best match.  It may happen that `dend ==
+5065:                  DEBUG_PRINT1 ("Restoring best registers.\n");
+5079:          DEBUG_PRINT1 ("Accepting match.\n");
+5081:          /* If caller wants register contents data back, do it.  */
+5097:                { /* Yes.  If we need more elements than were already
+5098:                     allocated, reallocate them.  If we need fewer, just
+5113:		  assert (bufp->regs_allocated == REGS_FIXED);
+5122:                  regs->end[0] = (MATCHING_IN_FIRST_STRING ? d - string1
+5128:	      for (mcnt = 1; mcnt < MIN (num_regs, regs->num_regs); mcnt++)
+5134:		      regs->start[mcnt] = POINTER_TO_OFFSET (regstart[mcnt]);
+5135:                      regs->end[mcnt] = POINTER_TO_OFFSET (regend[mcnt]);
+5139:              /* If the regs structure we return has more elements than
+5140:                 were in the pattern, set the extra elements to -1.  If
+5148:          FREE_VARIABLES ();
+5149:          DEBUG_PRINT4 ("%u failure points pushed, %u popped (%u remain).\n",
+5152:          DEBUG_PRINT2 ("%u registers pushed.\n", num_regs_pushed);
+5154:          mcnt = d - pos - (MATCHING_IN_FIRST_STRING 
+5158:          DEBUG_PRINT2 ("Returning %d from re_match_2.\n", mcnt);
+5164:#ifdef SWITCH_ENUM_BUG
+5170:        /* Ignore these.  Used to ignore the n of succeed_n's which
+5173:          DEBUG_PRINT1 ("EXECUTING no_op.\n");
+5182:          DEBUG_PRINT2 ("EXECUTING exactn %d.\n", mcnt);
+5211:          DEBUG_PRINT1 ("EXECUTING anychar.\n");
+5215:          if ((!(bufp->syntax & RE_DOT_NEWLINE) && TRANSLATE (*d) == '\n')
+5220:          DEBUG_PRINT2 ("  Matched `%d'.\n", *d);
+5231:            DEBUG_PRINT2 ("EXECUTING charset%s.\n", not ? "_not" : "");
+5238:	    if (c < (unsigned) (*p * BYTEWIDTH)
+5239:		&& p[1 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+5258:	  DEBUG_PRINT3 ("EXECUTING start_memory %d (%d):\n", *p, p[1]);
+5263:          if (REG_MATCH_NULL_STRING_P (reg_info[*p]) == MATCH_NULL_UNSET_VALUE)
+5264:            REG_MATCH_NULL_STRING_P (reg_info[*p]) 
+5272:          old_regstart[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+5275:	  DEBUG_PRINT2 ("  old_regstart: %d\n", 
+5276:			 POINTER_TO_OFFSET (old_regstart[*p]));
+5279:	  DEBUG_PRINT2 ("  regstart: %d\n", POINTER_TO_OFFSET (regstart[*p]));
+5281:          IS_ACTIVE (reg_info[*p]) = 1;
+5282:          MATCHED_SOMETHING (reg_info[*p]) = 0;
+5287:          /* If nothing was active before, this is the new lowest active
+5289:          if (lowest_active_reg == NO_LOWEST_ACTIVE_REG)
+5297:        /* The stop_memory opcode represents the end of a group.  Its
+5301:	  DEBUG_PRINT3 ("EXECUTING stop_memory %d (%d):\n", *p, p[1]);
+5308:          old_regend[*p] = REG_MATCH_NULL_STRING_P (reg_info[*p])
+5311:	  DEBUG_PRINT2 ("      old_regend: %d\n", 
+5312:			 POINTER_TO_OFFSET (old_regend[*p]));
+5315:	  DEBUG_PRINT2 ("      regend: %d\n", POINTER_TO_OFFSET (regend[*p]));
+5318:          IS_ACTIVE (reg_info[*p]) = 0;
+5320:          /* If this was the only register active, nothing is active
+5324:              lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+5325:              highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+5333:              while (r > 0 && !IS_ACTIVE (reg_info[r]))
+5336:              /* If we end up at register zero, that means that we saved
+5345:                  lowest_active_reg = NO_LOWEST_ACTIVE_REG;
+5346:                  highest_active_reg = NO_HIGHEST_ACTIVE_REG;
+5352:          /* If just failed to match something this time around with a
+5357:          if ((!MATCHED_SOMETHING (reg_info[*p])
+5373:                    EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+5383:              /* If the next operation is a jump backwards in the pattern
+5391:                  /* If this group ever matched anything, then restore
+5401:                  if (EVER_MATCHED_SOMETHING (reg_info[*p]))
+5405:                      EVER_MATCHED_SOMETHING (reg_info[*p]) = 0;
+5418:                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+5419:                  PUSH_FAILURE_POINT (p1 + mcnt, d, -2);
+5436:	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
+5450:            dend2 = ((FIRST_STRING_P (regstart[regno]) 
+5451:		      == FIRST_STRING_P (regend[regno]))
+5455:		/* If necessary, advance to next segment in register
+5469:		/* If necessary, advance to next segment in data.  */
+5496:          DEBUG_PRINT1 ("EXECUTING begline.\n");
+5498:          if (AT_STRINGS_BEG (d))
+5506:          /* In all other cases, we fail.  */
+5512:          DEBUG_PRINT1 ("EXECUTING endline.\n");
+5514:          if (AT_STRINGS_END (d))
+5530:          DEBUG_PRINT1 ("EXECUTING begbuf.\n");
+5531:          if (AT_STRINGS_BEG (d))
+5538:          DEBUG_PRINT1 ("EXECUTING endbuf.\n");
+5539:	  if (AT_STRINGS_END (d))
+5544:        /* on_failure_keep_string_jump is used to optimize `.*\n'.  It
+5561:          DEBUG_PRINT1 ("EXECUTING on_failure_keep_string_jump");
+5563:          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+5564:          DEBUG_PRINT3 (" %d (to 0x%x):\n", mcnt, p + mcnt);
+5566:          PUSH_FAILURE_POINT (p + mcnt, NULL, -2);
+5584:          DEBUG_PRINT1 ("EXECUTING on_failure_jump");
+5586:          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+5587:          DEBUG_PRINT3 (" %d (to 0x%x)", mcnt, p + mcnt);
+5589:          /* If this on_failure_jump comes right before a group (i.e.,
+5614:              if (lowest_active_reg == NO_LOWEST_ACTIVE_REG)
+5618:          DEBUG_PRINT1 (":\n");
+5619:          PUSH_FAILURE_POINT (p + mcnt, d, -2);
+5626:          EXTRACT_NUMBER_AND_INCR (mcnt, p);
+5627:          DEBUG_PRINT2 ("EXECUTING maybe_pop_jump %d.\n", mcnt);
+5632:               pattern follows its end. If we can establish that there
+5650:            /* If we're at the end of the pattern, we can change.  */
+5654:		   against ":/".  I don't really understand this code
+5657:                DEBUG_PRINT1
+5674:                    DEBUG_PRINT3 ("  %c != %c => pop_failure_jump.\n",
+5683:		    if (c < (unsigned char) (p1[4] * BYTEWIDTH)
+5684:			&& p1[5 + c / BYTEWIDTH] & (1 << (c % BYTEWIDTH)))
+5692:                        DEBUG_PRINT1 ("  No match => pop_failure_jump.\n");
+5701:              DEBUG_PRINT1 ("  Match => jump.\n");
+5724:            DEBUG_PRINT1 ("EXECUTING pop_failure_jump.\n");
+5725:            POP_FAILURE_POINT (sdummy, pdummy,
+5735:	  EXTRACT_NUMBER_AND_INCR (mcnt, p);	/* Get the amount to jump.  */
+5736:          DEBUG_PRINT2 ("EXECUTING jump %d ", mcnt);
+5738:          DEBUG_PRINT2 ("(to 0x%x).\n", p);
+5745:          DEBUG_PRINT1 ("EXECUTING jump_past_alt.\n");
+5755:          DEBUG_PRINT1 ("EXECUTING dummy_failure_jump.\n");
+5756:          /* It doesn't matter what we push for the string here.  What
+5758:          PUSH_FAILURE_POINT (0, 0, -2);
+5768:          DEBUG_PRINT1 ("EXECUTING push_dummy_failure.\n");
+5771:          PUSH_FAILURE_POINT (0, 0, -2);
+5778:          DEBUG_PRINT2 ("EXECUTING succeed_n %d.\n", mcnt);
+5786:               STORE_NUMBER_AND_INCR (p, mcnt);
+5787:               DEBUG_PRINT3 ("  Setting 0x%x to %d.\n", p, mcnt);
+5791:              DEBUG_PRINT2 ("  Setting two bytes from 0x%x to no_op.\n", p+2);
+5800:          DEBUG_PRINT2 ("EXECUTING jump_n %d.\n", mcnt);
+5809:          /* If don't have to jump any more, skip over the rest of command.  */
+5816:            DEBUG_PRINT1 ("EXECUTING set_number_at.\n");
+5818:            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+5820:            EXTRACT_NUMBER_AND_INCR (mcnt, p);
+5821:            DEBUG_PRINT3 ("  Setting 0x%x to %d.\n", p1, mcnt);
+5827:          DEBUG_PRINT1 ("EXECUTING wordbound.\n");
+5833:          DEBUG_PRINT1 ("EXECUTING notwordbound.\n");
+5839:          DEBUG_PRINT1 ("EXECUTING wordbeg.\n");
+5840:	  if (WORDCHAR_P (d) && (AT_STRINGS_BEG (d) || !WORDCHAR_P (d - 1)))
+5845:          DEBUG_PRINT1 ("EXECUTING wordend.\n");
+5846:	  if (!AT_STRINGS_BEG (d) && WORDCHAR_P (d - 1)
+5847:              && (!WORDCHAR_P (d) || AT_STRINGS_END (d)))
+5854:          DEBUG_PRINT1 ("EXECUTING before_dot.\n");
+5860:          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+5866:          DEBUG_PRINT1 ("EXECUTING after_dot.\n");
+5872:          DEBUG_PRINT1 ("EXECUTING at_dot.\n");
+5879:          DEBUG_PRINT2 ("EXECUTING syntaxspec %d.\n", mcnt);
+5884:          DEBUG_PRINT1 ("EXECUTING Emacs wordchar.\n");
+5894:          DEBUG_PRINT2 ("EXECUTING notsyntaxspec %d.\n", mcnt);
+5899:          DEBUG_PRINT1 ("EXECUTING Emacs notwordchar.\n");
+5910:          DEBUG_PRINT1 ("EXECUTING non-Emacs wordchar.\n");
+5919:          DEBUG_PRINT1 ("EXECUTING non-Emacs notwordchar.\n");
+5936:      if (!FAIL_STACK_EMPTY ())
+5938:          DEBUG_PRINT1 ("\nFAIL:\n");
+5939:          POP_FAILURE_POINT (d, p,
+5943:          /* If this failure point is a dummy, try the next one.  */
+5947:          /* If we failed to the end of the pattern, don't examine *p.  */
+5953:              /* If failed to a backwards jump that's part of a repetition
+5963:                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+5986:  FREE_VARIABLES ();
+5999:   If we find the matching stop_memory, sets P to point to one past its number.
+6024:          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+6026:          /* If the next operation is not a jump backwards in the
+6071:                  EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+6110:   It expects P to be the first byte of a single alternative and END one
+6128:	/* It's a loop.  */
+6131:          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+6186:      if (REG_MATCH_NULL_STRING_P (reg_info[reg_no]) == MATCH_NULL_UNSET_VALUE)
+6187:        REG_MATCH_NULL_STRING_P (reg_info[reg_no]) = ret;
+6193:    /* If this is an optimized succeed_n for zero times, make the jump.  */
+6195:      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+6205:      EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+6210:          EXTRACT_NUMBER_AND_INCR (mcnt, p1);
+6218:      if (!REG_MATCH_NULL_STRING_P (reg_info[*p1]))
+6256:   compiles PATTERN (of length SIZE) and puts the result in BUFP.
+6290:   them if this is an Emacs or POSIX compilation.  */
+6292:#if !defined (emacs) && !defined (_POSIX_SOURCE)
+6317:      re_comp_buf.fastmap = (char *) malloc (1 << BYTEWIDTH);
+6343:#endif /* not emacs and not _POSIX_SOURCE */
+6345:/* POSIX.2 functions.  Don't define these for Emacs.  */
+6352:   since POSIX says we shouldn't.  Thus, we set
+6356:     `syntax' to RE_SYNTAX_POSIX_EXTENDED if the
+6358:       RE_SYNTAX_POSIX_BASIC;
+6359:     `newline_anchor' to REG_NEWLINE being set in CFLAGS;
+6367:     If REG_EXTENDED is set, we use POSIX extended syntax; otherwise, we
+6368:     use POSIX basic syntax.
+6370:     If REG_NEWLINE is set, then . and [^...] don't match newline.
+6373:     If REG_ICASE is set, then we considers upper- and lowercase
+6376:     If REG_NOSUB is set, then when PREG is passed to regexec, that
+6380:   It returns 0 if it succeeds, nonzero if it doesn't.  (See regex.h for
+6392:      RE_SYNTAX_POSIX_EXTENDED : RE_SYNTAX_POSIX_BASIC;
+6400:     REG_NEWLINE case: if we used a fastmap, we'd have to put all the
+6405:  if (cflags & REG_ICASE)
+6409:      preg->translate = (char *) malloc (CHAR_SET_SIZE);
+6414:      for (i = 0; i < CHAR_SET_SIZE; i++)
+6415:        preg->translate[i] = ISUPPER (i) ? tolower (i) : i;
+6420:  /* If REG_NEWLINE is set, newlines are treated differently.  */
+6421:  if (cflags & REG_NEWLINE)
+6422:    { /* REG_NEWLINE implies neither . nor [^...] match newline.  */
+6423:      syntax &= ~RE_DOT_NEWLINE;
+6424:      syntax |= RE_HAT_LISTS_NOT_NEWLINE;
+6425:      /* It also changes the matching behavior.  */
+6433:  /* POSIX says a null character in the pattern terminates it, so we 
+6437:  /* POSIX doesn't distinguish between an unmatched open-group and an
+6446:   string STRING.
+6448:   If NMATCH is zero or REG_NOSUB was set in the cflags argument to
+6481:  private_preg.regs_allocated = REGS_FIXED;
+6497:  /* Copy the register information to the POSIX structure.  */
+6511:      /* If we needed the temporary register info, free the space now.  */
+6537:       to this routine.  If we are given anything else, or if other regex
+6544:  /* POSIX doesn't require that we do anything in this case, but why
+6549:  msg_size = strlen (msg) + 1; /* Includes the null.  */
+6599:   Copyright (C) 1988 Free Software Foundation, Inc.
+6607:   but WITHOUT ANY WARRANTY; without even the implied warranty of
+6608:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+6613:   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+6636:#if defined(HAVE_STRING_H) || defined(STDC_HEADERS)
+6654:#undef ISALPHA
+6655:#undef ISUPPER
+6656:#undef ISLOWER
+6657:#undef ISDIGIT
+6658:#undef ISXDIGIT
+6659:#undef ISSPACE
+6660:#undef ISPUNCT
+6661:#undef ISALNUM
+6662:#undef ISPRINT
+6663:#undef ISGRAPH
+6664:#undef ISCNTRL
+6668:#define ISALPHA(C) (isascii(C) && isalpha(C))
+6669:#define ISUPPER(C) (isascii(C) && isupper(C))
+6670:#define ISLOWER(C) (isascii(C) && islower(C))
+6671:#define ISDIGIT(C) (isascii(C) && isdigit(C))
+6672:#define ISXDIGIT(C) (isascii(C) && isxdigit(C))
+6673:#define ISSPACE(C) (isascii(C) && isspace(C))
+6674:#define ISPUNCT(C) (isascii(C) && ispunct(C))
+6675:#define ISALNUM(C) (isascii(C) && isalnum(C))
+6676:#define ISPRINT(C) (isascii(C) && isprint(C))
+6677:#define ISGRAPH(C) (isascii(C) && isgraph(C))
+6678:#define ISCNTRL(C) (isascii(C) && iscntrl(C))
+6680:#define ISALPHA(C) isalpha(C)
+6681:#define ISUPPER(C) isupper(C)
+6682:#define ISLOWER(C) islower(C)
+6683:#define ISDIGIT(C) isdigit(C)
+6684:#define ISXDIGIT(C) isxdigit(C)
+6685:#define ISSPACE(C) isspace(C)
+6686:#define ISPUNCT(C) ispunct(C)
+6687:#define ISALNUM(C) isalnum(C)
+6688:#define ISPRINT(C) isprint(C)
+6689:#define ISGRAPH(C) isgraph(C)
+6690:#define ISCNTRL(C) iscntrl(C)
+6746:#define REALLOC_IF_NECESSARY(p, t, nalloc, index) \
+6772:	case BEGLINE: s = "BEGLINE"; break;
+6773:	case ENDLINE: s = "ENDLINE"; break;
+6776:	case LIMWORD: s = "LIMWORD"; break;
+6777:	case NOTLIMWORD: s = "NOTLIMWORD"; break;
+6800:  return c[b / INTBITS] & 1 << b % INTBITS;
+6808:  c[b / INTBITS] |= 1 << b % INTBITS;
+6816:  c[b / INTBITS] &= ~(1 << b % INTBITS);
+6826:  for (i = 0; i < CHARCLASS_INTS; ++i)
+6836:  for (i = 0; i < CHARCLASS_INTS; ++i)
+6846:  for (i = 0; i < CHARCLASS_INTS; ++i)
+6857:  for (i = 0; i < CHARCLASS_INTS; ++i)
+6876:  REALLOC_IF_NECESSARY(dfa->charclasses, charclass, dfa->calloc, dfa->cindex);
+6927:FUNC(is_alpha, ISALPHA)
+6928:FUNC(is_upper, ISUPPER)
+6929:FUNC(is_lower, ISLOWER)
+6930:FUNC(is_digit, ISDIGIT)
+6931:FUNC(is_xdigit, ISXDIGIT)
+6932:FUNC(is_space, ISSPACE)
+6933:FUNC(is_punct, ISPUNCT)
+6934:FUNC(is_alnum, ISALNUM)
+6935:FUNC(is_print, ISPRINT)
+6936:FUNC(is_graph, ISGRAPH)
+6937:FUNC(is_cntrl, ISCNTRL)
+6980:  /* Basic plan: We fetch a character.  If it's a backslash,
+7002:	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+7006:	    return lasttok = BEGLINE;
+7012:	  if (syntax_bits & RE_CONTEXT_INDEP_ANCHORS
+7020:	      || ((syntax_bits & RE_NEWLINE_ALT)
+7022:	    return lasttok = ENDLINE;
+7053:	    return lasttok = LIMWORD;
+7058:	    return lasttok = NOTLIMWORD;
+7062:	  if (syntax_bits & RE_LIMITED_OPS)
+7066:	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+7073:	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+7078:	  if (syntax_bits & RE_LIMITED_OPS)
+7082:	  if (!(syntax_bits & RE_CONTEXT_INDEP_OPS) && laststart)
+7087:	  if (!(syntax_bits & RE_INTERVALS))
+7098:	  if (ISDIGIT(c))
+7104:		  if (!ISDIGIT(c))
+7115:		if (!ISDIGIT(c))
+7133:	  if (syntax_bits & RE_LIMITED_OPS)
+7141:	  if (syntax_bits & RE_LIMITED_OPS
+7143:	      || !(syntax_bits & RE_NEWLINE_ALT))
+7158:	  if (parens == 0 && syntax_bits & RE_UNMATCHED_RIGHT_PAREN_ORD)
+7169:	  if (!(syntax_bits & RE_DOT_NEWLINE))
+7182:	    if (ISALNUM(c2))
+7221:	      if (c == '\\' && (syntax_bits & RE_BACKSLASH_ESCAPE_IN_LISTS))
+7229:		      /* In the case [x-], the - is an ordinary hyphen,
+7238:			  && (syntax_bits & RE_BACKSLASH_ESCAPE_IN_LISTS))
+7249:		    if (ISUPPER(c))
+7251:		    else if (ISLOWER(c))
+7262:	      if (syntax_bits & RE_HAT_LISTS_NOT_NEWLINE)
+7271:	  if (case_fold && ISALPHA(c))
+7305:  REALLOC_IF_NECESSARY(dfa->tokens, token, dfa->talloc, dfa->tindex);
+7351:     BEGLINE
+7352:     ENDLINE
+7355:     LIMWORD
+7356:     NOTLIMWORD
+7371:      || tok == BEGLINE || tok == ENDLINE || tok == BEGWORD
+7372:      || tok == ENDWORD || tok == LIMWORD || tok == NOTLIMWORD)
+7536:/* Insert a position in a set.  Position sets are maintained in sorted
+7537:   order according to index.  If position already exists in the set with
+7645:  REALLOC_IF_NECESSARY(d->states, dfa_state, d->salloc, d->sindex);
+7658:	if (SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 0)
+7659:	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 0, letter, 1)
+7660:	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 0)
+7661:	    || SUCCEEDS_IN_CONTEXT(constraint, newline, 1, letter, 1))
+7668:	d->states[i].constraint = NO_CONSTRAINT;
+7677:/* Find the epsilon closure of a set of positions.  If any position of the set
+7711:	  case BEGLINE:
+7712:	    p.constraint &= BEGLINE_CONSTRAINT;
+7714:	  case ENDLINE:
+7715:	    p.constraint &= ENDLINE_CONSTRAINT;
+7718:	    p.constraint &= BEGWORD_CONSTRAINT;
+7721:	    p.constraint &= ENDWORD_CONSTRAINT;
+7723:	  case LIMWORD:
+7724:	    p.constraint &= LIMWORD_CONSTRAINT;
+7726:	  case NOTLIMWORD:
+7727:	    p.constraint &= NOTLIMWORD_CONSTRAINT;
+7869:	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+7889:	    REALLOC_IF_NECESSARY(d->follows[pos[j].index].elems, position,
+7948:	firstpos->constraint = lastpos->constraint = NO_CONSTRAINT;
+8011:    if (PREV_NEWLINE_DEPENDENT(merged.elems[i].constraint))
+8041:   If we are building a searching matcher, we include the positions of state
+8051:   intersection with C.  If L - C is nonempty, create a new group labeled
+8053:   the intersection of L and C.  Insert the position in this group, set
+8056:   If after comparing with every group there are characters remaining in C,
+8071:  charclass intersect;		/* Intersection with some label set. */
+8087:  /* Initialize the set of letters, if necessary. */
+8092:	if (ISALNUM(i))
+8113:	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+8116:	  if (! MATCHES_NEWLINE_CONTEXT(pos.constraint,
+8118:	    for (j = 0; j < CHARCLASS_INTS; ++j)
+8122:	    for (j = 0; j < CHARCLASS_INTS; ++j)
+8126:	    for (j = 0; j < CHARCLASS_INTS; ++j)
+8129:	  /* If there are no characters left, there's no point in going on. */
+8130:	  for (j = 0; j < CHARCLASS_INTS && !matches[j]; ++j)
+8132:	  if (j == CHARCLASS_INTS)
+8138:	  /* If matches contains a single character only, and the current
+8148:	  for (k = 0; k < CHARCLASS_INTS; ++k)
+8153:	  /* It does; now find the set differences both ways. */
+8155:	  for (k = 0; k < CHARCLASS_INTS; ++k)
+8164:	  /* If there were leftovers, create a new group labeled with them. */
+8178:	  /* If every character matching the current position has been
+8184:      /* If we've passed the last group, and there are still characters
+8200:  /* If we are a searching matcher, the default transition is to a state
+8209:	  if (PREV_NEWLINE_DEPENDENT(d->states[0].elems.elems[i].constraint))
+8227:	else if (ISALNUM(i))
+8246:      /* If we are building a searching matcher, throw in the positions
+8256:	  if (PREV_NEWLINE_DEPENDENT(follows.elems[j].constraint))
+8260:      for (j = 0; j < CHARCLASS_INTS; ++j)
+8263:      if (j < CHARCLASS_INTS)
+8280:      for (j = 0; j < CHARCLASS_INTS; ++j)
+8281:	for (k = 0; k < INTBITS; ++k)
+8284:	      int c = j * INTBITS + k;
+8288:	      else if (ISALNUM(c))
+8304:   If it is an accepting state then d->fails[state] points to its table.
+8305:   If it has no table at all, then d->trans[state] is NULL.
+8306:   TODO: Improve this comment, get rid of the unnecessary redundancy. */
+8340:  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 1, d->states[s].letter, 0,
+8343:  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 1,
+8346:  if (ACCEPTS_IN_CONTEXT(d->states[s].newline, 0, d->states[s].letter, 0,
+8380:  if (ACCEPTING(s, *d))
+8407:   allow newlines to be in the matching string.  If count is non-
+8437:	else if (ISALNUM(i))
+8485:      /* If the previous character was a newline, count it. */
+8510:/* Initialize the components of a dfa that the other routines don't
+8550:	if (ISUPPER(s[i]))
+8626:   The sequences calculated for the various types of node (in pseudo ANSI c)
+8656:   If there's anything else we recognize in the tree, all four sequences get set
+8657:   to zero-length sequences.  If there's something we don't recognize in the tree,
+8676:   Is optimization easy (enough)?
+8770:  /* Is there already something in the list that's new (or longer)? */
+8959:	case BEGLINE:
+8960:	case ENDLINE:
+8963:	case LIMWORD:
+8964:	case NOTLIMWORD:
+9039:	    /* In.  Everything in left, plus everything in
+9158:   but WITHOUT ANY WARRANTY; without even the implied warranty of
+9159:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+9164:   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+9172:   IBM-Germany, Scientific Center Heidelberg, Tiergartenstrasse 15, D-6900
+9187:#define INT_MAX 2147483647
+9298:  kwset->mind = INT_MAX;
+9375:	  /* Install the new tree node in its parent. */
+9577:  /* Initial values for the delta table; will be changed later.  The
+9630:	      /* If the current node has some outgoing edge that the fail
+9637:	      /* If the current node is accepting then the shift at the
+9785:  /* Initialize register copies and look for easy ways out. */
+9925:   the matching substring, or NULL if no match is found.  If FOUNDLEN
+9927:   matching substring.  Similarly, if FOUNDIDX is non-NULL, store
+9968:   Copyright (C) 1988, 1993 Free Software Foundation, Inc.
+9976:but WITHOUT ANY WARRANTY; without even the implied warranty of
+9977:MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+9986:/* This is just to get __GNU_LIBRARY__ defined.  */
+9997:#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
+10001:#define POINTER void *
+10003:#define POINTER char *
+10008:#define DEFAULT_ALIGNMENT  \
+10009:  ((PTR_INT_TYPE) ((char *)&((struct fooalign *) 0)->d - (char *)0))
+10010:/* If malloc were really smart, it would round addresses to DEFAULT_ALIGNMENT.
+10012:   DEFAULT_ROUNDING.  So we prepare for it to do that.  */
+10014:#define DEFAULT_ROUNDING (sizeof (union fooround))
+10018:   in such a case, redefine COPYING_UNIT to `long' (if that works)
+10020:#ifndef COPYING_UNIT
+10021:#define COPYING_UNIT int
+10032:   For free, do not use ?:, since some compilers, like the MIPS compilers,
+10049:/* Initialize an obstack H for use.  Specify chunk size SIZE (0 means default).
+10050:   Objects start on multiples of ALIGNMENT (0 means use default).
+10059:     POINTER (*chunkfun) ();
+10065:    alignment = DEFAULT_ALIGNMENT;
+10075:	 These number are irrelevant to the new GNU malloc.  I suspect it is
+10077:      int extra = ((((12 + DEFAULT_ROUNDING - 1) & ~(DEFAULT_ROUNDING - 1))
+10078:		    + 4 + DEFAULT_ROUNDING - 1)
+10079:		   & ~(DEFAULT_ROUNDING - 1));
+10103:     POINTER (*chunkfun) ();
+10105:     POINTER arg;
+10110:    alignment = DEFAULT_ALIGNMENT;
+10120:	 These number are irrelevant to the new GNU malloc.  I suspect it is
+10122:      int extra = ((((12 + DEFAULT_ROUNDING - 1) & ~(DEFAULT_ROUNDING - 1))
+10123:		    + 4 + DEFAULT_ROUNDING - 1)
+10124:		   & ~(DEFAULT_ROUNDING - 1));
+10175:  if (h->alignment_mask + 1 >= DEFAULT_ALIGNMENT)
+10177:      for (i = obj_size / sizeof (COPYING_UNIT) - 1;
+10179:	((COPYING_UNIT *)new_chunk->contents)[i]
+10180:	  = ((COPYING_UNIT *)h->object_base)[i];
+10181:      /* We used to copy the odd few remaining bytes as one extra COPYING_UNIT,
+10183:	 which does not do strict alignment for COPYING_UNITS.  */
+10184:      already = obj_size / sizeof (COPYING_UNIT) * sizeof (COPYING_UNIT);
+10192:  /* If the object just copied was the only data in OLD_CHUNK,
+10209:   If you use it in a program, you are probably losing.  */
+10214:     POINTER obj;
+10223:  while (lp != 0 && ((POINTER)lp >= obj || (POINTER)(lp)->limit < obj))
+10232:   more recently than OBJ.  If OBJ is zero, free everything in H.  */
+10237:   This is the first one, called from non-ANSI code.  */
+10242:     POINTER obj;
+10251:  while (lp != 0 && ((POINTER)lp >= obj || (POINTER)(lp)->limit < obj))
+10256:      /* If we switch chunks, we can't tell whether the new current
+10271:/* This function is used from ANSI code.  */
+10276:     POINTER obj;
+10285:  while (lp != 0 && ((POINTER)lp >= obj || (POINTER)(lp)->limit < obj))
+10290:      /* If we switch chunks, we can't tell whether the new current
+10313:/* These function definitions do not work with non-ANSI preprocessors;
+10319:POINTER (obstack_base) (obstack)
+10325:POINTER (obstack_next_free) (obstack)
+10345:     POINTER pointer;
+10353:     POINTER pointer;
+10387:POINTER (obstack_finish) (obstack)
+10393:POINTER (obstack_alloc) (obstack, length)
+10400:POINTER (obstack_copy) (obstack, pointer, length)
+10402:     POINTER pointer;
+10408:POINTER (obstack_copy0) (obstack, pointer, length)
+10410:     POINTER pointer;
+10420:#endif	/* _LIBC or not __GNU_LIBRARY__.  */
+10422:   Copyright (C) 1992 Free Software Foundation, Inc.
+10430:   but WITHOUT ANY WARRANTY; without even the implied warranty of
+10431:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+10436:   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+10480:#if defined(HAVE_STRING_H) || defined(STDC_HEADERS)
+10486:#define ISALNUM(C) (isascii(C) && isalnum(C))
+10487:#define ISUPPER(C) (isascii(C) && isupper(C))
+10489:#define ISALNUM(C) isalnum(C)
+10490:#define ISUPPER(C) isupper(C)
+10493:#define TOLOWER(C) (ISUPPER(C) ? tolower(C) : (C))
+10530:#define WCHAR(C) (ISALNUM(C) || (C) == '_')
+10544:   If kwsexec() returns < lastexact, then we don't need to
+10569:/* If the DFA turns out to have some set of fixed strings one of
+10617:  re_set_syntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE);
+10618:  dfasyntax(RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE, match_icase);
+10625:  /* In the match_words and match_lines cases, we use a different pattern
+10631:      /* In the whole-word case, we use the pattern:
+10633:	 In the whole-line case, we use the pattern:
+10677:      re_set_syntax(RE_SYNTAX_POSIX_EGREP);
+10678:      dfasyntax(RE_SYNTAX_POSIX_EGREP, match_icase);
+10691:  /* In the match_words and match_lines cases, we use a different pattern
+10697:      /* In the whole-word case, we use the pattern:
+10699:	 In the whole-line case, we use the pattern:
+10740:  static struct re_registers regs; /* This is static on account of a BRAIN-DEAD
+10791:      /* If we've made it to this point, this means DFA has seen
+10799:	  /* If -w, check if the match aligns with word boundaries.
